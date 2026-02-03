@@ -10,7 +10,7 @@ ON DUPLICATE KEY UPDATE name=name;
 
 -- Insert super admin
 INSERT INTO users (username, email, password, role_id) 
-SELECT 'ujShresthadmin', 'admin@paila.travel', '$2y$10$8.eM57yUeuIZBwTE7fy1ReZyIK0ivMeBudCU71VYSRMGDDUO3nWWW', 1
+SELECT 'ujShresthadmin', '2461787@paila.admin', '$2y$10$XJJRQsALbyI7RXBLPW07ZeNjRClJcMt.o/I/ygLvfAAQO0vNdOnW2', 1
 WHERE NOT EXISTS (SELECT * FROM users WHERE username = 'ujShresthadmin');
 
 -- Clear tour data
