@@ -11,28 +11,28 @@ if ($requestId == 0) redirect('manage_requests.php');
 
 $user = get_user();
 
-// Retrieve request
+// Fetch request data
 $stmt = $pdo->prepare("SELECT * FROM private_requests WHERE id = ?");
 $stmt->execute([$requestId]);
 $request = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$request) die("Request not found.");
 
-// Update status
+// Handle status changes
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($_POST['action'] === 'send_message') {
         $msgBody = trim($_POST['message']);
         if ($msgBody && $request['user_id']) {
             $sent = send_message($user['id'], $request['user_id'], 'private_request', $requestId, $msgBody);
             if ($sent) {
-                // Notify User
+                // Notify request owner
                 create_notification($request['user_id'], "New Message from Admin", "You have a new message about your access request.", "user_requests.php?id=$requestId");
             }
         }
     } elseif (in_array($_POST['action'], ['approve', 'reject'])) {
         $newStatus = ($_POST['action'] === 'approve') ? 'approved' : 'rejected';
         
-        // Generate access code
+        // Create access code
         $accessCode = null;
         if ($newStatus === 'approved' && empty($request['access_code'])) {
             $year = date('Y');
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         
         $request['status'] = $newStatus;
         
-        // Send notification
+        // Send status notification
         if ($request['user_id']) {
             $message = $newStatus === 'approved' 
                 ? "Your private access request has been approved! Your access code is: {$accessCode}" 
@@ -79,9 +79,9 @@ $base = '../';
 <div class="container" style="padding-top: 4rem; padding-bottom: 5rem;">
     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
         
-        <!-- Details column -->
+        <!-- Request details column -->
         <div>
-            <!-- Request info -->
+            <!-- Applicant info section -->
             <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
                 <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-stone-100); padding-bottom: 0.5rem;">Applicant Details</h3>
                 
@@ -132,7 +132,7 @@ $base = '../';
                 </div>
             </div>
             
-            <!-- Message history -->
+            <!-- Dialogue history section -->
             <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem;">
                 <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem;">Dialogue</h3>
                 
@@ -172,7 +172,7 @@ $base = '../';
             </div>
         </div>
         
-        <!-- Action column -->
+        <!-- Management sidebar panel -->
         <div>
             <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; position: sticky; top: 2rem;">
                 <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; color: var(--color-stone-500);">Actions</h3>

@@ -1,26 +1,26 @@
 <?php
-// Core helper logic
+// Message helper functions
 
-// Include project dependencies
+// Include database configuration
 require_once __DIR__ . '/../config/db.php';
 
-// Database interaction logic
 
-// Database interaction logic
+
+// Send new message
 function send_message($sender_id, $receiver_id, $context_type, $context_id, $message) {
     global $pdo;
     
-    // Security and validation
+    // Validate message content
     if (empty(trim($message))) return false;
     
     try {
-        // Database interaction logic
+        // Prepare insert query
         $stmt = $pdo->prepare("
             INSERT INTO messages (sender_id, receiver_id, context_type, context_id, message) 
             VALUES (?, ?, ?, ?, ?)
         ");
         
-        // Database interaction logic
+        // Execute message insertion
         return $stmt->execute([
             $sender_id, 
             $receiver_id, 
@@ -30,44 +30,40 @@ function send_message($sender_id, $receiver_id, $context_type, $context_id, $mes
         ]);
         
     } catch (PDOException $e) {
-        // Database interaction logic
+        // Handle database errors
         return false;
     }
 }
 
-// Database interaction logic
-
-// Database interaction logic
+// Fetch message history
 function get_message_history($context_type, $context_id, $user_id = null) {
     global $pdo;
     
-// Database interaction logic
+
     $sql = "SELECT m.*, s.username as sender_name, s.role_id as sender_role_id 
             FROM messages m 
             JOIN users s ON m.sender_id = s.id 
             WHERE m.context_type = ? AND m.context_id = ?";
     
-// Database interaction logic
+
     $params = [$context_type, $context_id];
     
-// Database interaction logic
+
     $sql .= " ORDER BY m.created_at ASC";
     
-    // Execute retrieval query and return message history
+    // Execute history search
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
     
-// Database interaction logic
+
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Database interaction logic
-
-// Database interaction logic
+// Mark messages read
 function mark_messages_read($context_type, $context_id, $user_id) {
     global $pdo;
     
-// Database interaction logic
+
     $stmt = $pdo->prepare("
         UPDATE messages 
         SET is_read = 1 

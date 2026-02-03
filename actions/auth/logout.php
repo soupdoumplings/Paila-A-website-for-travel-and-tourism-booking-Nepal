@@ -1,24 +1,24 @@
 <?php
 // User logout handler
 
-// Load dependencies
+// Load required files
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../helpers/functions.php';
 
-// Start session
+// Initialize session state
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Clear session data
+// Clear session variables
 $_SESSION = array();
 
-// Destroy session file
+// Destroy active session
 session_destroy();
 
 // Redirect to login
 redirect(url('public/authentication/login.php'));
 
-// Exit script
+// Stop script execution
 exit();
 ?>

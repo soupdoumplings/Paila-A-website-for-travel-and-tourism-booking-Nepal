@@ -1,14 +1,14 @@
-    <!-- Footer -->
+    <!-- Site footer section -->
     <footer style="background-color: var(--color-stone-900); color: white; padding: 4rem 1.5rem 2rem;">
         <div class="container">
             <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
-                <!-- Logo section -->
+                <!-- Footer logo section -->
                 <div>
                     <h3 style="font-family: var(--font-serif); font-size: 1.75rem; margin-bottom: 1rem; color: var(--color-amber-400);">पाइला</h3>
                     <p style="color: var(--color-stone-400); max-width: 300px; line-height: 1.7; margin-bottom: 1.5rem;">
                         Nature as Nobility. Crafting unforgettable Himalayan experiences since 2017.
                     </p>
-                    <!-- Social media -->
+                    <!-- Social media links -->
                     <div style="display: flex; gap: 1rem;">
                         <a href="#" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--color-stone-700); display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--color-amber-400)'; this.style.color='var(--color-amber-400)'" onmouseout="this.style.borderColor='var(--color-stone-700)'; this.style.color='white'"><i class="fa-brands fa-instagram"></i></a>
                         <a href="#" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--color-stone-700); display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--color-amber-400)'; this.style.color='var(--color-amber-400)'" onmouseout="this.style.borderColor='var(--color-stone-700)'; this.style.color='white'"><i class="fa-brands fa-facebook-f"></i></a>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 
-                <!-- Navigation links -->
+                <!-- Footer navigation links -->
                 <div>
                     <h4 style="margin-bottom: 1.25rem; color: white; font-weight: 600; font-size: 0.95rem;">EXPLORE</h4>
                     <ul style="list-style: none; padding: 0;">
@@ -26,7 +26,7 @@
                     </ul>
                 </div>
 
-                <!-- Tour categories -->
+                <!-- Journey category links -->
                 <div>
                     <h4 style="margin-bottom: 1.25rem; color: white; font-weight: 600; font-size: 0.95rem;">JOURNEYS</h4>
                     <ul style="list-style: none; padding: 0;">
@@ -38,7 +38,7 @@
                     </ul>
                 </div>
 
-                <!-- Contact info -->
+                <!-- Contact information details -->
                 <div>
                     <h4 style="margin-bottom: 1.25rem; color: white; font-weight: 600; font-size: 0.95rem;">CONTACT</h4>
                     <ul style="list-style: none; padding: 0;">
@@ -67,7 +67,7 @@
         </div>
     </footer>
 
-    <!-- Load scripts -->
+    <!-- Global JS scripts -->
     <script src="<?php echo BASE_URL; ?>/assets/js/validation.js"></script>
     <?php if(strpos($_SERVER['REQUEST_URI'], 'admin') !== false): ?>
         <script src="<?php echo BASE_URL; ?>/assets/js/admin.js"></script>

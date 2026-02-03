@@ -6,13 +6,14 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once '../helpers/functions.php';
 require_once '../config/db.php';
 
-// Check permissions
+// Verify user login
 require_login(); 
 
 $user = get_user();
 $error = '';
 $success = '';
 
+// Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update_profile'])) {
         $username = trim($_POST['username']);
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($username) || empty($email)) {
             $error = 'All profile fields are required.';
         } else {
-            // Update profile
+            // Update user profile
             try {
                 $stmt = $pdo->prepare("UPDATE users SET username = ?, email = ? WHERE id = ?");
                 if ($stmt->execute([$username, $email, $user['id']])) {
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($new_pass !== $confirm_pass) {
             $error = 'New passwords do not match.';
         } else {
-            // Verify password
+            // Check current password
             $stmt = $pdo->prepare("SELECT password FROM users WHERE id = ?");
             $stmt->execute([$user['id']]);
             $hash = $stmt->fetchColumn();
@@ -104,7 +105,7 @@ $base = '../';
                 </div>
             <?php endif; ?>
 
-            <!-- Profile Section -->
+            <!-- User profile section -->
             <div style="background: white; border: 1px solid var(--color-stone-200); padding: 2.5rem; border-radius: 1.5rem; margin-bottom: 3rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
                 <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 2rem; color: var(--color-stone-900);">Profile Information</h2>
                 <form method="POST" style="display: grid; gap: 1.5rem;">
@@ -122,7 +123,7 @@ $base = '../';
                 </form>
             </div>
 
-            <!-- Security Section -->
+            <!-- Password security section -->
             <div style="background: white; border: 1px solid var(--color-stone-200); padding: 2.5rem; border-radius: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
                 <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 2rem; color: var(--color-stone-900);">Security & Password</h2>
                 <form method="POST" style="display: grid; gap: 1.5rem;">

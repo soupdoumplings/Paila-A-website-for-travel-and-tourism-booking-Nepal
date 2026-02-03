@@ -6,11 +6,11 @@ require_login();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' || (isset($_GET['action']) && $_GET['action'] === 'delete')) {
     
-    // Handle delete
+    // Process tour delete
     if (isset($_GET['action']) && $_GET['action'] === 'delete') {
         $id = $_GET['id'];
         
-        // Check ownership
+        // Verify edit rights
         if (!is_super_admin()) {
             $check = $pdo->prepare("SELECT created_by FROM tours WHERE id = ?");
             $check->execute([$id]);
@@ -37,18 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || (isset($_GET['action']) && $_GET['a
     $category = isset($_POST['category']) ? trim($_POST['category']) : null;
     $is_featured = isset($_POST['is_featured']) ? 1 : 0;
 
-    // Handle image
+    // Process uploaded image
     $imagePath = null;
     if (isset($_POST['existing_image'])) {
         $imagePath = $_POST['existing_image'];
     }
 
-    // Check URL
+    // Use image URL
     if (isset($_POST['image_url']) && !empty(trim($_POST['image_url']))) {
         $imagePath = trim($_POST['image_url']);
     }
 
-    // Process upload
+    // Handle file upload
     if (isset($_FILES['image']) && $_FILES['image']['name'] !== '') {
         if ($_FILES['image']['error'] === 0) {
             $uploadDir = '../public/uploads/';
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || (isset($_GET['action']) && $_GET['a
                 'created_by' => $_SESSION['user_id']
             ]);
         } catch (PDOException $e) {
-            // Legacy support
+            // Handle legacy schema
              if (strpos($e->getMessage(), 'Unknown column') !== false) {
                  $stmt = $pdo->prepare("INSERT INTO tours (title, location, price, duration, description, image, difficulty, max_group, highlights, category) VALUES (:title, :location, :price, :duration, :description, :image, :difficulty, :max_group, :highlights, :category)");
                  $stmt->execute([
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || (isset($_GET['action']) && $_GET['a
     } elseif ($action === 'update') {
         $id = (int) $_POST['id'];
         
-        // Check ownership
+        // Verify edit rights
         if (!is_super_admin()) {
             $check = $pdo->prepare("SELECT created_by FROM tours WHERE id = ?");
             $check->execute([$id]);

@@ -6,13 +6,13 @@ require_once '../helpers/functions.php';
 require_login();
 $user = get_user();
 
-// Mark all read
+// Handle mark all
 if (isset($_POST['mark_all_read'])) {
     mark_all_notifications_read($user['id']);
     redirect('notifications.php');
 }
 
-// Mark one read
+// Handle single mark
 if (isset($_GET['read'])) {
     mark_notification_read($_GET['read'], $user['id']);
     redirect('notifications.php');

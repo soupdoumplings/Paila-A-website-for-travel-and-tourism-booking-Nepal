@@ -3,12 +3,12 @@ if (session_status() === PHP_SESSION_NONE) { session_start(); }
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
-// Check access
+// Verify premium access
 if (!isset($_SESSION['premium_access']) || $_SESSION['premium_access'] !== true) {
     redirect(url('public/premium.php'));
 }
 
-// Require login
+// Enforce login first
 if (!is_logged_in()) {
     $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
     redirect(url('public/authentication/login.php'));
@@ -16,7 +16,7 @@ if (!is_logged_in()) {
 
 $tour_id = isset($_GET['id']) ? $_GET['id'] : '';
 
-// Tour data
+// Premium tours data
 $tours = [
     'helicopter' => [
         'id' => 'helicopter',

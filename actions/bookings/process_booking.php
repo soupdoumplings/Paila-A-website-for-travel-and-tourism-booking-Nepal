@@ -1,14 +1,18 @@
 <?php
+// Initialize session status
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+// Load required files
 require_once '../../config/db.php';
 require_once '../../helpers/functions.php';
 
+// Init user variables
 $auto_registered = false;
 $temp_password = '';
 $user_id = null;
 
+// Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tour_id = (int)$_POST['tour_id'];
     $customer_name = trim($_POST['customer_name']);
@@ -18,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
     $special_requests = isset($_POST['special_requests']) ? trim($_POST['special_requests']) : '';
     
-    // Handle premium tour
+    // Process premium tour
     $premium_tour_id = isset($_POST['premium_tour_id']) ? trim($_POST['premium_tour_id']) : null;
     if ($premium_tour_id) {
         $special_requests = "[PREMIUM TOUR: {$premium_tour_id}] " . $special_requests;
@@ -29,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Invalid form data. Please go back and try again.");
     }
 
-    // Date validation: Must be at least 2 days in the future
+    // Validate travel date
     $minDate = date('Y-m-d', strtotime('+2 days'));
     if ($travel_date < $minDate) {
         die("Invalid travel date. Bookings must be made at least 2 days in advance.");
@@ -43,25 +47,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (is_logged_in()) {
         $user_id = $_SESSION['user_id'];
     } else {
-        // Check existing user
+        // Identify existing user
         $stmt = $pdo->prepare("SELECT id, username FROM users WHERE email = ?");
         $stmt->execute([$contact_email]);
         $existingUser = $stmt->fetch();
 
         if ($existingUser) {
             $user_id = $existingUser['id'];
-            // Log in user
+            // Log user in
             $_SESSION['user_id'] = $user_id;
             $_SESSION['username'] = $existingUser['username'];
             $_SESSION['email'] = $contact_email;
         } else {
-            // Register new user
+            // Register new account
             $temp_password = substr(str_shuffle('abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789'), 0, 8);
-            $hashed_password = password_hash($temp_password, PASSWORD_DEFAULT);
+            // Generate hashed password
             $username = strtolower(explode('@', $contact_email)[0]) . rand(10, 99);
             
             try {
-                // Insert user record
+                // Insert new account
                 $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role_id) VALUES (?, ?, ?, ?)");
                 if ($stmt->execute([$username, $contact_email, $hashed_password, 3])) {
                     $user_id = $pdo->lastInsertId();
@@ -73,17 +77,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['email'] = $contact_email;
                     $_SESSION['role_id'] = 3;
                     
-                    // Store temp password
+                    // Save temp credentials
                     $_SESSION['new_account_pass'] = $temp_password;
                 }
             } catch (Exception $e) {
                 // Log registration error
-                error_log("Auto-registration failed: " . $e->getMessage());
+                // Log registration failure
             }
         }
     }
 
-    // Insert booking data
+    // Create booking record
     try {
         $sql = "INSERT INTO bookings (tour_id, user_id, customer_name, contact_email, travel_date, travelers) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
@@ -99,9 +103,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Send notifications
+    // Send user notifications
     try {
-        // Notify admins
+        // Notify system admins
         $adminStmt = $pdo->query("SELECT id FROM users WHERE role_id IN (1, 2)");
         while ($row = $adminStmt->fetch(PDO::FETCH_ASSOC)) {
             create_notification(
@@ -112,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
         }
 
-        // Notify customer
+        // Notify booking customer
         if ($user_id) {
             create_notification(
                 $user_id, 

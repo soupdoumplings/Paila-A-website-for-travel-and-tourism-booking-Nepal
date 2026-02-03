@@ -5,19 +5,23 @@ require_once '../helpers/functions.php';
 
 $error = '';
 
+// Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
 
+        // Validate input fields
     if (empty($username) || empty($password)) {
         $error = "Please fill in all fields.";
     } else {
+                // Fetch admin user
         $stmt = $pdo->prepare("SELECT id, username, password FROM users WHERE username = :username");
         $stmt->execute(['username' => $username]);
         $user = $stmt->fetch();
 
+                // Verify credentials
         if ($user && password_verify($password, $user['password'])) {
-            // Handle login
+            // Establish admin session
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_id'] = $user['id'];
             $_SESSION['admin_username'] = $user['username'];
@@ -41,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body style="background: var(--color-stone-100);">
 
-    <div class="login-box animate-fadeIn">
+    <!-- Login box wrapper -->
         <h2 style="margin-bottom: 2rem;">Admin Login</h2>
         
         <?php if($error): ?>
@@ -50,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
 
-        <form method="POST" data-validate>
+        <!-- Admin login form -->
             <div class="form-group">
                 <label class="form-label">Username</label>
                 <input type="text" name="username" class="form-input" data-rules="required">

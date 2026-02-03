@@ -6,12 +6,12 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../helpers/functions.php';
 require_once __DIR__ . '/../config/db.php';
 
-// Page CSS
+// Extra page styles
 $extraCss = ['assets/css/home.css'];
 
 include __DIR__ . '/../includes/header.php';
 
-// Fetch stats
+// Count tour categories
 $categoryCounts = [];
 try {
     if ($pdo) {
@@ -22,7 +22,7 @@ try {
     }
 } catch (Exception $e) {}
 
-// Fetch stats
+// Count total records
 $totalToursCount = 0;
 $totalDestinationsCount = 0;
 try {

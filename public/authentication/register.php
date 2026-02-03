@@ -24,23 +24,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($password !== $confirm_password) {
         $error = 'Passwords do not match.';
     } else {
-        // Check if email exists
+        // Check email duplicate
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
         if ($stmt->fetch()) {
             $error = 'Email already exists.';
         } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            // Use fullname as username, default role_id = 3 (user)
+            // Save as user role
             $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role_id) VALUES (?, ?, ?, 3)");
             if ($stmt->execute([$fullname, $email, $hashed_password])) {
                 $new_user_id = $pdo->lastInsertId();
                 
-                // Link prior bookings
+                // Assign prior bookings
                 $linkBookings = $pdo->prepare("UPDATE bookings SET user_id = ? WHERE contact_email = ? AND user_id IS NULL");
                 $linkBookings->execute([$new_user_id, $email]);
                 
-                // Link prior private requests
+                // Assign prior requests
                 $linkRequests = $pdo->prepare("UPDATE private_requests SET user_id = ? WHERE email = ? AND user_id IS NULL");
                 $linkRequests->execute([$new_user_id, $email]);
 

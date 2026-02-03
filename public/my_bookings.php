@@ -13,7 +13,7 @@ if (!is_logged_in()) {
 $user = get_user();
 $user_id = $user['id'];
 
-// Fetch bookings
+// Load user bookings
 $stmt = $pdo->prepare("
     SELECT b.*, t.title as tour_title, t.image as tour_image, t.duration 
     FROM bookings b

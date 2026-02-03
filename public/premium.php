@@ -3,10 +3,10 @@ if (session_status() === PHP_SESSION_NONE) { session_start(); }
 require_once '../helpers/functions.php';
 require_once '../config/db.php';
 
-// Check access
+// Verify premium access
 $has_access = isset($_SESSION['premium_access']) && $_SESSION['premium_access'] === true;
 
-// Fetch messages
+// Get session messages
 $access_success = $_SESSION['access_success'] ?? '';
 $access_error = $_SESSION['access_error'] ?? '';
 unset($_SESSION['access_success'], $_SESSION['access_error']);

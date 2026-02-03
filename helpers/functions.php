@@ -1,51 +1,51 @@
 <?php
-// Core helper logic
+// Core helper functions
 
-// Include project dependencies
+// Include required dependencies
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/message_functions.php';
 require_once __DIR__ . '/notification_functions.php';
 
-// Security and validation
+// Sanitize output string
 function e($string) {
     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
 
-// Helper functions
+// Redirect to URL
 function redirect($url) {
     header("Location: $url");
     exit();
 }
 
-// Helper functions
+// Generate absolute URL
 function url($path) {
     $base = rtrim(BASE_URL, '/');
     return $base . '/' . ltrim($path, '/');
 }
 
-// Security and validation
+// Enforce admin login
 function require_login() {
     if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
         redirect(url('public/authentication/login.php')); 
     }
 }
 
-// Security and validation
+// Check login status
 function is_logged_in() {
     return isset($_SESSION['user_id']) || isset($_SESSION['admin_id']);
 }
 
-// Database interaction logic
+// Fetch current user
 function get_user() {
     if (is_logged_in()) {
         global $pdo;
         
-        // Determine user identification from active session variables
+        // Setup user identifier
         $userId = $_SESSION['user_id'] ?? $_SESSION['admin_id'];
         
-        // Check cached session data to optimize database performance
+        // Check session cache
         if (!isset($_SESSION['role_name']) || !isset($_SESSION['username'])) {
-            // Fetch user profile with role information from database
+            // Fetch user data
             $stmt = $pdo->prepare("
                 SELECT u.*, r.name as role_name 
                 FROM users u 
@@ -56,7 +56,7 @@ function get_user() {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             
             if ($user) {
-                // Cache user profile information in session for efficiency
+                // Save to session
                 $_SESSION['role_name'] = $user['role_name'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
@@ -64,7 +64,7 @@ function get_user() {
             }
         }
         
-        // Return user data directly from cached session variables
+        // Return cached data
         return [
             'id' => $userId,
             'username' => $_SESSION['username'] ?? 'User',
@@ -73,32 +73,32 @@ function get_user() {
         ];
     }
     
-    // Return null value if user authentication is missing
+    // No user found
     return null;
 }
 
-// Security and validation
+// Check super admin
 function is_super_admin() {
     $user = get_user();
     
-    // Check multiple role fields for super admin privileges
+    // Validate super role
     return $user && ($user['role'] === 'super_admin' || (isset($user['role_name']) && $user['role_name'] === 'super_admin'));
 }
 
-// Security and validation
+// Check admin status
 function is_admin() {
     $user = get_user();
     
     if (!$user) return false;
     
-    // Extract user role from database or session cache
+    // Get user role
     $role = $user['role'] ?? $user['role_name'] ?? '';
     
-    // Validate against predefined list of administrator roles
+    // Check admin roles
     return in_array($role, ['admin', 'super_admin']);
 }
 
-// Determining if user belongs to the tourguide role
+// Check tour guide
 function is_tour_guide() {
     $user = get_user();
     if (!$user) return false;
@@ -107,58 +107,58 @@ function is_tour_guide() {
     return $role === 'tourguide';
 }
 
-// User interface utilities
+// Render booking timeline
 function render_booking_timeline($status = 'pending', $isCompact = false) {
-    // Initialize basic visual classes for each timeline step
+    // Initialize timeline classes
     $submittedClass = 'completed';  // Always green checkmark
     $pendingClass = ($status === 'pending') ? 'active' : 'completed';
-    $finalClass = '';  // Will be set based on status below
+    $finalClass = '';  // Set based on status below
     $finalIcon = 'fa-circle-check';  // Default: checkmark
     $finalLabel = 'Confirmed';  // Default label
     $progressWidth = '16%';  // Default: middle of first step
 
-    // Modify timeline progress based on current booking status
+    // Set status progress
     if ($status === 'pending') {
-        // Still under review
+        // Processing pending status
         $progressWidth = '50%';  // Progress bar stops at middle of second step
         
     } elseif ($status === 'confirmed') {
-        // Booking approved
+        // Processing confirmed status
         $finalClass = 'completed';  // Green checkmark on final step
         $progressWidth = '84%';  // Progress bar reaches final step
         
     } elseif ($status === 'cancelled') {
-        // Booking rejected
+        // Processing cancelled status
         $finalClass = 'rejected';  // Red X on final step
         $finalIcon = 'fa-circle-xmark';  // X icon instead of checkmark
         $finalLabel = 'Rejected';  // Change label
         $progressWidth = '84%';  // Progress bar still reaches final step
     }
 
-    // Apply compact visual styling based on parameter setting
+    // Set compact mode
     $compactClass = $isCompact ? 'timeline-compact' : '';
     
-    // Start output buffering to capture visual component markup
+    // Buffer output markup
     ob_start(); ?>
     
     <div class="booking-timeline-wrapper <?php echo $compactClass; ?>">
         <div class="booking-timeline">
-            <!-- Animated progress bar that fills based on status -->
+            <!-- Visual progress bar -->
             <div class="progress-bar" style="width: <?php echo $progressWidth; ?>;"></div>
             
-            <!-- Step 1: Submitted (always completed) -->
+            <!-- Submission step -->
             <div class="timeline-step <?php echo $submittedClass; ?>">
                 <div class="step-icon"><i class="fa-solid fa-paper-plane"></i></div>
                 <div class="step-label">Submitted</div>
             </div>
             
-            <!-- Step 2: Pending Review (active if pending, completed otherwise) -->
+            <!-- Review step -->
             <div class="timeline-step <?php echo $pendingClass; ?>">
                 <div class="step-icon"><i class="fa-solid fa-clock"></i></div>
                 <div class="step-label">Pending Review</div>
             </div>
             
-            <!-- Step 3: Final outcome (confirmed or rejected) -->
+            <!-- Final step -->
             <div class="timeline-step <?php echo $finalClass; ?>">
                 <div class="step-icon"><i class="fa-solid <?php echo $finalIcon; ?>"></i></div>
                 <div class="step-label"><?php echo $finalLabel; ?></div>
@@ -167,17 +167,17 @@ function render_booking_timeline($status = 'pending', $isCompact = false) {
     </div>
     
     <?php
-    // Return captured visual markup from the output buffer
+    // Return buffered markup
     return ob_get_clean();
 }
-// Image discovery logic
+// Get tour image
 function get_tour_image($tour) {
-    // 1. Check for external URL
+    // Use external URL
     if (!empty($tour['image']) && filter_var($tour['image'], FILTER_VALIDATE_URL)) {
         return $tour['image'];
     }
 
-    // 2. Check for uploaded file
+    // Use uploaded file
     if (!empty($tour['image'])) {
         $uploadPath = __DIR__ . '/../public/uploads/' . $tour['image'];
         if (file_exists($uploadPath)) {
@@ -185,10 +185,10 @@ function get_tour_image($tour) {
         }
     }
 
-    // 3. Auto-discovery by location
+    // Discover by location
     if (!empty($tour['location'])) {
         $location = trim($tour['location']);
-        // Remove common suffixes like " Valley" or " Region" for better folder matching
+        // Clean location name
         $folderName = preg_replace('/ (Valley|Region|District)$/i', '', $location); 
         
         $folderMap = [
@@ -207,7 +207,7 @@ function get_tour_image($tour) {
         }
     }
 
-    // 4. Category-based fallbacks
+    // Use category fallback
     $cat = isset($tour['category']) ? strtolower($tour['category']) : 'trekking';
     $stockMap = [
         'trekking' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80',

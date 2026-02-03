@@ -4,18 +4,18 @@ $base = '../';
 require_once $base . 'helpers/functions.php';
 require_once $base . 'config/db.php';
 
-// Verify login
+// Check user access
 require_login();
 
 $format = isset($_GET['format']) ? $_GET['format'] : 'json';
 
 try {
-    // Get tours
+    // Fetch all tours
     $stmt = $pdo->query("SELECT id, title, location, price, duration, description, category, difficulty, max_group, highlights, image, best_season, altitude_max, permit_requirements, itinerary, inclusions, exclusions, is_featured, created_at FROM tours ORDER BY id ASC");
     $tours = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     if ($format === 'json') {
-        // Generate JSON
+        // Download JSON file
         $filename = 'tours_export_' . date('Y-m-d_H-i-s') . '.json';
         header('Content-Type: application/json');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
@@ -23,19 +23,19 @@ try {
         exit;
         
     } elseif ($format === 'csv') {
-        // Generate CSV
+        // Download CSV file
         $filename = 'tours_export_' . date('Y-m-d_H-i-s') . '.csv';
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
         
         $output = fopen('php://output', 'w');
         
-        // Add headers
+        // Write column headers
         if (!empty($tours)) {
             fputcsv($output, array_keys($tours[0]));
         }
         
-        // Add rows
+        // Write tour rows
         foreach ($tours as $tour) {
             fputcsv($output, $tour);
         }
@@ -44,14 +44,14 @@ try {
         exit;
         
     } elseif ($format === 'season_json') {
-        // Generate seasonal
-        // Check directory
+        // Split by season
+        // Create data folder
         $data_dir = $base . 'data';
         if (!is_dir($data_dir)) {
             mkdir($data_dir, 0755, true);
         }
         
-        // Sort tours
+        // Categorize by season
         $seasons = [
             'spring' => [],
             'autumn' => [],
@@ -76,7 +76,7 @@ try {
             }
         }
         
-        // Save files
+        // Write season files
         foreach ($seasons as $season_name => $season_tours) {
             if (empty($season_tours)) continue;
             
@@ -85,7 +85,7 @@ try {
             file_put_contents($filename, $json_data);
         }
         
-        // Redirect success
+        // Redirect on success
         header('Location: export.php?success=season');
         exit;
     }

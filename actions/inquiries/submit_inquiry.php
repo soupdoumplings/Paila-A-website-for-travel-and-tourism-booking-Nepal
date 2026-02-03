@@ -1,7 +1,9 @@
 <?php
+// Start user session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+// Load required files
 require_once '../../config/db.php';
 require_once '../../helpers/functions.php';
 
@@ -11,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = trim($_POST['phone'] ?? '');
     $message = trim($_POST['message'] ?? '');
 
-    // Validate inputs
+    // Validate contact inputs
     if (empty($name) || empty($email) || empty($message)) {
         $_SESSION['error'] = "Name, Email, and Message are required.";
         redirect(url('public/home.php#contact'));
@@ -23,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("INSERT INTO inquiries (name, email, phone, message) VALUES (?, ?, ?, ?)");
             $stmt->execute([$name, $email, $phone, $message]);
             
-            // Notify all admins/super_admins
+            // Notify system admins
             try {
                 $adminStmt = $pdo->query("SELECT id FROM users WHERE role_id IN (1, 2)");
                 $admins = $adminStmt->fetchAll(PDO::FETCH_COLUMN);
@@ -36,9 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         "admin/manage_inquiries.php"
                     );
                 }
-            } catch (Exception $e_notif) {
-                // Log notification failure but don't block the submission
-            }
+            // Handle notification failure
             
             $_SESSION['success'] = "Thank you! Your message has been sent. We will contact you soon.";
         } else {
@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['error'] = "Submission failed: " . $e->getMessage();
     }
 
+    // Redirect to home
     redirect(url('public/home.php#contact'));
 } else {
     redirect(url('public/home.php'));

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($username) || empty($email)) {
             $error = 'All profile fields are required.';
         } else {
-            // Update DB
+            // Save profile changes
             try {
                 $stmt = $pdo->prepare("UPDATE users SET username = ?, email = ? WHERE id = ?");
                 if ($stmt->execute([$username, $email, $user['id']])) {
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($new_pass !== $confirm_pass) {
             $error = 'New passwords do not match.';
         } else {
-            // Verify password
+            // Check old password
             $stmt = $pdo->prepare("SELECT password FROM users WHERE id = ?");
             $stmt->execute([$user['id']]);
             $hash = $stmt->fetchColumn();

@@ -6,12 +6,12 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../helpers/functions.php';
 require_once __DIR__ . '/../config/db.php';
 
-// Page styles
+// Extra page styles
 $extraCss = ['assets/css/collection.css'];
 
 include __DIR__ . '/../includes/header.php';
 
-// Init filters
+// Parse filter params
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $category = isset($_GET['category']) ? trim($_GET['category']) : '';
 $min_price = isset($_GET['min_price']) ? (int)$_GET['min_price'] : 0;
@@ -20,7 +20,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'newest';
 $duration = isset($_GET['duration']) ? $_GET['duration'] : '';
 $location_filter = isset($_GET['location']) ? trim($_GET['location']) : '';
 
-// Query builder
+// Build SQL query
 $query = "SELECT * FROM tours WHERE 1=1";
 $params = [];
 
@@ -50,12 +50,12 @@ if ($location_filter) {
     $params[] = "%$location_filter%";
 }
 
-// Price filter
+// Apply price filter
 $query .= " AND price >= ? AND price <= ?";
 $params[] = $min_price;
 $params[] = $max_price;
 
-// Sort logic
+// Apply sort order
 switch ($sort) {
     case 'price_asc':
         $query .= " ORDER BY price ASC";
@@ -71,7 +71,7 @@ switch ($sort) {
         break;
 }
 
-// Fetch data
+// Execute database query
 $tours = [];
 try {
     if ($pdo) {
@@ -81,7 +81,7 @@ try {
     }
 } catch (Exception $e) { /* Ignore */ }
 
-// Image helper
+// Category fallback images
 $imageMap = [
     'trekking' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80',
     'cultural' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',

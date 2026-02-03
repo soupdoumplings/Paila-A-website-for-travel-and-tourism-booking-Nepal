@@ -6,24 +6,24 @@ require_once '../helpers/functions.php';
 if (!is_logged_in()) redirect(url('public/authentication/login.php'));
 $user = get_user();
 
-// View mode
+// Check detail mode
 $detailId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Handle message
+// Process user message
 if ($detailId > 0 && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'send_message') {
-    // Verify owner
+    // Check request owner
     $check = $pdo->prepare("SELECT id FROM private_requests WHERE id = ? AND user_id = ?");
     $check->execute([$detailId, $user['id']]);
     if ($check->rowCount() > 0) {
         $msgBody = trim($_POST['message']);
         if ($msgBody) {
-             // Fetch admin
+             // Find admin user
             $adminStmt = $pdo->query("SELECT id FROM users WHERE role_id = 1 LIMIT 1");
             $adminId = $adminStmt->fetchColumn() ?: 1;
 
             send_message($user['id'], $adminId, 'private_request', $detailId, $msgBody);
             
-             // Notify Admins
+             // Alert admin users
             $allAdmins = $pdo->query("SELECT id FROM users WHERE role_id IN (1, 2)");
             while ($row = $allAdmins->fetch(PDO::FETCH_ASSOC)) {
                 create_notification($row['id'], "New Message: Request #$detailId", "User sent a message regarding their access request.", "admin/request_detail.php?id=$detailId");
@@ -32,9 +32,9 @@ if ($detailId > 0 && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acti
     }
 }
 
-// Fetch data
+// Load view data
 if ($detailId > 0) {
-    // Detail data
+    // Load single request
     $stmt = $pdo->prepare("SELECT * FROM private_requests WHERE id = ? AND user_id = ?");
     $stmt->execute([$detailId, $user['id']]);
     $request = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -43,7 +43,7 @@ if ($detailId > 0) {
     $messages = get_message_history('private_request', $detailId);
     $viewMode = 'detail';
 } else {
-    // List data
+    // Load all requests
     $stmt = $pdo->prepare("SELECT * FROM private_requests WHERE user_id = ? ORDER BY created_at DESC");
     $stmt->execute([$user['id']]);
     $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);

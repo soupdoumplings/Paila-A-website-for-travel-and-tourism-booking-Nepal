@@ -7,7 +7,7 @@ require_login();
 
 // Dashboard statistics
 
-// Initialize counters
+// Initialize stat counters
 $totalTours = 0;
 $totalBookings = 0;
 $pendingBookings = 0;
@@ -15,23 +15,23 @@ $totalRevenue = 0;
 $newInquiries = 0;
 
 try {
-    // Count tours
+    // Count total tours
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM tours");
     $totalTours = $stmt->fetch()['count'];
 
-    // Count bookings
+    // Count total bookings
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM bookings");
     $totalBookings = $stmt->fetch()['count'];
 
-    // Count pending
+    // Count pending bookings
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM bookings WHERE status = 'pending'");
     $pendingBookings = $stmt->fetch()['count'];
 
-    // Count inquiries
+    // Count new inquiries
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM inquiries WHERE status = 'new'");
     $newInquiries = $stmt->fetch()['count'];
 
-    // Calculate revenue
+    // Calculate total revenue
     $stmt = $pdo->query("
         SELECT SUM(b.travelers * t.price) as revenue 
         FROM bookings b 
@@ -41,7 +41,7 @@ try {
     $totalRevenue = $stmt->fetch()['revenue'] ?? 0;
 
 } catch (Exception $e) {
-    // Handle errors
+    // Log database errors
 }
 ?>
 <!DOCTYPE html>
@@ -59,14 +59,14 @@ try {
 </head>
 <body style="background: var(--color-stone-100);">
 
-    <!-- Header wrapper -->
+    <!-- Admin header section -->
     <div class="admin-hero">
         <?php 
             $base = '../';
             include '../includes/header.php'; 
         ?>
 
-        <!-- Title section -->
+        <!-- Dashboard title area -->
         <section style="padding: 6rem 0 5rem;">
             <div class="container">
                 <p class="badge" style="margin-bottom: 0.75rem;">RESTRICTED AREA</p>
@@ -80,7 +80,7 @@ try {
 
     <div class="container" style="margin-top: -2rem; position: relative; z-index: 10;">
         
-        <!-- Stats grid -->
+        <!-- Statistics cards grid -->
         <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 3rem;">
             <!-- Total Tours -->
             <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
@@ -128,7 +128,7 @@ try {
             </a>
         </div>
 
-        <!-- Tab navigation -->
+        <!-- Section tab navigation -->
         <div style="border-bottom: 1px solid var(--color-stone-300); margin-bottom: 2rem;">
             <div style="display: flex; gap: 2rem;">
                 <button class="tab-btn active" data-tab="tours" style="padding: 1rem 0; border: none; background: none; font-weight: 600; color: var(--color-stone-900); border-bottom: 2px solid var(--color-stone-900); cursor: pointer;">Tours</button>
@@ -136,9 +136,9 @@ try {
             </div>
         </div>
 
-        <!-- Tours content -->
+        <!-- Tour management section -->
         <div id="tours-section">
-            <!-- Search input -->
+            <!-- Search filter input -->
             <div style="margin-bottom: 1rem; position: relative; max-width: 400px;">
                 <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-stone-400);"></i>
                 <input type="text" id="admin-tour-search" placeholder="Search tours by name or location..." style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; border: 1px solid var(--color-stone-300); border-radius: 0.5rem; font-size: 0.9rem;">
@@ -220,7 +220,7 @@ try {
             <!-- Layout ends -->
         </div>
 
-        <!-- Bookings content -->
+        <!-- Recent bookings section -->
         <div id="bookings-section" style="display: none;">
              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                 <h2 style="font-size: 1.5rem; font-weight: 600;">Recent Bookings</h2>
@@ -302,7 +302,7 @@ try {
 
     </div>
 
-    <!-- View Tour Modal -->
+    <!-- Tour viewing modal -->
     <div id="viewTourModal" class="modal" style="display: none;">
         <div class="modal-content" style="max-width: 900px;">
             <button onclick="closeModal('viewTourModal')" style="position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-stone-600);">
@@ -312,7 +312,7 @@ try {
         </div>
     </div>
 
-    <!-- Edit Tour Modal -->
+    <!-- Tour editing modal -->
     <div id="editTourModal" class="modal" style="display: none;">
         <div class="modal-content" style="max-width: 600px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
@@ -328,7 +328,7 @@ try {
     </div>
 
 
-    <!-- Custom Confirmation Modal -->
+    <!-- Action confirmation modal -->
     <div id="confirmModal" class="modal" style="display: none;">
         <div class="modal-content" style="max-width: 400px; text-align: center; padding: 2rem;">
             <div style="width: 60px; height: 60px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
@@ -345,7 +345,7 @@ try {
 
     <script src="../assets/js/admin-dashboard.js"></script>
     <script>
-        // Custom Confirmation Logic
+        // Modal confirmation logic
         function showCustomConfirm(title, message, confirmText = 'Yes, Delete') {
             return new Promise((resolve) => {
                 const modal = document.getElementById('confirmModal');
@@ -392,7 +392,7 @@ try {
             }
         }
 
-        // Sidebar toggle
+        // Sidebar interaction logic
         document.addEventListener('DOMContentLoaded', function () {
             const userIcon = document.getElementById('user-icon');
             const sidebar = document.getElementById('user-sidebar');
@@ -416,7 +416,7 @@ try {
             if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
             if (overlay) overlay.addEventListener('click', closeSidebar);
 
-            // AJAX Search
+            // Real-time tour search
             const adminSearch = document.getElementById('admin-tour-search');
             const adminToursBody = document.getElementById('admin-tours-body');
             

@@ -3,10 +3,10 @@ session_start();
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
-// Get location from URL
+// Parse URL location
 $location = isset($_GET['location']) ? trim($_GET['location']) : '';
 
-// Gallery data structure
+// Define gallery data
 $galleries = [
     'Everest' => [
         'name' => 'Everest',
@@ -82,7 +82,7 @@ $galleries = [
     ]
 ];
 
-// Check if location exists
+// Validate location param
 if (!isset($galleries[$location])) {
     header('Location: archive.php');
     exit;
@@ -90,7 +90,7 @@ if (!isset($galleries[$location])) {
 
 $gallery = $galleries[$location];
 
-// Directory Mapping
+// Folder path mapping
 $folderMap = [
     'Rara Lake' => 'Rara',
     'Kathmandu' => 'kathmandu'
@@ -100,7 +100,7 @@ $folderName = isset($folderMap[$location]) ? $folderMap[$location] : $location;
 $imagesDir = __DIR__ . '/../assets/images/' . $folderName;
 $webPath = '../assets/images/' . $folderName;
 
-// Fetch images
+// Load local images
 $galleryImages = [];
 if (is_dir($imagesDir)) {
     $files = glob($imagesDir . '/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', GLOB_BRACE);
@@ -111,7 +111,7 @@ if (is_dir($imagesDir)) {
     }
 }
 
-// Fallback if no images found
+// Use default images
 if (empty($galleryImages)) {
     // Keeping some defaults just in case, or could simply be empty
     $galleryImages = [
@@ -121,13 +121,13 @@ if (empty($galleryImages)) {
         'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80'
     ];
 } else {
-    // Set first image as hero image
+    // Use first local
     $gallery['hero_image'] = $galleryImages[0];
 }
 
 $gallery['images'] = $galleryImages;
 
-// Fetch actual tour count from database
+// Get DB tour count
 try {
     $stmt = $pdo->prepare("SELECT COUNT(*) as count FROM tours WHERE location LIKE ?");
     $stmt->execute(['%' . $gallery['name'] . '%']);

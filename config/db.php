@@ -1,5 +1,5 @@
 <?php
-// Database configuration file
+// Database connection settings
 
 // localhost connection
 // // Define database host
@@ -18,41 +18,41 @@
 // define('BASE_URL', getenv('BASE_URL') !== false ? getenv('BASE_URL') : '');
 
 // Server connection
-// Define database host
+// Set database host
 define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
 
-// Define database user
+// Set database user
 define('DB_USER', getenv('DB_USER') ?: 'np03cs4a240006');
 
-// Define database password
+// Set database password
 define('DB_PASS', getenv('DB_PASS') ?: 'SvoFQrw1PP');
 
-// Define database name
+// Set database name
 define('DB_NAME', getenv('DB_NAME') ?: 'np03cs4a240006');
 
-// Define base url
+// Set site URL
 define('BASE_URL', getenv('BASE_URL') ?: 'https://student.heraldcollege.edu.np/~np03cs4a240006/paila-traveling-2461787/');
 
-// Define site name
+// Set site name
 define('SITE_NAME', 'PAILA');
 
-// Initialize error variable
+// Init error flag
 $db_error = null;
 
 try {
-    // Set connection string
+    // Create DSN string
     $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8";
     
-    // Create new connection
+    // Establish PDO connection
     $pdo = new PDO($dsn, DB_USER, DB_PASS);
     
-    // Set error mode
+    // Set exception mode
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // Set fetch mode
+    // Set default fetch
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     
 } catch (PDOException $e) {
-    // Capture connection error
+    // Catch connection error
     $db_error = $e->getMessage();
 }

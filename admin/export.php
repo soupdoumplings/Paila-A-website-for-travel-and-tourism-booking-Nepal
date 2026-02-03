@@ -10,11 +10,11 @@ require_login();
 
 <div class="admin-hero">
 <?php include $base . 'includes/header.php'; ?>
-<?php
+// View status signals
 $success = isset($_GET['success']) ? $_GET['success'] : null;
-?>
 
 <style>
+/* Component custom styling */
 .export-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -101,7 +101,7 @@ $success = isset($_GET['success']) ? $_GET['success'] : null;
 
 <div class="export-container" style="margin-top: -2rem; position: relative; z-index: 10; padding-bottom: 5rem;">
     <div class="export-card">
-        <h2>📦 Export Data</h2>
+        <!-- Export dashboard header -->
         <p>Backup your tours data for migration, sharing with partners, or data analysis</p>
         
         <?php if ($success === 'json'): ?>
@@ -114,7 +114,7 @@ $success = isset($_GET['success']) ? $_GET['success'] : null;
         </div>
         <?php endif; ?>
         
-        <div class="export-options">
+        <!-- Selection export formats -->
             <a href="process_export.php?format=json" class="export-option">
                 <div class="icon">📄</div>
                 <h3>Export to JSON</h3>
@@ -141,7 +141,7 @@ $success = isset($_GET['success']) ? $_GET['success'] : null;
         </div>
         
         <?php
-        // Retrieve stats
+        // Retrieve data statistics
         try {
             $total_tours = $pdo->query("SELECT COUNT(*) FROM tours")->fetchColumn();
             $total_bookings = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
@@ -151,7 +151,7 @@ $success = isset($_GET['success']) ? $_GET['success'] : null;
         }
         ?>
         
-        <div class="stats">
+        <!-- Display summary metrics -->
             <div class="stat-card">
                 <div class="label">Total Tours</div>
                 <div class="value"><?php echo $total_tours; ?></div>
@@ -168,7 +168,7 @@ $success = isset($_GET['success']) ? $_GET['success'] : null;
     </div>
     
     <div class="export-card">
-        <h2>ℹ️ Use Cases</h2>
+        <!-- Export usage cases -->
         <ul style="color: #57534e; line-height: 2;">
             <li><strong>Backup:</strong> Regular exports protect your data from loss</li>
             <li><strong>Migration:</strong> Move tours to another system or database</li>

@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
             if (isset($user['role_id'])) {
+                // Load user role
                 $stmt = $pdo->prepare("SELECT name FROM roles WHERE id = ?");
                 $stmt->execute([$user['role_id']]);
                 $roleName = $stmt->fetchColumn();
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
             }
-
+            // Redirect by role
             if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
                 redirect(url('admin/index.php'));
             } else {

@@ -1,9 +1,4 @@
-/**
- * PROJECT PAILA - CUSTOM VALIDATION ENGINE
- * =========================================
- * A bespoke JS engine that provides real-time and submission-time
- * validation without relying on native HTML5 UI.
- */
+
 
 const Validator = {
     // Configuration

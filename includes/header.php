@@ -1,15 +1,14 @@
 <?php
-// Session is now handled in entry scripts
-// Load config
+// Site header setup
 if (!defined('BASE_URL')) {
     require_once __DIR__ . '/../config/db.php';
 }
-// Load dependencies
+// Load required files
 if (!function_exists('get_unread_notification_count')) {
     require_once __DIR__ . '/../helpers/functions.php';
 }
 
-// Get notifications
+// Get notification count
 $unreadCount = 0;
 if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
     if (isset($pdo)) {
@@ -32,10 +31,10 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
+    <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Styles -->
+    <!-- Main stylesheets -->
     <link rel="stylesheet" href="<?php echo url('assets/css/style.css'); ?>?v=1.1">
     <link rel="stylesheet" href="<?php echo url('assets/css/validation.css'); ?>?v=1.1">
     <link rel="stylesheet" href="<?php echo url('assets/css/tours.css'); ?>?v=1.1">
@@ -46,15 +45,15 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <!-- Admin styles -->
+    <!-- Admin panel styles -->
     <?php if(strpos($_SERVER['REQUEST_URI'], 'admin') !== false): ?>
         <link rel="stylesheet" href="<?php echo url('assets/css/admin.css'); ?>?v=1.1">
     <?php endif; ?>
     
-    <!-- Scroll effects -->
+    <!-- Scroll animation script -->
     <script src="<?php echo url('assets/js/scroll-effects.js'); ?>" defer></script>
     
-    <!-- Scripts -->
+    <!-- JavaScript config -->
     <script>
         window.PAILA_CONFIG = {
             baseUrl: '<?php echo url(""); ?>'.replace(/\/$/, '') + '/'
@@ -64,7 +63,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
 </head>
 <body>
 
-    <!-- Navbar -->
+    <!-- Main navigation bar -->
     <?php 
         $navClass = "navbar";
         $isAdmin = strpos($_SERVER['REQUEST_URI'], '/admin/') !== false;
@@ -115,7 +114,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
                         <a href="<?php echo BASE_URL; ?>/admin/index.php" style="opacity: 0.7; text-decoration: none; font-size: 1rem;">⚙</a>
                     <?php endif; ?>
                     
-                    <!-- Notifications -->
+                    <!-- Notification bell icon -->
                     <?php if(is_logged_in()): ?>
                         <?php 
                             $notifLink = $isAdmin ? BASE_URL . '/admin/notifications.php' : BASE_URL . '/public/notifications.php'; 
@@ -130,7 +129,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
                         </a>
                     <?php endif; ?>
 
-                    <!-- Authentication -->
+                    <!-- Login/Register links -->
                     <?php if(is_logged_in()): ?>
                          <!-- User is logged in, show sidebar toggle -->
                          <button id="user-icon" style="background: none; border: none; color: white; font-size: 1.1rem; cursor: pointer; padding: 0.4rem; transition: opacity 0.3s;">
@@ -144,7 +143,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
             </div>
     </nav>
 
-    <!-- System alert -->
+    <!-- Offline status alert -->
     <?php if (isset($db_error) && $db_error): ?>
     <div style="background: #fef2f2; border-bottom: 1px solid #fee2e2; padding: 0.75rem 0; text-align: center; color: #991b1b; font-size: 0.85rem; font-weight: 500; position: relative; z-index: 1000;">
         <div class="container">
@@ -154,19 +153,19 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
     </div>
     <?php endif; ?>
 
-    <!-- Overlay -->
+    <!-- Sidebar background overlay -->
     <div id="sidebar-overlay" style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 99; opacity: 0; visibility: hidden; transition: all 0.3s ease;"></div>
 
-    <!-- Sidebar -->
+    <!-- User dashboard sidebar -->
     <div id="user-sidebar" style="position: fixed; top: 0; right: 0; width: 350px; height: 100vh; background: var(--color-stone-900); color: white; z-index: 100; transform: translateX(100%); transition: transform 0.3s ease; box-shadow: -4px 0 20px rgba(0,0,0,0.3);">
-        <!-- Close toggle -->
+        <!-- Sidebar close button -->
         <button id="close-sidebar" style="position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; line-height: 1; opacity: 0.7; transition: opacity 0.3s;">
             <i class="fa-solid fa-xmark"></i>
         </button>
 
-        <!-- Content -->
+        <!-- Sidebar menu content -->
         <div style="padding: 3rem 2rem;">
-            <!-- Profile -->
+            <!-- User profile section -->
             <div style="text-align: center; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
                 <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--color-stone-700); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">
                     <i class="fa-solid fa-user"></i>
@@ -180,7 +179,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
                 </p>
             </div>
 
-            <!-- Menu -->
+            <!-- Sidebar navigation links -->
             <nav style="margin-top: 2rem;">
                 <a href="<?php echo url('public/my_account.php'); ?>" class="sidebar-menu-item" style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 0.5rem; transition: background 0.3s; text-decoration: none; color: white; margin-bottom: 0.5rem;">
                     <i class="fa-solid fa-user-gear" style="font-size: 1.25rem; width: 1.5rem;"></i>

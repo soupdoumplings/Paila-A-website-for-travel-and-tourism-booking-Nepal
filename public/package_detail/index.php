@@ -25,17 +25,17 @@ $max_group = isset($tour['max_group']) && $tour['max_group'] ? $tour['max_group'
 $highlights = isset($tour['highlights']) && $tour['highlights'] ? $tour['highlights'] : '';
 $highlights_list = array_filter(array_map('trim', explode("\n", $highlights)));
 
-// Nepal-specific metadata
+// Nepal-specific fields
 $best_season = isset($tour['best_season']) && $tour['best_season'] ? $tour['best_season'] : null;
 $altitude_max = isset($tour['altitude_max']) && $tour['altitude_max'] ? (int)$tour['altitude_max'] : null;
 $permits = isset($tour['permit_requirements']) && $tour['permit_requirements'] ? $tour['permit_requirements'] : null;
 $permits_list = $permits ? array_filter(array_map('trim', explode(",", $permits))) : [];
 
-// Itinerary
+// Parse itinerary list
 $itinerary_text = isset($tour['itinerary']) && $tour['itinerary'] ? $tour['itinerary'] : '';
 $itinerary_days = array_filter(array_map('trim', explode("\n", $itinerary_text)));
 
-// Inclusions/Exclusions
+// Parse included/excluded
 $inclusions_text = isset($tour['inclusions']) && $tour['inclusions'] ? $tour['inclusions'] : '';
 $inclusions_list = array_filter(array_map('trim', explode("\n", $inclusions_text)));
 $exclusions_text = isset($tour['exclusions']) && $tour['exclusions'] ? $tour['exclusions'] : '';

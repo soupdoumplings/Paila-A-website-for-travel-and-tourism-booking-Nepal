@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check permissions
+// Verify admin access
 require_login();
 if (!is_admin()) {
     die("Access Denied. You must be an Admin to view this page.");
@@ -15,7 +15,7 @@ if (!is_admin()) {
 $success = '';
 $error = '';
 
-// Handle creation
+// Process guide creation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_guide'])) {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_guide'])) {
     if (empty($username) || empty($email) || empty($password)) {
         $error = "All fields are required.";
     } else {
-        // Check duplication
+        // Check existing user
         $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
         $stmt->execute([$username, $email]);
         if ($stmt->fetch()) {
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_guide'])) {
     }
 }
 
-// Handle deletion
+// Process guide deletion
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_guide'])) {
     $user_id = intval($_POST['user_id']);
     $stmt = $pdo->prepare("DELETE FROM users WHERE id = ? AND role_id = 4");
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_guide'])) {
     }
 }
 
-// Get guide list
+// Fetch all guides
 $stmt = $pdo->query("
     SELECT u.id, u.username, u.email, u.created_at
     FROM users u
@@ -79,10 +79,10 @@ $base = '../';
 </div>
 
 <div class="container" style="margin-top: -2rem; position: relative; z-index: 10; padding-bottom: 5rem;">
-    <!-- Content wrapper -->
+    <!-- Main content panel -->
     <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
         
-        <!-- Page header -->
+        <!-- Section header row -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
             <h2 style="font-size: 1.5rem; color: var(--color-stone-900);">Guide Records</h2>
             <div style="color: var(--color-stone-500); font-size: 0.9rem;">Total: <?php echo count($guides); ?> guides</div>
@@ -100,7 +100,7 @@ $base = '../';
             </div>
         <?php endif; ?>
 
-        <!-- Registration form -->
+        <!-- Guide registration form -->
         <div style="background: var(--color-stone-800); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
             <h3 style="color: white; margin-bottom: 1rem; font-size: 1.25rem;">Register New Tour Guide</h3>
             <form method="POST" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end;">
@@ -121,7 +121,7 @@ $base = '../';
             </form>
         </div>
 
-        <!-- Guide table -->
+        <!-- Guide records table -->
         <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; text-align: left;">
                 <thead>
@@ -219,7 +219,7 @@ function showCustomConfirm(title, message, confirmText = 'Yes, Delete') {
 }
 </script>
 
-<!-- Custom Confirmation Modal -->
+<!-- Deletion confirm modal -->
 <div id="confirmModal" class="modal" style="display: none;">
     <div class="modal-content" style="max-width: 400px; text-align: center; padding: 2rem;">
         <div style="width: 60px; height: 60px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">

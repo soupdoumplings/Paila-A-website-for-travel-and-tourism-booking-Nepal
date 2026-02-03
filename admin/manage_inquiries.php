@@ -14,7 +14,7 @@ if (!is_admin()) {
 $success = '';
 $error = '';
 
-// Process actions
+// Handle inquiry actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         $inquiry_id = intval($_POST['inquiry_id']);
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Get all inquiries
+// Fetch all inquiries
 $stmt = $pdo->query("SELECT * FROM inquiries ORDER BY created_at DESC");
 $inquiries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -60,10 +60,10 @@ $base = '../';
 </div>
 
 <div class="container" style="margin-top: -2rem; position: relative; z-index: 10; padding-bottom: 5rem;">
-    <!-- Content wrapper -->
+    <!-- Main content panel -->
     <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
         
-        <!-- Page header -->
+        <!-- Section header row -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
             <h2 style="font-size: 1.5rem; color: var(--color-stone-900);">Messages</h2>
             <div style="color: var(--color-stone-500); font-size: 0.9rem;">Total: <?php echo count($inquiries); ?> messages</div>
@@ -81,7 +81,7 @@ $base = '../';
             </div>
         <?php endif; ?>
 
-        <!-- Data table -->
+        <!-- Inquiry message table -->
         <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; min-width: 800px;">
                 <thead>
@@ -123,7 +123,7 @@ $base = '../';
                                 </td>
                                 <td style="padding: 1rem; text-align: right;">
                                     <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
-                                        <!-- Reply action -->
+                                        <!-- Email reply action -->
                                         <a href="mailto:<?php echo htmlspecialchars($msg['email']); ?>?subject=Re: Inquiry from Paila website" 
                                            class="btn" 
                                            style="padding: 0.5rem 0.75rem; font-size: 0.85rem; background: var(--color-stone-100); color: var(--color-stone-700); text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem;">
@@ -140,7 +140,7 @@ $base = '../';
                                             </form>
                                         <?php endif; ?>
 
-                                        <!-- Delete action -->
+                                        <!-- Inquiry delete action -->
                                         <form method="POST" id="delete-form-<?php echo $msg['id']; ?>" style="display: inline;">
                                             <input type="hidden" name="inquiry_id" value="<?php echo $msg['id']; ?>">
                                             <input type="hidden" name="action" value="delete">
@@ -160,7 +160,7 @@ $base = '../';
 </div>
 
 <style>
-/* Responsive table for mobile */
+/* Responsive mobile layout */
 @media (max-width: 768px) {
     .container { padding-left: 1rem; padding-right: 1rem; }
 }
@@ -214,7 +214,7 @@ function showCustomConfirm(title, message, confirmText = 'Yes, Delete') {
 }
 </script>
 
-<!-- Custom Confirmation Modal -->
+<!-- Deletion confirm modal -->
 <div id="confirmModal" class="modal" style="display: none;">
     <div class="modal-content" style="max-width: 400px; text-align: center; padding: 2rem;">
         <div style="width: 60px; height: 60px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">

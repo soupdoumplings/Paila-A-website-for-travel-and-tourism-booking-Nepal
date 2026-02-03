@@ -10,14 +10,14 @@ require_login();
 
 <div class="admin-hero">
 <?php include $base . 'includes/header.php'; ?>
-<?php
+// Retrieve status messages
 $message = isset($_GET['message']) ? $_GET['message'] : null;
 $error = isset($_GET['error']) ? $_GET['error'] : null;
 $detailed_errors = isset($_SESSION['import_errors']) ? $_SESSION['import_errors'] : [];
 unset($_SESSION['import_errors']);
-?>
 
 <style>
+/* Component custom styling */
 .import-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -107,13 +107,13 @@ unset($_SESSION['import_errors']);
 </div>
 
 <div class="import-container" style="margin-top: -2rem; position: relative; z-index: 10; padding-bottom: 5rem;">
-    <div style="margin-bottom: 2rem;">
+    <!-- Navigation back link -->
         <a href="export.php" style="color: #78716c; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
             <i class="fa-solid fa-arrow-left"></i> Back to Export
         </a>
     </div>
 
-    <div class="import-card">
+    <!-- Package import form -->
         <h2>📥 Import Tours from JSON</h2>
         <p>Upload a JSON file to import tours into your database</p>
         
@@ -152,7 +152,7 @@ unset($_SESSION['import_errors']);
                 <p id="fileName" style="margin-top: 1rem; font-weight: 600; color: #047857;"></p>
             </div>
             
-            <div class="import-options">
+            <!-- Advanced import options -->
                 <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #1c1917;">Import Options</h3>
                 
                 <label class="import-option">
@@ -186,7 +186,7 @@ unset($_SESSION['import_errors']);
         </form>
     </div>
     
-    <div class="import-card">
+    <!-- Import user guide -->
         <h2>ℹ️ Import Instructions</h2>
         <ul style="color: #57534e; line-height: 2;">
             <li><strong>JSON Format:</strong> Upload files exported from this system</li>
@@ -198,7 +198,7 @@ unset($_SESSION['import_errors']);
 </div>
 
 <script>
-// Handle file selection and drag-drop
+// Client file handling
 const uploadZone = document.getElementById('uploadZone');
 const fileInput = document.getElementById('jsonFile');
 const fileName = document.getElementById('fileName');

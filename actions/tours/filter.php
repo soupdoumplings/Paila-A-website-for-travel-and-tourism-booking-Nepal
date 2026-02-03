@@ -1,4 +1,5 @@
 <?php
+// Load required files
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../helpers/functions.php';
 
@@ -11,7 +12,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'newest';
 $duration = isset($_GET['duration']) ? $_GET['duration'] : '';
 $location_filter = isset($_GET['location']) ? trim($_GET['location']) : '';
 
-// Build search query
+// Build base query
 $query = "SELECT * FROM tours WHERE 1=1";
 $params = [];
 
@@ -41,12 +42,12 @@ if ($location_filter) {
     $params[] = "%$location_filter%";
 }
 
-// Filter by price
+// Apply price range
 $query .= " AND price >= ? AND price <= ?";
 $params[] = $min_price;
 $params[] = $max_price;
 
-// Apply sorting
+// Apply sort order
 switch ($sort) {
     case 'price_asc':
         $query .= " ORDER BY price ASC";
@@ -63,6 +64,7 @@ switch ($sort) {
 }
 
 $tours = [];
+// Execute search query
 try {
     if ($pdo) {
         $stmt = $pdo->prepare($query);
@@ -71,6 +73,7 @@ try {
     }
 } catch (Exception $e) { $tours = []; }
 
+// Setup image map
 $imageMap = [
     'trekking' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80',
     'cultural' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
@@ -82,9 +85,10 @@ $imageMap = [
     'budget' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80'
 ];
 
-// Return JSON response
+// Set JSON header
 header('Content-Type: application/json');
 
+// Buffer HTML output
 ob_start();
 if (count($tours) > 0):
     foreach ($tours as $tour):
@@ -96,7 +100,7 @@ if (count($tours) > 0):
             if (filter_var($tourImg, FILTER_VALIDATE_URL)) {
                 $img = $tourImg;
             } else {
-                // Check local file
+                // Validate local image
                 $localPath = __DIR__ . '/../public/uploads/' . $tourImg;
                 if (file_exists($localPath)) {
                     $img = url('public/uploads/' . $tourImg);
@@ -151,8 +155,10 @@ else: ?>
         <a href="collection.php" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">Clear Filters</a>
     </div>
 <?php endif;
+// Capture buffered HTML
 $html = ob_get_clean();
 
+// Return JSON response
 echo json_encode([
     'html' => $html,
     'count' => count($tours)

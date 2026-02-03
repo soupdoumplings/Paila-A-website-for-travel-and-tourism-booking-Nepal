@@ -9,7 +9,7 @@ $user = get_user();
 $bookingId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($bookingId == 0) redirect('my_bookings.php');
 
-// Fetch booking
+// Load booking data
 $stmt = $pdo->prepare("
     SELECT b.*, t.title as tour_title, t.image as tour_image, t.duration 
     FROM bookings b
@@ -23,13 +23,13 @@ if (!$booking) {
     redirect('my_bookings.php');
 }
 
-// Helper functions
 
-// Handle messages
+
+// Process user message
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'send_message') {
     $msgBody = trim($_POST['message']);
     if ($msgBody) {
-        // Send message
+        // Find admin user
         $adminStmt = $pdo->query("SELECT id FROM users WHERE role_id = 1 LIMIT 1");
         $adminId = $adminStmt->fetchColumn();
         
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         
         send_message($user['id'], $actualReceiverId, 'booking', $bookingId, $msgBody);
         
-        // Notify admins
+        // Alert admin users
         $allAdmins = $pdo->query("SELECT id FROM users WHERE role_id IN (1, 2)");
         while ($row = $allAdmins->fetch(PDO::FETCH_ASSOC)) {
             create_notification($row['id'], "New Message: Booking #$bookingId", "User sent a message regarding booking #$bookingId", "admin/booking_detail.php?id=$bookingId");

@@ -8,7 +8,7 @@ $tour = null;
 $title = "Add New Tour";
 $action = "create";
 
-// Check edit mode
+// Load existing tour
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $stmt = $pdo->prepare("SELECT * FROM tours WHERE id = :id");
@@ -18,13 +18,13 @@ if (isset($_GET['id'])) {
         $title = "Edit Tour: " . e($tour['title']);
         $action = "update";
         
-        // Check ownership
+        // Verify edit rights
         if (!is_super_admin()) {
-            // Verify creator
+            // Check tour owner
             if (isset($tour['created_by']) && $tour['created_by'] != $_SESSION['user_id']) {
                  die("Access Denied: You can only edit tours you created.");
             }
-            // Legacy check
+            // Check legacy tour
             if (!isset($tour['created_by']) || $tour['created_by'] === null) {
                 die("Access Denied: You cannot edit this tour (System/Legacy Tour).");
             }

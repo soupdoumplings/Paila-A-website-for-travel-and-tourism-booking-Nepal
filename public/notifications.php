@@ -9,13 +9,13 @@ if (!is_logged_in()) {
 
 $user = get_user();
 
-// Handle mark-all
+// Mark all read
 if (isset($_POST['mark_all_read'])) {
     mark_all_notifications_read($user['id']);
     redirect(url('public/notifications.php'));
 }
 
-// Handle mark-read
+// Mark single read
 if (isset($_GET['read'])) {
     mark_notification_read($_GET['read'], $user['id']);
     redirect(url('public/notifications.php'));

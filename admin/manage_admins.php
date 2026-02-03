@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check security
+// Verify admin access
 if (!is_logged_in() || !is_super_admin()) {
     die("Access Denied. You must be a Super Admin to view this page.");
 }
@@ -14,7 +14,7 @@ if (!is_logged_in() || !is_super_admin()) {
 $success = '';
 $error = '';
 
-// Handle form actions
+// Process form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['create_admin'])) {
         $username = trim($_POST['username']);
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($username) || empty($email) || empty($password)) {
             $error = "All fields are required.";
         } else {
-            // Check existence
+            // Check user exists
             $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
             $stmt->execute([$username, $email]);
             if ($stmt->fetch()) {
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_id = intval($_POST['user_id']);
         $new_role_id = intval($_POST['role_id']);
         
-        // Update user role
+        // Modify user role
         if (in_array($new_role_id, [1, 2, 3])) {
             if ($user_id == $_SESSION['user_id']) {
                  $error = "You cannot change your own role here.";
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Get all users
+// Fetch all users
 $stmt = $pdo->query("
     SELECT u.id, u.username, u.email, u.created_at, r.name as role_name, r.id as role_id
     FROM users u
@@ -107,10 +107,10 @@ $base = '../';
 </div>
 
 <div class="container" style="margin-top: -2rem; position: relative; z-index: 10; padding-bottom: 5rem;">
-    <!-- Content wrapper -->
+    <!-- Main content panel -->
     <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
         
-        <!-- Create admin form -->
+        <!-- Admin creation form -->
         <div style="background: var(--color-stone-50); padding: 1.5rem; border: 1px solid var(--color-stone-200); border-radius: 0.75rem; margin-bottom: 2rem;">
             <h3 style="color: var(--color-stone-900); margin-bottom: 1rem; font-size: 1.25rem;">Create New Admin</h3>
             <form method="POST" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end;">
@@ -143,7 +143,7 @@ $base = '../';
             </div>
         <?php endif; ?>
 
-        <!-- User list -->
+        <!-- System user table -->
         <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; text-align: left;">
                 <thead>
@@ -257,7 +257,7 @@ function showCustomConfirm(title, message, confirmText = 'Yes, Delete') {
 }
 </script>
 
-<!-- Custom Confirmation Modal -->
+<!-- Deletion confirm modal -->
 <div id="confirmModal" class="modal" style="display: none;">
     <div class="modal-content" style="max-width: 400px; text-align: center; padding: 2rem;">
         <div style="width: 60px; height: 60px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">

@@ -11,7 +11,7 @@ if ($bookingId == 0) redirect('manage_bookings.php');
 
 $user = get_user();
 
-// Retrieve booking
+// Fetch booking information
 $stmt = $pdo->prepare("
     SELECT b.*, t.title as tour_title, u.username as guide_name 
     FROM bookings b
@@ -24,21 +24,21 @@ $booking = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$booking) die("Booking not found.");
 
-// Process messages
+// Handle admin messages
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($_POST['action'] === 'send_message') {
         $msgBody = trim($_POST['message']);
         if ($msgBody && $booking['user_id']) {
             $sent = send_message($user['id'], $booking['user_id'], 'booking', $bookingId, $msgBody);
             if ($sent) {
-                // Notify User
+                // Notify booking owner
                 create_notification($booking['user_id'], "New Message regarding Booking #$bookingId", "You have a new message from the admin.", "user_booking_detail.php?id=$bookingId");
             }
         }
     }
 }
 
-$messages = get_message_history('booking', $bookingId);
+$messages = get_message_history('booking', $bookingId); // Get message history
 
 $pageTitle = "Booking Details #$bookingId";
 $base = '../';
@@ -58,7 +58,7 @@ $base = '../';
 <div class="container" style="margin-top: -2rem; position: relative; z-index: 10; padding-bottom: 5rem;">
     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
         
-        <!-- Details column -->
+        <!-- Booking details column -->
         <div>
             <!-- Booking info -->
             <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
@@ -101,11 +101,11 @@ $base = '../';
                 </div>
             </div>
             
-            <!-- Message history -->
+            <!-- Dialogue history section -->
             <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem;">
                 <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem;">Dialogue</h3>
                 
-                <?php if(!$booking['user_id']): ?>
+                <!-- Check guest account -->
                     <div style="padding: 1rem; background: #fffbe6; border: 1px solid #ffe58f; border-radius: 0.5rem; color: #856404;">
                          <i class="fa-solid fa-triangle-exclamation"></i> Customer booked as guest. Messaging is unavailable until they register or link account.
                     </div>
@@ -141,7 +141,7 @@ $base = '../';
             </div>
         </div>
         
-        <!-- Action column -->
+        <!-- Management sidebar panel -->
         <div>
             <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; position: sticky; top: 2rem;">
                 <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; color: var(--color-stone-500);">Management</h3>

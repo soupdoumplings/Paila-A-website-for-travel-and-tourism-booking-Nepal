@@ -11,18 +11,18 @@ $user = get_user();
 $success = '';
 $error = '';
 
-// Process request actions
+// Handle access actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $requestId = intval($_POST['request_id']);
     $action = $_POST['action'];
     $newStatus = ($action === 'approve') ? 'approved' : 'rejected';
     
-    // Update DB
+    // Update request status
     $stmt = $pdo->prepare("UPDATE private_requests SET status = ? WHERE id = ?");
     if ($stmt->execute([$newStatus, $requestId])) {
         $success = "Request #$requestId updated to $newStatus.";
         
-        // Notify User
+        // Notify request owner
         $reqStmt = $pdo->prepare("SELECT user_id, full_name, email FROM private_requests WHERE id = ?");
         $reqStmt->execute([$requestId]);
         $reqData = $reqStmt->fetch();
@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             
             create_notification($reqData['user_id'], $title, $msg, "user_requests.php");
         } elseif ($reqData) {
-            // Guest handling (omitted)
+            // Handle guest user
         }
     } else {
         $error = "Failed to update request.";
     }
 }
 
-// Get requests
+// Fetch all requests
 $stmt = $pdo->query("SELECT * FROM private_requests ORDER BY created_at DESC");
 $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

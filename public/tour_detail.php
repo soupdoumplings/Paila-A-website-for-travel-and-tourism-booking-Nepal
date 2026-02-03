@@ -2,14 +2,14 @@
 require_once '../helpers/functions.php';
 require_once '../config/db.php';
 
-// Get params
+// Parse request params
 $tour_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $tour_title = isset($_GET['title']) ? trim($_GET['title']) : '';
 
 $tour = null;
 $error = null;
 
-// Fetch by ID
+// Load tour by ID
 if ($tour_id > 0) {
     try {
         $stmt = $pdo->prepare("SELECT * FROM tours WHERE id = :id");
@@ -20,7 +20,7 @@ if ($tour_id > 0) {
     }
 }
 
-// Fetch by Title
+// Load tour by title
 if (!$tour && $tour_title) {
     try {
         $stmt = $pdo->prepare("SELECT * FROM tours WHERE title = :title");
@@ -35,7 +35,7 @@ if (!$tour) {
     exit();
 }
 
-// Redirect check
+// Forward to detail
 $tid = isset($tour['id']) ? (int)$tour['id'] : 0;
 if ($tid > 0) {
     header("Location: " . url('public/package_detail/?id=' . $tid));

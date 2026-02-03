@@ -14,7 +14,7 @@ if (!is_admin()) {
 $success = '';
 $error = '';
 
-// Process form actions
+// Handle booking actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         $booking_id = intval($_POST['booking_id']);
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Retrieve booking data
+// Fetch all bookings
 $stmt = $pdo->query("
     SELECT b.*, t.title as tour_title, u.username as guide_name
     FROM bookings b
@@ -53,7 +53,7 @@ $stmt = $pdo->query("
 ");
 $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Get guide list
+// Fetch guide options
 $stmt = $pdo->query("SELECT id, username FROM users WHERE role_id = 4 ORDER BY username ASC");
 $guides = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -75,10 +75,10 @@ $base = '../';
 </div>
 
 <div class="container" style="margin-top: -2rem; position: relative; z-index: 10; padding-bottom: 5rem;">
-    <!-- Content wrapper -->
+    <!-- Main content panel -->
     <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
         
-        <!-- Page header -->
+        <!-- Section header row -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
             <h2 style="font-size: 1.5rem; color: var(--color-stone-900);">Booking Records</h2>
             <div style="color: var(--color-stone-500); font-size: 0.9rem;">Total: <?php echo count($bookings); ?> bookings</div>
@@ -96,7 +96,7 @@ $base = '../';
             </div>
         <?php endif; ?>
 
-        <!-- Data table -->
+        <!-- Booking data table -->
         <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; text-align: left;">
                 <thead>
@@ -244,7 +244,7 @@ function showCustomConfirm(title, message, confirmText = 'Yes, Reject') {
 }
 </script>
 
-<!-- Custom Confirmation Modal -->
+<!-- Rejection confirm modal -->
 <div id="confirmModal" class="modal" style="display: none;">
     <div class="modal-content" style="max-width: 400px; text-align: center; padding: 2rem;">
         <div style="width: 60px; height: 60px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">

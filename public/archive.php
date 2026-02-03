@@ -84,7 +84,7 @@ include __DIR__ . '/../includes/header.php';
                 ]
             ];
 
-            // Directory Mapping
+            // Folder path mapping
             $folderMap = [
                 'Rara Lake' => 'Rara',
                 'Kathmandu' => 'kathmandu'
