@@ -1,0 +1,52 @@
+
+
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: nepal_tours_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: nepal_tours
+      MYSQL_USER: nepal_user
+      MYSQL_PASSWORD: nepal_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./database/insert_data.sql:/docker-entrypoint-initdb.d/02_insert_data.sql
+    networks:
+      - nepal_network
+
+  # PHP Apache Web Server
+  web:
+    image: php:8.1-apache
+    container_name: nepal_tours_web
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_USER: nepal_user
+      DB_PASS: nepal_pass
+      DB_NAME: nepal_tours
+      BASE_URL: ""
+    networks:
+      - nepal_network
+    command: >
+      bash -c "docker-php-ext-install pdo pdo_mysql mysqli &&
+               a2enmod rewrite &&
+               apache2-foreground"
+
+volumes:
+  db_data:
+
+networks:
+  nepal_network:
+    driver: bridge

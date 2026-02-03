@@ -1,0 +1,507 @@
+/* Home page */
+
+/* Parallax */
+#parallax-container {
+    position: relative;
+    height: 180vh;
+}
+
+#parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    background-color: #111;
+    /* Fallback */
+}
+
+#parallax-bg .hero-bg {
+    background-image: none;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+#parallax-bg .hero-bg.overlay {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+    z-index: 0;
+    /* Video overlay */
+}
+
+/* Hero */
+#hero-content {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.hero-text-container {
+    padding-left: 10%;
+}
+
+.hero-search-form {
+    background: var(--card-bg);
+    padding: 0.2rem;
+    border-radius: 12px;
+    max-width: 800px;
+    display: flex;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 50;
+    border: 1px solid var(--border-color);
+}
+
+.hero-search-input-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.hero-search-input {
+    width: 100%;
+    padding: 0.6rem 1rem 0.6rem 3.5rem;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 12px;
+    color: var(--color-stone-700);
+}
+
+.hero-search-icon {
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-stone-400);
+    font-size: 1.1rem;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 4rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-amber-400);
+    font-family: var(--font-serif);
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* About overlay */
+#about-content {
+    position: relative;
+    height: 75vh;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    color: white;
+    opacity: 0;
+    /* JS fade */
+}
+
+/* Sections */
+.section-padding {
+    padding: 6rem 0;
+}
+
+/* Collection */
+#collection {
+    background: var(--body-bg);
+}
+
+/* Archive */
+#archive {
+    background: var(--color-stone-50);
+}
+
+/* Destinations */
+#destinations {
+    background: linear-gradient(180deg, #A5D1E8 0%, #D6F1FF 40%, #FFFFFF 100%);
+    color: var(--color-stone-900);
+}
+
+/* Basic responsive grid utility */
+
+/* Four column grid layout */
+.grid-responsive-4 {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2rem;
+}
+
+/* Three column grid layout */
+.grid-responsive-3 {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem;
+}
+
+/* Two column grid layout */
+.grid-responsive-2 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem;
+}
+
+/* Split layout grid system */
+.grid-responsive-split {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4rem;
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .grid-responsive-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem;
+    }
+
+    .grid-responsive-split {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .grid-responsive-4,
+    .grid-responsive-3,
+    .grid-responsive-2,
+    .grid-responsive-split {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
+    }
+
+    .private-journey-section>.grid-responsive-split {
+        grid-template-columns: 1fr !important;
+        min-height: auto !important;
+    }
+
+    .private-journey-content {
+        padding: 2.5rem 1.5rem !important;
+    }
+}
+
+.destination-card {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    height: 600px;
+    display: block;
+    text-decoration: none;
+    transition: transform 0.4s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.destination-card:hover {
+    transform: translateY(-10px);
+}
+
+.destination-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+.destination-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2.5rem;
+    color: white;
+}
+
+/* About */
+#about {
+    background: var(--body-bg);
+}
+
+/* Testimonials */
+.testimonials-section {
+    background: var(--color-stone-50);
+}
+
+.testimonial-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Private */
+#private {
+    background: linear-gradient(180deg, #A5D1E8 0%, #D6F1FF 40%, #FFFFFF 100%);
+    overflow: hidden;
+}
+
+.private-journey-image {
+    background-image: url('../images/private_journey.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 600px;
+    border-radius: 1.5rem 0 0 1.5rem;
+}
+
+.private-journey-content {
+    display: flex;
+    align-items: center;
+    padding: 4rem 10% 4rem 4rem;
+}
+
+/* Contact */
+.contact-section {
+    background: var(--color-emerald-50);
+    padding: 8rem 0;
+    border-top: 1px solid #e2e8f0;
+}
+
+.contact-form-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+
+/* Small desktop */
+@media (max-width: 1024px) {
+    .section-padding {
+        padding: 4rem 0;
+    }
+
+    .hero-text-container {
+        padding-left: 5%;
+    }
+
+    .hero-stats {
+        gap: 2.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .destination-card {
+        height: 500px;
+    }
+
+    .testimonial-card {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .private-journey-content {
+        padding: 3rem 5% 3rem 3rem;
+    }
+
+    .contact-section {
+        padding: 6rem 0;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+
+    /* Parallax */
+    #parallax-container {
+        height: 120vh;
+    }
+
+    #hero-content {
+        height: 80vh;
+    }
+
+    .hero-text-container {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    /* Search */
+    .hero-search-form {
+        flex-direction: column;
+        max-width: 100%;
+        padding: 0.75rem;
+    }
+
+    .hero-search-input-wrapper {
+        width: 100%;
+    }
+
+    .hero-search-input {
+        padding: 0.75rem 1rem 0.75rem 3rem;
+    }
+
+    /* Stats */
+    .hero-stats {
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .stat-number {
+        font-size: 1.75rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+
+    /* About */
+    #about-content {
+        height: auto;
+        padding: 2rem 0 3rem;
+    }
+
+    /* Padding */
+    .section-padding {
+        padding: 3rem 0;
+    }
+
+    /* Cards */
+    .destination-card {
+        height: 450px;
+    }
+
+    .destination-content {
+        padding: 2rem;
+    }
+
+    /* Testimonials */
+    .testimonial-card {
+        padding: 2rem 1.5rem;
+    }
+
+    /* Private */
+    .private-journey-content {
+        padding: 2.5rem;
+    }
+
+    /* Contact */
+    .contact-section {
+        padding: 5rem 0;
+    }
+
+    .contact-form-card {
+        padding: 2rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+
+    /* Parallax */
+    #parallax-container {
+        height: 100vh;
+    }
+
+    #hero-content {
+        height: 100vh;
+        padding: 0 1rem;
+    }
+
+    .hero-text-container {
+        width: 100%;
+    }
+
+    /* Search */
+    .hero-search-form {
+        padding: 0.5rem;
+        gap: 0.5rem;
+        border-radius: 8px;
+    }
+
+    .hero-search-input {
+        padding: 0.6rem 0.75rem 0.6rem 2.5rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .hero-search-icon {
+        left: 0.75rem;
+        font-size: 1rem;
+    }
+
+    /* Stats */
+    .hero-stats {
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+
+    /* About */
+    #about-content {
+        height: auto;
+        padding: 1.5rem 0 2rem;
+    }
+
+    /* Padding */
+    .section-padding {
+        padding: 2.5rem 0;
+    }
+
+    /* Cards */
+    .destination-card {
+        height: 380px;
+        border-radius: 1rem;
+    }
+
+    .destination-content {
+        padding: 1.5rem;
+    }
+
+    /* Testimonials */
+    .testimonial-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    /* Private */
+    .private-journey-image {
+        min-height: 300px;
+    }
+
+    .private-journey-content {
+        padding: 2rem 1.5rem;
+    }
+
+    /* Contact */
+    .contact-section {
+        padding: 4rem 0;
+    }
+
+    .contact-form-card {
+        padding: 1.75rem;
+        border-radius: 1rem;
+    }
+}

@@ -1,0 +1,106 @@
+/* 
+ * PROJECT PAILA - PREMIUM VALIDATION UI
+ * ======================================
+ * High-end, glassmorphism-inspired validation feedback.
+ */
+
+:root {
+    --v-error: #e11d48;
+    --v-error-light: #fff1f2;
+    --v-error-border: rgba(225, 29, 72, 0.2);
+    --v-glass: rgba(255, 255, 255, 0.98);
+}
+
+/* --- Input States --- */
+.v-input-invalid {
+    border-color: var(--v-error) !important;
+    background-color: var(--v-error-light) !important;
+    box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.08) !important;
+}
+
+/* --- Error Messages (Elegant & Floating) --- */
+.v-error-message {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    z-index: 1000;
+    background: var(--v-glass);
+    backdrop-filter: blur(8px);
+    color: var(--v-error);
+    padding: 0.65rem 1rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--v-error-border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
+
+/* Tooltip Arrow */
+.v-error-message::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    background: var(--v-glass);
+    border-left: 1px solid var(--v-error-border);
+    border-top: 1px solid var(--v-error-border);
+    transform: rotate(45deg);
+}
+
+.v-error-message.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.v-error-message i {
+    font-size: 0.9rem;
+    color: var(--v-error);
+}
+
+/* Shake Animation */
+@keyframes v-shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    15% {
+        transform: translateX(-6px);
+    }
+
+    30% {
+        transform: translateX(6px);
+    }
+
+    45% {
+        transform: translateX(-4px);
+    }
+
+    60% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-2px);
+    }
+}
+
+.v-shake {
+    animation: v-shake 0.6s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+/* Helper to ensure relative positioning on anchors */
+.v-relative {
+    position: relative !important;
+}

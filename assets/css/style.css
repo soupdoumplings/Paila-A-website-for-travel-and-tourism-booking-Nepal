@@ -1,0 +1,855 @@
+/* Global */
+:root {
+    --color-stone-50: #fafaf9;
+    --color-stone-100: #f5f5f4;
+    --color-stone-200: #e7e5e4;
+    --color-stone-300: #d6d3d1;
+    --color-stone-400: #a8a29e;
+    --color-stone-500: #78716c;
+    --color-stone-600: #57534e;
+    --color-stone-700: #44403c;
+    --color-stone-800: #292524;
+    --color-stone-900: #1c1917;
+    --color-stone-950: #0c0a09;
+
+    --color-teal-900: #042f2e;
+    --color-teal-800: #064e4b;
+    --color-teal-700: #0d9488;
+    --color-teal-600: #14b8a6;
+
+    --color-amber-100: #fef3c7;
+    --color-amber-200: #fde68a;
+    --color-amber-300: #fcd34d;
+    --color-amber-400: #fbbf24;
+    --color-amber-500: #f59e0b;
+
+    --color-emerald-50: #f0fdfa;
+    --color-emerald-600: #14b8a6;
+    --color-emerald-700: #0d9488;
+    --color-emerald-800: #064e4b;
+    --color-emerald-900: #042f2e;
+
+    --color-white: #ffffff;
+    --color-black-overlay: rgba(0, 0, 0, 0.4);
+    --color-red-500: #ef4444;
+
+    --font-serif: "Playfair Display", serif;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+
+    --card-bg: var(--color-white);
+    --body-bg: var(--color-stone-50);
+    --text-main: var(--color-stone-800);
+    --text-muted: var(--color-stone-500);
+    --border-color: var(--color-stone-200);
+    --header-bg: transparent;
+}
+
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html {
+    font-size: 18px;
+    /* Increased base size */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--body-bg);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+}
+
+.text-amber {
+    color: var(--color-amber-300);
+}
+
+.text-serif {
+    font-family: var(--font-serif);
+}
+
+.text-xs-caps {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.container-fluid {
+    width: 100%;
+    padding: 0 3rem;
+    /* Fluid padding */
+    max-width: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.gap-8 {
+    gap: 2rem;
+}
+
+.grid {
+    display: grid;
+}
+
+.grid-clos-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.z-10 {
+    z-index: 10;
+}
+
+/* Components */
+
+/* Button */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(to right, var(--color-emerald-700), var(--color-emerald-800));
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, var(--color-emerald-600), var(--color-emerald-700));
+    transform: translateY(-2px);
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    padding: 1.5rem 0;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: var(--color-teal-900);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    backdrop-filter: none;
+}
+
+.navbar .logo {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.nav-links a {
+    color: rgba(255, 255, 255, 0.85);
+    margin-left: 2.5rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 400;
+}
+
+.nav-links a:hover {
+    color: var(--color-white);
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    transition: opacity 1s ease-in-out;
+}
+
+.overlay {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 2s ease-out both;
+}
+
+.animate-slideUp {
+    animation: slideUp 2s ease-out both;
+}
+
+.delay-300 {
+    animation-delay: 300ms;
+}
+
+.delay-500 {
+    animation-delay: 500ms;
+}
+
+/* Sidebar hover */
+.sidebar-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar hover */
+.sidebar-menu a:hover {
+    background: var(--color-stone-800);
+    padding-left: 1.25rem;
+}
+
+/* User icon */
+#user-icon:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+/* Tour card */
+.tour-card-content-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.tour-card-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.tour-card-title {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1.2;
+    color: white;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    transition: transform 0.4s ease;
+}
+
+.tour-card-description-reveal {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: white;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+}
+
+.tour-card-fixed-meta {
+    flex-shrink: 0;
+    color: white;
+}
+
+.tour-card-fixed-meta .tour-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.95;
+}
+
+.tour-card-fixed-meta .tour-card-price-label {
+    font-size: 0.7rem;
+    opacity: 0.85;
+    display: block;
+    text-transform: uppercase;
+}
+
+.tour-card-fixed-meta .tour-card-price-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-amber-300);
+}
+
+/* Card hover */
+.tour-card:hover .tour-card-overlay {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.95)) !important;
+}
+
+.tour-card:hover .tour-card-title {
+    transform: translateY(-1rem);
+}
+
+.tour-card:hover .tour-card-description-reveal {
+    opacity: 0.95;
+    max-height: 6rem;
+}
+
+/* Transitions */
+.tour-card {
+    transition: transform 0.3s ease;
+}
+
+#close-sidebar:hover {
+    opacity: 1;
+}
+
+/* Image zoom */
+.hover-zoom-card {
+    overflow: hidden;
+    /* Overflow fix */
+}
+
+.hover-zoom-card img {
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hover-zoom-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Collection card */
+.collection-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--card-bg);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--border-color);
+}
+
+.collection-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.collection-card-image-container {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.collection-card-content {
+    padding: 2rem;
+}
+
+.collection-card-desc {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    margin-bottom: 0;
+}
+
+.collection-card:hover .collection-card-desc {
+    max-height: 100px;
+    /* Animate */
+    opacity: 1;
+    margin-bottom: 1.5rem;
+}
+
+/* List view */
+.layout-list {
+    grid-template-columns: 1fr !important;
+    /* Single column */
+    gap: 1.5rem !important;
+}
+
+.layout-list .collection-card {
+    display: flex;
+    flex-direction: row;
+    height: 280px;
+    /* Fixed height */
+}
+
+.layout-list .collection-card-image-container {
+    width: 40%;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.layout-list .collection-card-content {
+    width: 60%;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Toggle buttons */
+.view-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background: var(--card-bg);
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s;
+}
+
+.view-btn:hover {
+    border-color: var(--color-stone-400);
+    color: var(--color-stone-800);
+}
+
+.view-btn.active {
+    background: var(--color-stone-900);
+    border-color: var(--color-stone-900);
+    color: white;
+}
+
+/* Timeline */
+.booking-timeline {
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem 0;
+    position: relative;
+    padding: 0 1rem;
+}
+
+.booking-timeline::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: var(--color-stone-200);
+    z-index: 1;
+}
+
+.timeline-step {
+    position: relative;
+    z-index: 2;
+    background: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 33%;
+}
+
+.step-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--color-stone-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--color-stone-400);
+    transition: all 0.3s ease;
+    margin-bottom: 0.75rem;
+}
+
+.step-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-stone-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+/* States */
+.timeline-step.completed .step-icon {
+    background: var(--color-teal-700);
+    border-color: var(--color-teal-700);
+    color: white;
+}
+
+.timeline-step.completed .step-label {
+    color: var(--color-teal-900);
+}
+
+.timeline-step.active .step-icon {
+    background: white;
+    border-color: var(--color-teal-700);
+    color: var(--color-teal-700);
+    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+}
+
+.timeline-step.active .step-label {
+    color: var(--color-teal-700);
+}
+
+.timeline-step.rejected .step-icon {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.timeline-step.rejected .step-label {
+    color: #ef4444;
+}
+
+/* Connectors */
+.booking-timeline .progress-bar {
+    position: absolute;
+    top: 24px;
+    left: 10%;
+    height: 2px;
+    background: var(--color-teal-700);
+    z-index: 1;
+    transition: width 0.5s ease;
+}
+
+/* Compact layout */
+.timeline-compact {
+    margin: 1.5rem 0 0;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.timeline-compact .booking-timeline {
+    margin: 0.5rem 0;
+}
+
+.timeline-compact .timeline-step {
+    background: transparent;
+}
+
+.timeline-compact .step-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+}
+
+.timeline-compact .step-label {
+    font-size: 0.7rem;
+}
+
+.timeline-compact .booking-timeline::before,
+.timeline-compact .progress-bar {
+    top: 16px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    html {
+        font-size: 16px;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .container-fluid {
+        padding: 0 2rem;
+    }
+
+    .nav-links a {
+        margin-left: 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    .hero {
+        height: 80vh;
+    }
+
+    .tour-card-title {
+        font-size: 1.5rem;
+    }
+
+    .collection-card-image-container {
+        height: 250px;
+    }
+
+    .booking-timeline {
+        padding: 0 0.5rem;
+    }
+
+    .timeline-step {
+        width: 30%;
+    }
+
+    .step-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .step-label {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+
+    .container,
+    .container-fluid {
+        padding: 0 1rem;
+    }
+
+    .navbar {
+        padding: 1rem 0;
+    }
+
+    .navbar .logo {
+        font-size: 1rem;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 280px;
+        background: var(--color-teal-900);
+        flex-direction: column;
+        padding: 5rem 2rem 2rem;
+        gap: 0;
+        transition: right 0.3s ease;
+        z-index: 100;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        margin-left: 0;
+        padding: 1rem 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1rem;
+    }
+
+    .hero {
+        height: 70vh;
+    }
+
+    .grid-clos-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .tour-card {
+        height: 350px;
+    }
+
+    .tour-card-title {
+        font-size: 1.5rem;
+    }
+
+    .tour-card-content-wrap {
+        padding: 1.5rem;
+    }
+
+    .tour-card-description-reveal {
+        font-size: 0.85rem;
+    }
+
+    .collection-card-image-container {
+        height: 220px;
+    }
+}
+
+/* Custom Validation Styles */
+.form-input.is-invalid,
+.form-textarea.is-invalid,
+.auth-input.is-invalid {
+    border-color: var(--color-red-500);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ef4444'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linecap='round' d='M6 3.5L6 6.5M6 8L6 8.5'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    padding-right: calc(1.5em + 0.75rem);
+    animation: shake 0.3s ease-in-out;
+}
+
+.form-input.is-valid,
+.form-textarea.is-valid,
+.auth-input.is-valid {
+    border-color: var(--color-emerald-600);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23059669' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    padding-right: calc(1.5em + 0.75rem);
+}
+
+.validation-message {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--color-red-500);
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+.validation-message.is-visible {
+    display: block;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
