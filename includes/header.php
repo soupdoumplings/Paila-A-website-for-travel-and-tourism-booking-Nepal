@@ -112,7 +112,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
                     <?php endif; ?>
                     
                     <?php if(isset($_SESSION['admin_logged_in']) && strpos($_SERVER['REQUEST_URI'], '/admin/') === false): ?>
-                        <a href="<?php echo BASE_URL; ?>/admin/index.php" style="opacity: 0.7; text-decoration: none; font-size: 1rem;">⚙</a>
+                        <a href="<?php echo BASE_URL; ?>/admin/index.php" style="opacity: 0.7; text-decoration: none; font-size: 1rem;" title="Admin dashboard"><i class="fa-solid fa-gear"></i></a>
                     <?php endif; ?>
                     
                     <!-- Notification bell icon -->

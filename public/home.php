@@ -130,7 +130,7 @@ try {
 <section id="collection" class="section-padding">
     <div class="container">
         <div style="text-align: center; margin-bottom: 3rem;">
-            <p class="text-xs-caps" style="color: var(--color-emerald-700); margin-bottom: 0.5rem;">✦ THE COLLECTION</p>
+            <p class="text-xs-caps" style="color: var(--color-emerald-700); margin-bottom: 0.5rem;">THE COLLECTION</p>
             <h2 style="font-size: 2.5rem; font-family: var(--font-serif);">Featured Journeys</h2>
             <p style="color: var(--color-stone-600); margin-top: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
                 The classic Himalayan trek through breathtaking landscapes, from subtropical forests to high-altitude desert, crossing ancient monasteries and vibrant Sherpa villages.

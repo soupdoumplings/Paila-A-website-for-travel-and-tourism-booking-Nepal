@@ -58,7 +58,7 @@ include '../includes/header.php';
         <div style="margin-bottom: 1rem;"><a href="my_bookings.php" style="color: rgba(255,255,255,0.7); text-decoration: none;"><i class="fa-solid fa-arrow-left"></i> My Bookings</a></div>
         <h1 style="font-size: 3rem; font-family: var(--font-serif); margin-bottom: 1rem;"><?php echo e($booking['tour_title'] ?: 'Custom Journey'); ?></h1>
         <p style="opacity: 0.8; font-size: 1.1rem;">
-            Booking #<?php echo $bookingId; ?> • <?php echo date('M d, Y', strtotime($booking['travel_date'])); ?>
+            Booking #<?php echo $bookingId; ?> - <?php echo date('M d, Y', strtotime($booking['travel_date'])); ?>
         </p>
     </div>
 </div>

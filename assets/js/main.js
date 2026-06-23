@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <div style="font-weight: 700; font-size: 1rem; color: #1c1917; margin-bottom: 0.25rem;">${tour.title}</div>
                                         <div style="font-size: 0.85rem; color: #78716c; display: flex; align-items: center; gap: 0.5rem;">
                                             <i class="fa-solid fa-location-dot" style="font-size: 0.75rem;"></i> ${tour.location}
-                                            <span style="opacity: 0.5;">•</span>
+                                            <span style="opacity: 0.5;">-</span>
                                             <i class="fa-regular fa-clock" style="font-size: 0.75rem;"></i> ${tour.duration}
                                         </div>
                                     </div>

@@ -61,7 +61,7 @@
                     © <?php echo date('Y'); ?> पाइला. Developed by Ujwal Shrestha (2461787). All rights reserved.
                 </div>
                 <div style="opacity: 0.6;">
-                    User-Centered Development Project • Made with ❤️ in Kathmandu
+                    User-Centered Development Project - Made in Kathmandu
                 </div>
             </div>
         </div>

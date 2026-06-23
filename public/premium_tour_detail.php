@@ -152,7 +152,7 @@ include '../includes/header.php';
                         </div>
                         
                         <button type="submit" class="btn" style="width: 100%; background: var(--color-stone-900); color: white; padding: 1rem; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; border-radius: 0.5rem;">
-                            Request Booking • Rs <?php echo number_format($tour['price']); ?>
+                            Request Booking - Rs <?php echo number_format($tour['price']); ?>
                         </button>
                     </form>
                 </div>

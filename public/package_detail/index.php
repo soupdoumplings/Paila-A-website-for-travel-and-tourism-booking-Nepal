@@ -129,11 +129,14 @@ include $base . 'includes/header.php';
     position: relative;
 }
 .pd-main li::before {
-    content: '✓';
+    content: '';
     position: absolute;
     left: 0;
-    color: #059669;
-    font-weight: 700;
+    top: 0.95rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: #059669;
 }
 .pd-highlights {
     margin-top: 2.5rem;
@@ -421,7 +424,7 @@ include $base . 'includes/header.php';
                 <span class="pd-tag" style="background: rgba(251,191,36,0.2); color: #fbbf24;"><?php echo e($best_season); ?></span>
             <?php endif; ?>
             <?php if ($altitude_max): ?>
-                <span class="pd-tag" style="background: rgba(239,68,68,0.2); color: #ef4444;">⛰ <?php echo number_format($altitude_max); ?>m</span>
+                <span class="pd-tag" style="background: rgba(239,68,68,0.2); color: #ef4444;">Altitude <?php echo number_format($altitude_max); ?>m</span>
             <?php endif; ?>
         </div>
         <h1 class="pd-title"><?php echo e($tour['title']); ?></h1>
@@ -470,7 +473,7 @@ include $base . 'includes/header.php';
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
                     <?php if (!empty($inclusions_list)): ?>
                     <div>
-                        <h3 style="font-size: 1.1rem; color: #059669; margin-bottom: 0.75rem;">✓ Included</h3>
+                        <h3 style="font-size: 1.1rem; color: #059669; margin-bottom: 0.75rem;">Included</h3>
                         <ul style="padding-left: 0;">
                             <?php foreach ($inclusions_list as $inc): ?>
                                 <li style="color: #059669;"><?php echo e($inc); ?></li>
@@ -480,7 +483,7 @@ include $base . 'includes/header.php';
                     <?php endif; ?>
                     <?php if (!empty($exclusions_list)): ?>
                     <div>
-                        <h3 style="font-size: 1.1rem; color: #dc2626; margin-bottom: 0.75rem;">✗ Not Included</h3>
+                        <h3 style="font-size: 1.1rem; color: #dc2626; margin-bottom: 0.75rem;">Not Included</h3>
                         <ul style="padding-left: 0;">
                             <?php foreach ($exclusions_list as $exc): ?>
                                 <li style="color: #dc2626; "><?php echo e($exc); ?></li>
@@ -497,7 +500,7 @@ include $base . 'includes/header.php';
                 <h2>Safety & Requirements</h2>
                 <?php if ($altitude_max && $altitude_max > 3500): ?>
                 <div style="background: #fef3c7; border: 1px solid #fbbf24; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                    <strong style="color: #92400e;">⚠️ High Altitude Warning:</strong>
+                    <strong style="color: #92400e;">High Altitude Warning:</strong>
                     <p style="margin: 0.5rem 0 0 0; color: #78350f;">This trek reaches <?php echo number_format($altitude_max); ?>m. Proper acclimatization is essential. Consult with your doctor before booking.</p>
                 </div>
                 <?php endif; ?>

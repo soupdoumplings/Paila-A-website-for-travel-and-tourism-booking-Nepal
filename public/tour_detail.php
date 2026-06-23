@@ -93,7 +93,7 @@ include '../includes/header.php';
 .td-highlights h3 { font-size: 1.25rem; font-weight: 700; color: #1c1917; margin-bottom: 1rem; }
 .td-highlights ul { list-style: none; padding: 0; margin: 0; }
 .td-highlights li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; color: #57534e; line-height: 1.8; }
-.td-highlights li::before { content: '✓'; position: absolute; left: 0; color: #059669; font-weight: 700; }
+.td-highlights li::before { content: ''; position: absolute; left: 0; top: 0.95rem; width: 0.45rem; height: 0.45rem; border-radius: 999px; background: #059669; }
 .td-card {
     background: #fff;
     border-radius: 8px;

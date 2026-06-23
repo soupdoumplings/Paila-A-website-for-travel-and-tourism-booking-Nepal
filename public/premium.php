@@ -155,7 +155,7 @@ include '../includes/header.php';
                     <div style="padding: 2rem; color: var(--color-stone-900);">
                         <div style="display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
                             <span style="color: #0d9488;">LUXURY</span>
-                            <span style="color: var(--color-stone-300);">•</span>
+                            <span style="color: var(--color-stone-300);">-</span>
                             <span style="color: var(--color-stone-500);">easy</span>
                         </div>
                         <h3 style="font-size: 1.5rem; font-family: var(--font-serif); margin-bottom: 1rem; color: var(--color-stone-900);">
@@ -180,7 +180,7 @@ include '../includes/header.php';
                     <div style="padding: 2rem; color: var(--color-stone-900);">
                         <div style="display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
                             <span style="color: #0d9488;">ADVENTURE</span>
-                            <span style="color: var(--color-stone-300);">•</span>
+                            <span style="color: var(--color-stone-300);">-</span>
                             <span style="color: var(--color-stone-500);">moderate</span>
                         </div>
                         <h3 style="font-size: 1.5rem; font-family: var(--font-serif); margin-bottom: 1rem; color: var(--color-stone-900);">

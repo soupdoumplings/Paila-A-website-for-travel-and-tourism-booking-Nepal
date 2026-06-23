@@ -56,13 +56,13 @@ include '../includes/header.php';
                             <div>
                                 <div style="display: flex; justify-content: space-between; align-items: start;">
                                     <div style="font-size: 0.8rem; color: var(--color-teal-700); font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                        Booking #<?php echo $booking['id']; ?> • <?php echo date('M d, Y', strtotime($booking['created_at'])); ?>
+                                        Booking #<?php echo $booking['id']; ?> - <?php echo date('M d, Y', strtotime($booking['created_at'])); ?>
                                     </div>
                                     <a href="<?php echo url('public/booking_detail.php?id=' . $booking['id']); ?>" class="btn" style="padding: 0.25rem 0.75rem; border: 1px solid var(--border-color); font-size: 0.8rem; border-radius: 2rem;">Details</a>
                                 </div>
                                 <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;"><?php echo e($booking['tour_title'] ?: 'Custom Journey'); ?></h3>
                                 <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;">
-                                    <i class="fa-solid fa-clock"></i> <?php echo e($booking['duration'] ?: 'N/A'); ?> • <i class="fa-solid fa-user"></i> <?php echo e($booking['customer_name']); ?>
+                                    <i class="fa-solid fa-clock"></i> <?php echo e($booking['duration'] ?: 'N/A'); ?> - <i class="fa-solid fa-user"></i> <?php echo e($booking['customer_name']); ?>
                                 </p>
                             </div>
                             
