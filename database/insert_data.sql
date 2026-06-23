@@ -1,5 +1,7 @@
 USE nepal_tours;
 
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- Insert default roles
 INSERT INTO roles (id, name, description) VALUES 
 (1, 'super_admin', 'Has full access to all settings and can manage other admins'),
@@ -18,8 +20,14 @@ email = VALUES(email),
 password = VALUES(password),
 role_id = VALUES(role_id);
 
--- Clear tour data
+-- Clear dependent demo data and reset package rows so this seed is safe to re-run locally.
+DELETE FROM messages;
+DELETE FROM notifications;
+DELETE FROM bookings;
 DELETE FROM tours;
+ALTER TABLE tours AUTO_INCREMENT = 1;
+ALTER TABLE bookings AUTO_INCREMENT = 1;
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- Insert spring tours
 INSERT INTO tours (title, location, price, duration, description, category, difficulty, max_group, highlights, image, best_season, altitude_max, permit_requirements, itinerary, inclusions, exclusions) VALUES
@@ -108,6 +116,10 @@ WHERE title IN (
     'Chitwan Jungle Safari',
     'Upper Mustang Trek'
 );
+
+UPDATE tours
+SET created_by = 1
+WHERE created_by IS NULL;
 
 
 -- Insert sample bookings

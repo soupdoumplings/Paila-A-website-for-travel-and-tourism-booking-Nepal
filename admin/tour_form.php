@@ -88,8 +88,8 @@ if (isset($_GET['id'])) {
             <?php echo csrf_field(); ?>
             <input type="hidden" name="action" value="<?php echo $action; ?>">
             <?php if($tour): ?>
-                <input type="hidden" name="id" value="<?php echo $tour['id']; ?>">
-                <input type="hidden" name="existing_image" value="<?php echo $tour['image']; ?>">
+                <input type="hidden" name="id" value="<?php echo (int) $tour['id']; ?>">
+                <input type="hidden" name="existing_image" value="<?php echo e($tour['image'] ?? ''); ?>">
             <?php endif; ?>
 
             <div class="form-group">
@@ -118,10 +118,15 @@ if (isset($_GET['id'])) {
                     <select name="category" class="form-input">
                         <option value="">—</option>
                         <option value="trekking" <?php echo ($tour && ($tour['category'] ?? '') === 'trekking') ? 'selected' : ''; ?>>Trekking</option>
+                        <option value="culture" <?php echo ($tour && ($tour['category'] ?? '') === 'culture') ? 'selected' : ''; ?>>Culture</option>
                         <option value="cultural" <?php echo ($tour && ($tour['category'] ?? '') === 'cultural') ? 'selected' : ''; ?>>Cultural</option>
                         <option value="adventure" <?php echo ($tour && ($tour['category'] ?? '') === 'adventure') ? 'selected' : ''; ?>>Adventure</option>
                         <option value="wellness" <?php echo ($tour && ($tour['category'] ?? '') === 'wellness') ? 'selected' : ''; ?>>Wellness</option>
                         <option value="family" <?php echo ($tour && ($tour['category'] ?? '') === 'family') ? 'selected' : ''; ?>>Family</option>
+                        <option value="luxury" <?php echo ($tour && ($tour['category'] ?? '') === 'luxury') ? 'selected' : ''; ?>>Luxury</option>
+                        <option value="photography" <?php echo ($tour && ($tour['category'] ?? '') === 'photography') ? 'selected' : ''; ?>>Photography</option>
+                        <option value="weekend" <?php echo ($tour && ($tour['category'] ?? '') === 'weekend') ? 'selected' : ''; ?>>Weekend</option>
+                        <option value="budget" <?php echo ($tour && ($tour['category'] ?? '') === 'budget') ? 'selected' : ''; ?>>Budget</option>
                     </select>
                 </div>
             </div>
@@ -133,7 +138,18 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="form-group form-col">
                     <label class="form-label">Max Group</label>
-                    <input type="text" name="max_group" class="form-input" placeholder="e.g. 12 people" value="<?php echo $tour ? e($tour['max_group'] ?? '') : ''; ?>">
+                    <input type="number" name="max_group" class="form-input" placeholder="12" min="1" value="<?php echo $tour ? e($tour['max_group'] ?? '') : ''; ?>">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group form-col">
+                    <label class="form-label">Best Season</label>
+                    <input type="text" name="best_season" class="form-input" placeholder="Spring, Autumn" value="<?php echo $tour ? e($tour['best_season'] ?? '') : ''; ?>">
+                </div>
+                <div class="form-group form-col">
+                    <label class="form-label">Max Altitude (m)</label>
+                    <input type="number" name="altitude_max" class="form-input" placeholder="5545" min="0" value="<?php echo $tour ? e($tour['altitude_max'] ?? '') : ''; ?>">
                 </div>
             </div>
 
@@ -149,22 +165,48 @@ if (isset($_GET['id'])) {
             </div>
 
             <div class="form-group">
+                <label class="form-label">Permit Requirements</label>
+                <textarea name="permit_requirements" class="form-textarea" placeholder="Comma separated, e.g. TIMS Card, National Park Permit"><?php echo $tour ? e($tour['permit_requirements'] ?? '') : ''; ?></textarea>
+                <small class="help-text">Use commas between permits so the public page can list them cleanly.</small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Itinerary</label>
+                <textarea name="itinerary" class="form-textarea" placeholder="One day or step per line"><?php echo $tour ? e($tour['itinerary'] ?? '') : ''; ?></textarea>
+                <small class="help-text">One itinerary step per line.</small>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group form-col">
+                    <label class="form-label">Inclusions</label>
+                    <textarea name="inclusions" class="form-textarea" placeholder="One included item per line"><?php echo $tour ? e($tour['inclusions'] ?? '') : ''; ?></textarea>
+                </div>
+                <div class="form-group form-col">
+                    <label class="form-label">Exclusions</label>
+                    <textarea name="exclusions" class="form-textarea" placeholder="One excluded item per line"><?php echo $tour ? e($tour['exclusions'] ?? '') : ''; ?></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="form-label">Tour Image</label>
                 <?php if($tour && $tour['image']): ?>
                     <?php 
                         $previewImg = $tour['image'];
-                        $displayImg = filter_var($previewImg, FILTER_VALIDATE_URL) ? $previewImg : "../public/uploads/" . $previewImg;
+                        $displayImg = get_tour_image($tour);
                     ?>
-                    <img src="<?php echo e($displayImg); ?>" class="image-preview">
+                    <img src="<?php echo e($displayImg); ?>" class="image-preview" id="image-preview">
+                    <small class="help-text" style="display: block; margin-bottom: 0.75rem;">Current stored image: <?php echo e($previewImg); ?></small>
+                <?php else: ?>
+                    <img src="" class="image-preview" id="image-preview" style="display: none;">
                 <?php endif; ?>
-                <input type="file" name="image" class="form-input" accept="image/*">
+                <input type="file" name="image" class="form-input" accept="image/jpeg,image/png,image/webp,image/avif" id="image-file-input">
                 
                 <div class="url-input-container">
                     <label class="url-label">Or Image URL</label>
-                    <input type="url" name="image_url" class="form-input" placeholder="https://example.com/image.jpg" value="">
+                    <input type="url" name="image_url" class="form-input" placeholder="https://example.com/image.jpg" value="<?php echo ($tour && filter_var($tour['image'] ?? '', FILTER_VALIDATE_URL)) ? e($tour['image']) : ''; ?>" id="image-url-input">
                 </div>
 
-                <small class="help-text">Leave empty to keep existing image (if editing).</small>
+                <small class="help-text">Upload a JPG, PNG, WEBP, or AVIF file, paste an image URL, or leave both empty to keep the current image.</small>
             </div>
 
             <div class="form-group featured-box">
@@ -182,6 +224,34 @@ if (isset($_GET['id'])) {
             </button>
         </form>
     </div>
+
+    <script>
+        const imageFileInput = document.getElementById('image-file-input');
+        const imageUrlInput = document.getElementById('image-url-input');
+        const imagePreview = document.getElementById('image-preview');
+
+        function showPreview(src) {
+            if (!imagePreview || !src) return;
+            imagePreview.src = src;
+            imagePreview.style.display = 'block';
+        }
+
+        if (imageFileInput) {
+            imageFileInput.addEventListener('change', function () {
+                const file = this.files && this.files[0];
+                if (!file) return;
+                showPreview(URL.createObjectURL(file));
+            });
+        }
+
+        if (imageUrlInput) {
+            imageUrlInput.addEventListener('input', function () {
+                if (this.value.trim()) {
+                    showPreview(this.value.trim());
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>

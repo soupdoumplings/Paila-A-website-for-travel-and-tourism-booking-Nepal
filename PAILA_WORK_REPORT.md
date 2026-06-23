@@ -28,6 +28,11 @@ Date: June 24, 2026
 - [x] Preserved the existing animation system while improving hover/reveal presentation for a more elegant nature-luxury feel.
 - [x] Fixed the seeded homepage data by marking selected Nepal journeys as featured.
 - [x] Reset and documented the local development super admin credential.
+- [x] Made `database/insert_data.sql` safe to re-run locally by clearing dependent demo rows before resetting package data.
+- [x] Seeded tours now include `created_by = 1`, so admin ownership is consistent.
+- [x] Expanded the admin package editor to manage season, altitude, permits, itinerary, inclusions, and exclusions.
+- [x] Fixed admin image editing so previews use the same resolver as live package pages.
+- [x] Hardened admin image uploads with MIME validation, safe filenames, writable directory checks, and AVIF support.
 
 ## Feature Additions
 
@@ -42,6 +47,7 @@ Date: June 24, 2026
 - Docker database user: `nepal_user`
 - Seed file: `database/insert_data.sql`
 - Current seeded data: 4 roles, 1 super admin, 10 tours, 6 featured tours, and 3 sample bookings.
+- To restore local seed data in Docker: `Get-Content -Raw database\insert_data.sql | docker compose exec -T db mysql -unepal_user -pnepal_pass nepal_tours`
 - Local admin URL: `http://localhost:8080/admin/login.php`
 - Local admin username: `ujShresthadmin`
 - Local admin email: `2461787@paila.admin`
@@ -55,6 +61,8 @@ Date: June 24, 2026
 - Admin login route checked locally: `/admin/login.php`.
 - Admin login was verified with CSRF using `ujShresthadmin` and dashboard access was confirmed.
 - Homepage featured section was verified with 6 rendered journey cards and no empty-state message.
+- Admin package edit form was verified for the full package-detail field set.
+- Admin image edits were verified with both image URL updates and real multipart file upload.
 - Search endpoint checked locally: `/actions/tours/search_ajax.php?q=everest`.
 - Protected routes checked for login redirect behavior.
 - CSRF-negative inquiry POST checked and rejected with HTTP 403.

@@ -202,7 +202,7 @@ function get_tour_image($tour) {
         $imagesDir = __DIR__ . '/../assets/images/' . $finalFolder;
         
         if (is_dir($imagesDir)) {
-            $files = glob($imagesDir . '/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', GLOB_BRACE);
+            $files = glob($imagesDir . '/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}', GLOB_BRACE);
             if ($files && count($files) > 0) {
                 return url('assets/images/' . $finalFolder . '/' . basename($files[0]));
             }
