@@ -36,7 +36,7 @@ services:
       DB_USER: nepal_user
       DB_PASS: nepal_pass
       DB_NAME: nepal_tours
-      BASE_URL: ""
+      BASE_URL: "http://localhost:8080"
     networks:
       - nepal_network
     command: >
