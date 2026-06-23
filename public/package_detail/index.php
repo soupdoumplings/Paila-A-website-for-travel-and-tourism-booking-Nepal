@@ -98,9 +98,10 @@ include $base . 'includes/header.php';
     grid-template-columns: 2fr 1fr;
     gap: 4rem;
     align-items: start;
-    max-width: 1160px;
+    width: min(var(--site-width), calc(100% - 2rem));
+    max-width: none;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0;
 }
 .pd-main {
     text-align: left;
@@ -149,13 +150,13 @@ include $base . 'includes/header.php';
 
 /* ——— Right column: booking card (third image) ——— */
 .pd-card {
-    background: #fff;
+    background: var(--gallery-paper, #fffdf9);
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    box-shadow: var(--gallery-shadow, 0 18px 50px rgba(28, 25, 23, 0.1));
     overflow: hidden;
     position: sticky;
     top: 100px;
-    border: 1px solid #f5f5f4;
+    border: 1px solid var(--gallery-line, #e7e5e4);
 }
 .pd-card-price {
     background: #047857;
@@ -270,9 +271,10 @@ include $base . 'includes/header.php';
 }
 .pd-sticky-book.show { bottom: 0; }
 .pd-sticky-book-inner {
-    max-width: 1160px;
+    width: min(var(--site-width), calc(100% - 2rem));
+    max-width: none;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;

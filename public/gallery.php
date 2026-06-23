@@ -152,7 +152,7 @@ include '../includes/header.php';
     <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);"></div>
     
     <!-- Content -->
-    <div class="container" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); padding-bottom: 4rem; width: 100%; max-width: 1200px;">
+    <div class="container" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); padding-bottom: 4rem;">
         <!-- Back Link -->
         <a href="archive.php" style="display: inline-flex; align-items: center; gap: 0.5rem; color: white; text-decoration: none; margin-bottom: 2rem; font-size: 0.9rem; opacity: 0.9; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
             <i class="fa-solid fa-arrow-left"></i>
@@ -190,7 +190,7 @@ include '../includes/header.php';
 
 <!-- Gallery Section -->
 <section style="background: white; padding: 0;">
-    <div class="container" style="max-width: 1200px; padding: 0;">
+    <div class="container" style="padding: 0;">
         <!-- Gallery Label -->
         <div style="padding: 2rem 0 1rem; border-bottom: 1px solid var(--color-stone-200);">
             <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-stone-600); text-transform: uppercase; letter-spacing: 0.1em;">Gallery:</span>
@@ -209,7 +209,7 @@ include '../includes/header.php';
 
 <!-- CTA Section -->
 <section style="background: white; padding: 4rem 0 6rem;">
-    <div class="container" style="max-width: 1200px; text-align: center;">
+    <div class="container" style="text-align: center;">
         <h2 style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem; color: var(--color-stone-900);">
             Ready to Explore?
         </h2>

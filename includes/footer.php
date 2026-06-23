@@ -1,5 +1,5 @@
     <!-- Site footer section -->
-    <footer style="background-color: var(--color-stone-900); color: white; padding: 4rem 1.5rem 2rem;">
+    <footer style="background-color: var(--color-teal-900); color: white; padding: 4rem 1.5rem 2rem;">
         <div class="container">
             <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
                 <!-- Footer logo section -->

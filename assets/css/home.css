@@ -44,13 +44,13 @@
 }
 
 .hero-text-container {
-    padding-left: 10%;
+    padding-left: 0;
 }
 
 .hero-search-form {
     background: var(--card-bg);
     padding: 0.2rem;
-    border-radius: 12px;
+    border-radius: 8px;
     max-width: 800px;
     display: flex;
     gap: 0.5rem;
@@ -74,7 +74,7 @@
     background: transparent;
     font-size: 1rem;
     outline: none;
-    border-radius: 12px;
+    border-radius: 8px;
     color: var(--color-stone-700);
 }
 
@@ -122,17 +122,19 @@
 
 /* Sections */
 .section-padding {
-    padding: 6rem 0;
+    padding: clamp(5rem, 8vw, 8rem) 0;
+    border-top: 1px solid rgba(68, 64, 60, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(250, 250, 249, 0.98));
 }
 
 /* Collection */
 #collection {
-    background: var(--body-bg);
+    background: linear-gradient(180deg, #ffffff 0%, #fafaf9 100%);
 }
 
 /* Archive */
 #archive {
-    background: var(--color-stone-50);
+    background: linear-gradient(180deg, #fafaf9 0%, #ffffff 100%);
 }
 
 /* Destinations */
@@ -205,13 +207,14 @@
 
 .destination-card {
     position: relative;
-    border-radius: 1.5rem;
+    border-radius: 8px;
     overflow: hidden;
     height: 600px;
     display: block;
     text-decoration: none;
     transition: transform 0.4s ease;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 18px 50px rgba(28, 25, 23, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .destination-card:hover {
@@ -235,23 +238,23 @@
 
 /* About */
 #about {
-    background: var(--body-bg);
+    background: linear-gradient(180deg, #ffffff 0%, #fafaf9 100%);
 }
 
 /* Testimonials */
 .testimonials-section {
-    background: var(--color-stone-50);
+    background: linear-gradient(180deg, #fafaf9 0%, #ffffff 100%);
 }
 
 .testimonial-card {
-    background: white;
+    background: var(--gallery-paper);
     padding: 3rem 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+    box-shadow: var(--gallery-shadow);
     display: flex;
     flex-direction: column;
     height: 100%;
-    border: 1px solid rgba(180, 83, 9, 0.12);
+    border: 1px solid var(--gallery-line);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
@@ -266,13 +269,25 @@
     overflow: hidden;
 }
 
+.private-journey-section {
+    padding: clamp(5rem, 8vw, 8rem) 0;
+}
+
+.private-journey-section>.grid-responsive-split {
+    width: min(var(--site-width), calc(100% - 2rem));
+    margin: 0 auto;
+    border-radius: 8px !important;
+    border: 1px solid rgba(180, 83, 9, 0.18) !important;
+    box-shadow: var(--gallery-shadow) !important;
+}
+
 .private-journey-image {
     background-image: url('../images/private_journey.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     min-height: 600px;
-    border-radius: 1.5rem 0 0 1.5rem;
+    border-radius: 8px 0 0 8px;
 }
 
 .private-journey-content {
@@ -283,16 +298,16 @@
 
 /* Contact */
 .contact-section {
-    background: var(--color-emerald-50);
+    background: linear-gradient(180deg, #f0fdfa 0%, #fffdf9 100%);
     padding: 8rem 0;
     border-top: 1px solid #e2e8f0;
 }
 
 .contact-form-card {
-    background: white;
+    background: var(--gallery-paper);
     padding: 2.5rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    box-shadow: var(--gallery-shadow);
     border: 1px solid rgba(251, 191, 36, 0.18);
 }
 
@@ -314,7 +329,7 @@
     }
 
     .hero-text-container {
-        padding-left: 5%;
+        padding-left: 0;
     }
 
     .hero-stats {
@@ -419,6 +434,10 @@
         padding: 2.5rem;
     }
 
+    .private-journey-image {
+        border-radius: 8px 8px 0 0;
+    }
+
     /* Contact */
     .contact-section {
         padding: 5rem 0;
@@ -492,7 +511,7 @@
     /* Cards */
     .destination-card {
         height: 380px;
-        border-radius: 1rem;
+        border-radius: 8px;
     }
 
     .destination-content {
@@ -520,6 +539,6 @@
 
     .contact-form-card {
         padding: 1.75rem;
-        border-radius: 1rem;
+        border-radius: 8px;
     }
 }

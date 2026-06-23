@@ -25,7 +25,8 @@ include '../includes/header.php';
         <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%);"></div>
     </div>
 
-    <div class="container" style="position: relative; z-index: 10; max-width: 600px;">
+    <div class="container" style="position: relative; z-index: 10;">
+        <div style="max-width: 620px;">
         <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(13, 148, 136, 0.1); color: #0d9488; padding: 0.4rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem;">
             <i class="fa-solid fa-lock"></i> BY INVITATION ONLY
         </div>
@@ -91,13 +92,14 @@ include '../includes/header.php';
                 Limited availability for the 2026 season due to regional constraints.
             </p>
         <?php endif; ?>
+        </div>
     </div>
 </section>
 
 <!-- Features -->
 <section style="padding: 6rem 0; background: white; color: var(--color-stone-900);">
     <div class="container">
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; max-width: 1000px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem;">
             <!-- Feature 1 -->
             <div style="text-align: left; padding: 2rem; border: 1px solid var(--color-stone-100); border-radius: 1rem; background: var(--color-stone-50);">
                 <div style="font-size: 0.8rem; color: #0d9488; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Bespoke</div>
@@ -145,7 +147,7 @@ include '../includes/header.php';
                 </a>
             </div>
         <?php else: ?>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; max-width: 1000px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem;">
                 <!-- Tour 1 -->
                 <a href="<?php echo url('public/premium_tour_detail.php?id=helicopter'); ?>" style="border-radius: 1rem; overflow: hidden; background: white; text-decoration: none; color: inherit; transition: all 0.3s ease; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 25px -5px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(0,0,0,0.05)';">
                     <div style="position: relative; height: 300px;">

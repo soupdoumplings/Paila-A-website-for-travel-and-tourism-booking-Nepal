@@ -1,25 +1,25 @@
 /* Collection page */
 
 .collection-hero {
-    background: linear-gradient(180deg, #A5D1E8 0%, #D6F1FF 40%, #FFFFFF 100%);
+    background: linear-gradient(180deg, #A5D1E8 0%, #D6F1FF 42%, #FFFFFF 100%);
     padding: 10rem 0 6rem;
     color: var(--color-stone-900);
 }
 
 .collection-grid-section {
     padding: 4rem 0;
-    background: white;
+    background: linear-gradient(180deg, #ffffff 0%, #fafaf9 100%);
 }
 
 .filters-sidebar {
-    background: white;
+    background: var(--gallery-paper);
     padding: 2rem;
-    border-radius: 1rem;
+    border-radius: 8px;
     height: fit-content;
     position: sticky;
     top: 2rem;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--gallery-line);
+    box-shadow: var(--gallery-shadow);
 }
 
 .filter-input-wrapper {
@@ -39,9 +39,9 @@
 .filter-select {
     width: 100%;
     border: 1px solid var(--color-stone-200);
-    border-radius: 0.5rem;
+    border-radius: 8px;
     font-size: 0.9rem;
-    background: #f8fafc;
+    background: #fffdf9;
 }
 
 .filter-input {
@@ -74,9 +74,9 @@ input[type=range] {
     grid-column: 1/-1;
     text-align: center;
     padding: 5rem 2rem;
-    background: white;
-    border-radius: 1rem;
-    border: 1px dashed var(--color-stone-300);
+    background: var(--gallery-paper);
+    border-radius: 8px;
+    border: 1px dashed var(--gallery-line);
 }
 
 #toursGrid {
@@ -131,7 +131,7 @@ input[type=range] {
 
     .filters-sidebar {
         padding: 1.25rem;
-        border-radius: 0.75rem;
+        border-radius: 8px;
     }
 
     .filter-label {
@@ -160,7 +160,7 @@ input[type=range] {
 
     .no-results-box {
         padding: 3rem 1rem;
-        border-radius: 0.75rem;
+        border-radius: 8px;
     }
 
     input[type=range] {

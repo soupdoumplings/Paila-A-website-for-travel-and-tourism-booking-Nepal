@@ -1,6 +1,6 @@
 # PAILA Work Report
 
-Date: June 23, 2026
+Date: June 24, 2026
 
 ## Checklist
 
@@ -21,6 +21,11 @@ Date: June 23, 2026
 - [x] Added graceful hero video autoplay fallback.
 - [x] Added luxury reveal animation for cards, detail sections, admin panels, and content blocks.
 - [x] Polished the royal nature-luxury feel with warmer gold accents, cleaner shadows, refined cards, and improved admin login styling.
+- [x] Re-aligned the homepage hero so it starts on the same 85-90% page rail as the rest of the site.
+- [x] Updated the header spacing so navigation no longer appears bunched into the center.
+- [x] Applied the shared 85-90% content width to home, gallery, tour detail, package detail, premium, and premium detail layouts.
+- [x] Added an art-gallery polish layer with gallery-paper surfaces, fine borders, restrained shadows, refined card radii, and quieter section transitions.
+- [x] Preserved the existing animation system while improving hover/reveal presentation for a more elegant nature-luxury feel.
 
 ## Feature Additions
 
@@ -44,3 +49,4 @@ Date: June 23, 2026
 - Local app URL: `http://localhost:8080`
 - The design direction was kept close to the existing Paila identity: Nepal travel, nature as luxury, and private Himalayan journeys.
 - No existing animation was removed; new reveal and hover motion was layered on top.
+- The latest layout pass keeps broad page sections on the shared 85-90% screen width while retaining smaller text/form widths where they improve readability.

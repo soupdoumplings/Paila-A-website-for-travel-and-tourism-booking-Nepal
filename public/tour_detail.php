@@ -86,7 +86,7 @@ include '../includes/header.php';
 .td-hero h1 { font-size: 2.5rem; color: white; margin-bottom: 0.5rem; }
 .td-hero .meta { color: rgba(255,255,255,0.95); font-size: 1rem; }
 .td-content { padding: 5rem 0 6rem; background: #fafaf9; }
-.td-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+.td-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; width: min(var(--site-width), calc(100% - 2rem)); max-width: none; margin: 0 auto; padding: 0; }
 .td-main h2 { font-size: 1.5rem; font-weight: 700; color: #047857; margin-bottom: 1rem; }
 .td-main p { color: #57534e; line-height: 1.85; font-size: 1rem; margin-bottom: 1.75rem; }
 .td-highlights { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid #e7e5e4; }
@@ -95,13 +95,13 @@ include '../includes/header.php';
 .td-highlights li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; color: #57534e; line-height: 1.8; }
 .td-highlights li::before { content: ''; position: absolute; left: 0; top: 0.95rem; width: 0.45rem; height: 0.45rem; border-radius: 999px; background: #059669; }
 .td-card {
-    background: #fff;
+    background: var(--gallery-paper, #fffdf9);
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    box-shadow: var(--gallery-shadow, 0 18px 50px rgba(28, 25, 23, 0.1));
     overflow: hidden;
     position: sticky;
     top: 100px;
-    border: 1px solid #f5f5f4;
+    border: 1px solid var(--gallery-line, #e7e5e4);
 }
 .td-card-title { font-size: 1.1rem; font-weight: 700; color: #1c1917; margin: 0 0 1.5rem 0; text-align: center; }
 .td-card-body { padding: 1.5rem; }

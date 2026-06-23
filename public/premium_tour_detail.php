@@ -88,7 +88,7 @@ include '../includes/header.php';
 
 <!-- Content -->
 <section style="padding: 5rem 0; background: white;">
-    <div class="container" style="max-width: 1100px;">
+    <div class="container">
         <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 4rem;">
             
             <!-- Tour Info -->
