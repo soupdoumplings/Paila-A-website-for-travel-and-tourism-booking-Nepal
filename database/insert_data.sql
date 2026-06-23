@@ -8,10 +8,15 @@ INSERT INTO roles (id, name, description) VALUES
 (4, 'tour_guide', 'Assigned to tours, no admin access')
 ON DUPLICATE KEY UPDATE name=name;
 
--- Insert super admin
-INSERT INTO users (username, email, password, role_id) 
-SELECT 'ujShresthadmin', '2461787@paila.admin', '$2y$10$XJJRQsALbyI7RXBLPW07ZeNjRClJcMt.o/I/ygLvfAAQO0vNdOnW2', 1
-WHERE NOT EXISTS (SELECT * FROM users WHERE username = 'ujShresthadmin');
+-- Insert local development super admin.
+-- Username: ujShresthadmin
+-- Password: PailaAdmin@2026
+INSERT INTO users (username, email, password, role_id) VALUES
+('ujShresthadmin', '2461787@paila.admin', '$2y$10$E4PhScu8N3V56oulHcbxKuWkqbqg8hdr9V.XahdhtloMd.z43Y62O', 1)
+ON DUPLICATE KEY UPDATE
+email = VALUES(email),
+password = VALUES(password),
+role_id = VALUES(role_id);
 
 -- Clear tour data
 DELETE FROM tours;
@@ -91,6 +96,18 @@ INSERT INTO tours (title, location, price, duration, description, category, diff
 'Fly Kathmandu to Nepalgunj\nFly to Talcha (Mugu) airstrip, trek to Rara Lake (2 hrs)\nFull day exploring Rara Lake and surroundings\nTrek to Chhapre (2800m)\nTrek to Jumla (2540m)\nBuffer day for flight delays\nFly Jumla to Nepalgunj\nFly to Kathmandu\nReserve days (2 days)',
 'All domestic flights (Kathmandu-Nepalgunj-Talcha/Jumla-Kathmandu)\nLodge/camping accommodation\nAll meals during trek\nCamping equipment if needed\nExperienced guide and porter\nNational Park and TIMS fees\nFirst aid kit',
 'Kathmandu hotel\nMeals in cities\nInternational flights\nTravel insurance\nExtra costs due to flight delays\nDrinks\nPersonal gear\nTips\nPersonal expenses');
+
+-- Feature selected journeys on the homepage collection section.
+UPDATE tours
+SET is_featured = 1
+WHERE title IN (
+    'Everest Base Camp Trek',
+    'Annapurna Base Camp Trek',
+    'Manaslu Circuit Trek',
+    'Kathmandu Valley Cultural Tour',
+    'Chitwan Jungle Safari',
+    'Upper Mustang Trek'
+);
 
 
 -- Insert sample bookings

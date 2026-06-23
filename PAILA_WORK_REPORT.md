@@ -26,6 +26,8 @@ Date: June 24, 2026
 - [x] Applied the shared 85-90% content width to home, gallery, tour detail, package detail, premium, and premium detail layouts.
 - [x] Added an art-gallery polish layer with gallery-paper surfaces, fine borders, restrained shadows, refined card radii, and quieter section transitions.
 - [x] Preserved the existing animation system while improving hover/reveal presentation for a more elegant nature-luxury feel.
+- [x] Fixed the seeded homepage data by marking selected Nepal journeys as featured.
+- [x] Reset and documented the local development super admin credential.
 
 ## Feature Additions
 
@@ -34,11 +36,25 @@ Date: June 24, 2026
 - Automatic CSRF token injection for POST forms, with direct CSRF fields added on critical forms.
 - Admin data import/export pages rebuilt as reliable management tools.
 
+## Database And Admin
+
+- Docker database: `nepal_tours`
+- Docker database user: `nepal_user`
+- Seed file: `database/insert_data.sql`
+- Current seeded data: 4 roles, 1 super admin, 10 tours, 6 featured tours, and 3 sample bookings.
+- Local admin URL: `http://localhost:8080/admin/login.php`
+- Local admin username: `ujShresthadmin`
+- Local admin email: `2461787@paila.admin`
+- Local admin password: `PailaAdmin@2026`
+- Change the local admin password before any public deployment.
+
 ## Verification
 
 - PHP lint passed for every PHP file inside the Docker PHP container.
 - Public routes checked locally: `/`, `/public/collection.php`, `/public/archive.php`, `/public/premium.php`, login, register, and `/public/package_detail/?id=1`.
 - Admin login route checked locally: `/admin/login.php`.
+- Admin login was verified with CSRF using `ujShresthadmin` and dashboard access was confirmed.
+- Homepage featured section was verified with 6 rendered journey cards and no empty-state message.
 - Search endpoint checked locally: `/actions/tours/search_ajax.php?q=everest`.
 - Protected routes checked for login redirect behavior.
 - CSRF-negative inquiry POST checked and rejected with HTTP 403.
