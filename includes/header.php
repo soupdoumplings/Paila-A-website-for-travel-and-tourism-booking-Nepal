@@ -79,8 +79,8 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
                 <a href="<?php echo url('index.php'); ?>" class="logo">पाइला</a>
             <?php endif; ?>
             
-            <div style="display: flex; align-items: center; gap: 1rem; width: <?php echo $isAdmin ? '100%' : 'auto'; ?>; justify-content: <?php echo $isAdmin ? 'space-between' : 'flex-end'; ?>;">
-                <div class="nav-links" style="display: flex; align-items: center; gap: 1rem; font-size: 0.82rem; font-weight: 500; width: <?php echo $isAdmin ? '100%' : 'auto'; ?>; justify-content: <?php echo $isAdmin ? 'space-between' : 'flex-end'; ?>;">
+            <div style="display: flex; align-items: center; gap: <?php echo $isAdmin ? '1rem' : '1.5rem'; ?>; width: <?php echo $isAdmin ? '100%' : 'auto'; ?>; justify-content: <?php echo $isAdmin ? 'space-between' : 'flex-end'; ?>;">
+                <div class="nav-links" style="display: flex; align-items: center; gap: <?php echo $isAdmin ? '1rem' : '1.55rem'; ?>; font-size: 0.82rem; font-weight: 500; width: <?php echo $isAdmin ? '100%' : 'auto'; ?>; justify-content: <?php echo $isAdmin ? 'space-between' : 'flex-end'; ?>;">
                     <?php if($isAdmin): ?>
                         <div style="display: flex; align-items: center; gap: 1.5rem; width: 100%;">
 <a href="<?php echo url('admin/index.php'); ?>" class="<?php echo (strpos($_SERVER['REQUEST_URI'], 'admin/index.php') !== false || substr($_SERVER['REQUEST_URI'], -7) == '/admin/') ? 'active' : ''; ?>" style="font-weight: 600; font-size: 0.9rem; letter-spacing: 0.05em;">DASHBOARD</a>
@@ -138,7 +138,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
                         </button>
                     <?php else: ?>
                         <a href="<?php echo url('public/authentication/login.php'); ?>" style="font-weight: 500; text-decoration: none; color: white;">LOGIN</a>
-                        <a href="<?php echo url('public/authentication/register.php'); ?>" style="background: white; color: black; padding: 0.4rem 1rem; border-radius: 2px; font-weight: 600; text-decoration: none; font-size: 0.75rem;">REGISTER</a>
+                        <a href="<?php echo url('public/authentication/register.php'); ?>" style="background: white; color: black; padding: 0.5rem 1.25rem; border-radius: 2px; font-weight: 600; text-decoration: none; font-size: 0.75rem;">REGISTER</a>
                     <?php endif; ?>
                 </div>
             </div>
