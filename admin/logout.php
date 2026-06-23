@@ -1,8 +1,9 @@
 <?php
+require_once __DIR__ . '/../helpers/security.php';
 // Load helper functions
 require_once __DIR__ . '/../helpers/functions.php';
 // Initialize session state
-session_start();
+secure_session_start();
 // Clear session data
 session_unset();
 // Destroy session file

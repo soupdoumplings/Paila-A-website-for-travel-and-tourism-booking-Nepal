@@ -1,5 +1,6 @@
 <?php
 // Database connection settings
+require_once __DIR__ . '/../helpers/security.php';
 
 // localhost connection
 // // Define database host

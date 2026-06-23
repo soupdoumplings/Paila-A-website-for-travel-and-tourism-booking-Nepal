@@ -1,5 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+require_once __DIR__ . '/../helpers/security.php';
+if (session_status() === PHP_SESSION_NONE) { secure_session_start(); }
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
@@ -11,6 +12,8 @@ $detailId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // Process user message
 if ($detailId > 0 && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'send_message') {
+    require_csrf_token();
+
     // Check request owner
     $check = $pdo->prepare("SELECT id FROM private_requests WHERE id = ? AND user_id = ?");
     $check->execute([$detailId, $user['id']]);
@@ -140,6 +143,7 @@ include '../includes/header.php';
                         <?php endif; ?>
                     </div>
                      <form method="POST">
+                        <?php echo csrf_field(); ?>
                         <input type="hidden" name="action" value="send_message">
                         <textarea name="message" required placeholder="Type your message here..." rows="3" style="width: 100%; padding: 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; font-family: inherit; resize: vertical;"></textarea>
                         <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">

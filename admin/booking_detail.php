@@ -1,8 +1,9 @@
 <?php
+require_once __DIR__ . '/../helpers/security.php';
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+if (session_status() === PHP_SESSION_NONE) { secure_session_start(); }
 require_login();
 if (!is_admin()) { die("Access Denied."); }
 
@@ -26,13 +27,14 @@ if (!$booking) die("Booking not found.");
 
 // Handle admin messages
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    require_csrf_token();
     if ($_POST['action'] === 'send_message') {
         $msgBody = trim($_POST['message']);
         if ($msgBody && $booking['user_id']) {
             $sent = send_message($user['id'], $booking['user_id'], 'booking', $bookingId, $msgBody);
             if ($sent) {
                 // Notify booking owner
-                create_notification($booking['user_id'], "New Message regarding Booking #$bookingId", "You have a new message from the admin.", "user_booking_detail.php?id=$bookingId");
+                create_notification($booking['user_id'], "New Message regarding Booking #$bookingId", "You have a new message from the admin.", "booking_detail.php?id=$bookingId");
             }
         }
     }
@@ -106,6 +108,7 @@ $base = '../';
                 <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem;">Dialogue</h3>
                 
                 <!-- Check guest account -->
+                <?php if (!$booking['user_id']): ?>
                     <div style="padding: 1rem; background: #fffbe6; border: 1px solid #ffe58f; border-radius: 0.5rem; color: #856404;">
                          <i class="fa-solid fa-triangle-exclamation"></i> Customer booked as guest. Messaging is unavailable until they register or link account.
                     </div>
@@ -131,6 +134,7 @@ $base = '../';
                     </div>
                     
                     <form method="POST">
+                        <?php echo csrf_field(); ?>
                         <input type="hidden" name="action" value="send_message">
                         <textarea name="message" required placeholder="Type a message to the customer..." rows="3" style="width: 100%; padding: 1rem; border: 1px solid var(--color-stone-300); border-radius: 0.5rem; margin-bottom: 1rem; font-family: inherit;"></textarea>
                         <button type="submit" class="btn" style="background: var(--color-stone-900); color: white; padding: 0.75rem 1.5rem; width: 100%;">

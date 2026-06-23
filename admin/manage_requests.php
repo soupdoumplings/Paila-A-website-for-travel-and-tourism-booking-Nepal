@@ -1,8 +1,9 @@
 <?php
+require_once __DIR__ . '/../helpers/security.php';
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+if (session_status() === PHP_SESSION_NONE) { secure_session_start(); }
 require_login();
 if (!is_admin()) { die("Access Denied."); }
 
@@ -13,6 +14,7 @@ $error = '';
 
 // Handle access actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    require_csrf_token();
     $requestId = intval($_POST['request_id']);
     $action = $_POST['action'];
     $newStatus = ($action === 'approve') ? 'approved' : 'rejected';

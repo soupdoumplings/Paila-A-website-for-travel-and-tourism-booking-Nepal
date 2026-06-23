@@ -1,7 +1,8 @@
 <?php
+require_once __DIR__ . '/../../helpers/security.php';
 ob_start();
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 $base = '../../';
 require_once $base . 'helpers/functions.php';
@@ -22,6 +23,7 @@ $img = get_tour_image($tour);
 $category = isset($tour['category']) && $tour['category'] ? $tour['category'] : null;
 $difficulty = isset($tour['difficulty']) && $tour['difficulty'] ? $tour['difficulty'] : null;
 $max_group = isset($tour['max_group']) && $tour['max_group'] ? $tour['max_group'] : null;
+$traveler_max = $max_group ? max(1, (int) $max_group) : 20;
 $highlights = isset($tour['highlights']) && $tour['highlights'] ? $tour['highlights'] : '';
 $highlights_list = array_filter(array_map('trim', explode("\n", $highlights)));
 
@@ -571,6 +573,7 @@ include $base . 'includes/header.php';
             <h2 class="pd-modal-title" id="pd-modal-title">Book <?php echo e($tour['title']); ?></h2>
             <p style="margin-top: -1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--color-stone-500);">No account needed to start. We'll automatically secure your booking.</p>
             <form id="pd-booking-form" action="<?php echo url('actions/bookings/process_booking.php'); ?>" method="POST" data-validate>
+                <?php echo csrf_field(); ?>
                 <input type="hidden" name="tour_id" value="<?php echo (int) $tour['id']; ?>">
                 <div class="form-group">
                     <label>Full Name <span class="req">*</span></label>
@@ -590,7 +593,8 @@ include $base . 'includes/header.php';
                 </div>
                 <div class="form-group">
                     <label>Group Size</label>
-                    <input type="number" name="travelers" value="1" data-rules="required">
+                    <input type="number" name="travelers" value="1" min="1" max="<?php echo $traveler_max; ?>" data-rules="required">
+                    <small style="display: block; margin-top: 0.35rem; color: var(--color-stone-500);">Up to <?php echo $traveler_max; ?> guests for this departure.</small>
                 </div>
                 <div class="form-group">
                     <label>Special Requests</label>
@@ -598,7 +602,7 @@ include $base . 'includes/header.php';
                 </div>
                 <div class="pd-modal-total">
                     <span class="label">Total Estimate</span>
-                    <span class="value">Rs <?php echo number_format($tour['price'], 0); ?></span>
+                    <span class="value" id="pd-total-estimate">Rs <?php echo number_format($tour['price'], 0); ?></span>
                 </div>
                 <button type="submit" class="pd-modal-submit">Submit Booking Request</button>
             </form>
@@ -648,6 +652,34 @@ include $base . 'includes/header.php';
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closeModal();
     });
+
+    var travelerInput = document.querySelector('#pd-booking-form input[name="travelers"]');
+    var totalEstimate = document.getElementById('pd-total-estimate');
+    var pricePerPerson = <?php echo json_encode((float) $tour['price']); ?>;
+
+    function formatNpr(value) {
+        return 'Rs ' + Math.round(value).toLocaleString('en-US');
+    }
+
+    function updateEstimate() {
+        if (!travelerInput || !totalEstimate) return;
+
+        var max = parseInt(travelerInput.getAttribute('max'), 10) || 20;
+        var travelers = parseInt(travelerInput.value, 10) || 1;
+        travelers = Math.max(1, Math.min(max, travelers));
+
+        if (String(travelers) !== travelerInput.value) {
+            travelerInput.value = travelers;
+        }
+
+        totalEstimate.textContent = formatNpr(pricePerPerson * travelers);
+    }
+
+    if (travelerInput) {
+        travelerInput.addEventListener('input', updateEstimate);
+        travelerInput.addEventListener('change', updateEstimate);
+        updateEstimate();
+    }
 
     var shareBtn = document.getElementById('pd-share');
     if (shareBtn) {

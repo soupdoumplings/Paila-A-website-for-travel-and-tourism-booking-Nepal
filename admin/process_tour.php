@@ -1,14 +1,17 @@
 <?php
-session_start();
+require_once __DIR__ . '/../helpers/security.php';
+secure_session_start();
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 require_login();
+require_post_request();
+require_csrf_token();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' || (isset($_GET['action']) && $_GET['action'] === 'delete')) {
-    
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     // Process tour delete
-    if (isset($_GET['action']) && $_GET['action'] === 'delete') {
-        $id = $_GET['id'];
+    if (isset($_POST['action']) && $_POST['action'] === 'delete') {
+        $id = (int)($_POST['id'] ?? 0);
         
         // Verify edit rights
         if (!is_super_admin()) {
@@ -25,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || (isset($_GET['action']) && $_GET['a
         redirect('index.php');
     }
 
-    $action = $_POST['action'];
+    $action = $_POST['action'] ?? '';
     $title = $_POST['title'];
     $location = $_POST['location'];
     $price = $_POST['price'];

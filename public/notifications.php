@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../helpers/security.php';
+secure_session_start();
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
@@ -9,15 +10,15 @@ if (!is_logged_in()) {
 
 $user = get_user();
 
-// Mark all read
-if (isset($_POST['mark_all_read'])) {
-    mark_all_notifications_read($user['id']);
-    redirect(url('public/notifications.php'));
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_csrf_token();
 
-// Mark single read
-if (isset($_GET['read'])) {
-    mark_notification_read($_GET['read'], $user['id']);
+    if (isset($_POST['mark_all_read'])) {
+        mark_all_notifications_read($user['id']);
+    } elseif (isset($_POST['mark_read'], $_POST['notification_id'])) {
+        mark_notification_read((int) $_POST['notification_id'], $user['id']);
+    }
+
     redirect(url('public/notifications.php'));
 }
 
@@ -38,6 +39,7 @@ include '../includes/header.php';
         <div style="display: flex; justify-content: flex-end; margin-bottom: 2rem;">
              <?php if(!empty($notifications)): ?>
                 <form method="POST">
+                    <?php echo csrf_field(); ?>
                     <button type="submit" name="mark_all_read" class="btn" style="background: white; border: 1px solid var(--color-stone-300); color: var(--color-stone-600); padding: 0.6rem 1.2rem; font-size: 0.9rem;">
                         <i class="fa-solid fa-check-double"></i> Mark All Read
                     </button>
@@ -78,7 +80,11 @@ include '../includes/header.php';
                                     </a>
                                 <?php endif; ?>
                                 <?php if(!$n['is_read']): ?>
-                                    <a href="?read=<?php echo $n['id']; ?>" style="color: var(--color-stone-400); text-decoration: none;">Mark as read</a>
+                                    <form method="POST" style="display: inline;">
+                                        <?php echo csrf_field(); ?>
+                                        <input type="hidden" name="notification_id" value="<?php echo (int) $n['id']; ?>">
+                                        <button type="submit" name="mark_read" style="border: none; background: transparent; color: var(--color-stone-400); text-decoration: none; padding: 0; font: inherit; cursor: pointer;">Mark as read</button>
+                                    </form>
                                 <?php endif; ?>
                             </div>
                         </div>

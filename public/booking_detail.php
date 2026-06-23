@@ -1,5 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+require_once __DIR__ . '/../helpers/security.php';
+if (session_status() === PHP_SESSION_NONE) { secure_session_start(); }
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
@@ -27,6 +28,7 @@ if (!$booking) {
 
 // Process user message
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'send_message') {
+    require_csrf_token();
     $msgBody = trim($_POST['message']);
     if ($msgBody) {
         // Find admin user
@@ -101,6 +103,7 @@ include '../includes/header.php';
                     </div>
                     
                     <form method="POST">
+                        <?php echo csrf_field(); ?>
                         <input type="hidden" name="action" value="send_message">
                         <textarea name="message" required placeholder="Type your message here..." rows="3" style="width: 100%; padding: 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; font-family: inherit; resize: vertical;"></textarea>
                         <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">

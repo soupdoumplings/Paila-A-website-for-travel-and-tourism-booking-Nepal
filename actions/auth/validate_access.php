@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__ . '/../../helpers/security.php';
 // Premium access validation
 
 // Initialize user session
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 
 // Load required files
@@ -14,6 +15,7 @@ require_once __DIR__ . '/../../helpers/functions.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['access_code'])) {
     redirect(url('public/premium.php'));
 }
+require_csrf_token();
 
 // Retrieve access code
 $access_code = trim(strtoupper($_POST['access_code']));

@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__ . '/../../helpers/security.php';
 require_once __DIR__ . '/../../helpers/functions.php';
 require_once __DIR__ . '/../../config/db.php';
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 
 if (is_logged_in()) {
@@ -16,8 +17,9 @@ if (is_logged_in()) {
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
+    require_csrf_token();
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
 
     if (empty($email) || empty($password)) {
         $error = 'Please enter both email and password.';
@@ -27,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
+            session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
@@ -159,6 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php endif; ?>
                     
                     <form method="POST" action="login.php" class="auth-form" data-validate>
+                        <?php echo csrf_field(); ?>
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             <div class="input-wrapper">

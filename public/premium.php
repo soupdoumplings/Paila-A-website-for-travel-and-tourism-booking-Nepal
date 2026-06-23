@@ -1,5 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+require_once __DIR__ . '/../helpers/security.php';
+if (session_status() === PHP_SESSION_NONE) { secure_session_start(); }
 require_once '../helpers/functions.php';
 require_once '../config/db.php';
 
@@ -74,6 +75,7 @@ include '../includes/header.php';
                 <label style="display: block; font-size: 0.875rem; margin-bottom: 0.25rem; color: var(--color-stone-700);">Enter your private access code</label>
                 <p style="font-size: 0.75rem; color: var(--color-stone-500); margin-bottom: 1rem; font-style: italic;">Access codes are issued exclusively following a personal consultation.</p>
                 <form action="<?php echo url('actions/auth/validate_access.php'); ?>" method="POST" style="display: flex; gap: 1rem;">
+                    <?php echo csrf_field(); ?>
                     <input type="text" name="access_code" placeholder="PRIVATE-XXXX-XXXX" required
                            style="flex: 1; padding: 1rem 1.5rem; background: white; border: 1px solid var(--color-stone-200); border-radius: 0.5rem; color: var(--color-stone-900); font-size: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
                     <button type="submit" class="btn" style="background: var(--color-stone-900); color: white; padding: 1rem 2.5rem; font-weight: 600; border-radius: 50px;">
@@ -209,6 +211,7 @@ include '../includes/header.php';
         </p>
         
         <form action="<?php echo url('actions/inquiries/submit_request.php'); ?>" method="POST" style="background: #f8fafc; padding: 3rem; border-radius: 2rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+            <?php echo csrf_field(); ?>
             <div style="margin-bottom: 2rem;">
                 <label style="display: block; margin-bottom: 0.75rem; font-size: 0.9rem; font-weight: 600; color: var(--color-stone-700);">Full Name</label>
                 <input type="text" name="full_name" required style="width: 100%; padding: 1rem; background: white; border: 1px solid var(--color-stone-200); color: var(--color-stone-900); border-radius: 0.75rem; font-size: 1rem;">

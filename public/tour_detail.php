@@ -170,7 +170,8 @@ include '../includes/header.php';
             <h2 class="td-modal-title">Book <?php echo e($tour['title']); ?></h2>
             <p style="margin-top: -1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--color-stone-500);">No account needed to start. We'll automatically secure your booking.</p>
             <form action="<?php echo url('actions/bookings/process_booking.php'); ?>" method="POST">
-                <input type="hidden" name="tour_id" value="0">
+                <?php echo csrf_field(); ?>
+                <input type="hidden" name="tour_id" value="<?php echo (int) $tour['id']; ?>">
                 <div class="form-group">
                     <label>Full Name *</label>
                     <input type="text" name="customer_name" placeholder="Your full name" required>
@@ -181,7 +182,7 @@ include '../includes/header.php';
                 </div>
                 <div class="form-group">
                     <label>Travel Date *</label>
-                    <input type="date" name="travel_date" required>
+                    <input type="date" name="travel_date" required min="<?php echo date('Y-m-d', strtotime('+2 days')); ?>">
                 </div>
                 <div class="form-group">
                     <label>Number of Travelers</label>

@@ -2,6 +2,7 @@
 // Core helper functions
 
 // Include required dependencies
+require_once __DIR__ . '/security.php';
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/message_functions.php';
 require_once __DIR__ . '/notification_functions.php';
@@ -13,7 +14,8 @@ function e($string) {
 
 // Redirect to URL
 function redirect($url) {
-    header("Location: $url");
+    $url = str_replace(["\r", "\n"], '', $url);
+    header("Location: $url", true, 302);
     exit();
 }
 

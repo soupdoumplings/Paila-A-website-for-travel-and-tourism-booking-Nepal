@@ -18,6 +18,64 @@
     --admin-gradient: linear-gradient(180deg, #A5D1E8 0%, #D6F1FF 40%, #FFFFFF 100%);
 }
 
+.admin-login-page {
+    min-height: 100vh;
+    background:
+        linear-gradient(135deg, rgba(4, 47, 46, 0.92), rgba(28, 25, 23, 0.86)),
+        url('../images/guest_experience.jpg') center/cover fixed;
+}
+
+.admin-login-shell {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.admin-login-card {
+    width: min(100%, 440px);
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(251, 191, 36, 0.22);
+    border-radius: 14px;
+    padding: 2.5rem;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(14px);
+}
+
+.admin-login-brand {
+    display: inline-flex;
+    color: var(--color-stone-900);
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    margin-bottom: 1.5rem;
+}
+
+.admin-login-card h1 {
+    color: var(--color-stone-900);
+    font-size: 2.4rem;
+    margin: 0 0 0.75rem;
+}
+
+.admin-login-copy {
+    color: var(--color-stone-600);
+    margin-bottom: 1.75rem;
+}
+
+.admin-login-form {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.admin-login-error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    padding: 0.85rem 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
 /* Buttons */
 .admin-btn {
     padding: 0.75rem 1.5rem;

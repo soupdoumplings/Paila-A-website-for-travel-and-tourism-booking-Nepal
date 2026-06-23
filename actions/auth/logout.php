@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../helpers/security.php';
 // User logout handler
 
 // Load required files
@@ -7,7 +8,7 @@ require_once __DIR__ . '/../../helpers/functions.php';
 
 // Initialize session state
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 
 // Clear session variables

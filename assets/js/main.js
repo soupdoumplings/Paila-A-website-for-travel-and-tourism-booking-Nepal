@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // CSRF token for POST forms rendered across public and admin pages
+    const csrfToken = window.PAILA_CONFIG && window.PAILA_CONFIG.csrfToken;
+    if (csrfToken) {
+        document.querySelectorAll('form').forEach((form) => {
+            const method = (form.getAttribute('method') || 'get').toLowerCase();
+            if (method === 'post' && !form.querySelector('input[name="_csrf_token"]')) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = '_csrf_token';
+                input.value = csrfToken;
+                form.prepend(input);
+            }
+        });
+    }
+
     // Sidebar
     const userIcon = document.getElementById('user-icon');
     const userSidebar = document.getElementById('user-sidebar');
@@ -99,6 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 player1.style.opacity = '1';
                 nextClipIndex = 1;
                 loadAndSwap();
+            }).catch((e) => {
+                console.warn('Hero video autoplay was blocked or failed:', e);
+                player1.style.opacity = '1';
             });
         }
     } else {
@@ -111,6 +129,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 heroImages[currentIndex].style.opacity = '1';
             }, 5000);
         }
+    }
+
+    // Elegant reveal motion for existing cards and content blocks
+    const motionAllowed = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealTargets = document.querySelectorAll([
+        '.collection-card',
+        '.category-card',
+        '.destination-card',
+        '.testimonial-card',
+        '.private-journey-section',
+        '.contact-form-card',
+        '.pd-main > *',
+        '.pd-card',
+        '.admin-hero + .container > div'
+    ].join(','));
+
+    if (motionAllowed && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.14, rootMargin: '0px 0px -70px 0px' });
+
+        revealTargets.forEach((target, index) => {
+            target.classList.add('luxury-reveal');
+            target.style.transitionDelay = `${Math.min(index % 5, 4) * 70}ms`;
+            observer.observe(target);
+        });
+    } else {
+        revealTargets.forEach((target) => target.classList.add('is-visible'));
     }
 
     // Search

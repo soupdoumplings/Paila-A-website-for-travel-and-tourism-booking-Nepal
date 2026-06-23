@@ -56,7 +56,8 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
     <!-- JavaScript config -->
     <script>
         window.PAILA_CONFIG = {
-            baseUrl: '<?php echo url(""); ?>'.replace(/\/$/, '') + '/'
+            baseUrl: '<?php echo url(""); ?>'.replace(/\/$/, '') + '/',
+            csrfToken: '<?php echo csrf_token(); ?>'
         };
     </script>
     <script src="<?php echo url('assets/js/main.js'); ?>?v=1.1" defer></script>

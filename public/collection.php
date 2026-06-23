@@ -1,7 +1,8 @@
 <?php
+require_once __DIR__ . '/../helpers/security.php';
 ob_start();
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 require_once __DIR__ . '/../helpers/functions.php';
 require_once __DIR__ . '/../config/db.php';

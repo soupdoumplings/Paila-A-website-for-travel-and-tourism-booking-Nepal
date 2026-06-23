@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../helpers/security.php';
+secure_session_start();
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 

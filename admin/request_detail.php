@@ -1,8 +1,9 @@
 <?php
+require_once __DIR__ . '/../helpers/security.php';
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+if (session_status() === PHP_SESSION_NONE) { secure_session_start(); }
 require_login();
 if (!is_admin()) { die("Access Denied."); }
 
@@ -20,6 +21,7 @@ if (!$request) die("Request not found.");
 
 // Handle status changes
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    require_csrf_token();
     if ($_POST['action'] === 'send_message') {
         $msgBody = trim($_POST['message']);
         if ($msgBody && $request['user_id']) {

@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/../helpers/security.php';
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 
 require_once '../helpers/functions.php';
@@ -15,6 +16,7 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_csrf_token();
     if (isset($_POST['update_profile'])) {
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);

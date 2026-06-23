@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../helpers/security.php';
+secure_session_start();
 ob_start();
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
@@ -388,7 +389,16 @@ try {
                 `Are you sure you want to delete "${title}"? This will remove the package permanently.`
             );
             if (confirmed) {
-                window.location.href = `process_tour.php?action=delete&id=${id}`;
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'process_tour.php';
+                form.innerHTML = `
+                    <input type="hidden" name="_csrf_token" value="${window.PAILA_CONFIG.csrfToken}">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="id" value="${id}">
+                `;
+                document.body.appendChild(form);
+                form.submit();
             }
         }
 

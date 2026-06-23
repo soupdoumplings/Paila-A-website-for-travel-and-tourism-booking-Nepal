@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__ . '/../helpers/security.php';
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 
 // Verify admin access
@@ -17,6 +18,7 @@ $error = '';
 
 // Process guide creation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_guide'])) {
+    require_csrf_token();
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
@@ -43,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_guide'])) {
 
 // Process guide deletion
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_guide'])) {
+    require_csrf_token();
     $user_id = intval($_POST['user_id']);
     $stmt = $pdo->prepare("DELETE FROM users WHERE id = ? AND role_id = 4");
     if ($stmt->execute([$user_id])) {

@@ -1,5 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+require_once __DIR__ . '/../helpers/security.php';
+if (session_status() === PHP_SESSION_NONE) { secure_session_start(); }
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
@@ -114,6 +115,7 @@ include '../includes/header.php';
                     <h3 style="font-size: 1.5rem; font-family: var(--font-serif); margin-bottom: 1.5rem;">Request Booking</h3>
                     
                     <form action="<?php echo url('actions/bookings/process_booking.php'); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                         <input type="hidden" name="tour_id" value="0">
                         <input type="hidden" name="premium_tour_id" value="<?php echo $tour['id']; ?>">
                         <input type="hidden" name="customer_name" value="<?php echo e($_SESSION['username'] ?? ''); ?>">
@@ -126,8 +128,13 @@ include '../includes/header.php';
                         
                         <div style="margin-bottom: 1.5rem;">
                             <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Number of Travelers</label>
-                            <input type="number" name="travelers" required min="1" max="<?php echo $tour['max_travelers']; ?>" value="2" style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-stone-300); border-radius: 0.5rem;">
+                            <input type="number" id="premiumTravelers" name="travelers" required min="1" max="<?php echo $tour['max_travelers']; ?>" value="2" style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-stone-300); border-radius: 0.5rem;">
                             <small style="color: var(--color-stone-500);">Maximum: <?php echo $tour['max_travelers']; ?> people</small>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: white; border: 1px solid var(--color-stone-200); border-radius: 0.75rem; padding: 1rem; margin-bottom: 1.5rem;">
+                            <span style="font-weight: 600; color: var(--color-stone-700);">Estimated Total</span>
+                            <span id="premiumEstimate" style="font-weight: 700; color: var(--color-amber-600); font-size: 1.2rem;">Rs <?php echo number_format($tour['price'] * 2); ?></span>
                         </div>
                         
                         <div style="margin-bottom: 1.5rem;">
@@ -154,5 +161,28 @@ include '../includes/header.php';
         </div>
     </div>
 </section>
+
+<script>
+(function() {
+    var travelers = document.getElementById('premiumTravelers');
+    var estimate = document.getElementById('premiumEstimate');
+    var price = <?php echo json_encode((float) $tour['price']); ?>;
+    var max = <?php echo json_encode((int) $tour['max_travelers']); ?>;
+
+    function updateEstimate() {
+        if (!travelers || !estimate) return;
+        var count = parseInt(travelers.value, 10) || 1;
+        count = Math.max(1, Math.min(max, count));
+        travelers.value = count;
+        estimate.textContent = 'Rs ' + Math.round(count * price).toLocaleString('en-US');
+    }
+
+    if (travelers) {
+        travelers.addEventListener('input', updateEstimate);
+        travelers.addEventListener('change', updateEstimate);
+        updateEstimate();
+    }
+})();
+</script>
 
 <?php include '../includes/footer.php'; ?>

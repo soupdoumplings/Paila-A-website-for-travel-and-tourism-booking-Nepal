@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../helpers/security.php';
+secure_session_start();
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 require_login();
@@ -40,7 +41,6 @@ if (isset($_GET['id'])) {
     <title><?php echo $title; ?> | Admin</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
-</head>
 </head>
 <body class="page-body">
 
@@ -85,6 +85,7 @@ if (isset($_GET['id'])) {
         </div>
 
         <form action="process_tour.php" method="POST" enctype="multipart/form-data">
+            <?php echo csrf_field(); ?>
             <input type="hidden" name="action" value="<?php echo $action; ?>">
             <?php if($tour): ?>
                 <input type="hidden" name="id" value="<?php echo $tour['id']; ?>">

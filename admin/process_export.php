@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../helpers/security.php';
+secure_session_start();
 $base = '../';
 require_once $base . 'helpers/functions.php';
 require_once $base . 'config/db.php';
@@ -7,7 +8,16 @@ require_once $base . 'config/db.php';
 // Check user access
 require_login();
 
-$format = isset($_GET['format']) ? $_GET['format'] : 'json';
+$format = $_POST['format'] ?? ($_GET['format'] ?? 'json');
+if (!in_array($format, ['json', 'csv', 'season_json'], true)) {
+    http_response_code(400);
+    exit('Unsupported export format.');
+}
+
+if ($format === 'season_json') {
+    require_post_request();
+    require_csrf_token();
+}
 
 try {
     // Fetch all tours

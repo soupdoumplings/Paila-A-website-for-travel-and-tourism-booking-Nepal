@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__ . '/../helpers/security.php';
 require_once '../config/db.php';
 require_once '../helpers/functions.php';
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 
 // Verify admin access
@@ -16,6 +17,7 @@ $error = '';
 
 // Process form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_csrf_token();
     if (isset($_POST['create_admin'])) {
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);

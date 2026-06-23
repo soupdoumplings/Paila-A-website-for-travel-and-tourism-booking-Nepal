@@ -1,7 +1,8 @@
 <?php
+require_once __DIR__ . '/../helpers/security.php';
 ob_start();
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 require_once __DIR__ . '/../helpers/functions.php';
 require_once __DIR__ . '/../config/db.php';
@@ -670,6 +671,7 @@ try {
                 <?php endif; ?>
 
                 <form action="<?php echo url('actions/inquiries/submit_inquiry.php'); ?>" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;" data-validate>
+                    <?php echo csrf_field(); ?>
                     <div>
                         <label style="display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--color-stone-700);">Full Name</label>
                         <input type="text" name="name" placeholder="Your name" style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-stone-300); border-radius: 0.5rem; font-size: 0.95rem; background: white;" data-rules="required|min:3">

@@ -1,35 +1,112 @@
 <?php
+require_once __DIR__ . '/../../helpers/security.php';
 // Initialize session status
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 // Load required files
 require_once '../../config/db.php';
 require_once '../../helpers/functions.php';
+
+require_post_request();
+require_csrf_token();
 
 // Init user variables
 $auto_registered = false;
 $temp_password = '';
 $user_id = null;
 
+function resolve_premium_tour(PDO $pdo, string $premiumTourId): ?array {
+    $premiumTours = [
+        'helicopter' => [
+            'title' => 'Luxury Everest Helicopter Tour',
+            'location' => 'Everest Region',
+            'price' => 1999,
+            'duration' => '1 Day',
+            'description' => 'Private Everest helicopter experience with an elevated breakfast stop and curated mountain views.',
+            'category' => 'luxury',
+            'difficulty' => 'Easy',
+            'max_group' => 5,
+            'highlights' => "Private helicopter routing\nEverest View breakfast\nDedicated concierge coordination",
+            'image' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80',
+            'best_season' => 'Spring, Autumn',
+        ],
+        'mustang' => [
+            'title' => 'Upper Mustang Expedition',
+            'location' => 'Mustang',
+            'price' => 7199,
+            'duration' => '12 Days',
+            'description' => 'A private expedition into Upper Mustang with restricted-area access, cultural immersion, and luxury logistics.',
+            'category' => 'luxury',
+            'difficulty' => 'Moderate',
+            'max_group' => 8,
+            'highlights' => "Restricted-area permit support\nPrivate guide team\nLuxury camp and lodge coordination",
+            'image' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
+            'best_season' => 'Spring, Autumn',
+        ],
+    ];
+
+    if (!isset($premiumTours[$premiumTourId])) {
+        return null;
+    }
+
+    $tour = $premiumTours[$premiumTourId];
+    $stmt = $pdo->prepare("SELECT id, title FROM tours WHERE title = ? LIMIT 1");
+    $stmt->execute([$tour['title']]);
+    $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($existing) {
+        return $existing;
+    }
+
+    $stmt = $pdo->prepare(
+        "INSERT INTO tours (title, location, price, duration, description, category, difficulty, max_group, highlights, image, best_season, is_featured)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)"
+    );
+    $stmt->execute([
+        $tour['title'],
+        $tour['location'],
+        $tour['price'],
+        $tour['duration'],
+        $tour['description'],
+        $tour['category'],
+        $tour['difficulty'],
+        $tour['max_group'],
+        $tour['highlights'],
+        $tour['image'],
+        $tour['best_season'],
+    ]);
+
+    return [
+        'id' => (int) $pdo->lastInsertId(),
+        'title' => $tour['title'],
+    ];
+}
+
 // Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tour_id = (int)$_POST['tour_id'];
-    $customer_name = trim($_POST['customer_name']);
-    $contact_email = trim($_POST['contact_email']);
-    $travel_date = $_POST['travel_date'];
-    $travelers = (int)$_POST['travelers'];
+    $tour_id = (int)($_POST['tour_id'] ?? 0);
+    $customer_name = trim($_POST['customer_name'] ?? '');
+    $contact_email = trim($_POST['contact_email'] ?? '');
+    $travel_date = $_POST['travel_date'] ?? '';
+    $travelers = (int)($_POST['travelers'] ?? 0);
     $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
     $special_requests = isset($_POST['special_requests']) ? trim($_POST['special_requests']) : '';
     
     // Process premium tour
     $premium_tour_id = isset($_POST['premium_tour_id']) ? trim($_POST['premium_tour_id']) : null;
     if ($premium_tour_id) {
-        $special_requests = "[PREMIUM TOUR: {$premium_tour_id}] " . $special_requests;
+        $premiumTour = resolve_premium_tour($pdo, $premium_tour_id);
+        if (!$premiumTour) {
+            die("Invalid premium tour. Please go back and try again.");
+        }
+
+        $tour_id = (int) $premiumTour['id'];
+        $special_requests = "[PREMIUM TOUR: {$premiumTour['title']}] " . $special_requests;
     }
 
     // Validate form inputs
-    if (empty($customer_name) || empty($contact_email) || empty($travel_date) || $travelers < 1) {
+    if ($tour_id < 1 || empty($customer_name) || empty($contact_email) || empty($travel_date) || $travelers < 1) {
         die("Invalid form data. Please go back and try again.");
     }
 
@@ -43,6 +120,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Invalid email address. Please go back and try again.");
     }
 
+    $tourCheck = $pdo->prepare("SELECT id FROM tours WHERE id = ? LIMIT 1");
+    $tourCheck->execute([$tour_id]);
+    if (!$tourCheck->fetchColumn()) {
+        die("Selected tour could not be found. Please choose a tour again.");
+    }
+
     // Manage user account
     if (is_logged_in()) {
         $user_id = $_SESSION['user_id'];
@@ -54,14 +137,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($existingUser) {
             $user_id = $existingUser['id'];
-            // Log user in
-            $_SESSION['user_id'] = $user_id;
-            $_SESSION['username'] = $existingUser['username'];
-            $_SESSION['email'] = $contact_email;
         } else {
             // Register new account
             $temp_password = substr(str_shuffle('abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789'), 0, 8);
             // Generate hashed password
+            $hashed_password = password_hash($temp_password, PASSWORD_DEFAULT);
             $username = strtolower(explode('@', $contact_email)[0]) . rand(10, 99);
             
             try {
@@ -76,6 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['username'] = $username;
                     $_SESSION['email'] = $contact_email;
                     $_SESSION['role_id'] = 3;
+                    session_regenerate_id(true);
                     
                     // Save temp credentials
                     $_SESSION['new_account_pass'] = $temp_password;
@@ -99,7 +180,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$tour_id, $customer_name, $contact_email, $travel_date, $travelers]);
             $booking_id = $pdo->lastInsertId();
         } catch (Exception $e2) {
-            $booking_id = 'ORD-' . strtoupper(substr(uniqid(), -6));
+            error_log('Booking insert failed: ' . $e2->getMessage());
+            http_response_code(500);
+            exit("We couldn't save this booking. Please try again or contact the Paila team.");
         }
     }
 

@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../helpers/security.php';
+secure_session_start();
 $base = '../';
 require_once $base . 'helpers/functions.php';
 require_once $base . 'config/db.php';
@@ -11,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: import.php');
     exit;
 }
+require_csrf_token();
 
 $import_mode = isset($_POST['import_mode']) ? $_POST['import_mode'] : 'skip';
 $imported = 0;

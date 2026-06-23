@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__ . '/../../helpers/security.php';
 require_once __DIR__ . '/../../helpers/functions.php';
 require_once __DIR__ . '/../../config/db.php';
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    secure_session_start();
 }
 
 if (is_logged_in()) {
@@ -14,15 +15,20 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fullname = trim($_POST['fullname']);
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    require_csrf_token();
+    $fullname = trim($_POST['fullname'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
 
     if (empty($fullname) || empty($email) || empty($password) || empty($confirm_password)) {
         $error = 'All fields are required.';
     } elseif ($password !== $confirm_password) {
         $error = 'Passwords do not match.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Please enter a valid email address.';
+    } elseif (strlen($password) < 8) {
+        $error = 'Password must be at least 8 characters.';
     } else {
         // Check email duplicate
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
@@ -144,6 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php endif; ?>
                     
                     <form method="POST" action="register.php" class="auth-form" data-validate>
+                        <?php echo csrf_field(); ?>
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
                             <div class="input-wrapper">
