@@ -35,7 +35,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Main stylesheets -->
-    <link rel="stylesheet" href="<?php echo url('assets/css/style.css'); ?>?v=1.1">
+    <link rel="stylesheet" href="<?php echo url('assets/css/style.css'); ?>?v=1.2">
     <link rel="stylesheet" href="<?php echo url('assets/css/validation.css'); ?>?v=1.1">
     <link rel="stylesheet" href="<?php echo url('assets/css/tours.css'); ?>?v=1.1">
     <!-- Page styles -->
@@ -142,6 +142,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
                     <?php endif; ?>
                 </div>
             </div>
+        </div>
     </nav>
 
     <!-- Offline status alert -->
