@@ -344,6 +344,12 @@
     max-width: 100%;
     overflow: hidden;
     margin-top: 2rem;
+    padding: 1rem 0 1.25rem;
+    border: 1px solid rgba(4, 47, 46, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 253, 249, 0.74);
+    box-shadow: 0 24px 80px rgba(28, 25, 23, 0.08);
+    backdrop-filter: blur(10px);
 }
 
 .category-slider-wrapper::before,
@@ -359,12 +365,12 @@
 
 .category-slider-wrapper::before {
     left: 0;
-    background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0));
+    background: linear-gradient(to right, #fffdf9, rgba(255, 253, 249, 0));
 }
 
 .category-slider-wrapper::after {
     right: 0;
-    background: linear-gradient(to left, #ffffff, rgba(255, 255, 255, 0));
+    background: linear-gradient(to left, #fffdf9, rgba(255, 253, 249, 0));
 }
 
 .slider-arrow {

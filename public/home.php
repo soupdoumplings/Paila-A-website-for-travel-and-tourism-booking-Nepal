@@ -129,15 +129,36 @@ try {
     </div>
 </section>
 
+<!-- Editorial Concept -->
+<section class="editorial-intro">
+    <div class="container editorial-intro-grid">
+        <div>
+            <p class="text-xs-caps">PAILA ATELIER</p>
+            <h2>Nepal, framed as a living gallery.</h2>
+        </div>
+        <div class="editorial-intro-copy">
+            <p>Paila treats nature as luxury: quiet lodges, sacred trails, high-altitude light, and journeys arranged with the care of a private collection.</p>
+            <div class="editorial-notes">
+                <span>Curated routes</span>
+                <span>Local guides</span>
+                <span>Refined stays</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Tours -->
 <section id="collection" class="section-padding">
     <div class="container">
-        <div style="text-align: center; margin-bottom: 3rem;">
-            <p class="text-xs-caps" style="color: var(--color-emerald-700); margin-bottom: 0.5rem;">THE COLLECTION</p>
-            <h2 style="font-size: 2.5rem; font-family: var(--font-serif);">Featured Journeys</h2>
-            <p style="color: var(--color-stone-600); margin-top: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-                The classic Himalayan trek through breathtaking landscapes, from subtropical forests to high-altitude desert, crossing ancient monasteries and vibrant Sherpa villages.
-            </p>
+        <div class="section-editorial-head">
+            <div>
+                <p class="text-xs-caps">THE COLLECTION</p>
+                <h2>Featured<br>Journeys</h2>
+            </div>
+            <div class="section-editorial-copy">
+                <p>The classic Himalayan trek through breathtaking landscapes, from subtropical forests to high-altitude desert, crossing ancient monasteries and vibrant Sherpa villages.</p>
+                <a href="<?php echo url('public/collection.php'); ?>">View All Tours -></a>
+            </div>
         </div>
 
         <!-- Grid -->
@@ -224,26 +245,22 @@ try {
             ?>
         </div>
 
-        <div style="text-align: center; margin-top: 3rem;">
-            <a href="<?php echo url('public/collection.php'); ?>" style="color: var(--color-emerald-800); font-weight: 500; font-size: 0.95rem;">
-                View All Tours →
-            </a>
-        </div>
+        <div class="gallery-footnote">Each package is built as a complete travel object: route, stay, guide, safety, and story.</div>
     </div>
 </section>
 
 <!-- Categories -->
 <section id="archive" class="section-padding">
-    <div class="container">
-        <div style="text-align: center; margin-bottom: 3rem;">
-            <p class="text-xs-caps" style="color: var(--color-amber-500); margin-bottom: 0.5rem;">EXPLORE BY INTEREST</p>
-            <h2 style="font-size: 2.5rem; font-family: var(--font-serif);">Find Your Adventure</h2>
-            <p style="color: var(--color-stone-600); margin-top: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-                Whether you seek the thrill of mountain peaks or the serenity of ancient temples, discover experiences tailored to your spirit.
-            </p>
-        </div>
+    <div class="container interest-editorial">
+        <aside class="interest-copy">
+            <p class="text-xs-caps">EXPLORE BY INTEREST</p>
+            <h2>Find Your Adventure</h2>
+            <p>Whether you seek the thrill of mountain peaks or the serenity of ancient temples, discover experiences tailored to your spirit.</p>
+            <a href="<?php echo url('public/collection.php'); ?>">Browse the archive -></a>
+        </aside>
 
         <!-- Slider -->
+        <div class="interest-slider-panel">
         <div class="category-slider-wrapper">
              <button class="slider-arrow prev" id="cat-prev"><i class="fa-solid fa-chevron-left"></i></button>
              
@@ -357,6 +374,7 @@ try {
                 renderDots();
             });
             </script>
+        </div>
     </div>
 </section>
 
@@ -375,7 +393,7 @@ try {
         </div>
 
         <!-- Destinations responsive grid layout -->
-        <div class="grid-responsive-4">
+        <div class="destination-gallery">
             <?php
             $destinations = [
                 ['name' => 'Everest', 'location' => 'Solukhumbu', 'desc' => 'Home to the world\'s highest peak and iconic Sherpa culture', 'altitude' => '2,860m - 5,364m', 'image' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80', 'icon' => 'fa-solid fa-mountain'],
@@ -447,12 +465,13 @@ try {
 <!-- Why Us -->
 <section id="about" class="section-padding">
     <div class="container">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+        <div class="atelier-standard">
             <!-- Left -->
-            <div style="position: relative;">
-                <img src="<?php echo url('assets/images/guest_experience.jpg'); ?>" style="width: 100%; border-radius: 1.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+            <div class="atelier-collage">
+                <img src="<?php echo url('assets/images/guest_experience.jpg'); ?>" alt="Guest experience in Nepal" class="atelier-main-photo">
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80" alt="Himalayan trail" class="atelier-offset-photo">
                 <!-- Rating -->
-                <div style="position: absolute; bottom: 2rem; left: 2rem; background: white; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+                <div class="atelier-rating">
                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                         <i class="fa-solid fa-trophy" style="font-size: 1.5rem; color: var(--color-emerald-700);"></i>
                         <span style="font-size: 2rem; font-weight: 700;">4.9/5</span>
@@ -463,12 +482,12 @@ try {
             </div>
 
             <!-- Right -->
-            <div>
+            <div class="atelier-copy">
                 <p class="text-xs-caps" style="color: var(--color-emerald-700); margin-bottom: 0.5rem;">THE STANDARD</p>
                 <h2 style="font-size: 2.5rem; font-family: var(--font-serif); margin-bottom: 2rem;">Why Travel<br>With Us</h2>
 
                 <!-- Why travel with us grid -->
-                <div class="grid-responsive-2" style="row-gap: 3rem;">
+                <div class="standard-grid">
                     <?php
                     $features = [
                         ['num' => '01', 'icon' => 'fa-solid fa-shield-halved', 'title' => 'Secure', 'desc' => 'Curated itineraries with verified security protocols and trusted local partners.', 'color' => 'var(--color-teal-900)'], // Emerald
@@ -481,7 +500,7 @@ try {
 
                     foreach ($features as $feature) {
                         ?>
-                        <div style="display: flex; gap: 1.5rem;">
+                        <div class="standard-card">
                             <span style="font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; color: <?php echo $feature['color']; ?>; opacity: 0.3; line-height: 1;">
                                 <?php echo $feature['num']; ?>
                             </span>
