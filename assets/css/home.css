@@ -288,23 +288,148 @@
 /* Testimonials */
 .testimonials-section {
     background: linear-gradient(180deg, #fafaf9 0%, #ffffff 100%);
+    overflow: hidden;
 }
 
-.testimonial-card {
-    background: var(--gallery-paper);
-    padding: 3rem 2rem;
+.testimonial-polaroid {
+    position: relative;
+    min-height: 430px;
+    background: #fffdf9;
+    padding: 0.75rem 0.75rem 1.1rem;
+    border: 1px solid rgba(68, 64, 60, 0.12);
     border-radius: 8px;
-    box-shadow: var(--gallery-shadow);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    border: 1px solid var(--gallery-line);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 22px 60px rgba(28, 25, 23, 0.16);
+    transform: rotate(var(--tilt, -1deg));
+    transition: transform 0.38s ease, box-shadow 0.38s ease;
+    outline: none;
+    overflow: hidden;
 }
 
-.testimonial-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--luxury-shadow);
+.testimonial-polaroid:nth-child(even) {
+    --tilt: 1.2deg;
+}
+
+.testimonial-polaroid:nth-child(3) {
+    --tilt: -0.4deg;
+}
+
+.testimonial-polaroid:hover,
+.testimonial-polaroid:focus-within,
+.testimonial-polaroid:focus {
+    transform: translateY(-10px) rotate(0deg);
+    box-shadow: 0 34px 90px rgba(28, 25, 23, 0.22);
+}
+
+.polaroid-photo {
+    position: relative;
+    height: 285px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--color-stone-900);
+}
+
+.polaroid-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.38s ease;
+}
+
+.testimonial-polaroid:hover .polaroid-photo img,
+.testimonial-polaroid:focus .polaroid-photo img,
+.testimonial-polaroid:focus-within .polaroid-photo img {
+    transform: scale(1.08);
+    filter: saturate(1.05) contrast(1.05);
+}
+
+.polaroid-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 58%);
+}
+
+.polaroid-stamp {
+    position: absolute;
+    left: 1rem;
+    bottom: 0.9rem;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-shadow: 0 10px 22px rgba(0, 0, 0, 0.55);
+}
+
+.polaroid-caption {
+    position: static;
+    min-height: 112px;
+    padding: 1rem 0.35rem 0;
+    background: #fffdf9;
+}
+
+.polaroid-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.polaroid-profile img {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    object-fit: cover;
+    box-shadow: 0 0 0 3px white, 0 8px 22px rgba(28, 25, 23, 0.18);
+}
+
+.polaroid-name {
+    color: var(--color-stone-900);
+    font-weight: 800;
+    font-size: 0.94rem;
+    line-height: 1.2;
+}
+
+.polaroid-location {
+    color: var(--color-stone-500);
+    font-size: 0.72rem;
+}
+
+.polaroid-rating {
+    color: var(--color-amber-400);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.55rem;
+}
+
+.polaroid-review {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 6;
+    max-height: 9rem;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(14px);
+    padding: 0.85rem;
+    border: 1px solid rgba(68, 64, 60, 0.12);
+    border-radius: 8px;
+    background: rgba(255, 253, 249, 0.98);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 20px 55px rgba(28, 25, 23, 0.18);
+    color: var(--color-stone-600);
+    font-size: 0.83rem;
+    line-height: 1.6;
+    pointer-events: none;
+    transition: opacity 0.32s ease, transform 0.32s ease;
+}
+
+.testimonial-polaroid:hover .polaroid-review,
+.testimonial-polaroid:focus .polaroid-review,
+.testimonial-polaroid:focus-within .polaroid-review {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Private */
@@ -477,8 +602,8 @@
         height: 500px;
     }
 
-    .testimonial-card {
-        padding: 2.5rem 1.5rem;
+    .testimonial-polaroid {
+        min-height: 405px;
     }
 
     .private-journey-content {
@@ -585,8 +710,14 @@
     }
 
     /* Testimonials */
-    .testimonial-card {
-        padding: 2rem 1.5rem;
+    .testimonial-polaroid {
+        min-height: 390px;
+        padding: 0.65rem 0.65rem 1rem;
+        transform: none;
+    }
+
+    .polaroid-photo {
+        height: 245px;
     }
 
     /* Private */
@@ -725,8 +856,14 @@
     }
 
     /* Testimonials */
-    .testimonial-card {
-        padding: 1.75rem 1.25rem;
+    .testimonial-polaroid {
+        min-height: 395px;
+        padding: 0.65rem 0.65rem 1rem;
+        transform: none;
+    }
+
+    .polaroid-photo {
+        height: 245px;
     }
 
     /* Private */

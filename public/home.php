@@ -520,7 +520,8 @@ try {
                     'location' => 'Kathmandu, Nepal',
                     'tour' => 'Everest Base Camp Trek',
                     'rating' => 5,
-                    'image' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80'
+                    'image' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80',
+                    'photo' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=900&q=80'
                 ],
                 [
                     'quote' => 'From the moment we arrived, everything was seamless. Our guide was knowledgeable and the luxury lodges were incredible.',
@@ -528,7 +529,8 @@ try {
                     'location' => 'Lalitpur, Nepal',
                     'tour' => 'Annapurna Circuit',
                     'rating' => 5,
-                    'image' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&q=80'
+                    'image' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&q=80',
+                    'photo' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80'
                 ],
                 [
                     'quote' => 'The perfect blend of adventure and comfort. PAILA truly understands how to create meaningful travel experiences.',
@@ -536,7 +538,8 @@ try {
                     'location' => 'Bhaktapur, Nepal',
                     'tour' => 'Kathmandu Heritage Walk',
                     'rating' => 5,
-                    'image' => 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&q=80'
+                    'image' => 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&q=80',
+                    'photo' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=900&q=80'
                 ],
                 [
                     'quote' => 'Best decision we made for our Nepal trip. Professional, safe, and absolutely stunning scenery every single day.',
@@ -544,44 +547,35 @@ try {
                     'location' => 'Chitwan, Nepal',
                     'tour' => 'Luxury Everest Helicopter Tour',
                     'rating' => 5,
-                    'image' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&q=80'
+                    'image' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&q=80',
+                    'photo' => 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80'
                 ]
             ];
 
             foreach ($testimonials as $test) {
                 ?>
-                <div class="testimonial-card">
-                    <!-- Icon -->
-                    <div style="font-size: 2.5rem; color: var(--color-teal-900); margin-bottom: 1.5rem; line-height: 1;">
-                        <i class="fa-solid fa-quote-left"></i>
+                <article class="testimonial-polaroid" tabindex="0">
+                    <div class="polaroid-photo">
+                        <img src="<?php echo $test['photo']; ?>" alt="<?php echo $test['tour']; ?>">
+                        <div class="polaroid-shade"></div>
+                        <div class="polaroid-stamp"><?php echo $test['tour']; ?></div>
                     </div>
-                    
-                    <!-- Stars -->
-                    <div style="color: var(--color-amber-400); margin-bottom: 1.5rem; font-size: 0.85rem;">
-                        <?php for($i=0; $i<$test['rating']; $i++) echo '<i class="fa-solid fa-star"></i> '; ?>
-                    </div>
-                    
-                    <!-- Quote -->
-                    <p style="font-size: 0.875rem; line-height: 1.7; color: var(--color-stone-600); margin-bottom: 2.5rem; flex-grow: 1;">
-                        "<?php echo $test['quote']; ?>"
-                    </p>
-                    
-                    <!-- Profile -->
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
-                        <img src="<?php echo $test['image']; ?>" alt="<?php echo $test['name']; ?>" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
-                        <div>
-                            <div style="font-weight: 700; font-size: 0.95rem; color: var(--color-stone-900);"><?php echo $test['name']; ?></div>
-                            <div style="font-size: 0.75rem; color: var(--color-stone-500);"><?php echo $test['location']; ?></div>
+                    <div class="polaroid-caption">
+                        <div class="polaroid-profile">
+                            <img src="<?php echo $test['image']; ?>" alt="<?php echo $test['name']; ?>">
+                            <div>
+                                <div class="polaroid-name"><?php echo $test['name']; ?></div>
+                                <div class="polaroid-location"><?php echo $test['location']; ?></div>
+                            </div>
                         </div>
+                        <div class="polaroid-rating">
+                            <?php for($i=0; $i<$test['rating']; $i++) echo '<i class="fa-solid fa-star"></i> '; ?>
+                        </div>
+                        <p class="polaroid-review">
+                            "<?php echo $test['quote']; ?>"
+                        </p>
                     </div>
-                    
-                    <!-- Link -->
-                    <div style="padding-top: 1.5rem; border-top: 1px solid var(--color-stone-100); margin-top: auto;">
-                        <a href="#" style="font-size: 0.75rem; color: var(--color-teal-900); font-weight: 700; text-decoration: none; transition: color 0.2s;">
-                            <?php echo $test['tour']; ?>
-                        </a>
-                    </div>
-                </div>
+                </article>
                 <?php
             }
             ?>

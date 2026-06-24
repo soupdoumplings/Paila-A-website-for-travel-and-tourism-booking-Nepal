@@ -1,5 +1,5 @@
 /* Auth pages */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&family=Prata&display=swap');
 
 :root {
     --auth-primary: #4169E1;
@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
     position: relative;
 }
 
@@ -31,7 +31,7 @@
     color: var(--auth-text-dark);
     text-decoration: none;
     font-weight: 600;
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Prata', serif;
     font-size: 1.25rem;
     padding: 0.75rem 1.25rem;
     background: white;
@@ -92,7 +92,7 @@
 }
 
 .auth-benefits h1 {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Prata', serif;
     font-size: 3rem;
     line-height: 1.2;
     color: var(--auth-text-dark);
@@ -175,7 +175,7 @@
 }
 
 .auth-form-header h2 {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Prata', serif;
     font-size: 2rem;
     color: var(--auth-text-dark);
     margin: 0 0 0.5rem 0;
@@ -249,7 +249,7 @@
     border: 1px solid var(--auth-border);
     border-radius: 8px;
     font-size: 0.95rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
     transition: all 0.3s ease;
     background: var(--auth-bg-light);
 }

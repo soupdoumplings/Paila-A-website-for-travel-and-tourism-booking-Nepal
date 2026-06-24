@@ -15,7 +15,7 @@ The main goal of the design is to make Nepal feel premium without removing the n
 - Docker Compose for local web and database services.
 - HTML, CSS, and JavaScript for layout, responsive UI, animation, validation, sliders, video transitions, and AJAX.
 - Font Awesome for icons.
-- Google Fonts for the current typography pair: `Libre Baskerville` for headings and `Inter` for body/UI.
+- Google Fonts for the current typography pair: `Prata` for headings and `Nunito Sans` for body/UI.
 
 ## Important Files
 
@@ -187,8 +187,8 @@ The visual system is based on these choices:
 - White and warm stone backgrounds for gallery-like sections.
 - Dark premium pages for old-money private travel.
 - 8px card radius for a cleaner gallery feel.
-- Large but controlled serif headings.
-- Inter body text for readability.
+- Large but controlled Prata headings.
+- Nunito Sans body text for soft, readable UI.
 - Wide content rail around 85 to 90 percent of the screen.
 - Subtle shadows and borders instead of loud gradients.
 
@@ -230,4 +230,3 @@ Use these points when explaining the project:
 - Category slider has responsive arrows, dots, and scroll snapping.
 - Local seed data includes tours and admin access for demo.
 - Security headers and CSRF protection are implemented through `helpers/security.php`.
-
