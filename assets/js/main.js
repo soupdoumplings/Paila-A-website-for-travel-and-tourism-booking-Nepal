@@ -135,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const motionAllowed = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const revealTargets = document.querySelectorAll([
         '.collection-card',
-        '.category-card',
         '.destination-card',
         '.testimonial-card',
         '.private-journey-section',

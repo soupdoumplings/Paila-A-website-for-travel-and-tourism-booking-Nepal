@@ -96,8 +96,7 @@ try {
             </div>
         </div>
         <a href="#collection" class="hero-scroll-cue animate-fadeIn delay-700" aria-label="Scroll to featured journeys">
-            <span>Explore</span>
-            <i class="fa-solid fa-arrow-down-long"></i>
+            <i class="fa-solid fa-chevron-down"></i>
         </a>
     </div>
 
@@ -296,49 +295,66 @@ try {
                 const items = slider.querySelectorAll('.category-card');
                 const prevBtn = document.getElementById('cat-prev');
                 const nextBtn = document.getElementById('cat-next');
-                
-                // Config
-                const dotCount = 3;
-                const itemsPerDot = Math.ceil(items.length / dotCount);
 
-                // Create dots
-                for (let i = 0; i < dotCount; i++) {
-                    const dot = document.createElement('button');
-                    dot.classList.add('slider-dot');
-                    if(i === 0) dot.classList.add('active');
-                    dot.ariaLabel = 'Go to page ' + (i + 1);
-                    
-                    dot.onclick = () => {
-                        const maxScroll = slider.scrollWidth - slider.clientWidth;
-                        const targetScroll = (i / (dotCount - 1)) * maxScroll;
-                        slider.scrollTo({ left: targetScroll, behavior: 'smooth' });
-                    };
-                    dotsContainer.appendChild(dot);
+                if (!slider || !dotsContainer || !prevBtn || !nextBtn || !items.length) {
+                    return;
                 }
 
-                // Update dots
-                slider.addEventListener('scroll', () => {
-                    const scrollLeft = slider.scrollLeft;
+                let pageCount = 1;
+
+                function getMaxScroll() {
+                    return Math.max(0, slider.scrollWidth - slider.clientWidth);
+                }
+
+                function getPageWidth() {
+                    return Math.max(1, slider.clientWidth * 0.82);
+                }
+
+                function renderDots() {
+                    const maxScroll = getMaxScroll();
+                    pageCount = maxScroll > 0 ? Math.max(1, Math.ceil(maxScroll / getPageWidth()) + 1) : 1;
+                    dotsContainer.innerHTML = '';
+
+                    for (let i = 0; i < pageCount; i++) {
+                        const dot = document.createElement('button');
+                        dot.className = 'slider-dot';
+                        dot.type = 'button';
+                        dot.ariaLabel = 'Go to interest group ' + (i + 1);
+                        dot.addEventListener('click', () => {
+                            const targetScroll = pageCount === 1 ? 0 : (i / (pageCount - 1)) * getMaxScroll();
+                            slider.scrollTo({ left: targetScroll, behavior: 'smooth' });
+                        });
+                        dotsContainer.appendChild(dot);
+                    }
+
+                    updateSliderState();
+                }
+
+                function updateSliderState() {
                     const maxScroll = slider.scrollWidth - slider.clientWidth;
-                    
-                    if (maxScroll <= 0) return;
-                    
-                    const scrollPercentage = scrollLeft / maxScroll;
-                    const activeDotIndex = Math.min(dotCount - 1, Math.round(scrollPercentage * (dotCount - 1)));
-                    
+                    const scrollPercentage = maxScroll > 0 ? slider.scrollLeft / maxScroll : 0;
+                    const activeDotIndex = Math.min(pageCount - 1, Math.round(scrollPercentage * Math.max(1, pageCount - 1)));
                     const dots = dotsContainer.children;
-                    for(let i=0; i<dots.length; i++) {
+
+                    for (let i = 0; i < dots.length; i++) {
                         dots[i].classList.toggle('active', i === activeDotIndex);
                     }
-                });
+
+                    prevBtn.disabled = slider.scrollLeft <= 4;
+                    nextBtn.disabled = slider.scrollLeft >= maxScroll - 4;
+                }
 
                 // Arrow logic
                 prevBtn.addEventListener('click', () => {
-                   slider.scrollBy({ left: -300, behavior: 'smooth' }); 
+                   slider.scrollBy({ left: -getPageWidth(), behavior: 'smooth' });
                 });
                 nextBtn.addEventListener('click', () => {
-                   slider.scrollBy({ left: 300, behavior: 'smooth' }); 
+                   slider.scrollBy({ left: getPageWidth(), behavior: 'smooth' });
                 });
+
+                slider.addEventListener('scroll', updateSliderState, { passive: true });
+                window.addEventListener('resize', renderDots);
+                renderDots();
             });
             </script>
     </div>

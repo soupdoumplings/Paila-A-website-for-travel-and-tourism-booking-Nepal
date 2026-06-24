@@ -118,14 +118,12 @@
 .category-grid {
     display: flex;
     overflow-x: auto;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    padding-bottom: 2rem;
-    /* Hover padding */
+    gap: clamp(1rem, 2vw, 1.5rem);
+    padding: 0.75rem clamp(2.75rem, 5vw, 4.5rem) 1.75rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    /* Firefox */
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: clamp(2.75rem, 5vw, 4.5rem);
 }
 
 /* Hide scrollbar */
@@ -134,17 +132,17 @@
 }
 
 .category-card {
-    flex: 0 0 240px;
-    /* Fixed width */
+    flex: 0 0 clamp(230px, 22vw, 300px);
     position: relative;
-    height: 320px;
-    /* Taller card */
-    border-radius: 1.5rem;
+    height: clamp(320px, 32vw, 390px);
+    border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s ease;
-    scroll-snap-align: center;
-    /* Center snap */
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    scroll-snap-align: start;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    box-shadow: 0 24px 70px rgba(28, 25, 23, 0.16);
+    background: var(--color-stone-900);
 }
 
 .category-card:hover .category-card-bg {
@@ -152,7 +150,8 @@
 }
 
 .category-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px);
+    box-shadow: 0 34px 90px rgba(28, 25, 23, 0.24);
 }
 
 .category-card-bg {
@@ -165,31 +164,49 @@
 .category-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+    background:
+        linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.28) 54%, rgba(0, 0, 0, 0.08)),
+        linear-gradient(135deg, rgba(4, 47, 46, 0.34), rgba(251, 191, 36, 0.06));
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-end;
     color: white;
-    text-align: center;
-    padding: 1.5rem;
+    text-align: left;
+    padding: 1.4rem;
 }
 
 .category-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    position: absolute;
+    top: 1.1rem;
+    left: 1.1rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(251, 191, 36, 0.34);
+    border-radius: 999px;
+    background: rgba(4, 47, 46, 0.42);
+    color: var(--color-amber-300);
+    font-size: 1.15rem;
+    margin-bottom: 0;
+    backdrop-filter: blur(10px);
 }
 
 .category-name {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: 700;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.35rem;
+    line-height: 1.15;
 }
 
 .category-count {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     opacity: 0.9;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 /* Responsive */
@@ -323,51 +340,89 @@
 /* Controls */
 .category-slider-wrapper {
     position: relative;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    display: block;
     max-width: 100%;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.category-slider-wrapper::before,
+.category-slider-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(3rem, 8vw, 7rem);
+    z-index: 8;
+    pointer-events: none;
+}
+
+.category-slider-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0));
+}
+
+.category-slider-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #ffffff, rgba(255, 255, 255, 0));
 }
 
 .slider-arrow {
-    background: white;
-    border: 1px solid var(--color-stone-200);
-    color: var(--color-stone-600);
-    width: 40px;
-    height: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(4, 47, 46, 0.12);
+    color: var(--color-teal-900);
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    z-index: 10;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+    box-shadow: 0 18px 50px rgba(28, 25, 23, 0.16);
+    z-index: 12;
+    backdrop-filter: blur(10px);
+}
+
+.slider-arrow.prev {
+    left: 0.75rem;
+}
+
+.slider-arrow.next {
+    right: 0.75rem;
 }
 
 .slider-arrow:hover {
-    background: var(--color-amber-400);
+    background: var(--color-teal-900);
     border-color: var(--color-amber-400);
-    color: white;
-    transform: scale(1.1);
+    color: var(--color-amber-300);
+    transform: translateY(-50%) scale(1.04);
+}
+
+.slider-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+    transform: translateY(-50%);
 }
 
 .slider-dots {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
+    gap: 0.45rem;
+    margin-top: 1rem;
 }
 
 .slider-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    width: 1.75rem;
+    height: 0.18rem;
+    border-radius: 999px;
     background: var(--color-stone-300);
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, width 0.3s ease;
     padding: 0;
 }
 
@@ -377,5 +432,50 @@
 
 .slider-dot.active {
     background: var(--color-amber-400);
-    transform: scale(1.2);
+    width: 2.75rem;
+}
+
+@media (max-width: 768px) {
+    .category-grid {
+        padding-inline: 2.5rem;
+        scroll-padding-inline: 2.5rem;
+    }
+
+    .category-card {
+        flex-basis: min(74vw, 280px);
+        height: 330px;
+    }
+
+    .slider-arrow {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-grid {
+        gap: 0.85rem;
+        padding-inline: 2.25rem;
+        scroll-padding-inline: 2.25rem;
+    }
+
+    .category-card {
+        flex-basis: min(78vw, 260px);
+        height: 310px;
+        border-radius: 8px;
+    }
+
+    .slider-arrow {
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 0.85rem;
+    }
+
+    .slider-dot {
+        width: 1.35rem;
+    }
+
+    .slider-dot.active {
+        width: 2.1rem;
+    }
 }

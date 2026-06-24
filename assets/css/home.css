@@ -112,41 +112,28 @@
 .hero-scroll-cue {
     position: absolute;
     left: 50%;
-    top: calc(100vh - 7rem);
+    top: calc(100vh - 4.5rem);
     bottom: auto;
     transform: translateX(-50%);
     z-index: 20;
     display: inline-flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.55rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.86);
     text-decoration: none;
-    text-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    width: 2.25rem;
+    height: 2.25rem;
 }
 
 .hero-scroll-cue i {
-    width: 2.5rem;
-    height: 2.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(251, 191, 36, 0.42);
-    border-radius: 999px;
     color: var(--color-amber-400);
-    background: rgba(4, 47, 46, 0.32);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
+    font-size: 0.95rem;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.36));
     animation: heroArrowFloat 1.8s ease-in-out infinite;
 }
 
 .hero-scroll-cue:hover i {
-    border-color: rgba(251, 191, 36, 0.72);
-    background: rgba(4, 47, 46, 0.48);
+    color: var(--color-amber-300);
 }
 
 @keyframes heroArrowFloat {
@@ -562,7 +549,7 @@
     }
 
     .hero-scroll-cue {
-        top: calc(95vh - 6rem);
+        top: calc(95vh - 4.5rem);
         bottom: auto;
     }
 
@@ -699,14 +686,13 @@
     }
 
     .hero-scroll-cue {
-        top: calc(100vh - 7.25rem);
+        top: calc(100vh - 4.5rem);
         bottom: auto;
         font-size: 0.62rem;
     }
 
     .hero-scroll-cue i {
-        width: 2.2rem;
-        height: 2.2rem;
+        font-size: 0.85rem;
     }
 
     .stat-number {
