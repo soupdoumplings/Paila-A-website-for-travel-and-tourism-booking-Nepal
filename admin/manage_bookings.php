@@ -87,7 +87,7 @@ $base = '../';
         </div>
         
         <?php if($success): ?>
-            <div style="background: rgba(6, 78, 59, 0.5); border: 1px solid #065f46; color: #a7f3d0; padding: 0.75rem 1rem; border-radius: 0.25rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
+            <div style="background: rgba(4, 47, 46, 0.08); border: 1px solid var(--color-teal-900); color: var(--color-teal-900); padding: 0.75rem 1rem; border-radius: 0.25rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
                 <?php echo $success; ?>
             </div>
         <?php endif; ?>
@@ -123,7 +123,7 @@ $base = '../';
                                     <?php if($b['status'] == 'pending'): ?>
                                         <span style="background: #f59e0b; color: #78350f; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600;">PENDING</span>
                                     <?php elseif($b['status'] == 'confirmed'): ?>
-                                        <span style="background: #10b981; color: #064e3b; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600;">CONFIRMED</span>
+                                        <span style="background: var(--color-teal-900); color: white; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600;">CONFIRMED</span>
                                     <?php else: ?>
                                         <span style="background: #ef4444; color: #7f1d1d; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600;">CANCELLED</span>
                                     <?php endif; ?>
@@ -162,7 +162,7 @@ $base = '../';
                             <td style="padding: 1rem;">
                                 <?php if($b['status'] == 'pending'): ?>
                                     <div style="display: flex; gap: 0.5rem;">
-                                        <button onclick="submitBooking(<?php echo $b['id']; ?>, 'approve')" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-size: 0.85rem; font-weight: 700; transition: background 0.2s;">
+                                        <button onclick="submitBooking(<?php echo $b['id']; ?>, 'approve')" style="background: var(--color-teal-900); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-size: 0.85rem; font-weight: 700; transition: background 0.2s;">
                                             Approve
                                         </button>
                                         <button onclick="submitBooking(<?php echo $b['id']; ?>, 'reject')" style="background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-size: 0.85rem; font-weight: 700; transition: background 0.2s;">

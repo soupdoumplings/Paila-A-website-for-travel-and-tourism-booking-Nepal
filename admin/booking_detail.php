@@ -69,7 +69,7 @@ $base = '../';
                     <?php if($booking['status'] == 'pending'): ?>
                         <span style="background: #fffbeb; color: #92400e; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Pending</span>
                     <?php elseif($booking['status'] == 'confirmed'): ?>
-                        <span style="background: #ecfdf5; color: #065f46; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Confirmed</span>
+                        <span style="background: rgba(4, 47, 46, 0.08); color: var(--color-teal-900); padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Confirmed</span>
                     <?php else: ?>
                         <span style="background: #fef2f2; color: #991b1b; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Cancelled</span>
                     <?php endif; ?>

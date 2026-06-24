@@ -98,7 +98,7 @@ include '../includes/header.php';
                                         <?php if($r['status'] == 'pending'): ?>
                                             <span style="background: #fffbeb; color: #92400e; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Pending</span>
                                         <?php elseif($r['status'] == 'approved'): ?>
-                                            <span style="background: #ecfdf5; color: #065f46; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Approved</span>
+                                            <span style="background: rgba(4, 47, 46, 0.08); color: var(--color-teal-900); padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Approved</span>
                                         <?php else: ?>
                                             <span style="background: #fef2f2; color: #991b1b; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Rejected</span>
                                         <?php endif; ?>
@@ -160,8 +160,8 @@ include '../includes/header.php';
                             <?php if($request['status'] == 'pending'): ?>
                                 <span style="background: #fffbeb; color: #92400e; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Pending Review</span>
                             <?php elseif($request['status'] == 'approved'): ?>
-                                <span style="background: #ecfdf5; color: #065f46; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Approved</span>
-                                <div style="margin-top: 1rem; font-size: 0.9rem; color: #065f46;">
+                                <span style="background: rgba(4, 47, 46, 0.08); color: var(--color-teal-900); padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Approved</span>
+                                <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--color-teal-900);">
                                     <?php if (!empty($request['access_code'])): ?>
                                         You have been granted access code: <strong style="font-family: monospace; letter-spacing: 1px;"><?php echo e($request['access_code']); ?></strong>
                                     <?php else: ?>

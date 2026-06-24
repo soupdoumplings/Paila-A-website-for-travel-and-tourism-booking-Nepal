@@ -72,7 +72,7 @@ $base = '../';
         </div>
         
         <?php if($success): ?>
-            <div style="background: rgba(6, 78, 59, 0.5); border: 1px solid #065f46; color: #a7f3d0; padding: 0.75rem 1rem; border-radius: 0.25rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
+            <div style="background: rgba(4, 47, 46, 0.08); border: 1px solid var(--color-teal-900); color: var(--color-teal-900); padding: 0.75rem 1rem; border-radius: 0.25rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
                 <?php echo $success; ?>
             </div>
         <?php endif; ?>
@@ -120,7 +120,7 @@ $base = '../';
                                     <?php elseif ($msg['status'] === 'read'): ?>
                                         <span style="background: #e7e5e4; color: #57534e; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600;">READ</span>
                                     <?php else: ?>
-                                        <span style="background: #d1fae5; color: #065f46; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600;">REPLIED</span>
+                                        <span style="background: rgba(4, 47, 46, 0.08); color: var(--color-teal-900); padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600;">REPLIED</span>
                                     <?php endif; ?>
                                 </td>
                                 <td style="padding: 1rem; text-align: right;">

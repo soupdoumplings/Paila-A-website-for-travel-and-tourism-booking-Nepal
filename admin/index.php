@@ -85,7 +85,7 @@ try {
         <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 3rem;">
             <!-- Total Tours -->
             <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                <div style="width: 48px; height: 48px; background: #10b981; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                <div style="width: 48px; height: 48px; background: var(--color-teal-900); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
                     <i class="fa-solid fa-map-location-dot" style="color: white; font-size: 1.25rem;"></i>
                 </div>
                 <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;"><?php echo $totalTours; ?></div>
@@ -274,7 +274,7 @@ try {
                                     <?php if($rb['status'] == 'pending'): ?>
                                         <span style="background: #fffbeb; color: #92400e; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600; border: 1px solid #fcd34d;">Pending</span>
                                     <?php elseif($rb['status'] == 'confirmed'): ?>
-                                        <span style="background: #ecfdf5; color: #065f46; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600; border: 1px solid #6ee7b7;">Confirmed</span>
+                                        <span style="background: rgba(4, 47, 46, 0.08); color: var(--color-teal-900); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(4, 47, 46, 0.24);">Confirmed</span>
                                     <?php else: ?>
                                         <span style="background: #fef2f2; color: #991b1b; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600; border: 1px solid #fca5a5;">Cancelled</span>
                                     <?php endif; ?>

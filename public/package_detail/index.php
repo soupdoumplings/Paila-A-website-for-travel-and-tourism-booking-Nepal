@@ -85,7 +85,7 @@ include $base . 'includes/header.php';
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
-.pd-tag-cat { background: #0f766e; color: white; }
+.pd-tag-cat { background: var(--color-teal-900); color: white; }
 .pd-tag-diff { background: rgba(255,255,255,0.25); color: white; }
 .pd-title { font-size: 2.5rem; color: white; margin-bottom: 1rem; line-height: 1.2; font-weight: 700; }
 .pd-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: rgba(255,255,255,0.95); font-size: 0.95rem; }
@@ -137,7 +137,7 @@ include $base . 'includes/header.php';
     width: 0.45rem;
     height: 0.45rem;
     border-radius: 999px;
-    background: #059669;
+    background: var(--color-teal-900);
 }
 .pd-highlights {
     margin-top: 2.5rem;
@@ -159,7 +159,7 @@ include $base . 'includes/header.php';
     border: 1px solid var(--gallery-line, #e7e5e4);
 }
 .pd-card-price {
-    background: #047857;
+    background: var(--color-teal-900);
     color: white;
     padding: 1.75rem 1.5rem;
     text-align: center;
@@ -217,11 +217,11 @@ include $base . 'includes/header.php';
     font-family: var(--font-sans), sans-serif;
 }
 .pd-btn-primary {
-    background: #047857;
+    background: var(--color-teal-900);
     color: white;
 }
 .pd-btn-primary:hover {
-    background: #059669;
+    background: var(--color-teal-900);
     transform: translateY(-1px);
 }
 .pd-btn-secondary {
@@ -289,7 +289,7 @@ include $base . 'includes/header.php';
 .pd-sticky-book-info .price {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #047857;
+    color: var(--color-teal-900);
 }
 @media (max-width: 900px) {
     .pd-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -393,11 +393,11 @@ include $base . 'includes/header.php';
     font-size: 1rem;
 }
 .pd-modal-total .label { font-weight: 600; color: #44403c; }
-.pd-modal-total .value { font-weight: 700; color: #047857; font-size: 1.2rem; }
+.pd-modal-total .value { font-weight: 700; color: var(--color-teal-900); font-size: 1.2rem; }
 .pd-modal-submit {
     width: 100%;
     padding: 0.9rem 1.25rem;
-    background: #047857;
+    background: var(--color-teal-900);
     color: white;
     border: none;
     border-radius: 6px;
@@ -406,7 +406,7 @@ include $base . 'includes/header.php';
     cursor: pointer;
     transition: background 0.2s;
 }
-.pd-modal-submit:hover { background: #059669; }
+.pd-modal-submit:hover { background: var(--color-teal-900); }
 </style>
 
 <!-- Hero -->
@@ -475,10 +475,10 @@ include $base . 'includes/header.php';
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
                     <?php if (!empty($inclusions_list)): ?>
                     <div>
-                        <h3 style="font-size: 1.1rem; color: #059669; margin-bottom: 0.75rem;">Included</h3>
+                        <h3 style="font-size: 1.1rem; color: var(--color-teal-900); margin-bottom: 0.75rem;">Included</h3>
                         <ul style="padding-left: 0;">
                             <?php foreach ($inclusions_list as $inc): ?>
-                                <li style="color: #059669;"><?php echo e($inc); ?></li>
+                                <li style="color: var(--color-teal-900);"><?php echo e($inc); ?></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>

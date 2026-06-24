@@ -119,7 +119,7 @@ include $base . 'includes/header.php';
 .success-msg {
     background: var(--color-emerald-50);
     border: 1px solid rgba(4, 120, 87, 0.22);
-    color: #065f46;
+    color: var(--color-teal-900);
     padding: 1rem 1.25rem;
     border-radius: 0.75rem;
     margin-top: 1.5rem;

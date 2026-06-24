@@ -87,13 +87,13 @@ include '../includes/header.php';
 .td-hero .meta { color: rgba(255,255,255,0.95); font-size: 1rem; }
 .td-content { padding: 5rem 0 6rem; background: #fafaf9; }
 .td-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; width: min(var(--site-width), calc(100% - 2rem)); max-width: none; margin: 0 auto; padding: 0; }
-.td-main h2 { font-size: 1.5rem; font-weight: 700; color: #047857; margin-bottom: 1rem; }
+.td-main h2 { font-size: 1.5rem; font-weight: 700; color: var(--color-teal-900); margin-bottom: 1rem; }
 .td-main p { color: #57534e; line-height: 1.85; font-size: 1rem; margin-bottom: 1.75rem; }
 .td-highlights { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid #e7e5e4; }
 .td-highlights h3 { font-size: 1.25rem; font-weight: 700; color: #1c1917; margin-bottom: 1rem; }
 .td-highlights ul { list-style: none; padding: 0; margin: 0; }
 .td-highlights li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; color: #57534e; line-height: 1.8; }
-.td-highlights li::before { content: ''; position: absolute; left: 0; top: 0.95rem; width: 0.45rem; height: 0.45rem; border-radius: 999px; background: #059669; }
+.td-highlights li::before { content: ''; position: absolute; left: 0; top: 0.95rem; width: 0.45rem; height: 0.45rem; border-radius: 999px; background: var(--color-teal-900); }
 .td-card {
     background: var(--gallery-paper, #fffdf9);
     border-radius: 8px;
@@ -105,8 +105,8 @@ include '../includes/header.php';
 }
 .td-card-title { font-size: 1.1rem; font-weight: 700; color: #1c1917; margin: 0 0 1.5rem 0; text-align: center; }
 .td-card-body { padding: 1.5rem; }
-.td-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 1.25rem; border-radius: 6px; font-weight: 600; font-size: 0.95rem; cursor: pointer; border: none; width: 100%; font-family: inherit; background: #047857; color: white; transition: background 0.2s; }
-.td-btn:hover { background: #059669; }
+.td-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 1.25rem; border-radius: 6px; font-weight: 600; font-size: 0.95rem; cursor: pointer; border: none; width: 100%; font-family: inherit; background: var(--color-teal-900); color: white; transition: background 0.2s; }
+.td-btn:hover { background: var(--color-teal-900); }
 .td-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; visibility: hidden; transition: opacity 0.25s, visibility 0.25s; pointer-events: none; }
 .td-modal-overlay.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
 .td-modal { background: #fff; border-radius: 12px; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); position: relative; transform: scale(0.96); transition: transform 0.25s; }
@@ -120,9 +120,9 @@ include '../includes/header.php';
 .td-modal .form-group input { width: 100%; padding: 0.7rem 0.85rem; border: 1px solid #d6d3d1; border-radius: 6px; font-size: 0.95rem; }
 .td-modal-total { display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0 1.25rem 0; padding: 0.75rem 0; border-top: 1px solid #e7e5e4; font-size: 1rem; }
 .td-modal-total .label { font-weight: 600; color: #44403c; }
-.td-modal-total .value { font-weight: 700; color: #047857; font-size: 1.2rem; }
-.td-modal-submit { width: 100%; padding: 0.9rem 1.25rem; background: #047857; color: white; border: none; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
-.td-modal-submit:hover { background: #059669; }
+.td-modal-total .value { font-weight: 700; color: var(--color-teal-900); font-size: 1.2rem; }
+.td-modal-submit { width: 100%; padding: 0.9rem 1.25rem; background: var(--color-teal-900); color: white; border: none; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
+.td-modal-submit:hover { background: var(--color-teal-900); }
 @media (max-width: 900px) { .td-grid { grid-template-columns: 1fr; } .td-card { position: static; } }
 </style>
 
@@ -154,7 +154,7 @@ include '../includes/header.php';
                 <h3 class="td-card-title">Book This Tour</h3>
                 <div class="td-card-total" style="display: flex; justify-content: space-between; align-items: center; margin: 1rem 0 1.25rem 0; padding: 0.75rem 0; border-bottom: 1px solid #e7e5e4;">
                     <span style="font-weight: 600; color: #44403c;">Total Price:</span>
-                    <span style="font-weight: 700; color: #047857; font-size: 1.2rem;">Rs <?php echo number_format($tour_price, 0); ?></span>
+                    <span style="font-weight: 700; color: var(--color-teal-900); font-size: 1.2rem;">Rs <?php echo number_format($tour_price, 0); ?></span>
                 </div>
                 <button type="button" class="td-btn" id="td-open-booking">Request Booking</button>
                 <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: #78716c;">You will receive a confirmation email</p>

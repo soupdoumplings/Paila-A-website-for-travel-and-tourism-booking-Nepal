@@ -13,9 +13,9 @@
     --color-stone-950: #0c0a09;
 
     --color-teal-900: #042f2e;
-    --color-teal-800: #064e4b;
-    --color-teal-700: #0d9488;
-    --color-teal-600: #14b8a6;
+    --color-teal-800: #042f2e;
+    --color-teal-700: #042f2e;
+    --color-teal-600: #042f2e;
 
     --color-amber-100: #fef3c7;
     --color-amber-200: #fde68a;
@@ -23,10 +23,10 @@
     --color-amber-400: #fbbf24;
     --color-amber-500: #f59e0b;
 
-    --color-emerald-50: #f0fdfa;
-    --color-emerald-600: #14b8a6;
-    --color-emerald-700: #0d9488;
-    --color-emerald-800: #064e4b;
+    --color-emerald-50: rgba(4, 47, 46, 0.08);
+    --color-emerald-600: #042f2e;
+    --color-emerald-700: #042f2e;
+    --color-emerald-800: #042f2e;
     --color-emerald-900: #042f2e;
 
     --color-white: #ffffff;
@@ -231,7 +231,7 @@ h6 {
 .navbar.scrolled {
     padding: 1rem 0;
     background: rgba(4, 47, 46, 0.88);
-    border-bottom-color: rgba(20, 184, 166, 0.24);
+    border-bottom-color: rgba(4, 47, 46, 0.24);
     box-shadow: 0 12px 34px rgba(4, 47, 46, 0.28);
     backdrop-filter: blur(14px);
 }
@@ -666,7 +666,7 @@ h6 {
     background: white;
     border-color: var(--color-teal-700);
     color: var(--color-teal-700);
-    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+    box-shadow: 0 0 0 4px rgba(4, 47, 46, 0.1);
 }
 
 .timeline-step.active .step-label {

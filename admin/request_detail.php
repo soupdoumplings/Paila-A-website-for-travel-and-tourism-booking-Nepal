@@ -102,7 +102,7 @@ $base = '../';
                              <?php if($request['status'] == 'pending'): ?>
                                 <span style="background: #fffbeb; color: #92400e; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Pending</span>
                             <?php elseif($request['status'] == 'approved'): ?>
-                                <span style="background: #ecfdf5; color: #065f46; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Approved</span>
+                                <span style="background: rgba(4, 47, 46, 0.08); color: var(--color-teal-900); padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Approved</span>
                             <?php else: ?>
                                 <span style="background: #fef2f2; color: #991b1b; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Rejected</span>
                             <?php endif; ?>
@@ -115,12 +115,12 @@ $base = '../';
                 </div>
                 
                 <?php if($request['access_code'] && $request['status'] === 'approved'): ?>
-                <div style="margin-top: 1.5rem; padding: 1rem; background: #ecfdf5; border: 1px solid #10b981; border-radius: 0.5rem;">
-                    <div style="font-size: 0.85rem; color: #065f46; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Access Code</div>
-                    <div style="font-size: 1.25rem; font-weight: 700; color: #065f46; font-family: monospace; letter-spacing: 0.1em;">
+                <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(4, 47, 46, 0.08); border: 1px solid var(--color-teal-900); border-radius: 0.5rem;">
+                    <div style="font-size: 0.85rem; color: var(--color-teal-900); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Access Code</div>
+                    <div style="font-size: 1.25rem; font-weight: 700; color: var(--color-teal-900); font-family: monospace; letter-spacing: 0.1em;">
                         <?php echo e($request['access_code']); ?>
                     </div>
-                    <div style="font-size: 0.75rem; color: #059669; margin-top: 0.5rem;">
+                    <div style="font-size: 0.75rem; color: var(--color-teal-900); margin-top: 0.5rem;">
                         <i class="fa-solid fa-circle-check"></i> Share this code with the applicant
                     </div>
                 </div>

@@ -134,7 +134,7 @@ $base = '../';
         </div>
         
         <?php if($success): ?>
-            <div style="background: rgba(6, 78, 59, 0.5); border: 1px solid #065f46; color: #a7f3d0; padding: 0.75rem 1rem; border-radius: 0.25rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
+            <div style="background: rgba(4, 47, 46, 0.08); border: 1px solid var(--color-teal-900); color: var(--color-teal-900); padding: 0.75rem 1rem; border-radius: 0.25rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
                 <?php echo $success; ?>
             </div>
         <?php endif; ?>
@@ -183,7 +183,7 @@ $base = '../';
                                     <?php endforeach; ?>
                                 </select>
                                 <button type="submit" style="background: var(--color-emerald-700); color: white; border: none; padding: 0.4rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; cursor: pointer; transition: background 0.3s;"
-                                    onmouseover="this.style.background='#059669'"
+                                    onmouseover="this.style.background='var(--color-teal-900)'"
                                     onmouseout="this.style.background='var(--color-emerald-700)'">
                                     Update
                                 </button>

@@ -94,7 +94,7 @@ include $base . 'includes/header.php';
 .success-msg {
     background: var(--color-emerald-50);
     border: 1px solid rgba(4, 120, 87, 0.22);
-    color: #065f46;
+    color: var(--color-teal-900);
     padding: 1rem 1.25rem;
     border-radius: 0.75rem;
     margin: 1.5rem 0;
@@ -160,7 +160,7 @@ include $base . 'includes/header.php';
                     <i class="fa-solid fa-file-arrow-up"></i> Choose File
                 </label>
                 <input type="file" id="jsonFile" name="jsonFile" accept=".json,application/json" style="display: none;" required>
-                <p id="fileName" style="margin-top: 1rem; font-weight: 600; color: #047857;"></p>
+                <p id="fileName" style="margin-top: 1rem; font-weight: 600; color: var(--color-teal-900);"></p>
             </div>
 
             <div class="import-options">

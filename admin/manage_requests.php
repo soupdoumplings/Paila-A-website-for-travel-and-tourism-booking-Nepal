@@ -74,7 +74,7 @@ $base = '../';
         </div>
         
         <?php if($success): ?>
-            <div style="background: #ecfdf5; border: 1px solid #059669; color: #065f46; padding: 0.75rem 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+            <div style="background: rgba(4, 47, 46, 0.08); border: 1px solid var(--color-teal-900); color: var(--color-teal-900); padding: 0.75rem 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
                 <?php echo $success; ?>
             </div>
         <?php endif; ?>
@@ -105,7 +105,7 @@ $base = '../';
                                 <?php if($r['status'] == 'pending'): ?>
                                     <span style="background: #fffbeb; color: #92400e; padding: 0.25rem 0.6rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; border: 1px solid #fcd34d;">Pending</span>
                                 <?php elseif($r['status'] == 'approved'): ?>
-                                    <span style="background: #ecfdf5; color: #065f46; padding: 0.25rem 0.6rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; border: 1px solid #6ee7b7;">Approved</span>
+                                    <span style="background: rgba(4, 47, 46, 0.08); color: var(--color-teal-900); padding: 0.25rem 0.6rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(4, 47, 46, 0.24);">Approved</span>
                                 <?php else: ?>
                                     <span style="background: #fef2f2; color: #991b1b; padding: 0.25rem 0.6rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; border: 1px solid #fca5a5;">Rejected</span>
                                 <?php endif; ?>

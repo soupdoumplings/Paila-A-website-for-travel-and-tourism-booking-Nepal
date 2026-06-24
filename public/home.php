@@ -344,11 +344,11 @@ try {
 <section id="destinations" class="section-padding">
     <div class="container-fluid">
         <div style="margin-bottom: 3rem;">
-            <p class="text-xs-caps" style="color: #0d9488; margin-bottom: 0.5rem;">DESTINATIONS</p>
+            <p class="text-xs-caps" style="color: var(--color-teal-900); margin-bottom: 0.5rem;">DESTINATIONS</p>
             <div style="display: flex; justify-content: space-between; align-items: flex-end;">
                 <h2 style="font-size: 3rem; font-family: var(--font-serif);">
                     Explore Nepal's<br>
-                    <span style="color: #0d9488;">Treasures</span>
+                    <span style="color: var(--color-teal-900);">Treasures</span>
                 </h2>
                 <a href="<?php echo url('public/archive.php'); ?>" style="color: var(--color-stone-600); font-size: 0.9rem;">View All Destinations →</a>
             </div>
@@ -451,12 +451,12 @@ try {
                 <div class="grid-responsive-2" style="row-gap: 3rem;">
                     <?php
                     $features = [
-                        ['num' => '01', 'icon' => 'fa-solid fa-shield-halved', 'title' => 'Secure', 'desc' => 'Curated itineraries with verified security protocols and trusted local partners.', 'color' => '#10b981'], // Emerald
+                        ['num' => '01', 'icon' => 'fa-solid fa-shield-halved', 'title' => 'Secure', 'desc' => 'Curated itineraries with verified security protocols and trusted local partners.', 'color' => 'var(--color-teal-900)'], // Emerald
                         ['num' => '02', 'icon' => 'fa-regular fa-heart', 'title' => 'Authentic', 'desc' => 'Genuine experiences crafted with deep local knowledge and cultural respect.', 'color' => '#f43f5e'], // Rose
                         ['num' => '03', 'icon' => 'fa-solid fa-award', 'title' => 'Premium', 'desc' => 'Exceptional quality without compromise. Nature deserves luxury treatment.', 'color' => '#f59e0b'], // Amber
                         ['num' => '04', 'icon' => 'fa-solid fa-headset', 'title' => 'Support', 'desc' => '24/7 assistance throughout your journey, from booking to return.', 'color' => '#3b82f6'], // Blue
                         ['num' => '05', 'icon' => 'fa-regular fa-compass', 'title' => 'Expertise', 'desc' => 'Over 8 years of crafting unforgettable Himalayan experiences.', 'color' => '#8b5cf6'], // Violet
-                        ['num' => '06', 'icon' => 'fa-solid fa-user-group', 'title' => 'Community', 'desc' => 'Supporting local communities and sustainable tourism practices.', 'color' => '#0d9488'] // Teal
+                        ['num' => '06', 'icon' => 'fa-solid fa-user-group', 'title' => 'Community', 'desc' => 'Supporting local communities and sustainable tourism practices.', 'color' => 'var(--color-teal-900)'] // Teal
                     ];
 
                     foreach ($features as $feature) {
@@ -486,7 +486,7 @@ try {
 <section class="testimonials-section section-padding">
     <div class="container">
         <div style="text-align: center; margin-bottom: 3rem;">
-            <p class="text-xs-caps" style="color: #0d9488; margin-bottom: 0.5rem; letter-spacing: 0.2em;">TRAVELER STORIES</p>
+            <p class="text-xs-caps" style="color: var(--color-teal-900); margin-bottom: 0.5rem; letter-spacing: 0.2em;">TRAVELER STORIES</p>
             <h2 style="font-size: 3rem; font-family: var(--font-serif); margin-bottom: 2rem;">What Our Guests Say</h2>
         </div>
 
@@ -532,7 +532,7 @@ try {
                 ?>
                 <div class="testimonial-card">
                     <!-- Icon -->
-                    <div style="font-size: 2.5rem; color: #a7f3d0; margin-bottom: 1.5rem; line-height: 1;">
+                    <div style="font-size: 2.5rem; color: var(--color-teal-900); margin-bottom: 1.5rem; line-height: 1;">
                         <i class="fa-solid fa-quote-left"></i>
                     </div>
                     
@@ -557,7 +557,7 @@ try {
                     
                     <!-- Link -->
                     <div style="padding-top: 1.5rem; border-top: 1px solid var(--color-stone-100); margin-top: auto;">
-                        <a href="#" style="font-size: 0.75rem; color: #0d9488; font-weight: 700; text-decoration: none; transition: color 0.2s;">
+                        <a href="#" style="font-size: 0.75rem; color: var(--color-teal-900); font-weight: 700; text-decoration: none; transition: color 0.2s;">
                             <?php echo $test['tour']; ?>
                         </a>
                     </div>
@@ -579,13 +579,13 @@ try {
         <!-- Right -->
         <div class="private-journey-content" style="padding: 5rem;">
             <div style="max-width: 500px;">
-                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(13, 148, 136, 0.1); color: #0d9488; padding: 0.4rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem;">
+                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(4, 47, 46, 0.1); color: var(--color-teal-900); padding: 0.4rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem;">
                     <i class="fa-solid fa-lock"></i> BY INVITATION ONLY
                 </div>
                 
                 <h2 style="font-size: 4.5rem; font-family: var(--font-serif); margin-bottom: 2rem; line-height: 1; color: var(--color-stone-900); letter-spacing: -0.02em;">
                     Private <br>
-                    <span style="color: #0d9488;">Journeys</span>
+                    <span style="color: var(--color-teal-900);">Journeys</span>
                 </h2>
                 
                 <p style="font-size: 1.1rem; line-height: 1.8; color: var(--color-stone-600); margin-bottom: 3rem;">
@@ -597,17 +597,17 @@ try {
                 </a>
 
                 <!-- Three column feature list -->
-                <div class="grid-responsive-3" style="margin-top: 5rem; padding-top: 3.5rem; border-top: 1px solid rgba(13, 148, 136, 0.15); gap: 2rem;">
-                    <div style="border-right: 1px solid rgba(13, 148, 136, 0.1); padding-right: 1.5rem;">
-                        <div style="font-size: 0.7rem; color: #0d9488; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem;">Exclusive</div>
+                <div class="grid-responsive-3" style="margin-top: 5rem; padding-top: 3.5rem; border-top: 1px solid rgba(4, 47, 46, 0.15); gap: 2rem;">
+                    <div style="border-right: 1px solid rgba(4, 47, 46, 0.1); padding-right: 1.5rem;">
+                        <div style="font-size: 0.7rem; color: var(--color-teal-900); font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem;">Exclusive</div>
                         <div style="font-size: 1.6rem; font-weight: 400; font-family: var(--font-serif); color: var(--color-stone-900);">Private Guides</div>
                     </div>
-                    <div style="border-right: 1px solid rgba(13, 148, 136, 0.1); padding-right: 1.5rem;">
-                        <div style="font-size: 0.7rem; color: #0d9488; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem;">Premium</div>
+                    <div style="border-right: 1px solid rgba(4, 47, 46, 0.1); padding-right: 1.5rem;">
+                        <div style="font-size: 0.7rem; color: var(--color-teal-900); font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem;">Premium</div>
                         <div style="font-size: 1.6rem; font-weight: 400; font-family: var(--font-serif); color: var(--color-stone-900);">Luxury Lodges</div>
                     </div>
                     <div>
-                        <div style="font-size: 0.7rem; color: #0d9488; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem;">Bespoke</div>
+                        <div style="font-size: 0.7rem; color: var(--color-teal-900); font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem;">Bespoke</div>
                         <div style="font-size: 1.6rem; font-weight: 400; font-family: var(--font-serif); color: var(--color-stone-900);">Custom Itineraries</div>
                     </div>
                 </div>
@@ -659,7 +659,7 @@ try {
                 <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; font-family: var(--font-serif);">Send us a message</h3>
                 
                 <?php if(isset($_SESSION['success'])): ?>
-                    <div style="background: #ecfdf5; color: #047857; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border: 1px solid #a7f3d0;">
+                    <div style="background: rgba(4, 47, 46, 0.08); color: var(--color-teal-900); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border: 1px solid rgba(4, 47, 46, 0.24);">
                         <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
                     </div>
                 <?php endif; ?>
@@ -688,7 +688,7 @@ try {
                         <label style="display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--color-stone-700);">How can we help?</label>
                         <textarea name="message" rows="4" placeholder="Tell us about your dream trip..." style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-stone-300); border-radius: 0.5rem; font-size: 0.95rem; resize: vertical; background: white;" data-rules="required|min:10"></textarea>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%; background: #0f766e; color: white; padding: 1rem; border-radius: 8px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border: none; cursor: pointer; transition: background 0.3s;">
+                    <button type="submit" class="btn" style="width: 100%; background: var(--color-teal-900); color: white; padding: 1rem; border-radius: 8px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border: none; cursor: pointer; transition: background 0.3s;">
                         <i class="fa-solid fa-paper-plane"></i> Send Message
                     </button>
                 </form>

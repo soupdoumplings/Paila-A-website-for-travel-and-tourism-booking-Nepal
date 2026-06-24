@@ -145,7 +145,7 @@ include '../includes/header.php';
         </div>
         
         <?php if ($access_success): ?>
-            <div style="margin-bottom: 2rem; padding: 1rem 1.5rem; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.5); border-radius: 0.5rem; color: #ecfdf5;">
+            <div style="margin-bottom: 2rem; padding: 1rem 1.5rem; background: rgba(4, 47, 46, 0.2); border: 1px solid rgba(4, 47, 46, 0.5); border-radius: 0.5rem; color: rgba(4, 47, 46, 0.08);">
                 <i class="fa-solid fa-circle-check"></i> <?php echo e($access_success); ?>
             </div>
         <?php endif; ?>
@@ -157,8 +157,8 @@ include '../includes/header.php';
         <?php endif; ?>
         
         <?php if ($has_access): ?>
-            <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.5); border-radius: 0.5rem;">
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: #ecfdf5; margin-bottom: 0.5rem;">
+            <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(4, 47, 46, 0.2); border: 1px solid rgba(4, 47, 46, 0.5); border-radius: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: rgba(4, 47, 46, 0.08); margin-bottom: 0.5rem;">
                     <i class="fa-solid fa-unlock" style="font-size: 1.25rem;"></i>
                     <span style="font-size: 1.125rem; font-weight: 600;">Access Granted</span>
                 </div>
@@ -196,7 +196,7 @@ include '../includes/header.php';
         <div class="premium-feature-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem;">
             <!-- Feature 1 -->
             <div class="premium-feature-card" style="text-align: left; padding: 2rem; border: 1px solid var(--color-stone-100); border-radius: 1rem; background: var(--color-stone-50);">
-                <div style="font-size: 0.8rem; color: #0d9488; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Bespoke</div>
+                <div style="font-size: 0.8rem; color: var(--color-teal-900); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Bespoke</div>
                 <h3 style="font-size: 2rem; font-family: var(--font-serif); margin-bottom: 1rem; font-weight: 400;">Itineraries</h3>
                 <p style="font-size: 1.1rem; color: var(--color-stone-600); line-height: 1.8;">
                     Completely customized journeys designed around your preferences and schedule
@@ -205,7 +205,7 @@ include '../includes/header.php';
             
             <!-- Feature 2 -->
             <div class="premium-feature-card" style="text-align: left; padding: 2rem; border: 1px solid var(--color-stone-100); border-radius: 1rem; background: var(--color-stone-50);">
-                <div style="font-size: 0.8rem; color: #0d9488; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Private</div>
+                <div style="font-size: 0.8rem; color: var(--color-teal-900); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Private</div>
                 <h3 style="font-size: 2rem; font-family: var(--font-serif); margin-bottom: 1rem; font-weight: 400;">Guides</h3>
                 <p style="font-size: 1.1rem; color: var(--color-stone-600); line-height: 1.8;">
                     One-on-one attention from our most experienced expedition leaders
@@ -214,7 +214,7 @@ include '../includes/header.php';
             
             <!-- Feature 3 -->
             <div class="premium-feature-card" style="text-align: left; padding: 2rem; border: 1px solid var(--color-stone-100); border-radius: 1rem; background: var(--color-stone-50);">
-                <div style="font-size: 0.8rem; color: #0d9488; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Exclusive</div>
+                <div style="font-size: 0.8rem; color: var(--color-teal-900); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Exclusive</div>
                 <h3 style="font-size: 2rem; font-family: var(--font-serif); margin-bottom: 1rem; font-weight: 400;">Access</h3>
                 <p style="font-size: 1.1rem; color: var(--color-stone-600); line-height: 1.8;">
                     Visit restricted areas and hidden gems unavailable to regular tours
@@ -250,7 +250,7 @@ include '../includes/header.php';
                     </div>
                     <div style="padding: 2rem; color: var(--color-stone-900);">
                         <div style="display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
-                            <span style="color: #0d9488;">LUXURY</span>
+                            <span style="color: var(--color-teal-900);">LUXURY</span>
                             <span style="color: var(--color-stone-300);">-</span>
                             <span style="color: var(--color-stone-500);">easy</span>
                         </div>
@@ -259,7 +259,7 @@ include '../includes/header.php';
                         </h3>
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span style="font-size: 0.9rem; color: var(--color-stone-500);"><i class="fa-regular fa-clock"></i> 1 Days</span>
-                            <span style="font-size: 1.5rem; font-weight: 600; color: #0d9488;">$1,999</span>
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--color-teal-900);">$1,999</span>
                         </div>
                         <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #f1f5f9; text-align: center; color: var(--color-stone-900); font-weight: 600;">
                             Book Now <i class="fa-solid fa-arrow-right" style="margin-left: 0.5rem;"></i>
@@ -275,7 +275,7 @@ include '../includes/header.php';
                     </div>
                     <div style="padding: 2rem; color: var(--color-stone-900);">
                         <div style="display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
-                            <span style="color: #0d9488;">ADVENTURE</span>
+                            <span style="color: var(--color-teal-900);">ADVENTURE</span>
                             <span style="color: var(--color-stone-300);">-</span>
                             <span style="color: var(--color-stone-500);">moderate</span>
                         </div>
@@ -284,7 +284,7 @@ include '../includes/header.php';
                         </h3>
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span style="font-size: 0.9rem; color: var(--color-stone-500);"><i class="fa-regular fa-clock"></i> 12 Days</span>
-                            <span style="font-size: 1.5rem; font-weight: 600; color: #0d9488;">$7,199</span>
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--color-teal-900);">$7,199</span>
                         </div>
                         <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #f1f5f9; text-align: center; color: var(--color-stone-900); font-weight: 600;">
                             Book Now <i class="fa-solid fa-arrow-right" style="margin-left: 0.5rem;"></i>

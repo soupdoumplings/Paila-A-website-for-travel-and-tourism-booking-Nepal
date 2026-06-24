@@ -13,7 +13,7 @@ include __DIR__ . '/../includes/header.php';
 <!-- Hero -->
 <section style="background: linear-gradient(180deg, #A5D1E8 0%, #D6F1FF 40%, #FFFFFF 100%); padding: 8rem 0 5rem; text-align: center;">
     <div class="container">
-        <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(14, 165, 233, 0.1); color: #0d9488; padding: 0.4rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem;">
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(14, 165, 233, 0.1); color: var(--color-teal-900); padding: 0.4rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem;">
             <i class="fa-solid fa-location-dot"></i> RECORDED LOCATIONS
         </div>
         <h1 style="font-size: 5rem; font-family: var(--font-serif); margin-bottom: 1.5rem; color: var(--color-stone-900); font-weight: 400;">The Archive</h1>
