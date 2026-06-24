@@ -617,7 +617,7 @@ try {
 </section>
 
 <!-- Contact -->
-<section class="contact-section" style="background-color: #042f2e; border-top: none;">
+<section class="contact-section" style="border-top: none;">
     <div class="container">
         <!-- Contact details and form -->
         <div class="grid-responsive-split">
