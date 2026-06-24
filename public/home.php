@@ -39,10 +39,10 @@ try {
     <!-- Background -->
     <div id="parallax-bg" style="background-color: #000;">
         <video id="hero-video-1" muted playsinline 
-               style="position: absolute; top: 0; left: 0; width: 100%; height: 100vh; object-fit: cover; z-index: -2; opacity: 0; transition: opacity 1.5s ease-in-out;">
+               style="position: absolute; top: 0; left: 0; width: 100%; height: 112vh; object-fit: cover; z-index: -2; opacity: 0; transition: opacity 1.5s ease-in-out;">
         </video>
         <video id="hero-video-2" muted playsinline 
-               style="position: absolute; top: 0; left: 0; width: 100%; height: 100vh; object-fit: cover; z-index: -2; opacity: 0; transition: opacity 1.5s ease-in-out;">
+               style="position: absolute; top: 0; left: 0; width: 100%; height: 112vh; object-fit: cover; z-index: -2; opacity: 0; transition: opacity 1.5s ease-in-out;">
         </video>
         <div class="hero-bg overlay" style="z-index: -1;"></div>
         
@@ -95,6 +95,10 @@ try {
                 </div>
             </div>
         </div>
+        <a href="#collection" class="hero-scroll-cue animate-fadeIn delay-700" aria-label="Scroll to featured journeys">
+            <span>Explore</span>
+            <i class="fa-solid fa-arrow-down-long"></i>
+        </a>
     </div>
 
     <!-- About -->
