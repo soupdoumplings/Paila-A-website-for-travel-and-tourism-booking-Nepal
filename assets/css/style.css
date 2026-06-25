@@ -575,7 +575,7 @@ h6 {
 
 .price-display .currency {
     font-family: var(--font-devanagari);
-    font-size: 0.98em;
+    font-size: 0.95em;
     font-weight: 800;
     line-height: 1;
 }
