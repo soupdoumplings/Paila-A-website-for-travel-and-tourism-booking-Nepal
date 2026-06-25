@@ -76,17 +76,33 @@ include $base . 'includes/header.php';
     transition: opacity 0.3s;
 }
 .pd-back:hover { opacity: 0.8; }
-.pd-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-.pd-tag {
-    padding: 0.35rem 0.9rem;
-    border-radius: 0.4rem;
-    font-size: 0.7rem;
-    font-weight: 600;
+.pd-category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    margin-bottom: 1rem;
+    padding: 0.55rem 0.95rem;
+    border: 1px solid rgba(251, 191, 36, 0.42);
+    border-radius: 999px;
+    background: rgba(4, 47, 46, 0.78);
+    color: #fffdf7;
+    box-shadow: 0 14px 34px rgba(4, 47, 46, 0.24);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-size: 0.72rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.13em;
 }
-.pd-tag-cat { background: var(--color-teal-900); color: white; }
-.pd-tag-diff { background: rgba(255,255,255,0.25); color: white; }
+.pd-category-badge::before {
+    content: '';
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--color-amber-400);
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.16);
+}
 .pd-title { font-size: 2.5rem; color: white; margin-bottom: 1rem; line-height: 1.2; font-weight: 700; }
 .pd-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: rgba(255,255,255,0.95); font-size: 0.95rem; }
 .pd-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
@@ -416,20 +432,9 @@ include $base . 'includes/header.php';
         <a href="<?php echo $base; ?>collection.php" class="pd-back">
             <i class="fa-solid fa-arrow-left"></i> Back to Collection
         </a>
-        <div class="pd-tags">
-            <?php if ($category): ?>
-                <span class="pd-tag pd-tag-cat"><?php echo e(strtoupper($category)); ?></span>
-            <?php endif; ?>
-            <?php if ($difficulty): ?>
-                <span class="pd-tag pd-tag-diff"><?php echo e($difficulty); ?></span>
-            <?php endif; ?>
-            <?php if ($best_season): ?>
-                <span class="pd-tag" style="background: rgba(251,191,36,0.2); color: #fbbf24;"><?php echo e($best_season); ?></span>
-            <?php endif; ?>
-            <?php if ($altitude_max): ?>
-                <span class="pd-tag" style="background: rgba(239,68,68,0.2); color: #ef4444;">Altitude <?php echo number_format($altitude_max); ?>m</span>
-            <?php endif; ?>
-        </div>
+        <?php if ($category): ?>
+            <div class="pd-category-badge"><?php echo e(ucwords(str_replace(['_', '-'], ' ', $category))); ?></div>
+        <?php endif; ?>
         <h1 class="pd-title"><?php echo e($tour['title']); ?></h1>
         <div class="pd-meta">
             <span><i class="fa-solid fa-location-dot"></i> <?php echo e($tour['location']); ?></span>

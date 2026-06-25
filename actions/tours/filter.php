@@ -81,27 +81,18 @@ ob_start();
 if (count($tours) > 0):
     foreach ($tours as $tour):
         $img = get_tour_image($tour);
+        $cat = isset($tour['category']) && $tour['category'] ? $tour['category'] : 'trekking';
+        $categoryLabel = ucwords(str_replace(['_', '-'], ' ', $cat));
         $cardHref = url('public/package_detail/index.php?id=' . (int)$tour['id']);
         ?>
         <a href="<?php echo e($cardHref); ?>" class="collection-card hover-zoom-card">
             <div class="collection-card-image-container">
                 <img src="<?php echo e($img); ?>" alt="<?php echo e($tour['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                <?php if($tour['is_featured']): ?>
-                    <span style="position: absolute; top: 1rem; right: 1rem; background: var(--color-amber-400); color: black; font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px;">FEATURED</span>
-                <?php endif; ?>
+                <span class="journey-card-badge"><?php echo e($categoryLabel); ?></span>
             </div>
             <div class="collection-card-content">
                 <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
                     <h3 style="font-family: var(--font-serif); font-size: 1.25rem; line-height: 1.3; color: var(--color-stone-900); margin: 0;"><?php echo e($tour['title']); ?></h3>
-                </div>
-                
-                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
-                    <span style="font-size: 0.75rem; color: var(--color-stone-500); background: #f3f4f6; padding: 2px 8px; border-radius: 4px;">
-                        <i class="fa-regular fa-clock"></i> <?php echo e($tour['duration']); ?>
-                    </span>
-                    <span style="font-size: 0.75rem; color: var(--color-stone-500); background: #f3f4f6; padding: 2px 8px; border-radius: 4px;">
-                        <i class="fa-solid fa-layer-group"></i> <?php echo ucfirst($cat); ?>
-                    </span>
                 </div>
 
                 <div style="padding-top: 1rem; border-top: 1px dashed var(--color-stone-200); display: flex; justify-content: space-between; align-items: center; margin-top: auto;">

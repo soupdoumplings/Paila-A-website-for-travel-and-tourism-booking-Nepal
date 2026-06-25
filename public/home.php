@@ -175,6 +175,7 @@ try {
             if (count($displayTours) > 0) {
                 foreach ($displayTours as $tour) {
                     $category = isset($tour['category']) && $tour['category'] ? $tour['category'] : 'trekking';
+                    $categoryLabel = ucwords(str_replace(['_', '-'], ' ', $category));
                     $location = isset($tour['destination_name']) ? $tour['destination_name'] : (isset($tour['location']) ? $tour['location'] : '');
                     $img = get_tour_image($tour);
 
@@ -183,16 +184,11 @@ try {
                     <a href="<?php echo e($cardHref); ?>" class="collection-card hover-zoom-card">
                         <div class="collection-card-image-container">
                             <img src="<?php echo e($img); ?>" alt="<?php echo e($tour['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                            <span class="tour-badge <?php echo e($category); ?>" style="position: absolute; top: 1rem; left: 1rem; z-index: 2;">
-                                <?php echo strtoupper($category); ?>
-                            </span>
+                            <span class="journey-card-badge"><?php echo e($categoryLabel); ?></span>
                         </div>
                         <div class="collection-card-content">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
                                 <h3 style="font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.2; color: var(--color-stone-900); margin: 0;"><?php echo e($tour['title']); ?></h3>
-                                <span style="background: var(--color-stone-100); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600; color: var(--color-stone-600); white-space: nowrap; margin-left: 0.5rem;">
-                                     <?php echo e($tour['duration'] ?? ''); ?>
-                                </span>
                             </div>
                             
                             <p class="collection-card-desc" style="color: var(--color-stone-500); font-size: 0.9rem; margin-bottom: 0; line-height: 1.6;">

@@ -543,6 +543,40 @@ h6 {
     overflow: hidden;
 }
 
+.journey-card-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    max-width: calc(100% - 2rem);
+    padding: 0.46rem 0.78rem;
+    border: 1px solid rgba(251, 191, 36, 0.42);
+    border-radius: 999px;
+    background: rgba(4, 47, 46, 0.84);
+    color: #fffdf7;
+    box-shadow: 0 14px 34px rgba(4, 47, 46, 0.28);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.journey-card-badge::before {
+    content: '';
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: var(--color-amber-400);
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.16);
+    flex: 0 0 auto;
+}
+
 .collection-card-content {
     padding: 2rem;
 }
