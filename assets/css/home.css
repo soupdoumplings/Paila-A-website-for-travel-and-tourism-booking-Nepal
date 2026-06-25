@@ -231,7 +231,7 @@
 .editorial-intro .text-xs-caps,
 .section-editorial-head .text-xs-caps,
 .interest-copy .text-xs-caps,
-.atelier-copy .text-xs-caps {
+.trust-copy .text-xs-caps {
     color: var(--color-teal-900) !important;
 }
 
@@ -529,20 +529,20 @@
     background: linear-gradient(180deg, #ffffff 0%, #fafaf9 100%);
 }
 
-.atelier-standard {
+.trust-standard {
     display: grid;
     grid-template-columns: minmax(280px, 0.86fr) minmax(0, 1fr);
     gap: clamp(3rem, 6vw, 6rem);
     align-items: center;
 }
 
-.atelier-collage {
+.trust-collage {
     position: relative;
     min-height: 620px;
 }
 
-.atelier-main-photo,
-.atelier-offset-photo {
+.trust-main-photo,
+.trust-offset-photo {
     position: absolute;
     object-fit: cover;
     border: 0.75rem solid #fffdf9;
@@ -550,21 +550,21 @@
     box-shadow: 0 28px 80px rgba(28, 25, 23, 0.18);
 }
 
-.atelier-main-photo {
+.trust-main-photo {
     left: 0;
     top: 0;
     width: 76%;
     height: 520px;
 }
 
-.atelier-offset-photo {
+.trust-offset-photo {
     right: 0;
     bottom: 0;
     width: 46%;
     height: 300px;
 }
 
-.atelier-rating {
+.trust-rating {
     position: absolute;
     left: 2rem;
     bottom: 2rem;
@@ -577,7 +577,7 @@
     backdrop-filter: blur(12px);
 }
 
-.atelier-copy h2 {
+.trust-copy h2 {
     font-size: clamp(3.2rem, 5vw, 5.6rem) !important;
     line-height: 0.9;
     font-weight: 500;
@@ -616,145 +616,140 @@
     overflow: hidden;
 }
 
-.testimonial-polaroid {
-    position: relative;
-    min-height: 430px;
-    background: #fffdf9;
-    padding: 0.75rem 0.75rem 1.1rem;
-    border: 1px solid rgba(68, 64, 60, 0.12);
-    border-radius: 8px;
-    box-shadow: 0 22px 60px rgba(28, 25, 23, 0.16);
-    transform: rotate(var(--tilt, -1deg));
-    transition: transform 0.38s ease, box-shadow 0.38s ease;
-    outline: none;
+.instagram-review-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.35rem;
+}
+
+.instagram-post-card {
     overflow: hidden;
+    background: #fffdf9;
+    border: 1px solid rgba(4, 47, 46, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 24px 70px rgba(28, 25, 23, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    outline: none;
 }
 
-.testimonial-polaroid:nth-child(even) {
-    --tilt: 1.2deg;
+.instagram-post-card:hover,
+.instagram-post-card:focus {
+    transform: translateY(-8px);
+    border-color: rgba(251, 191, 36, 0.34);
+    box-shadow: 0 34px 100px rgba(28, 25, 23, 0.18);
 }
 
-.testimonial-polaroid:nth-child(3) {
-    --tilt: -0.4deg;
+.ig-post-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 68px;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(4, 47, 46, 0.08);
 }
 
-.testimonial-polaroid:hover,
-.testimonial-polaroid:focus-within,
-.testimonial-polaroid:focus {
-    transform: translateY(-10px) rotate(0deg);
-    box-shadow: 0 34px 90px rgba(28, 25, 23, 0.22);
+.ig-post-header img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 3px #fffdf9, 0 8px 24px rgba(28, 25, 23, 0.16);
 }
 
-.polaroid-photo {
+.ig-post-name {
+    color: var(--color-stone-900);
+    font-weight: 800;
+    font-size: 0.86rem;
+    line-height: 1.2;
+}
+
+.ig-post-location {
+    color: var(--color-stone-500);
+    font-size: 0.7rem;
+}
+
+.ig-post-menu {
+    width: 4px;
+    height: 4px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: var(--color-teal-900);
+    box-shadow: 8px 0 0 var(--color-teal-900), 16px 0 0 var(--color-teal-900);
+    opacity: 0.65;
+}
+
+.ig-post-photo {
     position: relative;
-    height: 285px;
-    border-radius: 6px;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     background: var(--color-stone-900);
 }
 
-.polaroid-photo img {
+.ig-post-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease, filter 0.38s ease;
+    transition: transform 0.6s ease, filter 0.35s ease;
 }
 
-.testimonial-polaroid:hover .polaroid-photo img,
-.testimonial-polaroid:focus .polaroid-photo img,
-.testimonial-polaroid:focus-within .polaroid-photo img {
-    transform: scale(1.08);
-    filter: saturate(1.05) contrast(1.05);
+.instagram-post-card:hover .ig-post-photo img,
+.instagram-post-card:focus .ig-post-photo img {
+    transform: scale(1.06);
+    filter: saturate(1.05) contrast(1.04);
 }
 
-.polaroid-shade {
+.ig-post-tag {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 58%);
-}
-
-.polaroid-stamp {
-    position: absolute;
-    left: 1rem;
-    bottom: 0.9rem;
-    max-width: calc(100% - 2rem);
+    left: 0.8rem;
+    bottom: 0.8rem;
+    max-width: calc(100% - 1.6rem);
+    padding: 0.42rem 0.58rem;
+    background: rgba(4, 47, 46, 0.82);
     color: white;
-    font-size: 0.68rem;
-    font-weight: 700;
+    border: 1px solid rgba(251, 191, 36, 0.34);
+    border-radius: 6px;
+    font-size: 0.62rem;
+    font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    text-shadow: 0 10px 22px rgba(0, 0, 0, 0.55);
+    line-height: 1.35;
 }
 
-.polaroid-caption {
-    position: static;
-    min-height: 112px;
-    padding: 1rem 0.35rem 0;
-    background: #fffdf9;
+.ig-post-body {
+    padding: 0.9rem 1rem 1.05rem;
 }
 
-.polaroid-profile {
-    display: flex;
+.ig-post-actions {
+    display: grid;
+    grid-template-columns: repeat(3, auto) 1fr;
+    gap: 0.85rem;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    color: var(--color-teal-900);
+    font-size: 1.05rem;
+    margin-bottom: 0.65rem;
 }
 
-.polaroid-profile img {
-    width: 42px;
-    height: 42px;
-    border-radius: 999px;
-    object-fit: cover;
-    box-shadow: 0 0 0 3px white, 0 8px 22px rgba(28, 25, 23, 0.18);
+.ig-post-actions span:last-child {
+    justify-self: end;
 }
 
-.polaroid-name {
-    color: var(--color-stone-900);
-    font-weight: 800;
-    font-size: 0.94rem;
-    line-height: 1.2;
-}
-
-.polaroid-location {
-    color: var(--color-stone-500);
-    font-size: 0.72rem;
-}
-
-.polaroid-rating {
+.ig-post-rating {
     color: var(--color-amber-400);
     font-size: 0.72rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     margin-bottom: 0.55rem;
 }
 
-.polaroid-review {
-    position: absolute;
-    left: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 6;
-    max-height: 9rem;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(14px);
-    padding: 0.85rem;
-    border: 1px solid rgba(68, 64, 60, 0.12);
-    border-radius: 8px;
-    background: rgba(255, 253, 249, 0.98);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 20px 55px rgba(28, 25, 23, 0.18);
+.ig-post-caption {
     color: var(--color-stone-600);
-    font-size: 0.83rem;
-    line-height: 1.6;
-    pointer-events: none;
-    transition: opacity 0.32s ease, transform 0.32s ease;
+    font-size: 0.82rem;
+    line-height: 1.58;
+    margin: 0;
 }
 
-.testimonial-polaroid:hover .polaroid-review,
-.testimonial-polaroid:focus .polaroid-review,
-.testimonial-polaroid:focus-within .polaroid-review {
-    opacity: 1;
-    transform: translateY(0);
+.ig-post-caption strong {
+    color: var(--color-stone-900);
+    font-weight: 800;
 }
 
 /* Private */
@@ -907,10 +902,14 @@
 
 /* Small desktop */
 @media (max-width: 1024px) {
+    .instagram-review-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .editorial-intro-grid,
     .section-editorial-head,
     .interest-editorial,
-    .atelier-standard {
+    .trust-standard {
         grid-template-columns: 1fr;
     }
 
@@ -949,10 +948,6 @@
         height: 500px;
     }
 
-    .testimonial-polaroid {
-        min-height: 405px;
-    }
-
     .private-journey-content {
         padding: 3rem 5% 3rem 3rem;
     }
@@ -971,7 +966,7 @@
     .editorial-intro h2,
     .section-editorial-head h2,
     .interest-copy h2,
-    .atelier-copy h2 {
+    .trust-copy h2 {
         font-size: clamp(2.8rem, 13vw, 4rem) !important;
         line-height: 0.95;
     }
@@ -993,16 +988,16 @@
         min-height: 380px;
     }
 
-    .atelier-collage {
+    .trust-collage {
         min-height: 520px;
     }
 
-    .atelier-main-photo {
+    .trust-main-photo {
         width: 86%;
         height: 420px;
     }
 
-    .atelier-offset-photo {
+    .trust-offset-photo {
         width: 52%;
         height: 230px;
     }
@@ -1102,17 +1097,6 @@
         padding: 2rem;
     }
 
-    /* Testimonials */
-    .testimonial-polaroid {
-        min-height: 390px;
-        padding: 0.65rem 0.65rem 1rem;
-        transform: none;
-    }
-
-    .polaroid-photo {
-        height: 245px;
-    }
-
     /* Private */
     .private-journey-content {
         padding: 2.5rem;
@@ -1134,6 +1118,10 @@
 
 /* Mobile */
 @media (max-width: 640px) {
+    .instagram-review-grid {
+        grid-template-columns: 1fr;
+    }
+
     .hero-text-container {
         max-width: 22rem;
     }
@@ -1155,24 +1143,24 @@
     .editorial-intro h2,
     .section-editorial-head h2,
     .interest-copy h2,
-    .atelier-copy h2 {
+    .trust-copy h2 {
         font-size: 2.8rem !important;
     }
 
-    .atelier-collage {
+    .trust-collage {
         min-height: 430px;
     }
 
-    .atelier-main-photo {
+    .trust-main-photo {
         width: 100%;
         height: 320px;
     }
 
-    .atelier-offset-photo {
+    .trust-offset-photo {
         display: none;
     }
 
-    .atelier-rating {
+    .trust-rating {
         left: 1rem;
         right: 1rem;
         bottom: 1rem;
@@ -1272,17 +1260,6 @@
 
     .destination-content {
         padding: 1.5rem;
-    }
-
-    /* Testimonials */
-    .testimonial-polaroid {
-        min-height: 395px;
-        padding: 0.65rem 0.65rem 1rem;
-        transform: none;
-    }
-
-    .polaroid-photo {
-        height: 245px;
     }
 
     /* Private */

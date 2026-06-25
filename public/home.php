@@ -133,7 +133,7 @@ try {
 <section class="editorial-intro">
     <div class="container editorial-intro-grid">
         <div>
-            <p class="text-xs-caps">PAILA ATELIER</p>
+            <p class="text-xs-caps">PAILA JOURNAL</p>
             <h2>Nepal, framed as a living gallery.</h2>
         </div>
         <div class="editorial-intro-copy">
@@ -465,13 +465,13 @@ try {
 <!-- Why Us -->
 <section id="about" class="section-padding">
     <div class="container">
-        <div class="atelier-standard">
+        <div class="trust-standard">
             <!-- Left -->
-            <div class="atelier-collage">
-                <img src="<?php echo url('assets/images/guest_experience.jpg'); ?>" alt="Guest experience in Nepal" class="atelier-main-photo">
-                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80" alt="Himalayan trail" class="atelier-offset-photo">
+            <div class="trust-collage">
+                <img src="<?php echo url('assets/images/guest_experience.jpg'); ?>" alt="Guest experience in Nepal" class="trust-main-photo">
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80" alt="Himalayan trail" class="trust-offset-photo">
                 <!-- Rating -->
-                <div class="atelier-rating">
+                <div class="trust-rating">
                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                         <i class="fa-solid fa-trophy" style="font-size: 1.5rem; color: var(--color-emerald-700);"></i>
                         <span style="font-size: 2rem; font-weight: 700;">4.9/5</span>
@@ -482,7 +482,7 @@ try {
             </div>
 
             <!-- Right -->
-            <div class="atelier-copy">
+            <div class="trust-copy">
                 <p class="text-xs-caps" style="color: var(--color-emerald-700); margin-bottom: 0.5rem;">THE STANDARD</p>
                 <h2 style="font-size: 2.5rem; font-family: var(--font-serif); margin-bottom: 2rem;">Why Travel<br>With Us</h2>
 
@@ -530,7 +530,7 @@ try {
         </div>
 
         <!-- Guest testimonials grid layout -->
-        <div class="grid-responsive-4" style="gap: 1.5rem;">
+        <div class="instagram-review-grid">
             <?php
             $testimonials = [
                 [
@@ -573,26 +573,30 @@ try {
 
             foreach ($testimonials as $test) {
                 ?>
-                <article class="testimonial-polaroid" tabindex="0">
-                    <div class="polaroid-photo">
-                        <img src="<?php echo $test['photo']; ?>" alt="<?php echo $test['tour']; ?>">
-                        <div class="polaroid-shade"></div>
-                        <div class="polaroid-stamp"><?php echo $test['tour']; ?></div>
-                    </div>
-                    <div class="polaroid-caption">
-                        <div class="polaroid-profile">
-                            <img src="<?php echo $test['image']; ?>" alt="<?php echo $test['name']; ?>">
-                            <div>
-                                <div class="polaroid-name"><?php echo $test['name']; ?></div>
-                                <div class="polaroid-location"><?php echo $test['location']; ?></div>
-                            </div>
+                <article class="instagram-post-card" tabindex="0">
+                    <div class="ig-post-header">
+                        <img src="<?php echo $test['image']; ?>" alt="<?php echo $test['name']; ?>">
+                        <div>
+                            <div class="ig-post-name"><?php echo $test['name']; ?></div>
+                            <div class="ig-post-location"><?php echo $test['location']; ?></div>
                         </div>
-                        <div class="polaroid-rating">
+                        <span class="ig-post-menu" aria-hidden="true"></span>
+                    </div>
+                    <div class="ig-post-photo">
+                        <img src="<?php echo $test['photo']; ?>" alt="<?php echo $test['tour']; ?>">
+                        <div class="ig-post-tag"><?php echo $test['tour']; ?></div>
+                    </div>
+                    <div class="ig-post-body">
+                        <div class="ig-post-actions" aria-hidden="true">
+                            <span><i class="fa-regular fa-heart"></i></span>
+                            <span><i class="fa-regular fa-comment"></i></span>
+                            <span><i class="fa-regular fa-paper-plane"></i></span>
+                            <span><i class="fa-regular fa-bookmark"></i></span>
+                        </div>
+                        <div class="ig-post-rating">
                             <?php for($i=0; $i<$test['rating']; $i++) echo '<i class="fa-solid fa-star"></i> '; ?>
                         </div>
-                        <p class="polaroid-review">
-                            "<?php echo $test['quote']; ?>"
-                        </p>
+                        <p class="ig-post-caption"><strong><?php echo $test['name']; ?></strong> <?php echo $test['quote']; ?></p>
                     </div>
                 </article>
                 <?php

@@ -33,7 +33,7 @@ The main goal of the design is to make Nepal feel premium without removing the n
 ## Main Features
 
 - Homepage hero with rotating mountain videos and parallax storytelling.
-- Editorial homepage structure with a Paila Atelier intro, split collection heading, interest-based browsing panel, destination gallery wall, and atelier-style trust section.
+- Editorial homepage structure with a Paila Journal intro, split collection heading, interest-based browsing panel, destination gallery wall, and curated trust section.
 - Featured tour cards powered by database records.
 - Category slider for interest-based browsing.
 - Collection page with filtering and AJAX search support.
@@ -192,7 +192,7 @@ The visual system is based on these choices:
 - Inter body text for clean, readable booking UI.
 - Noto Serif Devanagari on the header wordmark so the Nepali brand name feels intentional and premium.
 - Warm paper section backgrounds, fine grid lines, jade borders, and gold accents inspired by the botanical gallery style of the Petals and Pots reference project.
-- Homepage sections are structured like an editorial gallery instead of a generic landing page: concept statement, curated collection, interest archive, destination wall, atelier standard, guest polaroids, private journeys, and contact.
+- Homepage sections are structured like an editorial gallery instead of a generic landing page: concept statement, curated collection, interest archive, destination wall, trust standard, Instagram-style guest posts, private journeys, and contact.
 - Wide content rail around 85 to 90 percent of the screen.
 - Subtle shadows and borders instead of loud gradients.
 

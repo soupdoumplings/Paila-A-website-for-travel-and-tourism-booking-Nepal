@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '.collection-card',
         '.destination-card',
         '.testimonial-card',
+        '.instagram-post-card',
         '.private-journey-section',
         '.contact-form-card',
         '.pd-main > *',
