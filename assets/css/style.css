@@ -565,7 +565,7 @@ h6 {
 .price-display {
     display: inline-flex;
     align-items: baseline;
-    gap: 0.42rem;
+    gap: 0.34rem;
     color: var(--color-stone-900);
     font-family: var(--font-serif);
     font-weight: 500;
@@ -575,21 +575,22 @@ h6 {
 
 .price-display .currency {
     font-family: var(--font-devanagari);
-    font-size: 0.95em;
+    font-size: 0.98em;
+    font-weight: 800;
     line-height: 1;
 }
 
 .price-display .amount {
-    font-size: 0.95em;
+    font-size: 0.9em;
     line-height: 1;
 }
 
 .price-display.card-price {
-    font-size: 1.08rem;
+    font-size: 0.94rem;
 }
 
 .price-display.large-price {
-    font-size: 2.2rem;
+    font-size: 2rem;
 }
 
 /* List view */
