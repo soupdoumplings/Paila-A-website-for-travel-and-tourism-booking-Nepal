@@ -575,22 +575,31 @@ h6 {
 
 .price-display .currency {
     font-family: var(--font-devanagari);
-    font-size: 0.95em;
+    font-size: 1.05em;
     font-weight: 800;
     line-height: 1;
 }
 
 .price-display .amount {
-    font-size: 0.9em;
+    font-size: 1em;
     line-height: 1;
 }
 
+.price-display::after {
+    content: '/-';
+    font-family: var(--font-serif);
+    font-size: 0.82em;
+    font-weight: 600;
+    line-height: 1;
+    margin-left: 0.08rem;
+}
+
 .price-display.card-price {
-    font-size: 0.94rem;
+    font-size: 1.14rem;
 }
 
 .price-display.large-price {
-    font-size: 2rem;
+    font-size: 2.35rem;
 }
 
 /* List view */
