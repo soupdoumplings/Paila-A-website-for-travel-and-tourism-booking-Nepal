@@ -171,13 +171,43 @@ $imageMap = [
                         <!-- Price -->
                         <div style="margin-bottom: 2rem;">
                             <label class="filter-label">Price Range</label>
-                            <div style="margin-bottom: 1rem; font-size: 0.9rem; font-weight: 600; color: var(--color-emerald-700);">
-                                रू <span id="price-val"><?php echo $max_price; ?></span>
-                            </div>
-                            <input type="range" name="max_price" min="0" max="500000" step="5000" value="<?php echo $max_price; ?>" oninput="document.getElementById('price-val').innerText = this.value">
-                            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--color-stone-400); margin-top: 0.5rem;">
-                                <span>रू 0</span>
-                                <span>रू 5L+</span>
+                            <div class="price-curator">
+                                <div class="price-current">
+                                    <span>Selected Budget</span>
+                                    <strong id="price-summary">
+                                        <?php if ($min_price <= 0 && $max_price >= 1000000): ?>
+                                            Any price
+                                        <?php else: ?>
+                                            <span class="price-display card-price"><span class="currency">रू</span><span class="amount"><?php echo number_format((float)$min_price, 2); ?></span></span>
+                                            <span class="price-separator">to</span>
+                                            <span class="price-display card-price"><span class="currency">रू</span><span class="amount"><?php echo number_format((float)$max_price, 2); ?></span></span>
+                                        <?php endif; ?>
+                                    </strong>
+                                </div>
+
+                                <div class="price-preset-grid" aria-label="Budget presets">
+                                    <?php
+                                    $pricePresets = [
+                                        ['label' => 'Any', 'note' => 'Show all', 'min' => 0, 'max' => 1000000],
+                                        ['label' => 'Essential', 'note' => 'Under रू 50k', 'min' => 0, 'max' => 50000],
+                                        ['label' => 'Signature', 'note' => 'रू 50k - 150k', 'min' => 50000, 'max' => 150000],
+                                        ['label' => 'Private', 'note' => 'रू 150k+', 'min' => 150000, 'max' => 1000000],
+                                    ];
+                                    foreach ($pricePresets as $preset):
+                                        $activePreset = ((int)$min_price === $preset['min'] && (int)$max_price === $preset['max']);
+                                    ?>
+                                        <button type="button"
+                                                class="price-preset <?php echo $activePreset ? 'active' : ''; ?>"
+                                                data-min="<?php echo $preset['min']; ?>"
+                                                data-max="<?php echo $preset['max']; ?>">
+                                            <span><?php echo $preset['label']; ?></span>
+                                            <small><?php echo $preset['note']; ?></small>
+                                        </button>
+                                    <?php endforeach; ?>
+                                </div>
+
+                                <input type="hidden" name="min_price" id="price-min" value="<?php echo (int)$min_price; ?>">
+                                <input type="hidden" name="max_price" id="price-max" value="<?php echo (int)$max_price; ?>">
                             </div>
                         </div>
 

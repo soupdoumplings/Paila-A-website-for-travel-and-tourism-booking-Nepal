@@ -138,8 +138,8 @@ if (count($tours) > 0):
                     <div style="font-size: 0.85rem; color: var(--color-stone-500);">
                         <i class="fa-solid fa-location-dot"></i> <?php echo e($tour['location']); ?>
                     </div>
-                    <div style="font-weight: 700; color: var(--color-emerald-700);">
-                        Rs <?php echo number_format((float)$tour['price'], 0); ?>
+                    <div class="price-display card-price">
+                        <span class="currency">रू</span><span class="amount"><?php echo number_format((float)$tour['price'], 2); ?></span>
                     </div>
                 </div>
             </div>

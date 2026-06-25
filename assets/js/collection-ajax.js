@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const toursGrid = document.getElementById('toursGrid');
     const journeyCount = document.getElementById('journey-count');
     const sortSelect = document.getElementById('sortSelect');
+    const pricePresets = filterForm ? filterForm.querySelectorAll('.price-preset') : [];
+    const priceMin = document.getElementById('price-min');
+    const priceMax = document.getElementById('price-max');
+    const priceSummary = document.getElementById('price-summary');
 
     if (!filterForm || !toursGrid) return;
 
@@ -60,21 +64,52 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     };
 
+    const formatPrice = (value) => {
+        return Number(value || 0).toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    };
+
+    const updatePriceUi = () => {
+        if (!priceMin || !priceMax) return;
+
+        const min = Number(priceMin.value || 0);
+        const max = Number(priceMax.value || 1000000);
+
+        pricePresets.forEach((preset) => {
+            preset.classList.toggle(
+                'active',
+                Number(preset.dataset.min) === min && Number(preset.dataset.max) === max
+            );
+        });
+
+        if (priceSummary) {
+            priceSummary.innerHTML = min <= 0 && max >= 1000000
+                ? 'Any price'
+                : `<span class="price-display card-price"><span class="currency">रू</span><span class="amount">${formatPrice(min)}</span></span><span class="price-separator">to</span><span class="price-display card-price"><span class="currency">रू</span><span class="amount">${formatPrice(max)}</span></span>`;
+        }
+    };
+
     // Listeners
     const formInputs = filterForm.querySelectorAll('input, select');
     formInputs.forEach(input => {
-        if (input.type === 'text') {
+        if (input.type === 'text' || input.type === 'number') {
             input.addEventListener('input', debounce(updateFilters));
+            input.addEventListener('input', debounce(updatePriceUi, 80));
         } else {
             input.addEventListener('change', updateFilters);
         }
     });
 
-    // Range listener
-    const rangeInput = filterForm.querySelector('input[type="range"]');
-    if (rangeInput) {
-        rangeInput.addEventListener('input', debounce(updateFilters, 100));
-    }
+    pricePresets.forEach((preset) => {
+        preset.addEventListener('click', () => {
+            if (priceMin) priceMin.value = preset.dataset.min || 0;
+            if (priceMax) priceMax.value = preset.dataset.max || 1000000;
+            updatePriceUi();
+            updateFilters();
+        });
+    });
 
     // Sort listener
     if (sortSelect) {
