@@ -1,0 +1,191 @@
+PAILA Docker SQL Copy-Paste Commands
+====================================
+
+Use these commands from this project folder:
+C:\Users\mount\OneDrive\Documents\Paila
+
+Docker database details from docker-compose.yml:
+Database container: nepal_tours_db
+Database name: nepal_tours
+App DB user: nepal_user
+App DB password: nepal_pass
+Root password: rootpassword
+
+Local website:
+http://localhost:8080
+
+Admin login:
+Email: 2461787@paila.admin
+Password: PailaAdmin@2026
+
+
+1. Start the project
+--------------------
+
+docker compose up -d
+
+
+2. Check if containers are running
+----------------------------------
+
+docker ps
+
+
+3. Open a MySQL shell inside Docker
+-----------------------------------
+
+docker exec -it nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours
+
+Root shell if needed:
+
+docker exec -it nepal_tours_db mysql -uroot -prootpassword nepal_tours
+
+
+4. Import the main schema
+-------------------------
+
+PowerShell:
+
+Get-Content -Raw .\database\schema.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours
+
+Command Prompt:
+
+cmd /c "type database\schema.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours"
+
+
+5. Import the default roles, admin, and demo data
+-------------------------------------------------
+
+PowerShell:
+
+Get-Content -Raw .\database\insert_data.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours
+
+Command Prompt:
+
+cmd /c "type database\insert_data.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours"
+
+
+6. Import the Nepal package seed data
+-------------------------------------
+
+PowerShell:
+
+Get-Content -Raw .\database\nepal_packages_seed.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours
+
+Command Prompt:
+
+cmd /c "type database\nepal_packages_seed.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours"
+
+
+7. Full fresh local database rebuild
+------------------------------------
+
+This removes the Docker MySQL volume and recreates the database from the mounted schema and insert_data files.
+After that, run step 6 again to add the Nepal travel package seed.
+
+docker compose down -v
+docker compose up -d
+
+Wait around 20-40 seconds for MySQL to initialize, then run:
+
+Get-Content -Raw .\database\nepal_packages_seed.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours
+
+
+8. Check admin users
+--------------------
+
+docker exec -it nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours -e "SELECT users.id, users.username, users.email, roles.name AS role FROM users JOIN roles ON roles.id = users.role_id WHERE users.role_id IN (1, 2);"
+
+
+9. Check package count by category
+----------------------------------
+
+docker exec -it nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours -e "SELECT category, COUNT(*) AS total FROM tours GROUP BY category ORDER BY category;"
+
+
+10. Check featured packages shown on homepage
+---------------------------------------------
+
+docker exec -it nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours -e "SELECT id, title, category, price, is_featured FROM tours WHERE is_featured = 1 ORDER BY id DESC;"
+
+
+11. Check all tables
+--------------------
+
+docker exec -it nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours -e "SHOW TABLES;"
+
+
+12. Check all packages
+----------------------
+
+docker exec -it nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours -e "SELECT id, title, location, category, price, duration, is_featured FROM tours ORDER BY id;"
+
+
+13. Run one custom SQL query
+----------------------------
+
+Example:
+
+docker exec -it nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours -e "SELECT COUNT(*) AS total_tours FROM tours;"
+
+
+14. Export a backup SQL file
+----------------------------
+
+PowerShell:
+
+docker exec nepal_tours_db mysqldump -unepal_user -pnepal_pass nepal_tours > .\paila_backup.sql
+
+
+15. Import a backup SQL file
+----------------------------
+
+PowerShell:
+
+Get-Content -Raw .\paila_backup.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours
+
+
+16. Useful admin pages
+----------------------
+
+Login:
+http://localhost:8080/public/authentication/login.php
+
+Admin dashboard:
+http://localhost:8080/admin/index.php
+
+Add or edit tours:
+http://localhost:8080/admin/tour_form.php
+
+Manage bookings:
+http://localhost:8080/admin/manage_bookings.php
+
+Manage inquiries:
+http://localhost:8080/admin/manage_inquiries.php
+
+
+17. If image upload or package edits do not appear
+--------------------------------------------------
+
+Restart the web container:
+
+docker compose restart web
+
+Check the website again:
+
+http://localhost:8080
+
+
+18. Stop the project
+--------------------
+
+docker compose down
+
+
+19. Stop and delete local database data
+---------------------------------------
+
+Warning: this deletes the local MySQL volume.
+
+docker compose down -v
+
