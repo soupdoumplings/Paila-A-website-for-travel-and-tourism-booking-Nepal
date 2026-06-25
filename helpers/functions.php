@@ -174,16 +174,27 @@ function render_booking_timeline($status = 'pending', $isCompact = false) {
 }
 // Get tour image
 function get_tour_image($tour) {
+    $storedImage = trim((string)($tour['image'] ?? ''));
+
     // Use external URL
-    if (!empty($tour['image']) && filter_var($tour['image'], FILTER_VALIDATE_URL)) {
-        return $tour['image'];
+    if ($storedImage !== '' && filter_var($storedImage, FILTER_VALIDATE_URL)) {
+        return $storedImage;
     }
 
-    // Use uploaded file
-    if (!empty($tour['image'])) {
-        $uploadPath = __DIR__ . '/../public/uploads/' . $tour['image'];
+    // Use project-local image path saved in the database.
+    if ($storedImage !== '') {
+        $relativeImage = ltrim(str_replace('\\', '/', $storedImage), '/');
+        $projectPath = __DIR__ . '/../' . $relativeImage;
+        if (preg_match('#^(assets/images|public/uploads)/#', $relativeImage) && file_exists($projectPath)) {
+            return url($relativeImage);
+        }
+    }
+
+    // Use uploaded filename saved by the admin form.
+    if ($storedImage !== '') {
+        $uploadPath = __DIR__ . '/../public/uploads/' . $storedImage;
         if (file_exists($uploadPath)) {
-            return url('public/uploads/' . $tour['image']);
+            return url('public/uploads/' . $storedImage);
         }
     }
 

@@ -73,20 +73,6 @@ try {
     }
 } catch (Exception $e) { $tours = []; }
 
-// Setup image map
-$imageMap = [
-    'trekking' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80',
-    'cultural' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
-    'culture' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
-    'adventure' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-    'wellness' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80',
-    'family' => 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=800&q=80',
-    'luxury' => 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80',
-    'photography' => 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?w=800&q=80',
-    'weekend' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-    'budget' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80'
-];
-
 // Set JSON header
 header('Content-Type: application/json');
 
@@ -94,25 +80,7 @@ header('Content-Type: application/json');
 ob_start();
 if (count($tours) > 0):
     foreach ($tours as $tour):
-        $cat = isset($tour['category']) && $tour['category'] ? $tour['category'] : 'trekking';
-        $tourImg = !empty($tour['image']) ? $tour['image'] : '';
-        $img = '';
-
-        if ($tourImg) {
-            if (filter_var($tourImg, FILTER_VALIDATE_URL)) {
-                $img = $tourImg;
-            } else {
-                // Validate local image
-                $localPath = __DIR__ . '/../public/uploads/' . $tourImg;
-                if (file_exists($localPath)) {
-                    $img = url('public/uploads/' . $tourImg);
-                } else {
-                    $img = $imageMap[$cat] ?? $imageMap['trekking'];
-                }
-            }
-        } else {
-            $img = $imageMap[$cat] ?? $imageMap['trekking'];
-        }
+        $img = get_tour_image($tour);
         $cardHref = url('public/package_detail/index.php?id=' . (int)$tour['id']);
         ?>
         <a href="<?php echo e($cardHref); ?>" class="collection-card hover-zoom-card">
