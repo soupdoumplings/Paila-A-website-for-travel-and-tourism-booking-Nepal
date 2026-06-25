@@ -171,9 +171,10 @@ include $base . 'includes/header.php';
     letter-spacing: 0;
     display: block;
 }
-.pd-card-price .amount {
-    font-size: 2.5rem;
-    font-weight: 700;
+.pd-card-price > .amount {
+    font-size: 2.2rem;
+    font-weight: 500;
+    font-family: var(--font-serif), serif;
     display: block;
     margin: 0.35rem 0;
     line-height: 1.1;
@@ -524,7 +525,7 @@ include $base . 'includes/header.php';
         <div class="pd-card">
             <div class="pd-card-price">
                 <span class="label">Starting from</span>
-                <span class="amount">Rs <?php echo number_format($tour['price'], 0); ?></span>
+                <span class="price-display large-price"><span class="currency">रू</span><span class="amount"><?php echo number_format((float)$tour['price'], 2); ?></span></span>
                 <span class="per">per person</span>
             </div>
             <div class="pd-card-body">
@@ -607,7 +608,7 @@ include $base . 'includes/header.php';
                 </div>
                 <div class="pd-modal-total">
                     <span class="label">Total Estimate</span>
-                    <span class="value" id="pd-total-estimate">Rs <?php echo number_format($tour['price'], 0); ?></span>
+                    <span class="value price-display card-price" id="pd-total-estimate"><span class="currency">रू</span><span class="amount"><?php echo number_format((float)$tour['price'], 2); ?></span></span>
                 </div>
                 <button type="submit" class="pd-modal-submit">Submit Booking Request</button>
             </form>
@@ -620,7 +621,7 @@ include $base . 'includes/header.php';
     <div class="pd-sticky-book-inner">
         <div class="pd-sticky-book-info">
             <h3><?php echo e($tour['title']); ?></h3>
-            <span class="price">Rs <?php echo number_format($tour['price'], 0); ?></span> <span style="font-size: 0.9rem; color: #78716c;">per person</span>
+            <span class="price price-display card-price"><span class="currency">रू</span><span class="amount"><?php echo number_format((float)$tour['price'], 2); ?></span></span> <span style="font-size: 0.9rem; color: #78716c;">per person</span>
         </div>
         <button type="button" class="pd-btn pd-btn-primary" id="pd-sticky-book-btn" style="max-width: 250px;">Book Now</button>
     </div>
@@ -663,7 +664,7 @@ include $base . 'includes/header.php';
     var pricePerPerson = <?php echo json_encode((float) $tour['price']); ?>;
 
     function formatNpr(value) {
-        return 'Rs ' + Math.round(value).toLocaleString('en-US');
+        return '<span class="currency">रू</span><span class="amount">' + Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span>';
     }
 
     function updateEstimate() {
@@ -677,7 +678,7 @@ include $base . 'includes/header.php';
             travelerInput.value = travelers;
         }
 
-        totalEstimate.textContent = formatNpr(pricePerPerson * travelers);
+        totalEstimate.innerHTML = formatNpr(pricePerPerson * travelers);
     }
 
     if (travelerInput) {

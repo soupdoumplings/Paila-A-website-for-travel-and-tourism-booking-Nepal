@@ -172,12 +172,12 @@ $imageMap = [
                         <div style="margin-bottom: 2rem;">
                             <label class="filter-label">Price Range</label>
                             <div style="margin-bottom: 1rem; font-size: 0.9rem; font-weight: 600; color: var(--color-emerald-700);">
-                                Rs <span id="price-val"><?php echo $max_price; ?></span>
+                                रू <span id="price-val"><?php echo $max_price; ?></span>
                             </div>
                             <input type="range" name="max_price" min="0" max="500000" step="5000" value="<?php echo $max_price; ?>" oninput="document.getElementById('price-val').innerText = this.value">
                             <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--color-stone-400); margin-top: 0.5rem;">
-                                <span>Rs 0</span>
-                                <span>Rs 5L+</span>
+                                <span>रू 0</span>
+                                <span>रू 5L+</span>
                             </div>
                         </div>
 
@@ -242,8 +242,8 @@ $imageMap = [
                                         <div style="font-size: 0.85rem; color: var(--color-stone-500);">
                                             <i class="fa-solid fa-location-dot"></i> <?php echo e($tour['location']); ?>
                                         </div>
-                                        <div style="font-weight: 700; color: var(--color-emerald-700);">
-                                            Rs <?php echo number_format((float)$tour['price'], 0); ?>
+                                        <div class="price-display card-price">
+                                            <span class="currency">रू</span><span class="amount"><?php echo number_format((float)$tour['price'], 2); ?></span>
                                         </div>
                                     </div>
                                 </div>

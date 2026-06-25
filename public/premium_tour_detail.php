@@ -81,7 +81,7 @@ include '../includes/header.php';
         <div style="display: flex; gap: 2rem; font-size: 1rem; opacity: 0.9;">
             <span><i class="fa-regular fa-clock"></i> <?php echo $tour['duration']; ?></span>
             <span><i class="fa-solid fa-signal"></i> <?php echo $tour['difficulty']; ?></span>
-            <span style="color: var(--color-amber-400); font-size: 1.5rem; font-weight: 600;">Rs <?php echo number_format($tour['price']); ?></span>
+            <span class="price-display card-price" style="color: var(--color-amber-400);"><span class="currency">रू</span><span class="amount"><?php echo number_format((float)$tour['price'], 2); ?></span></span>
         </div>
     </div>
 </section>
@@ -134,7 +134,7 @@ include '../includes/header.php';
 
                         <div style="display: flex; justify-content: space-between; align-items: center; background: white; border: 1px solid var(--color-stone-200); border-radius: 0.75rem; padding: 1rem; margin-bottom: 1.5rem;">
                             <span style="font-weight: 600; color: var(--color-stone-700);">Estimated Total</span>
-                            <span id="premiumEstimate" style="font-weight: 700; color: var(--color-amber-600); font-size: 1.2rem;">Rs <?php echo number_format($tour['price'] * 2); ?></span>
+                            <span id="premiumEstimate" class="price-display card-price" style="color: var(--color-amber-600);"><span class="currency">रू</span><span class="amount"><?php echo number_format((float)($tour['price'] * 2), 2); ?></span></span>
                         </div>
                         
                         <div style="margin-bottom: 1.5rem;">
@@ -152,7 +152,7 @@ include '../includes/header.php';
                         </div>
                         
                         <button type="submit" class="btn" style="width: 100%; background: var(--color-stone-900); color: white; padding: 1rem; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; border-radius: 0.5rem;">
-                            Request Booking - Rs <?php echo number_format($tour['price']); ?>
+                            Request Booking - रू <?php echo number_format((float)$tour['price'], 2); ?>
                         </button>
                     </form>
                 </div>
@@ -174,7 +174,7 @@ include '../includes/header.php';
         var count = parseInt(travelers.value, 10) || 1;
         count = Math.max(1, Math.min(max, count));
         travelers.value = count;
-        estimate.textContent = 'Rs ' + Math.round(count * price).toLocaleString('en-US');
+        estimate.innerHTML = '<span class="currency">रू</span><span class="amount">' + Number(count * price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span>';
     }
 
     if (travelers) {

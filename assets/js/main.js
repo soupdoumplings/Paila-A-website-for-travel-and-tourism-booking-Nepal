@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </div>
                                     <div style="text-align: right;">
                                         <div style="font-size: 0.7rem; text-transform: uppercase; color: #a8a29e; font-weight: 700; margin-bottom: 0.1rem;">FROM</div>
-                                        <div style="font-weight: 700; color: var(--color-teal-900); font-size: 1.05rem;">Rs ${Number(tour.price).toLocaleString()}</div>
+                                        <div class="price-display card-price"><span class="currency">रू</span><span class="amount">${Number(tour.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></div>
                                     </div>
                                 </a>`;
                         }).join('');

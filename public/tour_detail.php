@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once '../helpers/functions.php';
 require_once '../config/db.php';
 
@@ -130,7 +130,7 @@ include '../includes/header.php';
     <div class="container td-hero-inner">
         <p class="loc"><?php echo e($tour_location); ?></p>
         <h1><?php echo e($tour['title']); ?></h1>
-        <div class="meta"><?php echo e($tour_duration); ?> – Rs <?php echo number_format($tour_price, 0); ?></div>
+        <div class="meta"><?php echo e($tour_duration); ?> · <span class="price-display card-price"><span class="currency">रू</span><span class="amount"><?php echo number_format($tour_price, 2); ?></span></span></div>
     </div>
 </section>
 
@@ -154,7 +154,7 @@ include '../includes/header.php';
                 <h3 class="td-card-title">Book This Tour</h3>
                 <div class="td-card-total" style="display: flex; justify-content: space-between; align-items: center; margin: 1rem 0 1.25rem 0; padding: 0.75rem 0; border-bottom: 1px solid #e7e5e4;">
                     <span style="font-weight: 600; color: #44403c;">Total Price:</span>
-                    <span style="font-weight: 700; color: var(--color-teal-900); font-size: 1.2rem;">Rs <?php echo number_format($tour_price, 0); ?></span>
+                    <span class="price-display card-price"><span class="currency">रू</span><span class="amount"><?php echo number_format($tour_price, 2); ?></span></span>
                 </div>
                 <button type="button" class="td-btn" id="td-open-booking">Request Booking</button>
                 <p style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: #78716c;">You will receive a confirmation email</p>
@@ -190,7 +190,7 @@ include '../includes/header.php';
                 </div>
                 <div class="td-modal-total">
                     <span class="label">Total Estimate</span>
-                    <span class="value">Rs <?php echo number_format($tour_price, 0); ?></span>
+                    <span class="value price-display card-price"><span class="currency">रू</span><span class="amount"><?php echo number_format($tour_price, 2); ?></span></span>
                 </div>
                 <button type="submit" class="td-modal-submit">Submit Booking Request</button>
             </form>

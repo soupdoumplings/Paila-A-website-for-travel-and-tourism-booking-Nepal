@@ -562,6 +562,36 @@ h6 {
     margin-bottom: 1.5rem;
 }
 
+.price-display {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.42rem;
+    color: var(--color-stone-900);
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.price-display .currency {
+    font-family: var(--font-devanagari);
+    font-size: 0.95em;
+    line-height: 1;
+}
+
+.price-display .amount {
+    font-size: 0.95em;
+    line-height: 1;
+}
+
+.price-display.card-price {
+    font-size: 1.08rem;
+}
+
+.price-display.large-price {
+    font-size: 2.2rem;
+}
+
 /* List view */
 .layout-list {
     grid-template-columns: 1fr !important;

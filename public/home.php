@@ -230,7 +230,7 @@ try {
                                 </div>
                                 <div style="text-align: right;">
                                     <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--color-stone-400); font-weight: 700;">From</div>
-                                    <div style="font-size: 1.25rem; font-weight: 700; color: var(--color-emerald-700);">Rs <?php echo number_format((float)($tour['price'] ?? 0), 0); ?></div>
+                                    <div class="price-display card-price"><span class="currency">रू</span><span class="amount"><?php echo number_format((float)($tour['price'] ?? 0), 2); ?></span></div>
                                 </div>
                             </div>
                         </div>
