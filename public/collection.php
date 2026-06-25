@@ -88,8 +88,10 @@ $imageMap = [
     'cultural' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
     'culture' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
     'adventure' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+    'wellness' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80',
     'family' => 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=800&q=80',
     'luxury' => 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80',
+    'photography' => 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?w=800&q=80',
     'weekend' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
     'budget' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80'
 ];
@@ -143,8 +145,11 @@ $imageMap = [
                                 <option value="cultural" <?php echo $category == 'cultural' ? 'selected' : ''; ?>>Cultural Tours</option>
                                 <option value="culture" <?php echo $category == 'culture' ? 'selected' : ''; ?>>Culture & Heritage</option>
                                 <option value="adventure" <?php echo $category == 'adventure' ? 'selected' : ''; ?>>Adventure Sports</option>
-                                <option value="family" <?php echo $category == 'family' ? 'selected' : ''; ?>>Family & Wellness</option>
+                                <option value="wellness" <?php echo $category == 'wellness' ? 'selected' : ''; ?>>Wellness</option>
+                                <option value="family" <?php echo $category == 'family' ? 'selected' : ''; ?>>Family</option>
                                 <option value="luxury" <?php echo $category == 'luxury' ? 'selected' : ''; ?>>Luxury</option>
+                                <option value="photography" <?php echo $category == 'photography' ? 'selected' : ''; ?>>Photography</option>
+                                <option value="weekend" <?php echo $category == 'weekend' ? 'selected' : ''; ?>>Weekend</option>
                                 <option value="budget" <?php echo $category == 'budget' ? 'selected' : ''; ?>>Budget Friendly</option>
                             </select>
                         </div>
