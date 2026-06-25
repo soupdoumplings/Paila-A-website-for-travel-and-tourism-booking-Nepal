@@ -702,12 +702,23 @@
     border-bottom: 0;
 }
 
-.ig-post-header img {
+.ig-post-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 44px;
     height: 44px;
+    flex: 0 0 44px;
     border-radius: 50%;
-    object-fit: cover;
+    background:
+        radial-gradient(circle at 35% 28%, rgba(251, 191, 36, 0.28), transparent 35%),
+        linear-gradient(135deg, var(--color-teal-900), #082f2d);
+    color: var(--color-amber-400);
     border: 2px solid #fffdf7;
+    font-family: var(--font-serif);
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
     box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.28), 0 8px 22px rgba(28, 25, 23, 0.16);
 }
 

@@ -541,8 +541,8 @@ try {
                     'location' => 'Kathmandu, Nepal',
                     'tour' => 'Everest Base Camp Trek',
                     'rating' => 5,
-                    'image' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80',
-                    'photo' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=900&q=80'
+                    'initials' => 'RH',
+                    'photo' => url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jpg')
                 ],
                 [
                     'quote' => 'From the moment we arrived, everything was seamless. Our guide was knowledgeable and the luxury lodges were incredible.',
@@ -550,8 +550,8 @@ try {
                     'location' => 'Lalitpur, Nepal',
                     'tour' => 'Annapurna Circuit',
                     'rating' => 5,
-                    'image' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&q=80',
-                    'photo' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80'
+                    'initials' => 'KH',
+                    'photo' => url('assets/images/Annapurna/photo-1697621535550-1c671d4969c4.jpg')
                 ],
                 [
                     'quote' => 'The perfect blend of adventure and comfort. PAILA truly understands how to create meaningful travel experiences.',
@@ -559,8 +559,8 @@ try {
                     'location' => 'Bhaktapur, Nepal',
                     'tour' => 'Kathmandu Heritage Walk',
                     'rating' => 5,
-                    'image' => 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&q=80',
-                    'photo' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=900&q=80'
+                    'initials' => 'FG',
+                    'photo' => url('assets/images/kathmandu/meghraj-neupane-YtEzq-hnv5k-unsplash.jpg')
                 ],
                 [
                     'quote' => 'Best decision we made for our Nepal trip. Professional, safe, and absolutely stunning scenery every single day.',
@@ -568,8 +568,8 @@ try {
                     'location' => 'Chitwan, Nepal',
                     'tour' => 'Luxury Everest Helicopter Tour',
                     'rating' => 5,
-                    'image' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&q=80',
-                    'photo' => 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80'
+                    'initials' => 'KD',
+                    'photo' => url('assets/images/Chitwan/photo-1534215782964-d58601aa091c.jpg')
                 ]
             ];
 
@@ -577,7 +577,7 @@ try {
                 ?>
                 <article class="instagram-post-card" tabindex="0">
                     <div class="ig-post-header">
-                        <img src="<?php echo $test['image']; ?>" alt="<?php echo $test['name']; ?>">
+                        <div class="ig-post-avatar" aria-hidden="true"><?php echo e($test['initials']); ?></div>
                         <div>
                             <div class="ig-post-name"><?php echo $test['name']; ?></div>
                             <div class="ig-post-location"><?php echo $test['location']; ?></div>
