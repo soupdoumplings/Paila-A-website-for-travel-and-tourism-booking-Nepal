@@ -65,8 +65,12 @@
 }
 
 .hero-text-container {
+    width: min(var(--site-width), calc(100% - 2rem));
+    max-width: none;
     padding-left: 0;
-    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
 }
 
 #hero-content h1 {
@@ -87,7 +91,7 @@
     background: rgba(255, 253, 249, 0.95);
     padding: 0.2rem;
     border-radius: 8px;
-    max-width: 800px;
+    max-width: 720px;
     display: flex;
     gap: 0.5rem;
     backdrop-filter: blur(10px);
@@ -129,6 +133,7 @@
     margin-top: 2rem;
     position: relative;
     z-index: 1;
+    justify-content: flex-start;
 }
 
 .stat-number {
