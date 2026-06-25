@@ -116,6 +116,7 @@ $base = '../';
         <div style="background: var(--color-stone-50); padding: 1.5rem; border: 1px solid var(--color-stone-200); border-radius: 0.75rem; margin-bottom: 2rem;">
             <h3 style="color: var(--color-stone-900); margin-bottom: 1rem; font-size: 1.25rem;">Create New Admin</h3>
             <form method="POST" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end;">
+                <?php echo csrf_field(); ?>
                 <input type="hidden" name="create_admin" value="1">
                 <div>
                     <label style="color: var(--color-stone-600); font-size: 0.8rem; display: block; margin-bottom: 0.5rem;">Username</label>
@@ -173,6 +174,7 @@ $base = '../';
                         </td>
                         <td style="padding: 1rem;">
                             <form method="POST" style="display: flex; gap: 0.5rem; align-items: center;">
+                                <?php echo csrf_field(); ?>
                                 <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                                 <input type="hidden" name="update_role" value="1">
                                 <select name="role_id" style="background: var(--color-stone-900); border: 1px solid var(--color-stone-700); color: white; border-radius: 0.25rem; padding: 0.4rem 0.5rem; outline: none; font-size: 0.875rem;">

@@ -106,7 +106,7 @@ function is_tour_guide() {
     if (!$user) return false;
     
     $role = $user['role'] ?? $user['role_name'] ?? '';
-    return $role === 'tourguide';
+    return $role === 'tour_guide';
 }
 
 // Render booking timeline

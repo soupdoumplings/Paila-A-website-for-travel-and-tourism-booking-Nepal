@@ -44,21 +44,7 @@ if ($tid > 0) {
 
 $tour_price = isset($tour['price']) ? (float)$tour['price'] : 0;
 $tour_duration = isset($tour['duration']) ? $tour['duration'] : '';
-$tourImg = !empty($tour['image']) ? $tour['image'] : '';
-if ($tourImg) {
-    if (filter_var($tourImg, FILTER_VALIDATE_URL)) {
-        $img = $tourImg;
-    } else {
-        $localPath = __DIR__ . '/uploads/' . $tourImg;
-        if (file_exists($localPath)) {
-            $img = url('public/uploads/' . $tourImg);
-        } else {
-            $img = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80';
-        }
-    }
-} else {
-    $img = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80';
-}
+$img = get_tour_image($tour);
 $tour_location = isset($tour['location']) ? $tour['location'] : ($tour['destination_name'] ?? '');
 
 include '../includes/header.php';

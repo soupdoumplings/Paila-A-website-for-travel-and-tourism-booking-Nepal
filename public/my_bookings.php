@@ -16,7 +16,7 @@ $user_id = $user['id'];
 
 // Load user bookings
 $stmt = $pdo->prepare("
-    SELECT b.*, t.title as tour_title, t.image as tour_image, t.duration 
+    SELECT b.*, t.title as tour_title, t.image as tour_image, t.duration, t.location as tour_location, t.category as tour_category
     FROM bookings b
     LEFT JOIN tours t ON b.tour_id = t.id
     WHERE b.user_id = ? 
@@ -48,9 +48,16 @@ include '../includes/header.php';
         <?php else: ?>
             <div style="display: grid; gap: 2rem;">
                 <?php foreach ($bookings as $booking): ?>
+                    <?php
+                    $bookingImage = get_tour_image([
+                        'image' => $booking['tour_image'] ?? '',
+                        'location' => $booking['tour_location'] ?? '',
+                        'category' => $booking['tour_category'] ?? '',
+                    ]);
+                    ?>
                     <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.5rem; display: flex; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
                         <div style="width: 250px; height: 180px; flex-shrink: 0; position: relative;">
-                            <img src="<?php echo $booking['tour_image'] ? 'uploads/'.$booking['tour_image'] : 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&q=80'; ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="<?php echo e($bookingImage); ?>" alt="<?php echo e($booking['tour_title'] ?: 'Booked journey'); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div style="padding: 2rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
                             <div>

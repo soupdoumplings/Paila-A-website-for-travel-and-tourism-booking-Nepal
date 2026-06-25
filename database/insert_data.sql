@@ -33,7 +33,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 INSERT INTO tours (title, location, price, duration, description, category, difficulty, max_group, highlights, image, best_season, altitude_max, permit_requirements, itinerary, inclusions, exclusions) VALUES
 ('Everest Base Camp Trek', 'Everest', 165000.00, '14 Days', 'Experience the world''s most iconic trek to the base of Mt. Everest. Journey through Sherpa villages, ancient monasteries, and breathtaking alpine landscapes with stunning views of the world''s highest peaks.', 'trekking', 'Hard', 12, 
 'Scenic flight to Lukla\nNamche Bazaar market\nTengboche Monastery\nKala Patthar sunrise viewpoint\nEverest Base Camp at 5364m\nSherpa culture immersion',
-'assets/images/private_journey.jpg', 'Spring, Autumn', 5545, 'TIMS Card, Sagarmatha National Park Entry Permit',
+'assets/images/Everest/photo-1544735716-87fa59a45b4e.jpg', 'Spring, Autumn', 5545, 'TIMS Card, Sagarmatha National Park Entry Permit',
 'Arrival in Kathmandu, hotel transfer and briefing\nFly to Lukla (2840m), trek to Phakding (2610m)\nTrek to Namche Bazaar (3440m)\nAcclimatization day in Namche, optional hike to Everest View Hotel\nTrek to Tengboche (3860m)\nTrek to Dingboche (4410m)\nAcclimatization day in Dingboche\nTrek to Lobuche (4910m)\nTrek to Gorak Shep (5140m), hike to EBC (5364m)\nHike to Kala Patthar (5545m) for sunrise, descend to Pheriche\nTrek back to Namche Bazaar\nTrek to Lukla\nFly back to Kathmandu\nDeparture day',
 'Airport transfers\nDomestic flights (Kathmandu-Lukla-Kathmandu)\nTeahouse accommodation during trek\nExperienced English-speaking guide\nPorter service (1 porter for 2 trekkers)\nAll permit fees (TIMS, National Park)\nFirst aid kit\nGovernment taxes',
 'International flights\nNepal visa fees\nLunch and dinner in Kathmandu\nPersonal trekking equipment\nTravel insurance\nDrinks and beverages\nTips for guide and porter\nPersonal expenses'),
@@ -54,7 +54,7 @@ INSERT INTO tours (title, location, price, duration, description, category, diff
 
 ('Manaslu Circuit Trek', 'Manaslu', 185000.00, '16 Days', 'Trek around the eighth highest mountain in the world. Experience remote villages, ancient monasteries, and cross the challenging Larkya La Pass with stunning views of Manaslu, Himlung Himal, and more.', 'trekking', 'Hard', 10,
 'Larkya La Pass (5160m)\nManaslu Conservation Area\nRemote Tibetan Buddhist villages\nPungen Glacier\nBirendra Lake\nLess crowded alternative to Annapurna',
-'assets/images/Langtang/pexels-photo-16666147.jpeg', 'Spring, Autumn', 5160, 'Restricted Area Permit, ACAP, MCAP, TIMS',
+'https://commons.wikimedia.org/wiki/Special:Redirect/file/Manaslu%20Circuit%20Trek%20-%20Mountain%20View.jpg?width=1200', 'Spring, Autumn', 5160, 'Restricted Area Permit, ACAP, MCAP, TIMS',
 'Drive Kathmandu to Soti Khola (700m)\nTrek to Machhakhola (930m)\nTrek to Jagat (1410m)\nTrek to Deng (1860m)\nTrek to Namrung (2660m)\nTrek to Lho (3180m)\nTrek to Samagaun (3530m)\nAcclimatization day in Samagaun\nTrek to Samdo (3860m)\nTrek to Dharamsala/Larkya Phedi (4460m)\nCross Larkya La Pass (5160m), descend to Bimthang (3720m)\nTrek to Tilije (2300m)\nTrek to Dharapani, drive to Besisahar\nDrive to Kathmandu\nBuffer day',
 'All transportation (Kathmandu-trek-Kathmandu)\nBasic lodge accommodation\nExperienced guide and porter\nAll permits (RAP, MCAP, ACAP, TIMS)\nThree meals a day during trek\nFirst aid kit\nGovernment taxes and fees',
 'Kathmandu hotel\nInternational flights\nTravel and rescue insurance\nExtra nights due to delays\nDrinks and snacks\nPersonal gear\nTips\nPersonal expenses');

@@ -107,6 +107,7 @@ $base = '../';
         <div style="background: var(--color-stone-800); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
             <h3 style="color: white; margin-bottom: 1rem; font-size: 1.25rem;">Register New Tour Guide</h3>
             <form method="POST" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end;">
+                <?php echo csrf_field(); ?>
                 <input type="hidden" name="create_guide" value="1">
                 <div>
                     <label style="color: var(--color-stone-400); font-size: 0.8rem; display: block; margin-bottom: 0.5rem;">Username</label>
@@ -156,6 +157,7 @@ $base = '../';
                             </td>
                             <td style="padding: 1rem;">
                                 <form method="POST" id="delete-guide-form-<?php echo $guide['id']; ?>">
+                                    <?php echo csrf_field(); ?>
                                     <input type="hidden" name="user_id" value="<?php echo $guide['id']; ?>">
                                     <input type="hidden" name="delete_guide" value="1">
                                     <button type="button" onclick="handleDeleteGuide(<?php echo $guide['id']; ?>, '<?php echo addslashes($guide['username']); ?>')" style="background: var(--color-red-600); color: white; border: none; padding: 0.4rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; cursor: pointer; transition: background 0.3s;"

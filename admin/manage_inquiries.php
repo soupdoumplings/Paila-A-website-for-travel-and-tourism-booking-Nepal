@@ -134,6 +134,7 @@ $base = '../';
 
                                         <?php if ($msg['status'] === 'new'): ?>
                                             <form method="POST" style="display: inline;">
+                                                <?php echo csrf_field(); ?>
                                                 <input type="hidden" name="inquiry_id" value="<?php echo $msg['id']; ?>">
                                                 <input type="hidden" name="action" value="mark_read">
                                                 <button type="submit" class="btn" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; background: var(--color-stone-100); color: var(--color-stone-700); border: none; cursor: pointer;" title="Mark as Read">
@@ -144,6 +145,7 @@ $base = '../';
 
                                         <!-- Inquiry delete action -->
                                         <form method="POST" id="delete-form-<?php echo $msg['id']; ?>" style="display: inline;">
+                                            <?php echo csrf_field(); ?>
                                             <input type="hidden" name="inquiry_id" value="<?php echo $msg['id']; ?>">
                                             <input type="hidden" name="action" value="delete">
                                             <button type="button" onclick="handleDeleteInquiry(<?php echo $msg['id']; ?>)" class="btn" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; cursor: pointer;" title="Delete">

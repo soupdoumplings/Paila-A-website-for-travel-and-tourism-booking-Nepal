@@ -141,6 +141,7 @@ $base = '../';
                             <td style="padding: 1rem;">
                                 <?php if($b['status'] == 'pending'): ?>
                                     <form method="POST" id="form-<?php echo $b['id']; ?>">
+                                        <?php echo csrf_field(); ?>
                                         <input type="hidden" name="booking_id" value="<?php echo $b['id']; ?>">
                                         <input type="hidden" name="action" id="action-<?php echo $b['id']; ?>" value="">
                                         <select name="tour_guide_id" required style="background: white; color: var(--color-stone-900); border: 1px solid var(--color-stone-200); padding: 0.4rem; border-radius: 0.25rem; width: 100%;">
