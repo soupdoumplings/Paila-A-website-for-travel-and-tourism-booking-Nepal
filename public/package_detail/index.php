@@ -199,12 +199,15 @@ include $base . 'includes/header.php';
     color: #1c1917;
     margin-bottom: 1rem;
     font-family: var(--font-serif), serif;
+    font-style: italic;
     line-height: 1.02;
 }
 .pd-main p {
     color: #57534e;
-    line-height: 1.85;
-    font-size: 1rem;
+    line-height: 1.72;
+    font-size: 1.18rem;
+    font-family: var(--font-serif), serif;
+    font-style: italic;
     margin-bottom: 0;
 }
 .pd-main ul { list-style: none; padding: 0; margin: 0; }
@@ -248,6 +251,8 @@ include $base . 'includes/header.php';
     margin: 0 0 0.8rem !important;
     color: var(--color-teal-900) !important;
     font-size: 0.72rem !important;
+    font-family: var(--font-sans), sans-serif !important;
+    font-style: normal !important;
     font-weight: 900;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -348,10 +353,12 @@ include $base . 'includes/header.php';
     border: 1px solid rgba(68, 64, 60, 0.1);
 }
 .pd-inclusion-box h3 {
-    font-size: 1rem;
+    font-size: 1.35rem;
     color: var(--color-teal-900);
-    margin-bottom: 0.7rem;
-    font-family: var(--font-sans), sans-serif;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-serif), serif;
+    font-style: italic;
+    font-weight: 700;
 }
 .pd-inclusion-box.excluded h3 { color: #991b1b; }
 .pd-check-list li {
@@ -364,6 +371,12 @@ include $base . 'includes/header.php';
     margin-top: 0.3rem;
     color: var(--color-amber-500);
     font-size: 0.74rem;
+}
+.pd-check-list li span {
+    font-family: var(--font-serif), serif;
+    font-size: 1.18rem;
+    font-style: italic;
+    line-height: 1.45;
 }
 .pd-requirement-note {
     padding: 1.15rem;
