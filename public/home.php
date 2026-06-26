@@ -238,15 +238,15 @@ try {
             <div class="category-grid" id="category-slider">
                 <?php
                 $categories = [
-                    ['name' => 'Trekking', 'icon' => 'fa-solid fa-mountain-sun', 'image' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80', 'filter' => 'trekking'],
-                    ['name' => 'Culture', 'icon' => 'fa-solid fa-landmark', 'image' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80', 'filter' => 'culture'],
-                    ['name' => 'Adventure', 'icon' => 'fa-solid fa-parachute-box', 'image' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80', 'filter' => 'adventure'],
-                    ['name' => 'Wellness', 'icon' => 'fa-solid fa-spa', 'image' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80', 'filter' => 'wellness'],
-                    ['name' => 'Family', 'icon' => 'fa-solid fa-people-group', 'image' => 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=800&q=80', 'filter' => 'family'],
-                    ['name' => 'Photography', 'icon' => 'fa-solid fa-camera', 'image' => 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?w=800&q=80', 'filter' => 'photography'],
-                    ['name' => 'Weekend', 'icon' => 'fa-solid fa-calendar-day', 'image' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80', 'filter' => 'weekend'],
-                    ['name' => 'Luxury', 'icon' => 'fa-solid fa-gem', 'image' => 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80', 'filter' => 'luxury'],
-                    ['name' => 'Budget', 'icon' => 'fa-solid fa-wallet', 'image' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80', 'filter' => 'budget']
+                    ['name' => 'Trekking', 'icon' => 'fa-solid fa-mountain-sun', 'image' => url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jpg'), 'filter' => 'trekking'],
+                    ['name' => 'Culture', 'icon' => 'fa-solid fa-landmark', 'image' => url('assets/images/kathmandu/Swayambhunath_temple_-_an_ancient_religious_architecture_of_Nepal.jpg'), 'filter' => 'culture'],
+                    ['name' => 'Adventure', 'icon' => 'fa-solid fa-parachute-box', 'image' => url('assets/images/Pokhara/pexels-photo-30131353.jpeg'), 'filter' => 'adventure'],
+                    ['name' => 'Wellness', 'icon' => 'fa-solid fa-spa', 'image' => url('assets/images/Rara/photo-1630291706048-81c1a92faa53.jpg'), 'filter' => 'wellness'],
+                    ['name' => 'Family', 'icon' => 'fa-solid fa-people-group', 'image' => url('assets/images/Chitwan/pexels-photo-10965840.jpeg'), 'filter' => 'family'],
+                    ['name' => 'Photography', 'icon' => 'fa-solid fa-camera', 'image' => url('assets/images/Mustang/pexels-photo-34022822.jpeg'), 'filter' => 'photography'],
+                    ['name' => 'Weekend', 'icon' => 'fa-solid fa-calendar-day', 'image' => url('assets/images/Pokhara/pexels-photo-14892590.jpeg'), 'filter' => 'weekend'],
+                    ['name' => 'Luxury', 'icon' => 'fa-solid fa-gem', 'image' => url('assets/images/private_journey.jpg'), 'filter' => 'luxury'],
+                    ['name' => 'Budget', 'icon' => 'fa-solid fa-wallet', 'image' => url('assets/images/Annapurna/pexels-photo-2902939.jpeg'), 'filter' => 'budget']
                 ];
 
                 foreach ($categories as $cat) {
