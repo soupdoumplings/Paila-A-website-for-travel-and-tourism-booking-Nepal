@@ -302,11 +302,7 @@
 
 .section-editorial-copy p {
     color: var(--color-stone-600);
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 1.24rem;
-    font-style: italic;
-    font-weight: 500;
-    line-height: 1.58;
+    line-height: 1.8;
     margin-bottom: 1.25rem;
 }
 
@@ -421,11 +417,7 @@
 
 .interest-copy p {
     color: var(--color-stone-600);
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 1.24rem;
-    font-style: italic;
-    font-weight: 500;
-    line-height: 1.58;
+    line-height: 1.8;
     margin-bottom: 1.5rem;
 }
 
@@ -615,24 +607,9 @@
     font-weight: 500;
 }
 
-.trust-copy p,
-.standard-card p,
-#about-content p,
-.destination-content p,
-.contact-section p {
-    font-family: "Cormorant Garamond", Georgia, serif !important;
-    font-style: italic;
-    font-weight: 500;
-}
-
-#about-content p {
-    font-size: 1.28rem !important;
-    line-height: 1.55 !important;
-}
-
 .standard-card p {
-    font-size: 1.05rem !important;
-    line-height: 1.45 !important;
+    font-size: 0.925rem !important;
+    line-height: 1.6 !important;
 }
 
 .standard-grid {
@@ -934,11 +911,11 @@
 }
 
 .private-journey-content p {
-    font-family: "Cormorant Garamond", Georgia, serif !important;
-    font-style: italic;
-    font-size: 1.35rem !important;
-    font-weight: 500;
-    line-height: 1.55 !important;
+    font-family: var(--font-sans) !important;
+    font-style: normal;
+    font-size: 1.1rem !important;
+    font-weight: 400;
+    line-height: 1.8 !important;
 }
 
 /* Contact */
