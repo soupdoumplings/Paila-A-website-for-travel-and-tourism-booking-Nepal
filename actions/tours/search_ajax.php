@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
+require_once __DIR__ . '/../../helpers/functions.php';
 header('Content-Type: application/json');
 
 $query = isset($_GET['q']) ? trim($_GET['q']) : '';
@@ -18,6 +19,11 @@ if (!isset($pdo) || isset($db_error)) {
 $stmt = $pdo->prepare("SELECT id, title, location, price, duration, image, category FROM tours WHERE title LIKE :query OR location LIKE :query OR description LIKE :query ORDER BY is_featured DESC, id DESC LIMIT 5");
 $stmt->execute(['query' => '%' . $query . '%']);
 $results = $stmt->fetchAll();
+
+foreach ($results as &$tour) {
+    $tour['image_url'] = get_tour_image($tour);
+}
+unset($tour);
 
 // Output JSON response
 echo json_encode($results, JSON_UNESCAPED_SLASHES);

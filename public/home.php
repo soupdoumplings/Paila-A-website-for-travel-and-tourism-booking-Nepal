@@ -80,7 +80,7 @@ $heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jp
             </p>
 
             <!-- Search -->
-            <form action="#tours" method="GET" class="hero-search-form animate-slideUp delay-500" data-validate>
+            <form action="<?php echo url('public/collection.php'); ?>" method="GET" class="hero-search-form animate-slideUp delay-500" data-validate data-search-source="hero">
                 <div class="hero-search-input-wrapper">
                      <input type="text" id="search-input" name="search" placeholder="Where do you want to explore?" class="hero-search-input" data-rules="required|min:3">
                      <!-- Icon -->

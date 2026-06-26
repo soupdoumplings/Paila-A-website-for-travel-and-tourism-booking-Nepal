@@ -191,9 +191,138 @@ document.addEventListener('DOMContentLoaded', () => {
         revealTargets.forEach((target) => target.classList.add('is-visible'));
     }
 
-    // Search
+    // Full-screen search overlay
+    const heroSearchForm = document.querySelector('[data-search-source="hero"]');
+    const heroSearchInput = document.getElementById('search-input');
+    const siteSearchOverlay = document.getElementById('site-search-overlay');
+    const siteSearchForm = document.getElementById('site-search-form');
+    const siteSearchInput = document.getElementById('site-search-input');
+    const siteSearchClose = document.getElementById('site-search-close');
+    const siteSearchResults = document.getElementById('site-search-results');
+    const siteSearchHint = document.getElementById('site-search-hint');
+
+    if (siteSearchOverlay && siteSearchForm && siteSearchInput && siteSearchResults) {
+        const baseUrl = window.PAILA_CONFIG ? window.PAILA_CONFIG.baseUrl : '/';
+        const fallbackImage = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80';
+        let overlaySearchTimeout;
+        let latestQuery = '';
+
+        const escapeHTML = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        }[char]));
+
+        const formatPrice = (value) => Number(value || 0).toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+        const openSearch = (initialValue = '') => {
+            siteSearchOverlay.classList.add('is-open');
+            siteSearchOverlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('search-open');
+            siteSearchInput.value = initialValue;
+            setTimeout(() => siteSearchInput.focus(), 40);
+            if (siteSearchInput.value.trim().length >= 2) {
+                runSearch(siteSearchInput.value.trim());
+            }
+        };
+
+        const closeSearch = () => {
+            siteSearchOverlay.classList.remove('is-open');
+            siteSearchOverlay.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('search-open');
+            siteSearchResults.innerHTML = '';
+            if (siteSearchHint) siteSearchHint.style.display = 'flex';
+        };
+
+        const renderResults = (results) => {
+            if (siteSearchHint) siteSearchHint.style.display = results.length ? 'none' : 'flex';
+
+            if (!results.length) {
+                siteSearchResults.innerHTML = '<div class="site-search-empty">No journeys found. Press Enter to search the full collection.</div>';
+                return;
+            }
+
+            siteSearchResults.innerHTML = results.map((tour) => {
+                const image = tour.image_url || fallbackImage;
+                return `
+                    <a class="site-search-result-card" href="${baseUrl}public/package_detail/?id=${encodeURIComponent(tour.id)}">
+                        <img src="${escapeHTML(image)}" alt="${escapeHTML(tour.title)}" onerror="this.src='${fallbackImage}'">
+                        <div>
+                            <div class="site-search-result-title">${escapeHTML(tour.title)}</div>
+                            <div class="site-search-result-meta">
+                                <span><i class="fa-solid fa-location-dot"></i> ${escapeHTML(tour.location)}</span>
+                                <span><i class="fa-regular fa-clock"></i> ${escapeHTML(tour.duration)}</span>
+                            </div>
+                        </div>
+                        <div class="site-search-result-price">
+                            <small>From</small>
+                            <span>&#8360; ${formatPrice(tour.price)}</span>
+                        </div>
+                    </a>`;
+            }).join('');
+        };
+
+        async function runSearch(query) {
+            latestQuery = query;
+            try {
+                const response = await fetch(`${baseUrl}actions/tours/search_ajax.php?q=${encodeURIComponent(query)}`);
+                const results = await response.json();
+                if (latestQuery === query) renderResults(results);
+            } catch (error) {
+                console.error(error);
+                siteSearchResults.innerHTML = '<div class="site-search-empty">Search is unavailable right now. Press Enter to open the full collection.</div>';
+            }
+        }
+
+        siteSearchInput.addEventListener('input', () => {
+            const query = siteSearchInput.value.trim();
+            clearTimeout(overlaySearchTimeout);
+
+            if (heroSearchInput) heroSearchInput.value = siteSearchInput.value;
+
+            if (query.length < 2) {
+                siteSearchResults.innerHTML = '';
+                if (siteSearchHint) siteSearchHint.style.display = 'flex';
+                return;
+            }
+
+            overlaySearchTimeout = setTimeout(() => runSearch(query), 220);
+        });
+
+        siteSearchForm.addEventListener('submit', (event) => {
+            if (!siteSearchInput.value.trim()) {
+                event.preventDefault();
+                siteSearchInput.focus();
+            }
+        });
+
+        if (siteSearchClose) siteSearchClose.addEventListener('click', closeSearch);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && siteSearchOverlay.classList.contains('is-open')) closeSearch();
+        });
+
+        if (heroSearchInput) {
+            heroSearchInput.addEventListener('focus', () => openSearch(heroSearchInput.value.trim()));
+            heroSearchInput.addEventListener('click', () => openSearch(heroSearchInput.value.trim()));
+        }
+
+        if (heroSearchForm) {
+            heroSearchForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                openSearch(heroSearchInput ? heroSearchInput.value.trim() : '');
+            });
+        }
+    }
+
+    // Search fallback for pages without the full-screen overlay
     const searchInput = document.getElementById('search-input');
-    if (searchInput) {
+    if (searchInput && !siteSearchOverlay) {
         const resultsDiv = document.createElement('div');
         resultsDiv.id = 'search-results';
         resultsDiv.style.cssText = `

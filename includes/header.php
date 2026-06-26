@@ -35,7 +35,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Main stylesheets -->
-    <link rel="stylesheet" href="<?php echo url('assets/css/style.css'); ?>?v=1.6">
+    <link rel="stylesheet" href="<?php echo url('assets/css/style.css'); ?>?v=1.7">
     <link rel="stylesheet" href="<?php echo url('assets/css/validation.css'); ?>?v=1.1">
     <link rel="stylesheet" href="<?php echo url('assets/css/tours.css'); ?>?v=1.2">
     <!-- Page styles -->
@@ -60,7 +60,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
             csrfToken: '<?php echo csrf_token(); ?>'
         };
     </script>
-    <script src="<?php echo url('assets/js/main.js'); ?>?v=1.2" defer></script>
+    <script src="<?php echo url('assets/js/main.js'); ?>?v=1.3" defer></script>
 </head>
 <body>
 
@@ -148,6 +148,25 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
             </div>
         </div>
     </nav>
+
+    <?php if (!$isAdmin): ?>
+    <div class="site-search-overlay" id="site-search-overlay" aria-hidden="true">
+        <form action="<?php echo url('public/collection.php'); ?>" method="GET" class="site-search-bar" id="site-search-form" role="search">
+            <i class="fa-solid fa-magnifying-glass site-search-bar-icon" aria-hidden="true"></i>
+            <input type="search" name="search" id="site-search-input" class="site-search-input" placeholder="Search journeys, places, experiences..." autocomplete="off">
+            <button type="button" class="site-search-close" id="site-search-close" aria-label="Close search">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+        </form>
+        <div class="site-search-stage">
+            <div class="site-search-results" id="site-search-results" aria-live="polite"></div>
+            <div class="site-search-hint" id="site-search-hint">
+                <span>Type at least two letters</span>
+                <span>Press Enter to view the full collection</span>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 
     <!-- Offline status alert -->
     <?php if (isset($db_error) && $db_error): ?>
