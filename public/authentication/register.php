@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </svg>
             पाइला
         </a>
-        <div class="auth-wrapper">
+        <div class="auth-wrapper auth-register">
             <!-- Left Side - Benefits -->
             <div class="auth-benefits">
                 <div class="auth-benefits-header">
@@ -84,10 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <svg fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                         </svg>
-                        Join Us
+                        Start the Archive
                     </div>
-                    <h1>Begin Your <span class="highlight">Journey</span></h1>
-                    <p class="auth-benefits-description">Join thousands of adventurers who have discovered extraordinary experiences with us. Create your account and unlock a world of possibilities.</p>
+                    <h1>Begin With <span class="highlight">Paila</span></h1>
+                    <p class="auth-benefits-description">Create a travel profile for Nepal packages, premium requests, booking updates, and guide assignment details.</p>
                 </div>
                 
                 <div class="auth-benefits-list">
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <span class="benefit-text">Exclusive access to private tours</span>
+                        <span class="benefit-text">Book Nepal packages faster</span>
                     </div>
                     
                     <div class="benefit-item">
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <span class="benefit-text">Personalized travel recommendations</span>
+                        <span class="benefit-text">Link past requests by email</span>
                     </div>
                     
                     <div class="benefit-item">
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <span class="benefit-text">Early booking privileges</span>
+                        <span class="benefit-text">Track approval and messages</span>
                     </div>
                     
                     <div class="benefit-item">
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <span class="benefit-text">Member-only discounts</span>
+                        <span class="benefit-text">View assigned guide profiles</span>
                     </div>
                 </div>
             </div>
@@ -133,8 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="auth-form-section">
                 <div class="auth-form-container">
                     <div class="auth-form-header">
+                        <span class="auth-kicker">Create travel profile</span>
                         <h2>Create Account</h2>
-                        <p>Fill in your details to get started</p>
+                        <p>Keep the details simple. Your dashboard grows as you book.</p>
                     </div>
                     
                     <?php if($error): ?>
@@ -157,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                 </svg>
-                                <input type="text" id="fullname" name="fullname" class="auth-input" placeholder="John Doe" data-rules="required|min:3" value="<?php echo isset($_POST['fullname']) ? e($_POST['fullname']) : ''; ?>">
+                                <input type="text" id="fullname" name="fullname" class="auth-input" placeholder="Your full name" data-rules="required|min:3" value="<?php echo isset($_POST['fullname']) ? e($_POST['fullname']) : ''; ?>">
                             </div>
                         </div>
                         

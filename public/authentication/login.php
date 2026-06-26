@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </svg>
             पाइला
         </a>
-        <div class="auth-wrapper">
+        <div class="auth-wrapper auth-login">
             <!-- Left Side - Benefits -->
             <div class="auth-benefits">
                 <div class="auth-benefits-header">
@@ -84,10 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <svg fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                         </svg>
-                        Welcome Back
+                        Member Atelier
                     </div>
-                    <h1>Continue Your <span class="highlight">Journey</span></h1>
-                    <p class="auth-benefits-description">Sign in to access your personalized travel dashboard and continue exploring extraordinary destinations around the world.</p>
+                    <h1>Return to Your <span class="highlight">Paila</span></h1>
+                    <p class="auth-benefits-description">Step back into your Nepal travel desk: bookings, guide updates, and curated journeys arranged with quiet care.</p>
                 </div>
                 
                 <div class="auth-benefits-list">
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <span class="benefit-text">Access your saved tours</span>
+                        <span class="benefit-text">Review your curated journeys</span>
                     </div>
                     
                     <div class="benefit-item">
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <span class="benefit-text">Track your bookings</span>
+                        <span class="benefit-text">Track booking requests</span>
                     </div>
                     
                     <div class="benefit-item">
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <span class="benefit-text">Get personalized recommendations</span>
+                        <span class="benefit-text">Receive assigned guide details</span>
                     </div>
                     
                     <div class="benefit-item">
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <span class="benefit-text">Enjoy exclusive member benefits</span>
+                        <span class="benefit-text">Continue private access requests</span>
                     </div>
                 </div>
             </div>
@@ -132,6 +132,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Right Side - Form -->
             <div class="auth-form-section">
                 <div class="auth-form-container">
+                    <div class="auth-form-header">
+                        <span class="auth-kicker">Secure sign in</span>
+                        <h2>Welcome back</h2>
+                        <p>Use the email connected to your Paila booking or account.</p>
+                    </div>
+
                     <?php 
                     $prefill_email = isset($_GET['email']) ? e($_GET['email']) : ''; 
                     $is_booked = isset($_GET['booked']) && $_GET['booked'] == '1';
