@@ -518,10 +518,20 @@ button:hover {
 
 /* Tablet */
 @media (max-width: 768px) {
+    .admin-login-shell {
+        padding: 1rem;
+    }
+
+    .admin-login-card {
+        padding: 1.75rem;
+    }
+
     .admin-container {
         margin: 2rem auto;
         padding: 1.5rem;
         border-radius: 0.75rem;
+        width: calc(100% - 1.25rem);
+        overflow: hidden;
     }
 
     .admin-header {
@@ -532,6 +542,13 @@ button:hover {
 
     .admin-table {
         font-size: 0.85rem;
+        min-width: 680px;
+    }
+
+    .admin-container:has(.admin-table),
+    .admin-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .admin-table th,
@@ -570,6 +587,7 @@ button:hover {
     .admin-card-overlay {
         padding: 2.5rem;
         margin-top: -1.5rem;
+        width: calc(100% - 1.25rem);
     }
 
     .form-row {
@@ -585,6 +603,15 @@ button:hover {
 
 /* Mobile */
 @media (max-width: 480px) {
+    .admin-login-card {
+        padding: 1.35rem;
+        border-radius: 10px;
+    }
+
+    .admin-login-card h1 {
+        font-size: 2rem;
+    }
+
     .admin-container {
         margin: 1.5rem auto;
         padding: 1.25rem;
@@ -661,7 +688,7 @@ button:hover {
 
     /* Admin Hero */
     .admin-hero {
-        padding: 2rem 0;
+        padding: 1.5rem 0;
     }
 
     .admin-hero h1 {

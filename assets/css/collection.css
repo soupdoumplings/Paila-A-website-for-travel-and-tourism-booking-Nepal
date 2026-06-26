@@ -197,6 +197,51 @@
         padding: 1.5rem;
     }
 
+    .collection-grid-section .grid.grid-cols-12 {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    .collection-grid-section aside,
+    .collection-grid-section .col-span-9 {
+        grid-column: 1 / -1 !important;
+    }
+
+    .collection-grid-section .col-span-9 > div:first-child {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 0.9rem;
+        margin-bottom: 1.4rem !important;
+    }
+
+    .collection-grid-section .col-span-9 > div:first-child form {
+        width: 100%;
+        justify-content: space-between;
+        padding: 0.75rem 0.85rem;
+        border: 1px solid rgba(4, 47, 46, 0.1);
+        border-radius: 8px;
+        background: rgba(255, 253, 249, 0.72);
+    }
+
+    #toursGrid {
+        grid-template-columns: 1fr !important;
+        gap: 1.35rem !important;
+    }
+
+    #toursGrid .collection-card-image-container {
+        height: clamp(230px, 58vw, 320px);
+    }
+
+    #toursGrid .collection-card-content > div:last-child {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .price-preset-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .filter-input,
     .filter-select {
         font-size: 0.85rem;
@@ -219,6 +264,22 @@
 @media (max-width: 480px) {
     .collection-hero {
         padding: 7rem 0 3rem;
+        text-align: left;
+    }
+
+    .collection-hero .text-center {
+        text-align: left !important;
+    }
+
+    .collection-hero h1 {
+        font-size: clamp(2.5rem, 14vw, 3.35rem) !important;
+        line-height: 0.95;
+        margin-bottom: 1.2rem !important;
+    }
+
+    .collection-hero p {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 
     .collection-grid-section {
@@ -228,6 +289,7 @@
     .filters-sidebar {
         padding: 1.25rem;
         border-radius: 8px;
+        margin-bottom: 1.25rem;
     }
 
     .filter-label {
@@ -261,5 +323,23 @@
 
     .price-preset-grid {
         grid-template-columns: 1fr;
+    }
+
+    .collection-grid-section .col-span-9 > div:first-child form {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .collection-grid-section .col-span-9 > div:first-child form label {
+        width: 100%;
+    }
+
+    #toursGrid .collection-card-content > div:last-child {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    #toursGrid .price-display.card-price {
+        font-size: 1.05rem;
     }
 }

@@ -557,7 +557,7 @@ include $base . 'includes/header.php';
     .pd-card { position: static; }
     .pd-sticky-book-inner { flex-direction: column; align-items: stretch; }
     .pd-hero { min-height: 74vh; }
-    .pd-hero-inner { margin-left: auto; }
+    .pd-hero-inner { margin-left: auto; margin-right: auto; }
     .pd-overview-strip,
     .pd-feature-list,
     .pd-inclusion-grid {
@@ -566,6 +566,131 @@ include $base . 'includes/header.php';
     .pd-timeline-list li {
         grid-template-columns: 1fr;
         gap: 0.45rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .pd-hero {
+        min-height: 88svh;
+        padding: 7rem 0 4.2rem;
+        background-position: center;
+    }
+
+    .pd-hero::before {
+        background:
+            radial-gradient(circle at 22% 18%, rgba(251, 191, 36, 0.18), transparent 34%),
+            linear-gradient(90deg, rgba(4, 47, 46, 0.86) 0%, rgba(4, 47, 46, 0.5) 58%, rgba(12, 10, 9, 0.38) 100%),
+            linear-gradient(to top, rgba(12, 10, 9, 0.9) 0%, rgba(12, 10, 9, 0.22) 62%, rgba(12, 10, 9, 0.3) 100%);
+    }
+
+    .pd-back {
+        margin-bottom: 1.1rem;
+        font-size: 0.68rem;
+        padding: 0.5rem 0.72rem;
+    }
+
+    .pd-category-badge {
+        font-size: 0.64rem;
+        letter-spacing: 0.11em;
+        padding: 0.5rem 0.76rem;
+    }
+
+    .pd-title {
+        font-size: clamp(3rem, 16vw, 4.35rem);
+        line-height: 0.9;
+        margin-bottom: 1rem;
+    }
+
+    .pd-hero-lede {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        margin-bottom: 1.25rem;
+    }
+
+    .pd-meta {
+        gap: 0.45rem;
+    }
+
+    .pd-meta span {
+        width: 100%;
+        justify-content: flex-start;
+        border-radius: 8px;
+        padding: 0.58rem 0.72rem;
+    }
+
+    .pd-content {
+        padding: 3rem 0 5.5rem;
+    }
+
+    .pd-grid {
+        width: calc(100% - 1.25rem);
+        gap: 1.25rem;
+    }
+
+    .pd-editorial-panel,
+    .pd-section-card {
+        padding: 1.25rem;
+    }
+
+    .pd-editorial-panel::after {
+        width: 3.3rem;
+        height: 3.3rem;
+    }
+
+    .pd-main h2 {
+        font-size: clamp(2rem, 11vw, 3rem);
+    }
+
+    .pd-overview-item {
+        padding: 0.85rem;
+    }
+
+    .pd-feature-list li {
+        grid-template-columns: 1.55rem 1fr;
+        gap: 0.65rem;
+        padding: 0.82rem !important;
+    }
+
+    .pd-feature-list em {
+        width: 1.55rem;
+        height: 1.55rem;
+        font-size: 0.64rem;
+    }
+
+    .pd-card-price {
+        padding: 1.5rem 1rem;
+    }
+
+    .pd-card-price .price-display.large-price {
+        font-size: clamp(1.85rem, 10vw, 2.35rem);
+        gap: 0.2rem;
+    }
+
+    .pd-card-body {
+        padding: 1.15rem;
+    }
+
+    .pd-card-row {
+        font-size: 0.88rem;
+        padding: 0.78rem 0;
+    }
+
+    .pd-sticky-book {
+        display: none;
+    }
+
+    .pd-modal-overlay {
+        align-items: flex-end;
+        padding: 0.75rem;
+    }
+
+    .pd-modal {
+        max-height: calc(100svh - 1.5rem);
+        border-radius: 10px;
+    }
+
+    .pd-modal-body {
+        padding: 1.35rem;
     }
 }
 
@@ -684,7 +809,7 @@ include $base . 'includes/header.php';
 <!-- Hero -->
 <section class="pd-hero" style="background-image: url('<?php echo e($img); ?>');">
     <div class="container pd-hero-inner">
-        <a href="<?php echo $base; ?>collection.php" class="pd-back">
+        <a href="<?php echo url('public/collection.php'); ?>" class="pd-back">
             <i class="fa-solid fa-arrow-left"></i> Back to Collection
         </a>
         <?php if ($category): ?>

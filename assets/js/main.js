@@ -20,6 +20,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeSidebar = document.getElementById('close-sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
 
+    // Mobile navigation drawer
+    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileNavToggle && navLinks) {
+        const setMobileNav = (isOpen) => {
+            navLinks.classList.toggle('active', isOpen);
+            document.body.classList.toggle('nav-open', isOpen);
+            mobileNavToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            mobileNavToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+            mobileNavToggle.innerHTML = isOpen
+                ? '<i class="fa-solid fa-xmark"></i>'
+                : '<i class="fa-solid fa-bars"></i>';
+        };
+
+        mobileNavToggle.addEventListener('click', () => {
+            setMobileNav(!navLinks.classList.contains('active'));
+        });
+
+        navLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => setMobileNav(false));
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && navLinks.classList.contains('active')) {
+                setMobileNav(false);
+            }
+        });
+    }
+
     if (userIcon && userSidebar) {
         userIcon.addEventListener('click', (e) => {
             e.preventDefault();

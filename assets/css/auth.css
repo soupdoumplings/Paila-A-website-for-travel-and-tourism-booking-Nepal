@@ -2,17 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&family=Prata&display=swap');
 
 :root {
-    --auth-primary: #4169E1;
-    --auth-primary-hover: #5B7FE8;
+    --auth-primary: #042f2e;
+    --auth-primary-hover: #064e4b;
     --auth-text-dark: #1a1a1a;
     --auth-text-light: #666;
     --auth-border: #e5e5e5;
-    --auth-bg-light: #f8f9fa;
+    --auth-bg-light: #fffdf9;
 }
 
 .auth-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 50%, #90CAF9 100%);
+    background:
+        linear-gradient(90deg, rgba(4, 47, 46, 0.035) 1px, transparent 1px),
+        linear-gradient(rgba(68, 64, 60, 0.025) 1px, transparent 1px),
+        linear-gradient(180deg, #f7fbfa 0%, #fffdf9 50%, #fafaf9 100%);
+    background-size: 86px 86px, 86px 86px, auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,9 +38,10 @@
     font-family: 'Prata', serif;
     font-size: 1.25rem;
     padding: 0.75rem 1.25rem;
-    background: white;
-    border-radius: 50px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 253, 249, 0.88);
+    border: 1px solid rgba(4, 47, 46, 0.12);
+    border-radius: 999px;
+    box-shadow: 0 14px 36px rgba(28, 25, 23, 0.1);
     transition: all 0.3s ease;
     z-index: 10;
 }
@@ -52,16 +57,19 @@
     grid-template-columns: 1fr 1fr;
     max-width: 1200px;
     width: 100%;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 253, 249, 0.94);
+    border: 1px solid rgba(180, 83, 9, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 28px 90px rgba(28, 25, 23, 0.16);
     overflow: hidden;
     min-height: 600px;
 }
 
 /* Benefits */
 .auth-benefits {
-    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    background:
+        linear-gradient(135deg, rgba(4, 47, 46, 0.9), rgba(4, 47, 46, 0.58)),
+        url('../images/guest_experience.jpg') center/cover;
     padding: 4rem 3rem;
     display: flex;
     flex-direction: column;
@@ -80,7 +88,7 @@
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-size: 0.875rem;
-    color: var(--auth-text-light);
+    color: var(--auth-primary);
     margin-bottom: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
@@ -95,16 +103,16 @@
     font-family: 'Prata', serif;
     font-size: 3rem;
     line-height: 1.2;
-    color: var(--auth-text-dark);
+    color: #fffdf9;
     margin: 0;
 }
 
 .auth-benefits h1 .highlight {
-    color: var(--auth-primary);
+    color: var(--color-amber-400, #fbbf24);
 }
 
 .auth-benefits-description {
-    color: var(--auth-text-light);
+    color: rgba(255, 253, 249, 0.78);
     font-size: 1rem;
     line-height: 1.6;
     margin-top: 1rem;
@@ -122,7 +130,7 @@
     gap: 1rem;
     background: white;
     padding: 1rem 1.5rem;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -161,7 +169,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: white;
+    background: rgba(255, 253, 249, 0.96);
 }
 
 .auth-form-container {
@@ -311,7 +319,7 @@
 .auth-submit:hover {
     background: var(--auth-primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(65, 105, 225, 0.3);
+    box-shadow: 0 16px 34px rgba(4, 47, 46, 0.2);
 }
 
 .auth-submit svg {
@@ -416,7 +424,8 @@
 
 @media (max-width: 640px) {
     .auth-container {
-        padding: 1rem;
+        align-items: flex-start;
+        padding: 5.25rem 0.75rem 1rem;
     }
 
     .auth-back-link {
@@ -427,12 +436,12 @@
     }
 
     .auth-wrapper {
-        border-radius: 16px;
+        border-radius: 8px;
         min-height: auto;
     }
 
     .auth-form-section {
-        padding: 2rem 1.5rem;
+        padding: 1.8rem 1.25rem;
     }
 
     .auth-form-header h2 {
@@ -464,11 +473,11 @@
     }
 
     .auth-wrapper {
-        border-radius: 12px;
+        border-radius: 8px;
     }
 
     .auth-form-section {
-        padding: 1.75rem 1.25rem;
+        padding: 1.5rem 1rem;
     }
 
     .auth-form-header h2 {

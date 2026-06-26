@@ -1119,19 +1119,20 @@
 
     .hero-text-container {
         padding-left: 0;
-        text-align: center;
+        text-align: left;
         width: min(100%, calc(100vw - 2rem));
         margin-inline: auto;
     }
 
     #hero-content h1 {
-        font-size: clamp(2.25rem, 9vw, 3.15rem) !important;
+        font-size: clamp(2.65rem, 13vw, 4.2rem) !important;
         letter-spacing: 0 !important;
+        max-width: 7.6em;
     }
 
     #hero-content p:not(.text-xs-caps) {
         font-size: 0.95rem !important;
-        max-width: 100% !important;
+        max-width: 33rem !important;
     }
 
     /* Search */
@@ -1153,13 +1154,13 @@
     /* Stats */
     .hero-stats {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 0.75rem 1rem;
         width: 100%;
     }
 
     .hero-stats > div:nth-child(3) {
-        grid-column: 1 / -1;
+        grid-column: auto;
     }
 
     .hero-scroll-cue {
@@ -1184,6 +1185,11 @@
         padding: 2rem 0 3rem;
     }
 
+    #about-content .container > div {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
     /* Padding */
     .section-padding {
         padding: 3rem 0;
@@ -1200,7 +1206,7 @@
 
     /* Private */
     .private-journey-content {
-        padding: 2.5rem;
+        padding: 2.5rem !important;
     }
 
     .private-journey-image {
@@ -1230,19 +1236,19 @@
     }
 
     .hero-text-container {
-        max-width: 22rem;
+        max-width: none;
     }
 
     #hero-content p:not(.text-xs-caps) {
-        width: min(100%, 20rem) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
+        width: min(100%, 24rem) !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 
     .hero-search-form {
-        width: min(100%, 20rem);
-        margin-left: auto;
-        margin-right: auto;
+        width: min(100%, 26rem);
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
@@ -1281,7 +1287,7 @@
 
     #hero-content {
         min-height: 100vh;
-        padding: 0 1rem;
+        padding: 0;
         padding-bottom: 6rem;
     }
 
@@ -1290,7 +1296,7 @@
     }
 
     #hero-content h1 {
-        font-size: 2.25rem !important;
+        font-size: clamp(2.7rem, 15vw, 3.75rem) !important;
         letter-spacing: 0 !important;
     }
 
@@ -1320,14 +1326,14 @@
     /* Stats */
     .hero-stats {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.35rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.45rem;
         margin-top: 1.5rem;
         width: 100%;
     }
 
     .hero-stats > div:nth-child(3) {
-        grid-column: 1 / -1;
+        grid-column: auto;
     }
 
     .hero-scroll-cue {
@@ -1375,7 +1381,7 @@
     }
 
     .private-journey-content {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1.25rem !important;
     }
 
     /* Contact */
@@ -1386,5 +1392,118 @@
     .contact-form-card {
         padding: 1.75rem;
         border-radius: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-editorial-head,
+    .editorial-intro-grid,
+    .interest-editorial,
+    .trust-standard {
+        gap: 1.5rem;
+    }
+
+    .section-editorial-head {
+        margin-bottom: 2rem;
+        padding-bottom: 1.4rem;
+    }
+
+    .tours-grid {
+        gap: 1.25rem;
+    }
+
+    .collection-card-content > div:last-child {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 0.8rem;
+    }
+
+    .interest-copy {
+        padding-bottom: 0.25rem;
+    }
+
+    .interest-slider-panel {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .destination-gallery .destination-card:first-child h3 {
+        font-size: 2.5rem !important;
+    }
+
+    .standard-card {
+        padding: 1rem;
+    }
+
+    .instagram-post-card {
+        max-width: 28rem;
+        margin-inline: auto;
+    }
+
+    .private-journey-section > .grid-responsive-split {
+        width: calc(100% - 1.25rem);
+        min-height: auto !important;
+    }
+
+    .private-journey-content h2 {
+        font-size: clamp(3rem, 15vw, 4rem) !important;
+    }
+
+    .private-journey-content .grid-responsive-3 {
+        margin-top: 2.5rem !important;
+        padding-top: 2rem !important;
+    }
+
+    .contact-section .grid-responsive-split {
+        gap: 2rem;
+    }
+
+    .contact-section h2 {
+        font-size: clamp(2.7rem, 13vw, 3.6rem) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .text-xs-caps {
+        font-size: 0.66rem;
+        letter-spacing: 0.18em;
+    }
+
+    .hero-stats {
+        text-align: left;
+    }
+
+    .hero-search-form .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.78rem 1rem !important;
+    }
+
+    .editorial-intro h2,
+    .section-editorial-head h2,
+    .interest-copy h2,
+    .trust-copy h2 {
+        font-size: clamp(2.65rem, 14vw, 3.4rem) !important;
+    }
+
+    .destination-gallery .destination-card,
+    .destination-gallery .destination-card:first-child {
+        min-height: 330px;
+    }
+
+    .destination-gallery .destination-card:first-child .destination-content {
+        padding: 1.5rem;
+    }
+
+    .destination-gallery .destination-card:first-child h3 {
+        font-size: 2.1rem !important;
+    }
+
+    .instagram-review-grid {
+        gap: 1.4rem;
+    }
+
+    .contact-form-card {
+        padding: 1.35rem;
     }
 }
