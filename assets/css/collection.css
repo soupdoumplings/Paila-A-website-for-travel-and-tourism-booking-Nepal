@@ -15,11 +15,27 @@
     background: var(--gallery-paper);
     padding: 2rem;
     border-radius: 8px;
-    height: fit-content;
     position: sticky;
-    top: 2rem;
+    top: 6.5rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(4, 47, 46, 0.5) rgba(231, 229, 228, 0.75);
     border: 1px solid var(--gallery-line);
     box-shadow: var(--gallery-shadow);
+}
+
+.filters-sidebar form > div:first-child {
+    position: sticky;
+    top: -2rem;
+    z-index: 3;
+    background: linear-gradient(180deg, #fffdf9 72%, rgba(255, 253, 249, 0));
+    margin: -2rem -2rem 1.5rem !important;
+    padding: 1.5rem 2rem 1rem !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .filters-sidebar::-webkit-scrollbar {
@@ -214,10 +230,6 @@
         position: sticky;
         top: 5rem;
         max-height: min(72vh, 620px);
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(4, 47, 46, 0.5) rgba(231, 229, 228, 0.75);
         margin-bottom: 2rem;
         padding: 1.5rem;
         padding-bottom: 2rem;
