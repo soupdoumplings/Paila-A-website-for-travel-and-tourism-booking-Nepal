@@ -69,9 +69,9 @@ include $base . 'includes/header.php';
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(circle at 18% 28%, rgba(251, 191, 36, 0.18), transparent 30%),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.22) 44%, rgba(12, 10, 9, 0.14) 100%),
-        linear-gradient(to top, rgba(12, 10, 9, 0.82) 0%, rgba(12, 10, 9, 0.12) 62%, rgba(12, 10, 9, 0.18) 100%);
+        linear-gradient(90deg, rgba(0, 0, 0, 0.44) 0%, rgba(0, 0, 0, 0.12) 48%, rgba(0, 0, 0, 0.04) 100%),
+        linear-gradient(to top, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.08) 58%, rgba(0, 0, 0, 0.06) 100%);
+    pointer-events: none;
 }
 .pd-hero::after {
     content: '';
@@ -601,9 +601,8 @@ include $base . 'includes/header.php';
 
     .pd-hero::before {
         background:
-            radial-gradient(circle at 22% 18%, rgba(251, 191, 36, 0.18), transparent 34%),
-            linear-gradient(90deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.24) 58%, rgba(12, 10, 9, 0.28) 100%),
-            linear-gradient(to top, rgba(12, 10, 9, 0.86) 0%, rgba(12, 10, 9, 0.16) 62%, rgba(12, 10, 9, 0.22) 100%);
+            linear-gradient(90deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.14) 64%, rgba(0, 0, 0, 0.08) 100%),
+            linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.1) 62%, rgba(0, 0, 0, 0.06) 100%);
     }
 
     .pd-back {
