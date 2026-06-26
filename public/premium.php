@@ -12,6 +12,9 @@ $access_success = $_SESSION['access_success'] ?? '';
 $access_error = $_SESSION['access_error'] ?? '';
 unset($_SESSION['access_success'], $_SESSION['access_error']);
 
+$premiumHeroVideo = __DIR__ . '/../assets/video/1.mp4';
+$premiumHeroImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jpg');
+
 include '../includes/header.php';
 ?>
 
@@ -113,9 +116,13 @@ include '../includes/header.php';
 <section style="position: relative; min-height: 100vh; display: flex; align-items: center; background: #000; overflow: hidden; color: white;">
     <!-- Video overlay -->
     <div style="position: absolute; inset: 0; z-index: 1;">
+        <?php if (is_file($premiumHeroVideo)): ?>
         <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.46;">
             <source src="<?php echo url('assets/video/1.mp4'); ?>" type="video/mp4">
         </video>
+        <?php else: ?>
+        <div style="position: absolute; inset: 0; background-image: url('<?php echo e($premiumHeroImage); ?>'); background-size: cover; background-position: center; opacity: 0.58;"></div>
+        <?php endif; ?>
         <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.28) 52%, rgba(0,0,0,0.72) 100%);"></div>
     </div>
 

@@ -32,12 +32,23 @@ try {
         $totalDestinationsCount = $pdo->query("SELECT COUNT(DISTINCT location) FROM tours")->fetchColumn();
     }
 } catch (Exception $e) {}
+
+$heroVideoDir = __DIR__ . '/../assets/video/';
+$heroClipNames = ['1.mp4', '2.mp4', '3.mp4', '4.mp4', '5.mp4', '6.mp4', '7.mp4', '8.mp4'];
+$heroClips = [];
+foreach ($heroClipNames as $clipName) {
+    if (is_file($heroVideoDir . $clipName)) {
+        $heroClips[] = $clipName;
+    }
+}
+$heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jpg');
 ?>
 
 <!-- Hero -->
 <section id="parallax-container">
     <!-- Background -->
-    <div id="parallax-bg" style="background-color: #000;">
+    <div id="parallax-bg" style="background-color: #000; background-image: url('<?php echo e($heroFallbackImage); ?>'); background-size: cover; background-position: center;">
+        <?php if (!empty($heroClips)): ?>
         <video id="hero-video-1" muted playsinline 
                style="position: absolute; top: 0; left: 0; width: 100%; height: 112vh; object-fit: cover; z-index: -2; opacity: 0; transition: opacity 1.5s ease-in-out;">
         </video>
@@ -49,8 +60,9 @@ try {
         <!-- Video config -->
         <div id="video-config" 
              data-base-url="<?php echo url('assets/video/'); ?>"
-             data-clips='["1.mp4", "2.mp4", "3.mp4", "4.mp4", "5.mp4", "6.mp4", "7.mp4", "8.mp4"]'>
+             data-clips='<?php echo e(json_encode($heroClips)); ?>'>
         </div>
+        <?php endif; ?>
     </div>
 
     <!-- Content -->

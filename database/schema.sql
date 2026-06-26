@@ -1,6 +1,3 @@
-CREATE DATABASE IF NOT EXISTS nepal_tours;
-USE nepal_tours;
-
 -- Create roles table
 CREATE TABLE IF NOT EXISTS roles (
     id INT AUTO_INCREMENT PRIMARY KEY,

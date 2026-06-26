@@ -1,5 +1,3 @@
-USE nepal_tours;
-
 START TRANSACTION;
 
 SET @admin_id := (
