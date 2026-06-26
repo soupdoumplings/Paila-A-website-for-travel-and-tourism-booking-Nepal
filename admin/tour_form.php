@@ -119,7 +119,6 @@ if (isset($_GET['id'])) {
                         <option value="">—</option>
                         <option value="trekking" <?php echo ($tour && ($tour['category'] ?? '') === 'trekking') ? 'selected' : ''; ?>>Trekking</option>
                         <option value="culture" <?php echo ($tour && ($tour['category'] ?? '') === 'culture') ? 'selected' : ''; ?>>Culture</option>
-                        <option value="cultural" <?php echo ($tour && ($tour['category'] ?? '') === 'cultural') ? 'selected' : ''; ?>>Cultural</option>
                         <option value="adventure" <?php echo ($tour && ($tour['category'] ?? '') === 'adventure') ? 'selected' : ''; ?>>Adventure</option>
                         <option value="wellness" <?php echo ($tour && ($tour['category'] ?? '') === 'wellness') ? 'selected' : ''; ?>>Wellness</option>
                         <option value="family" <?php echo ($tour && ($tour['category'] ?? '') === 'family') ? 'selected' : ''; ?>>Family</option>

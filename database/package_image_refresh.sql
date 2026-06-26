@@ -1,6 +1,11 @@
 USE nepal_tours;
 
 -- Safe to run on an existing database. It only updates package image paths.
+-- Also normalizes the old "cultural" category slug into the single public "culture" category.
+UPDATE tours
+SET category = 'culture'
+WHERE category = 'cultural';
+
 UPDATE tours
 SET image = 'assets/images/Everest/photo-1544735716-87fa59a45b4e.jpg'
 WHERE title = 'Everest Base Camp Trek';

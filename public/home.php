@@ -239,8 +239,7 @@ try {
                 <?php
                 $categories = [
                     ['name' => 'Trekking', 'icon' => 'fa-solid fa-mountain-sun', 'image' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80', 'filter' => 'trekking'],
-                    ['name' => 'Cultural', 'icon' => 'fa-solid fa-landmark', 'image' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80', 'filter' => 'cultural'],
-                    ['name' => 'Culture', 'icon' => 'fa-solid fa-building-columns', 'image' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80', 'filter' => 'culture'],
+                    ['name' => 'Culture', 'icon' => 'fa-solid fa-landmark', 'image' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80', 'filter' => 'culture'],
                     ['name' => 'Adventure', 'icon' => 'fa-solid fa-parachute-box', 'image' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80', 'filter' => 'adventure'],
                     ['name' => 'Wellness', 'icon' => 'fa-solid fa-spa', 'image' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80', 'filter' => 'wellness'],
                     ['name' => 'Family', 'icon' => 'fa-solid fa-people-group', 'image' => 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=800&q=80', 'filter' => 'family'],

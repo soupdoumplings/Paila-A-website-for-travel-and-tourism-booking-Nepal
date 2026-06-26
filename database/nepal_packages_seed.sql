@@ -108,7 +108,7 @@ INSERT INTO tours (
 
 ('Lumbini Buddhist Circuit', 'Lumbini', 36500.00, '3 Days',
 'A peaceful cultural journey through the birthplace of Buddha, monasteries, Maya Devi Temple, Ashoka Pillar, and surrounding Buddhist heritage sites.',
-'cultural', 'Easy', 18,
+'culture', 'Easy', 18,
 'Maya Devi Temple\nAshoka Pillar\nWorld Peace Pagoda\nInternational monasteries\nTilaurakot visit\nBuddhist heritage interpretation',
 'assets/images/Lumbini/pexels-photo-6327865.jpeg', 'October to March', 150, 'Lumbini development area entry tickets',
 'Day 1: Arrival in Lumbini and monastery zone walk\nDay 2: Maya Devi Temple, Ashoka Pillar, World Peace Pagoda, and Tilaurakot\nDay 3: Morning meditation time and departure',
@@ -118,7 +118,7 @@ INSERT INTO tours (
 
 ('Janakpur Mithila Culture Tour', 'Janakpur', 29500.00, '3 Days',
 'A colorful cultural tour of Janakpur focused on Janaki Mandir, Mithila art, local markets, ponds, rituals, and Maithil hospitality.',
-'cultural', 'Easy', 16,
+'culture', 'Easy', 16,
 'Janaki Mandir\nMithila art workshop\nSacred ponds\nLocal market walk\nMaithil food tasting\nRam-Janaki heritage stories',
 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Janaki%20Temple%20Janakpur-Janakpur030315%20MG%2036680059.jpg?width=1200', 'October to March', 74, 'Local monument tickets where applicable',
 'Day 1: Travel to Janakpur and evening market walk\nDay 2: Janaki Mandir, Mithila art workshop, sacred ponds, and local food\nDay 3: Morning temple visit and return',

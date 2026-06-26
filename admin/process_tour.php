@@ -89,6 +89,9 @@ $difficulty = optional_text('difficulty');
 $max_group = optional_int('max_group');
 $highlights = optional_text('highlights');
 $category = optional_text('category');
+if ($category === 'cultural') {
+    $category = 'culture';
+}
 $best_season = optional_text('best_season');
 $altitude_max = optional_int('altitude_max');
 $permit_requirements = optional_text('permit_requirements');

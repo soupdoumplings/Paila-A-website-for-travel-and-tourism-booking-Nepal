@@ -23,6 +23,9 @@ if ($search) {
 }
 
 if ($category) {
+    if ($category === 'cultural') {
+        $category = 'culture';
+    }
     $query .= " AND category = ?";
     $params[] = $category;
 }

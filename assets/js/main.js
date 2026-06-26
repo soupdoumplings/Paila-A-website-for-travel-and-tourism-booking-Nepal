@@ -197,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         : results.map(tour => {
                             const imageMap = {
                                 'trekking': 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80',
-                                'cultural': 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
                                 'culture': 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
                                 'adventure': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
                                 'family': 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=800&q=80',

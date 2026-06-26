@@ -32,6 +32,9 @@ if ($search) {
 }
 
 if ($category) {
+    if ($category === 'cultural') {
+        $category = 'culture';
+    }
     $query .= " AND category = ?";
     $params[] = $category;
 }
@@ -85,7 +88,6 @@ try {
 // Category fallback images
 $imageMap = [
     'trekking' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80',
-    'cultural' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
     'culture' => 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
     'adventure' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
     'wellness' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80',
@@ -142,7 +144,6 @@ $imageMap = [
                             <select name="category" class="filter-select">
                                 <option value="">All Categories</option>
                                 <option value="trekking" <?php echo $category == 'trekking' ? 'selected' : ''; ?>>Trekking</option>
-                                <option value="cultural" <?php echo $category == 'cultural' ? 'selected' : ''; ?>>Cultural Tours</option>
                                 <option value="culture" <?php echo $category == 'culture' ? 'selected' : ''; ?>>Culture & Heritage</option>
                                 <option value="adventure" <?php echo $category == 'adventure' ? 'selected' : ''; ?>>Adventure Sports</option>
                                 <option value="wellness" <?php echo $category == 'wellness' ? 'selected' : ''; ?>>Wellness</option>

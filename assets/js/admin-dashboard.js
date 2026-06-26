@@ -32,7 +32,7 @@ function viewTour(tour) {
     // Icons
     const categoryIcons = {
         'trekking': 'fa-solid fa-mountain',
-        'cultural': 'fa-solid fa-landmark',
+        'culture': 'fa-solid fa-landmark',
         'adventure': 'fa-solid fa-person-hiking',
         'wellness': 'fa-solid fa-spa',
         'photography': 'fa-solid fa-camera',
@@ -47,7 +47,7 @@ function viewTour(tour) {
     // Images
     const imageMap = {
         'trekking': 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80',
-        'cultural': 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=1200&q=80',
+        'culture': 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=1200&q=80',
         'adventure': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
         'family': 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=1200&q=80',
         'luxury': 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80',
@@ -135,7 +135,7 @@ function editTour(tour) {
                 <label style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Category</label>
                 <select name="category" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-stone-300); border-radius: 0.5rem; font-size: 1rem;">
                     <option value="trekking" ${tour.category === 'trekking' ? 'selected' : ''}>Trekking</option>
-                    <option value="cultural" ${tour.category === 'cultural' ? 'selected' : ''}>Cultural</option>
+                    <option value="culture" ${tour.category === 'culture' ? 'selected' : ''}>Culture</option>
                     <option value="adventure" ${tour.category === 'adventure' ? 'selected' : ''}>Adventure</option>
                     <option value="wellness" ${tour.category === 'wellness' ? 'selected' : ''}>Wellness</option>
                     <option value="photography" ${tour.category === 'photography' ? 'selected' : ''}>Photography</option>
