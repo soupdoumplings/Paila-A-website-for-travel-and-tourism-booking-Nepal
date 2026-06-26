@@ -8,6 +8,9 @@ require_login();
 $tour = null;
 $title = "Add New Tour";
 $action = "create";
+$storedImage = '';
+$storedImageIsUrl = false;
+$storedImageIsSupportedUrl = false;
 
 // Load existing tour
 if (isset($_GET['id'])) {
@@ -31,6 +34,12 @@ if (isset($_GET['id'])) {
             }
         }
     }
+}
+
+if ($tour) {
+    $storedImage = trim((string)($tour['image'] ?? ''));
+    $storedImageIsUrl = $storedImage !== '' && filter_var($storedImage, FILTER_VALIDATE_URL);
+    $storedImageIsSupportedUrl = $storedImageIsUrl && is_supported_tour_image_url($storedImage);
 }
 ?>
 <!DOCTYPE html>
@@ -188,13 +197,17 @@ if (isset($_GET['id'])) {
 
             <div class="form-group">
                 <label class="form-label">Tour Image</label>
-                <?php if($tour && $tour['image']): ?>
+                <?php if($tour && $storedImage): ?>
                     <?php 
-                        $previewImg = $tour['image'];
                         $displayImg = get_tour_image($tour);
                     ?>
                     <img src="<?php echo e($displayImg); ?>" class="image-preview" id="image-preview">
-                    <small class="help-text" style="display: block; margin-bottom: 0.75rem;">Current stored image: <?php echo e($previewImg); ?></small>
+                    <small class="help-text" style="display: block; margin-bottom: 0.4rem;">Current stored image: <?php echo e($storedImage); ?></small>
+                    <?php if($storedImageIsUrl && !$storedImageIsSupportedUrl): ?>
+                        <small class="help-text" style="display: block; margin-bottom: 0.75rem; color: #b45309; font-weight: 700;">
+                            This saved URL is a webpage, not a direct image. Upload a file or paste a direct image URL to replace it.
+                        </small>
+                    <?php endif; ?>
                 <?php else: ?>
                     <img src="" class="image-preview" id="image-preview" style="display: none;">
                 <?php endif; ?>
@@ -202,10 +215,10 @@ if (isset($_GET['id'])) {
                 
                 <div class="url-input-container">
                     <label class="url-label">Or Image URL</label>
-                    <input type="url" name="image_url" class="form-input" placeholder="https://example.com/image.jpg" value="<?php echo ($tour && filter_var($tour['image'] ?? '', FILTER_VALIDATE_URL)) ? e($tour['image']) : ''; ?>" id="image-url-input">
+                    <input type="url" name="image_url" class="form-input" placeholder="https://example.com/image.jpg" value="<?php echo $storedImageIsSupportedUrl ? e($storedImage) : ''; ?>" id="image-url-input">
                 </div>
 
-                <small class="help-text">Upload a JPG, PNG, WEBP, or AVIF file, paste an image URL, or leave both empty to keep the current image.</small>
+                <small class="help-text">Upload a JPG, PNG, WEBP, or AVIF file, paste a direct image URL, or leave both empty to keep the current image. Stock-photo page URLs will not work.</small>
             </div>
 
             <div class="form-group featured-box">
@@ -239,6 +252,9 @@ if (isset($_GET['id'])) {
             imageFileInput.addEventListener('change', function () {
                 const file = this.files && this.files[0];
                 if (!file) return;
+                if (imageUrlInput) {
+                    imageUrlInput.value = '';
+                }
                 showPreview(URL.createObjectURL(file));
             });
         }
@@ -246,6 +262,9 @@ if (isset($_GET['id'])) {
         if (imageUrlInput) {
             imageUrlInput.addEventListener('input', function () {
                 if (this.value.trim()) {
+                    if (imageFileInput) {
+                        imageFileInput.value = '';
+                    }
                     showPreview(this.value.trim());
                 }
             });
