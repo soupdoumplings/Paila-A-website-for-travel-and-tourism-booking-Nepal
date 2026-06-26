@@ -173,11 +173,36 @@ function render_booking_timeline($status = 'pending', $isCompact = false) {
     return ob_get_clean();
 }
 // Get tour image
+function is_supported_tour_image_url($url) {
+    if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        return false;
+    }
+
+    $parts = parse_url($url);
+    $host = strtolower($parts['host'] ?? '');
+    $path = strtolower($parts['path'] ?? '');
+
+    if (preg_match('/\.(jpe?g|png|webp|avif|gif)$/i', $path)) {
+        return true;
+    }
+
+    $trustedImageHosts = [
+        'images.unsplash.com',
+        'source.unsplash.com',
+        'upload.wikimedia.org',
+        'commons.wikimedia.org',
+        'images.pexels.com',
+        'images.stockcake.com'
+    ];
+
+    return in_array($host, $trustedImageHosts, true);
+}
+
 function get_tour_image($tour) {
     $storedImage = trim((string)($tour['image'] ?? ''));
 
     // Use external URL
-    if ($storedImage !== '' && filter_var($storedImage, FILTER_VALIDATE_URL)) {
+    if ($storedImage !== '' && is_supported_tour_image_url($storedImage)) {
         return $storedImage;
     }
 

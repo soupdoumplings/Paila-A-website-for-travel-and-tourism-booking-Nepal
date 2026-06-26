@@ -102,15 +102,15 @@ $is_featured = isset($_POST['is_featured']) ? 1 : 0;
 
 $imagePath = trim($_POST['existing_image'] ?? '');
 $imageUrl = trim($_POST['image_url'] ?? '');
+$uploadError = $_FILES['image']['error'] ?? UPLOAD_ERR_NO_FILE;
 
-if ($imageUrl !== '') {
-    if (!filter_var($imageUrl, FILTER_VALIDATE_URL)) {
-        fail_tour_form('Please enter a valid image URL, or leave the URL field empty.', $action, $id);
+if ($imageUrl !== '' && $uploadError === UPLOAD_ERR_NO_FILE) {
+    if (!is_supported_tour_image_url($imageUrl)) {
+        fail_tour_form('Please paste a direct image URL, not a gallery or stock-photo page. Use a JPG, PNG, WEBP, AVIF URL, a trusted image CDN URL, or upload the image file instead.', $action, $id);
     }
     $imagePath = $imageUrl;
 }
 
-$uploadError = $_FILES['image']['error'] ?? UPLOAD_ERR_NO_FILE;
 if ($uploadError !== UPLOAD_ERR_NO_FILE) {
     if ($uploadError !== UPLOAD_ERR_OK) {
         fail_tour_form('Image upload failed. Please choose a smaller JPG, PNG, WEBP, or AVIF file and try again.', $action, $id);
