@@ -68,7 +68,7 @@
 /* Benefits */
 .auth-benefits {
     background:
-        linear-gradient(135deg, rgba(4, 47, 46, 0.9), rgba(4, 47, 46, 0.58)),
+        linear-gradient(135deg, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.28)),
         url('../images/guest_experience.jpg') center/cover;
     padding: 4rem 3rem;
     display: flex;

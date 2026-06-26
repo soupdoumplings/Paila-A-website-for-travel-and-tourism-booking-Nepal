@@ -116,7 +116,7 @@ include '../includes/header.php';
         <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.46;">
             <source src="<?php echo url('assets/video/1.mp4'); ?>" type="video/mp4">
         </video>
-        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.94) 0%, rgba(4,47,46,0.62) 52%, rgba(0,0,0,0.78) 100%);"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.28) 52%, rgba(0,0,0,0.72) 100%);"></div>
     </div>
 
     <div class="container" style="position: relative; z-index: 10;">
