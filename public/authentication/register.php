@@ -88,6 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <h1>Begin With <span class="highlight">Paila</span></h1>
                     <p class="auth-benefits-description">Create a travel profile for Nepal packages, premium requests, booking updates, and guide assignment details.</p>
+                    <div class="auth-panel-meta" aria-label="Paila account details">
+                        <span>Nepal package access</span>
+                        <span>Premium guide privileges</span>
+                    </div>
                 </div>
                 
                 <div class="auth-benefits-list">
@@ -127,6 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <span class="benefit-text">View assigned guide profiles</span>
                     </div>
                 </div>
+
+                <p class="auth-photo-caption">Your archive begins with one carefully planned step.</p>
             </div>
             
             <!-- Right Side - Form -->

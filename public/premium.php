@@ -87,6 +87,32 @@ include '../includes/header.php';
         box-shadow: 0 16px 40px rgba(251, 191, 36, 0.18);
     }
 
+    .premium-access-cta {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #f8d477, #d99a18) !important;
+        color: #11100d !important;
+        padding: 1rem 3rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.04em;
+        text-decoration: none !important;
+        border: 1px solid rgba(251, 191, 36, 0.55) !important;
+        border-radius: 999px !important;
+        box-shadow: 0 18px 42px rgba(251, 191, 36, 0.2) !important;
+    }
+
+    .premium-access-cta:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.04);
+        box-shadow: 0 22px 48px rgba(251, 191, 36, 0.28) !important;
+    }
+
+    .premium-access-cta i {
+        color: #11100d !important;
+    }
+
     .premium-request-form label {
         color: rgba(255, 255, 255, 0.84) !important;
     }
@@ -152,7 +178,7 @@ include '../includes/header.php';
         </div>
         
         <?php if ($access_success): ?>
-            <div style="margin-bottom: 2rem; padding: 1rem 1.5rem; background: rgba(4, 47, 46, 0.2); border: 1px solid rgba(4, 47, 46, 0.5); border-radius: 0.5rem; color: rgba(4, 47, 46, 0.08);">
+            <div style="margin-bottom: 2rem; padding: 1rem 1.5rem; background: rgba(4, 47, 46, 0.82); border: 1px solid rgba(251, 191, 36, 0.28); border-radius: 0.5rem; color: #fffdf9;">
                 <i class="fa-solid fa-circle-check"></i> <?php echo e($access_success); ?>
             </div>
         <?php endif; ?>
@@ -165,7 +191,7 @@ include '../includes/header.php';
         
         <?php if ($has_access): ?>
             <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(4, 47, 46, 0.2); border: 1px solid rgba(4, 47, 46, 0.5); border-radius: 0.5rem;">
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: rgba(4, 47, 46, 0.08); margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #fffdf9; margin-bottom: 0.5rem;">
                     <i class="fa-solid fa-unlock" style="font-size: 1.25rem;"></i>
                     <span style="font-size: 1.125rem; font-weight: 600;">Access Granted</span>
                 </div>
@@ -243,8 +269,8 @@ include '../includes/header.php';
                 <div style="font-size: 4rem; color: var(--color-stone-200); margin-bottom: 1.5rem;"><i class="fa-solid fa-lock"></i></div>
                 <h3 style="color: var(--color-stone-900); font-family: var(--font-serif); font-size: 1.75rem; margin-bottom: 1rem;">Access Required</h3>
                 <p style="color: var(--color-stone-500); font-size: 1.125rem; margin-bottom: 2.5rem;">Enter a valid access code above to view exclusive tour offerings.</p>
-                <a href="#contact" class="btn" style="background: var(--color-stone-900); color: white; padding: 1rem 3rem; font-weight: 500; text-decoration: none; display: inline-block; border-radius: 50px;">
-                    Request Access <i class="fa-solid fa-arrow-right-long" style="margin-left: 0.5rem;"></i>
+                <a href="#contact" class="btn premium-access-cta">
+                    Request Access <i class="fa-solid fa-arrow-right-long"></i>
                 </a>
             </div>
         <?php else: ?>
