@@ -78,6 +78,7 @@ if (isset($_SESSION['user_id']) || isset($_SESSION['admin_id'])) {
             <?php if (!$isAdmin): ?>
                 <a href="<?php echo url('index.php'); ?>" class="logo">पाइला</a>
                 <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+                    <span aria-hidden="true"></span>
                     <i class="fa-solid fa-bars"></i>
                 </button>
             <?php endif; ?>

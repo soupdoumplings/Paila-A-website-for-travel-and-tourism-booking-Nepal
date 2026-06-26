@@ -275,6 +275,48 @@ h6 {
     z-index: 160;
 }
 
+.mobile-nav-toggle i {
+    display: none;
+}
+
+.mobile-nav-toggle::before,
+.mobile-nav-toggle::after,
+.mobile-nav-toggle span {
+    content: '';
+    position: absolute;
+    width: 1.08rem;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--color-amber-400);
+    transition: transform 0.28s ease, opacity 0.28s ease, top 0.28s ease;
+}
+
+.mobile-nav-toggle::before {
+    top: 0.86rem;
+}
+
+.mobile-nav-toggle span {
+    top: 1.28rem;
+}
+
+.mobile-nav-toggle::after {
+    top: 1.7rem;
+}
+
+body.nav-open .mobile-nav-toggle::before {
+    top: 1.28rem;
+    transform: rotate(45deg);
+}
+
+body.nav-open .mobile-nav-toggle span {
+    opacity: 0;
+}
+
+body.nav-open .mobile-nav-toggle::after {
+    top: 1.28rem;
+    transform: rotate(-45deg);
+}
+
 .nav-links a {
     color: rgba(255, 255, 255, 0.85);
     margin-left: 0;
@@ -600,12 +642,22 @@ h6 {
     padding: 2rem;
 }
 
+.collection-card-content h3 {
+    font-size: clamp(1.45rem, 2vw, 1.9rem) !important;
+    line-height: 1.08 !important;
+}
+
 .collection-card-desc {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
     transition: all 0.4s ease;
     margin-bottom: 0;
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-size: 1.08rem !important;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.48 !important;
 }
 
 .collection-card:hover .collection-card-desc {
@@ -648,7 +700,7 @@ h6 {
 }
 
 .price-display.card-price {
-    font-size: 1.14rem;
+    font-size: 1.22rem;
 }
 
 .price-display.large-price {

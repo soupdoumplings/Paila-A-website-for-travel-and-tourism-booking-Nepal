@@ -255,8 +255,11 @@
 
 .editorial-intro-copy p {
     color: var(--color-stone-600);
-    font-size: 1.02rem;
-    line-height: 1.8;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.55;
     margin-bottom: 1.5rem;
 }
 
@@ -299,7 +302,11 @@
 
 .section-editorial-copy p {
     color: var(--color-stone-600);
-    line-height: 1.8;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.24rem;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.58;
     margin-bottom: 1.25rem;
 }
 
@@ -365,6 +372,22 @@
     box-shadow: 0 -48px 90px rgba(250, 250, 249, 0.42);
 }
 
+#collection .collection-card-content h3 {
+    font-size: clamp(1.75rem, 2.35vw, 2.25rem) !important;
+    line-height: 1.02 !important;
+}
+
+#collection .collection-card-desc {
+    max-height: none;
+    opacity: 1;
+    margin-bottom: 1.15rem !important;
+    color: var(--color-stone-600) !important;
+}
+
+#collection .price-display.card-price {
+    font-size: 1.32rem;
+}
+
 /* Archive */
 #archive {
     background:
@@ -398,7 +421,11 @@
 
 .interest-copy p {
     color: var(--color-stone-600);
-    line-height: 1.8;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.24rem;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.58;
     margin-bottom: 1.5rem;
 }
 
@@ -586,6 +613,26 @@
     font-size: clamp(3.2rem, 5vw, 5.6rem) !important;
     line-height: 0.9;
     font-weight: 500;
+}
+
+.trust-copy p,
+.standard-card p,
+#about-content p,
+.destination-content p,
+.contact-section p {
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-style: italic;
+    font-weight: 500;
+}
+
+#about-content p {
+    font-size: 1.28rem !important;
+    line-height: 1.55 !important;
+}
+
+.standard-card p {
+    font-size: 1.05rem !important;
+    line-height: 1.45 !important;
 }
 
 .standard-grid {
@@ -884,6 +931,14 @@
     display: flex;
     align-items: center;
     padding: 4rem 10% 4rem 4rem;
+}
+
+.private-journey-content p {
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-style: italic;
+    font-size: 1.35rem !important;
+    font-weight: 500;
+    line-height: 1.55 !important;
 }
 
 /* Contact */
@@ -1416,6 +1471,12 @@
         flex-direction: column;
         align-items: flex-start !important;
         gap: 0.8rem;
+    }
+
+    #collection .collection-card-desc {
+        max-height: none;
+        opacity: 1;
+        margin-bottom: 1rem !important;
     }
 
     .interest-copy {

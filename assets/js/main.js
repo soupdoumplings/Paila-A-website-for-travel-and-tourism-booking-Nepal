@@ -30,9 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.toggle('nav-open', isOpen);
             mobileNavToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             mobileNavToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
-            mobileNavToggle.innerHTML = isOpen
-                ? '<i class="fa-solid fa-xmark"></i>'
-                : '<i class="fa-solid fa-bars"></i>';
         };
 
         mobileNavToggle.addEventListener('click', () => {
