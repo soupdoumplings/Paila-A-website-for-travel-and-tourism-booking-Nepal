@@ -92,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $travelers = (int)($_POST['travelers'] ?? 0);
     $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
     $special_requests = isset($_POST['special_requests']) ? trim($_POST['special_requests']) : '';
+    $is_premium = 0;
     
     // Process premium tour
     $premium_tour_id = isset($_POST['premium_tour_id']) ? trim($_POST['premium_tour_id']) : null;
@@ -102,7 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $tour_id = (int) $premiumTour['id'];
-        $special_requests = "[PREMIUM TOUR: {$premiumTour['title']}] " . $special_requests;
+        $is_premium = 1;
+        $special_requests = trim("[PREMIUM TOUR: {$premiumTour['title']}] [GUIDE PRIVILEGE] " . $special_requests);
     }
 
     // Validate form inputs
@@ -170,9 +172,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Create booking record
     try {
-        $sql = "INSERT INTO bookings (tour_id, user_id, customer_name, contact_email, travel_date, travelers) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO bookings (tour_id, user_id, customer_name, contact_email, phone, travel_date, travelers, special_requests, is_premium) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$tour_id, $user_id, $customer_name, $contact_email, $travel_date, $travelers]);
+        $stmt->execute([$tour_id, $user_id, $customer_name, $contact_email, $phone, $travel_date, $travelers, $special_requests, $is_premium]);
         $booking_id = $pdo->lastInsertId();
     } catch (Exception $e) {
         try {

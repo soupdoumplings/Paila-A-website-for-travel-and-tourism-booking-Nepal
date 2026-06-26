@@ -14,10 +14,23 @@ $user = get_user();
 
 // Fetch booking information
 $stmt = $pdo->prepare("
-    SELECT b.*, t.title as tour_title, u.username as guide_name 
+    SELECT
+        b.*,
+        t.title as tour_title,
+        u.username as guide_name,
+        gp.full_name as guide_full_name,
+        gp.phone as guide_phone,
+        gp.license_no as guide_license_no,
+        gp.languages as guide_languages,
+        gp.specialties as guide_specialties,
+        gp.experience_years as guide_experience_years,
+        gp.rating as guide_rating,
+        gp.bio as guide_bio,
+        gp.avatar as guide_avatar
     FROM bookings b
     LEFT JOIN tours t ON b.tour_id = t.id
     LEFT JOIN users u ON b.tour_guide_id = u.id
+    LEFT JOIN guide_profiles gp ON gp.user_id = u.id
     WHERE b.id = ?
 ");
 $stmt->execute([$bookingId]);
@@ -66,6 +79,9 @@ $base = '../';
             <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
                 <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-stone-100); padding-bottom: 1rem;">
                     <h3 style="font-size: 1.25rem; font-weight: 600;"><?php echo e($booking['tour_title'] ?? '[Deleted Tour]'); ?></h3>
+                    <?php if(!empty($booking['is_premium'])): ?>
+                        <span style="background: var(--color-teal-900); color: var(--color-amber-500); padding: 0.25rem 0.6rem; border-radius: 999px; font-weight: 800; letter-spacing: 0.04em; font-size: 0.75rem; margin-right: auto; margin-left: 1rem;">Premium Guide Privilege</span>
+                    <?php endif; ?>
                     <?php if($booking['status'] == 'pending'): ?>
                         <span style="background: #fffbeb; color: #92400e; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">Pending</span>
                     <?php elseif($booking['status'] == 'confirmed'): ?>
@@ -85,6 +101,10 @@ $base = '../';
                         <div style="font-weight: 500; font-size: 1.1rem;"><?php echo e($booking['contact_email']); ?></div>
                     </div>
                     <div>
+                        <div style="font-size: 0.85rem; color: var(--color-stone-500); text-transform: uppercase; letter-spacing: 0.05em;">Phone</div>
+                        <div style="font-weight: 500;"><?php echo e($booking['phone'] ?: 'Not provided'); ?></div>
+                    </div>
+                    <div>
                         <div style="font-size: 0.85rem; color: var(--color-stone-500); text-transform: uppercase; letter-spacing: 0.05em;">Travel Date</div>
                         <div style="font-weight: 500;"><?php echo e($booking['travel_date']); ?></div>
                     </div>
@@ -98,10 +118,41 @@ $base = '../';
                     </div>
                     <div>
                          <div style="font-size: 0.85rem; color: var(--color-stone-500); text-transform: uppercase; letter-spacing: 0.05em;">Assigned Guide</div>
-                         <div><?php echo $booking['guide_name'] ? e($booking['guide_name']) : 'Not Assigned'; ?></div>
+                         <div><?php echo $booking['guide_name'] ? e($booking['guide_full_name'] ?: $booking['guide_name']) : 'Not Assigned'; ?></div>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                         <div style="font-size: 0.85rem; color: var(--color-stone-500); text-transform: uppercase; letter-spacing: 0.05em;">Special Requests</div>
+                         <div style="line-height: 1.6;"><?php echo !empty($booking['special_requests']) ? nl2br(e($booking['special_requests'])) : 'None'; ?></div>
                     </div>
                 </div>
             </div>
+
+            <?php if($booking['guide_name']): ?>
+            <div style="background: #fffdfa; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 12px 40px rgba(28,25,23,0.05);">
+                <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.25rem;">
+                    <?php if(!empty($booking['guide_avatar'])): ?>
+                        <img src="<?php echo e(url($booking['guide_avatar'])); ?>" alt="<?php echo e($booking['guide_full_name'] ?: $booking['guide_name']); ?>" style="width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: 0 6px 20px rgba(0,0,0,0.14);">
+                    <?php endif; ?>
+                    <div>
+                        <div style="font-size: 0.78rem; color: var(--color-amber-600); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 800;">Assigned Guide</div>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.65rem; margin: 0.2rem 0;"><?php echo e($booking['guide_full_name'] ?: $booking['guide_name']); ?></h3>
+                        <div style="color: var(--color-stone-500);"><?php echo e($booking['guide_specialties'] ?: 'General Nepal tours'); ?></div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                    <div><div style="font-size: 0.75rem; color: var(--color-stone-500); text-transform: uppercase; font-weight: 800;">Rating</div><div style="font-weight: 800;"><?php echo number_format((float)($booking['guide_rating'] ?: 4.8), 1); ?></div></div>
+                    <div><div style="font-size: 0.75rem; color: var(--color-stone-500); text-transform: uppercase; font-weight: 800;">Experience</div><div style="font-weight: 800;"><?php echo (int)($booking['guide_experience_years'] ?? 0); ?> years</div></div>
+                    <div><div style="font-size: 0.75rem; color: var(--color-stone-500); text-transform: uppercase; font-weight: 800;">License</div><div style="font-weight: 800;"><?php echo e($booking['guide_license_no'] ?: 'On file'); ?></div></div>
+                    <div><div style="font-size: 0.75rem; color: var(--color-stone-500); text-transform: uppercase; font-weight: 800;">Phone</div><div style="font-weight: 800;"><?php echo e($booking['guide_phone'] ?: 'After approval'); ?></div></div>
+                </div>
+                <?php if(!empty($booking['guide_languages'])): ?>
+                    <p style="margin-bottom: 0.5rem; color: var(--color-stone-600);"><strong>Languages:</strong> <?php echo e($booking['guide_languages']); ?></p>
+                <?php endif; ?>
+                <?php if(!empty($booking['guide_bio'])): ?>
+                    <p style="margin: 0; color: var(--color-stone-600); line-height: 1.6;"><?php echo e($booking['guide_bio']); ?></p>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
             
             <!-- Dialogue history section -->
             <div style="background: white; border: 1px solid var(--color-stone-200); border-radius: 1rem; padding: 2rem;">

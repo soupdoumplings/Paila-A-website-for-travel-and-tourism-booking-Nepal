@@ -58,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $error = "Failed to update role.";
                 }
             }
+        } else {
+            $error = "Guide accounts are managed from the Guide Profiles page.";
         }
     }
     elseif (isset($_POST['delete_user'])) {
@@ -87,8 +89,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $roles = [
     1 => 'Super Admin',
     2 => 'Admin',
-    3 => 'User',
-    4 => 'Tour Guide'
+    3 => 'User'
 ];
 
 $pageTitle = "Manage Admins";
@@ -104,6 +105,7 @@ $base = '../';
             <span style="opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; color: var(--color-stone-500);">Access Control</span>
         </div>
         <h1 style="font-size: 3.5rem; font-family: var(--font-serif); color: var(--color-stone-900); margin: 0;">Manage System Users</h1>
+        <p style="max-width: 760px; margin-top: 1rem; color: var(--color-stone-600); font-size: 1.05rem;">Superadmins create admin accounts here. Tour guides are created with license, language, and guest-facing profile details from the <a href="manage_guides.php" style="color: var(--color-amber-600); font-weight: 800;">Guide Profiles</a> page.</p>
     </div>
 </section>
 </div>
@@ -161,7 +163,7 @@ $base = '../';
                     <?php foreach ($users as $user): ?>
                     <tr style="border-bottom: 1px solid var(--color-stone-800);">
                         <td style="padding: 1rem;">
-                            <div style="color: white; font-weight: 500; font-size: 1rem;"><?php echo e($user['username']); ?></div>
+                            <div style="color: var(--color-stone-900); font-weight: 700; font-size: 1rem;"><?php echo e($user['username']); ?></div>
                             <div style="color: var(--color-stone-500); font-size: 0.75rem;">ID: <?php echo $user['id']; ?></div>
                         </td>
                         <td style="padding: 1rem; color: var(--color-stone-600);">
@@ -177,12 +179,15 @@ $base = '../';
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                                 <input type="hidden" name="update_role" value="1">
-                                <select name="role_id" style="background: var(--color-stone-900); border: 1px solid var(--color-stone-700); color: white; border-radius: 0.25rem; padding: 0.4rem 0.5rem; outline: none; font-size: 0.875rem;">
+                                <select name="role_id" style="background: white; border: 1px solid var(--color-stone-300); color: var(--color-stone-900); border-radius: 0.25rem; padding: 0.4rem 0.5rem; outline: none; font-size: 0.875rem;">
                                     <?php foreach ($roles as $rnId => $rnName): ?>
                                         <option value="<?php echo $rnId; ?>" <?php echo $user['role_id'] == $rnId ? 'selected' : ''; ?>>
                                             <?php echo $rnName; ?>
                                         </option>
                                     <?php endforeach; ?>
+                                    <?php if ($user['role_id'] == 4): ?>
+                                        <option value="4" selected>Tour Guide</option>
+                                    <?php endif; ?>
                                 </select>
                                 <button type="submit" style="background: var(--color-emerald-700); color: white; border: none; padding: 0.4rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; cursor: pointer; transition: background 0.3s;"
                                     onmouseover="this.style.background='var(--color-teal-900)'"

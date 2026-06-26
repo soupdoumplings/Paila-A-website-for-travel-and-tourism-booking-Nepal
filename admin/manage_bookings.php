@@ -25,11 +25,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($action === 'approve') {
             $guide_id = intval($_POST['tour_guide_id']);
             if ($guide_id > 0) {
-                $stmt = $pdo->prepare("UPDATE bookings SET status = 'confirmed', tour_guide_id = ? WHERE id = ?");
-                if ($stmt->execute([$guide_id, $booking_id])) {
-                    $success = "Booking #$booking_id approved and guide assigned.";
+                $guideCheck = $pdo->prepare("SELECT id FROM users WHERE id = ? AND role_id = 4");
+                $guideCheck->execute([$guide_id]);
+
+                if (!$guideCheck->fetchColumn()) {
+                    $error = "Please select a valid tour guide.";
                 } else {
-                    $error = "Failed to approve booking.";
+                    $stmt = $pdo->prepare("UPDATE bookings SET status = 'confirmed', tour_guide_id = ? WHERE id = ?");
+                    if ($stmt->execute([$guide_id, $booking_id])) {
+                        $ownerStmt = $pdo->prepare("SELECT user_id, is_premium FROM bookings WHERE id = ?");
+                        $ownerStmt->execute([$booking_id]);
+                        $owner = $ownerStmt->fetch(PDO::FETCH_ASSOC);
+                        if (!empty($owner['user_id'])) {
+                            $title = !empty($owner['is_premium']) ? "Premium guide assigned" : "Guide assigned";
+                            create_notification((int)$owner['user_id'], $title, "Your booking #$booking_id has been confirmed and a guide has been assigned.", "booking_detail.php?id=$booking_id");
+                        }
+
+                        $success = "Booking #$booking_id approved and guide assigned.";
+                    } else {
+                        $error = "Failed to approve booking.";
+                    }
                 }
             } else {
                 $error = "Please select a tour guide.";
@@ -47,16 +62,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Fetch all bookings
 $stmt = $pdo->query("
-    SELECT b.*, t.title as tour_title, u.username as guide_name
+    SELECT
+        b.*,
+        t.title as tour_title,
+        u.username as guide_name,
+        gp.full_name as guide_full_name,
+        gp.languages as guide_languages,
+        gp.specialties as guide_specialties,
+        gp.rating as guide_rating
     FROM bookings b
     LEFT JOIN tours t ON b.tour_id = t.id
     LEFT JOIN users u ON b.tour_guide_id = u.id
+    LEFT JOIN guide_profiles gp ON gp.user_id = u.id
     ORDER BY b.created_at DESC
 ");
 $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch guide options
-$stmt = $pdo->query("SELECT id, username FROM users WHERE role_id = 4 ORDER BY username ASC");
+$stmt = $pdo->query("
+    SELECT u.id, u.username, gp.full_name, gp.specialties, gp.rating
+    FROM users u
+    LEFT JOIN guide_profiles gp ON gp.user_id = u.id
+    WHERE u.role_id = 4
+    ORDER BY COALESCE(gp.full_name, u.username) ASC
+");
 $guides = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $pageTitle = "Manage Bookings";
@@ -120,6 +149,9 @@ $base = '../';
                                 <div style="color: var(--color-stone-900); font-weight: 700;">#<?php echo $b['id']; ?></div>
                                 <div style="color: var(--color-stone-500); font-size: 0.8rem;"><?php echo date('M d, Y', strtotime($b['created_at'])); ?></div>
                                 <div style="margin-top: 0.25rem;">
+                                    <?php if(!empty($b['is_premium'])): ?>
+                                        <span style="background: var(--color-teal-900); color: var(--color-amber-500); padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 800; margin-right: 0.25rem;">PREMIUM GUIDE</span>
+                                    <?php endif; ?>
                                     <?php if($b['status'] == 'pending'): ?>
                                         <span style="background: #f59e0b; color: #78350f; padding: 0.1rem 0.4rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600;">PENDING</span>
                                     <?php elseif($b['status'] == 'confirmed'): ?>
@@ -132,11 +164,17 @@ $base = '../';
                             <td style="padding: 1rem; color: var(--color-stone-600);">
                                 <div style="color: var(--color-stone-900); font-weight: 600;"><?php echo e($b['customer_name']); ?></div>
                                 <div style="font-size: 0.8rem; opacity: 0.8;"><?php echo e($b['contact_email']); ?></div>
+                                <?php if(!empty($b['phone'])): ?>
+                                    <div style="font-size: 0.8rem; opacity: 0.8;"><?php echo e($b['phone']); ?></div>
+                                <?php endif; ?>
                                 <div style="font-size: 0.8rem; margin-top: 0.25rem;">Travelers: <?php echo $b['travelers']; ?></div>
                             </td>
                             <td style="padding: 1rem; color: var(--color-stone-600);">
                                 <div style="color: var(--color-stone-900); font-weight: 500;"><?php echo e($b['tour_title'] ?? '[Deleted Tour]'); ?></div>
                                 <div style="font-size: 0.8rem; opacity: 0.8;"><?php echo e($b['travel_date']); ?></div>
+                                <?php if(!empty($b['special_requests'])): ?>
+                                    <div style="font-size: 0.78rem; margin-top: 0.35rem; color: var(--color-stone-500); max-width: 260px;"><?php echo e(strlen($b['special_requests']) > 110 ? substr($b['special_requests'], 0, 110) . '...' : $b['special_requests']); ?></div>
+                                <?php endif; ?>
                             </td>
                             <td style="padding: 1rem;">
                                 <?php if($b['status'] == 'pending'): ?>
@@ -147,14 +185,23 @@ $base = '../';
                                         <select name="tour_guide_id" required style="background: white; color: var(--color-stone-900); border: 1px solid var(--color-stone-200); padding: 0.4rem; border-radius: 0.25rem; width: 100%;">
                                             <option value="">Select Guide...</option>
                                             <?php foreach($guides as $g): ?>
-                                                <option value="<?php echo $g['id']; ?>"><?php echo e($g['username']); ?></option>
+                                                <?php
+                                                $label = $g['full_name'] ?: $g['username'];
+                                                $meta = trim(($g['specialties'] ?: '') . (!empty($g['rating']) ? ' - ' . number_format((float)$g['rating'], 1) : ''));
+                                                ?>
+                                                <option value="<?php echo $g['id']; ?>"><?php echo e($label . ($meta ? ' (' . $meta . ')' : '')); ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </form>
                                 <?php elseif($b['status'] == 'confirmed'): ?>
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-emerald-400);">
-                                        <i class="fa-solid fa-user-check"></i>
-                                        <?php echo e($b['guide_name'] ?: 'Unknown'); ?>
+                                    <div style="display: grid; gap: 0.25rem; color: var(--color-teal-900);">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 800;">
+                                            <i class="fa-solid fa-user-check"></i>
+                                            <?php echo e($b['guide_full_name'] ?: ($b['guide_name'] ?: 'Unknown')); ?>
+                                        </div>
+                                        <?php if(!empty($b['guide_specialties'])): ?>
+                                            <div style="font-size: 0.75rem; color: var(--color-stone-500);"><?php echo e($b['guide_specialties']); ?></div>
+                                        <?php endif; ?>
                                     </div>
                                 <?php else: ?>
                                     <span style="color: var(--color-stone-600);">-</span>

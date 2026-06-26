@@ -20,6 +20,28 @@ email = VALUES(email),
 password = VALUES(password),
 role_id = VALUES(role_id);
 
+-- Demo guide accounts.
+-- Password for all demo guides: Guide@2026
+INSERT INTO users (username, email, password, role_id) VALUES
+('mingma_guide', 'mingma@paila.guide', '$2y$10$NLaolsXPbR/dL3MuyO0m8OPOEB49cnTwNOk4/wWm1FrJOeaLjfXki', 4),
+('saraswati_guide', 'saraswati@paila.guide', '$2y$10$NLaolsXPbR/dL3MuyO0m8OPOEB49cnTwNOk4/wWm1FrJOeaLjfXki', 4),
+('nabin_guide', 'nabin@paila.guide', '$2y$10$NLaolsXPbR/dL3MuyO0m8OPOEB49cnTwNOk4/wWm1FrJOeaLjfXki', 4)
+ON DUPLICATE KEY UPDATE
+password = VALUES(password),
+role_id = VALUES(role_id);
+
+INSERT INTO guide_profiles (user_id, full_name, phone, license_no, languages, specialties, experience_years, rating, bio, avatar, created_by)
+SELECT id, 'Mingma Sherpa', '+977 9800001101', 'NTB-G-8841', 'Nepali, English, Sherpa', 'Everest trails, altitude safety, luxury trekking', 9, 4.9, 'Everest-region guide known for calm pacing, weather judgment, and high-altitude guest care.', 'assets/images/Everest/photo-1544735716-87fa59a45b4e.jpg', 1 FROM users WHERE email = 'mingma@paila.guide'
+ON DUPLICATE KEY UPDATE full_name = VALUES(full_name), phone = VALUES(phone), license_no = VALUES(license_no), languages = VALUES(languages), specialties = VALUES(specialties), experience_years = VALUES(experience_years), rating = VALUES(rating), bio = VALUES(bio), avatar = VALUES(avatar);
+
+INSERT INTO guide_profiles (user_id, full_name, phone, license_no, languages, specialties, experience_years, rating, bio, avatar, created_by)
+SELECT id, 'Saraswati Gurung', '+977 9800001102', 'NTB-G-7712', 'Nepali, English, Gurung, Hindi', 'Culture walks, heritage storytelling, family trips', 7, 4.8, 'Cultural host and city guide focused on heritage routes, temple etiquette, and easy guest communication.', 'assets/images/kathmandu/Swayambhunath_temple_-_an_ancient_religious_architecture_of_Nepal.jpg', 1 FROM users WHERE email = 'saraswati@paila.guide'
+ON DUPLICATE KEY UPDATE full_name = VALUES(full_name), phone = VALUES(phone), license_no = VALUES(license_no), languages = VALUES(languages), specialties = VALUES(specialties), experience_years = VALUES(experience_years), rating = VALUES(rating), bio = VALUES(bio), avatar = VALUES(avatar);
+
+INSERT INTO guide_profiles (user_id, full_name, phone, license_no, languages, specialties, experience_years, rating, bio, avatar, created_by)
+SELECT id, 'Nabin Thapa', '+977 9800001103', 'NTB-G-6904', 'Nepali, English, Hindi', 'Pokhara adventure, Chitwan wildlife, family logistics', 6, 4.7, 'Soft-spoken field guide for mixed adventure itineraries, family pacing, and smooth transfer days.', 'assets/images/Pokhara/pexels-photo-30131353.jpeg', 1 FROM users WHERE email = 'nabin@paila.guide'
+ON DUPLICATE KEY UPDATE full_name = VALUES(full_name), phone = VALUES(phone), license_no = VALUES(license_no), languages = VALUES(languages), specialties = VALUES(specialties), experience_years = VALUES(experience_years), rating = VALUES(rating), bio = VALUES(bio), avatar = VALUES(avatar);
+
 -- Clear dependent demo data and reset package rows so this seed is safe to re-run locally.
 DELETE FROM messages;
 DELETE FROM notifications;
@@ -123,8 +145,13 @@ WHERE created_by IS NULL;
 
 
 -- Insert sample bookings
-INSERT INTO bookings (tour_id, customer_name, contact_email, travel_date, travelers, status) VALUES
-(1, 'John Doe', 'john@example.com', '2026-04-15', 2, 'confirmed'),
-(2, 'Jane Smith', 'jane@example.com', '2026-05-10', 4, 'pending'),
-(3, 'Alex Johnson', 'alex@example.com', '2026-10-20', 1, 'confirmed')
-ON DUPLICATE KEY UPDATE customer_name=customer_name;
+INSERT INTO bookings (tour_id, customer_name, contact_email, phone, travel_date, travelers, special_requests, is_premium, status, tour_guide_id)
+SELECT 1, 'John Doe', 'john@example.com', '+977 9800002201', '2026-10-15', 2, 'Interested in a premium pacing plan with extra acclimatization care.', 1, 'confirmed', id FROM users WHERE email = 'mingma@paila.guide'
+LIMIT 1;
+
+INSERT INTO bookings (tour_id, customer_name, contact_email, phone, travel_date, travelers, special_requests, is_premium, status)
+VALUES (2, 'Jane Smith', 'jane@example.com', '+977 9800002202', '2026-11-10', 4, 'Family group, prefer gentle walking days.', 0, 'pending');
+
+INSERT INTO bookings (tour_id, customer_name, contact_email, phone, travel_date, travelers, special_requests, is_premium, status, tour_guide_id)
+SELECT 5, 'Alex Johnson', 'alex@example.com', '+977 9800002203', '2026-12-20', 1, 'Would like strong cultural context and photography stops.', 0, 'confirmed', id FROM users WHERE email = 'saraswati@paila.guide'
+LIMIT 1;

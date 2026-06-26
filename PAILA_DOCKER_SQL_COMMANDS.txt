@@ -92,6 +92,28 @@ Command Prompt:
 cmd /c "type database\package_image_refresh.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours"
 
 
+7A. Add premium guide privilege database changes
+------------------------------------------------
+
+Use this on an existing database before testing premium guide assignment.
+It creates guide_profiles and adds phone, special_requests, and is_premium to bookings.
+
+PowerShell:
+
+Get-Content -Raw .\database\guide_privilege_migration.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours
+
+Command Prompt:
+
+cmd /c "type database\guide_privilege_migration.sql | docker exec -i nepal_tours_db mysql -unepal_user -pnepal_pass nepal_tours"
+
+Demo guide logins created by this migration:
+
+Email: mingma@paila.guide
+Email: saraswati@paila.guide
+Email: nabin@paila.guide
+Password for all three: Guide@2026
+
+
 8. Full fresh local database rebuild
 ------------------------------------
 
@@ -174,6 +196,9 @@ http://localhost:8080/admin/tour_form.php
 
 Manage bookings:
 http://localhost:8080/admin/manage_bookings.php
+
+Manage guide profiles:
+http://localhost:8080/admin/manage_guides.php
 
 Manage inquiries:
 http://localhost:8080/admin/manage_inquiries.php

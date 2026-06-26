@@ -19,6 +19,26 @@ CREATE TABLE IF NOT EXISTS users (
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
+-- Create guide_profiles table
+CREATE TABLE IF NOT EXISTS guide_profiles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL UNIQUE,
+    full_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(30),
+    license_no VARCHAR(80),
+    languages VARCHAR(255),
+    specialties VARCHAR(255),
+    experience_years INT DEFAULT 0,
+    rating DECIMAL(2,1) DEFAULT 4.8,
+    bio TEXT,
+    avatar VARCHAR(255),
+    created_by INT DEFAULT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
+);
+
 -- Create tours table
 CREATE TABLE IF NOT EXISTS tours (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -50,8 +70,11 @@ CREATE TABLE IF NOT EXISTS bookings (
     user_id INT DEFAULT NULL,
     customer_name VARCHAR(100) NOT NULL,
     contact_email VARCHAR(100) NOT NULL,
+    phone VARCHAR(30),
     travel_date DATE NOT NULL,
     travelers INT NOT NULL,
+    special_requests TEXT,
+    is_premium TINYINT(1) DEFAULT 0,
     status ENUM('pending', 'confirmed', 'cancelled') DEFAULT 'pending',
     tour_guide_id INT DEFAULT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
