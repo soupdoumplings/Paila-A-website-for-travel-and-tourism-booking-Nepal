@@ -205,10 +205,19 @@ include $base . 'includes/header.php';
 .pd-main p {
     color: #57534e;
     line-height: 1.72;
-    font-size: 1.18rem;
-    font-family: var(--font-serif), serif;
-    font-style: italic;
+    font-size: 1.22rem;
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-style: italic !important;
+    font-weight: 500;
     margin-bottom: 0;
+}
+.pd-editorial-panel > p:not(.pd-kicker),
+.pd-section-card > p:not(.pd-kicker),
+.pd-inclusion-box .pd-check-list li span {
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-style: italic !important;
+    font-weight: 500;
+    letter-spacing: 0;
 }
 .pd-main ul { list-style: none; padding: 0; margin: 0; }
 .pd-main li {
@@ -353,11 +362,11 @@ include $base . 'includes/header.php';
     border: 1px solid rgba(68, 64, 60, 0.1);
 }
 .pd-inclusion-box h3 {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     color: var(--color-teal-900);
     margin-bottom: 0.75rem;
-    font-family: var(--font-serif), serif;
-    font-style: italic;
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-style: italic !important;
     font-weight: 700;
 }
 .pd-inclusion-box.excluded h3 { color: #991b1b; }
@@ -373,9 +382,10 @@ include $base . 'includes/header.php';
     font-size: 0.74rem;
 }
 .pd-check-list li span {
-    font-family: var(--font-serif), serif;
-    font-size: 1.18rem;
-    font-style: italic;
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    font-size: 1.25rem;
+    font-style: italic !important;
+    font-weight: 500;
     line-height: 1.45;
 }
 .pd-requirement-note {
