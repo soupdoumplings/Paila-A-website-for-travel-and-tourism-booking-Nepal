@@ -1,9 +1,27 @@
 <?php
 require_once __DIR__ . '/../helpers/security.php';
 
-function paila_env_or_default(string $key, string $default): string {
+$pailaLocalConfig = [];
+$pailaLocalConfigPath = __DIR__ . '/db.local.php';
+if (is_file($pailaLocalConfigPath)) {
+    $loadedConfig = require $pailaLocalConfigPath;
+    if (is_array($loadedConfig)) {
+        $pailaLocalConfig = $loadedConfig;
+    }
+}
+
+function paila_config_value(string $key, string $default): string {
     $value = getenv($key);
-    return $value === false ? $default : $value;
+    if ($value !== false && trim($value) !== '') {
+        return $value;
+    }
+
+    global $pailaLocalConfig;
+    if (isset($pailaLocalConfig[$key]) && trim((string)$pailaLocalConfig[$key]) !== '') {
+        return (string)$pailaLocalConfig[$key];
+    }
+
+    return $default;
 }
 
 function paila_detect_base_url(): string {
@@ -41,10 +59,10 @@ function paila_detect_base_url(): string {
     return $scheme . '://' . $_SERVER['HTTP_HOST'] . $basePath;
 }
 
-define('DB_HOST', paila_env_or_default('DB_HOST', 'localhost'));
-define('DB_USER', paila_env_or_default('DB_USER', 'np03cs4a240006'));
-define('DB_PASS', paila_env_or_default('DB_PASS', 'SvoFQrw1PP'));
-define('DB_NAME', paila_env_or_default('DB_NAME', 'np03cs4a240006'));
+define('DB_HOST', paila_config_value('DB_HOST', 'localhost'));
+define('DB_USER', paila_config_value('DB_USER', 'root'));
+define('DB_PASS', paila_config_value('DB_PASS', ''));
+define('DB_NAME', paila_config_value('DB_NAME', 'nepal_tours'));
 define('BASE_URL', paila_detect_base_url());
 define('SITE_NAME', 'PAILA');
 

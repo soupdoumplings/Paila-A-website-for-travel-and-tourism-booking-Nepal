@@ -1,0 +1,6 @@
+/.env
+/config/db.local.php
+/Server Access Guide.docx.pdf
+/Paila_Deploy_Extras/
+/public/uploads/*
+!/public/uploads/.gitkeep

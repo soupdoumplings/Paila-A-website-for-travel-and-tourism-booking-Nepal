@@ -13,17 +13,22 @@ After registration, save the generated:
 
 The guide says the MySQL database name and MySQL user are the same as your generated username.
 
-## 2. Check Config
+## 2. Add Server-Only Config
 
-Open `config/db.php`.
+Do not put real server passwords into GitHub.
 
-Current default server values:
+On the server, copy:
 
-- `DB_HOST`: `localhost`
-- `DB_USER`: `np03cs4a240006`
-- `DB_NAME`: `np03cs4a240006`
+```bash
+cp config/db.local.example.php config/db.local.php
+```
 
-If your generated college username or password is different, update `DB_USER`, `DB_PASS`, and `DB_NAME`.
+Then edit `config/db.local.php` with your generated college values:
+
+- `DB_HOST`: usually `localhost`
+- `DB_USER`: your generated MySQL username
+- `DB_PASS`: your generated MySQL password
+- `DB_NAME`: your generated MySQL database name
 
 `BASE_URL` is auto-detected, so the site can run under:
 
@@ -46,6 +51,8 @@ Before uploading, make a deployment copy that excludes only development/private 
 
 - `.git`
 - `docker-compose.yml`
+- `Paila_Deploy_Extras`
+- `config/db.local.php`
 - any backup `.sql` files outside `database/schema.sql` and `database/package_data.sql`
 
 Keep:
@@ -61,7 +68,7 @@ Create a clean deployment copy with videos, but without Git/Docker/private files
 ```powershell
 cd C:\Users\mount\OneDrive\Documents
 Remove-Item .\Paila_College_Deploy -Recurse -Force -ErrorAction SilentlyContinue
-robocopy .\Paila .\Paila_College_Deploy /E /XD .git /XF docker-compose.yml "Server Access Guide.docx.pdf"
+robocopy .\Paila .\Paila_College_Deploy /E /XD .git Paila_Deploy_Extras /XF db.local.php
 ```
 
 Then upload that clean folder:
@@ -141,7 +148,7 @@ Admin login:
 
 Database error:
 
-- Check `config/db.php`.
+- Check `config/db.local.php`.
 - Confirm database name, user, and password match your generated college credentials.
 
 Blank images:
