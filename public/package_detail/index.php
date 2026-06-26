@@ -315,11 +315,13 @@ include $base . 'includes/header.php';
     width: 1.7rem;
     height: 1.7rem;
     border-radius: 50%;
-    background: var(--color-teal-900);
-    color: var(--color-amber-400);
+    background: #fffdf9;
+    color: #292524;
+    border: 1px solid rgba(68, 64, 60, 0.22);
     font-style: normal;
     font-size: 0.72rem;
     font-weight: 900;
+    box-shadow: 0 8px 18px rgba(28, 25, 23, 0.08);
 }
 .pd-timeline-list {
     display: grid;
@@ -378,7 +380,7 @@ include $base . 'includes/header.php';
 }
 .pd-check-list li i {
     margin-top: 0.3rem;
-    color: var(--color-amber-500);
+    color: #78716c;
     font-size: 0.74rem;
 }
 .pd-check-list li span {
@@ -419,23 +421,24 @@ include $base . 'includes/header.php';
 .pd-card {
     background: var(--gallery-paper, #fffdf9);
     border-radius: 8px;
-    box-shadow: 0 28px 80px rgba(28, 25, 23, 0.15);
+    box-shadow: 0 24px 68px rgba(28, 25, 23, 0.12);
     overflow: hidden;
     position: sticky;
     top: 100px;
-    border: 1px solid rgba(251, 191, 36, 0.24);
+    border: 1px solid rgba(68, 64, 60, 0.14);
 }
 .pd-card-price {
     background:
-        radial-gradient(circle at top left, rgba(251, 191, 36, 0.2), transparent 42%),
-        var(--color-teal-900);
-    color: white;
+        linear-gradient(135deg, rgba(255, 253, 249, 0.98), rgba(250, 250, 249, 0.92)),
+        radial-gradient(circle at top left, rgba(68, 64, 60, 0.08), transparent 44%);
+    color: #292524;
     padding: 2rem 1.5rem 1.85rem;
     text-align: center;
+    border-bottom: 1px solid rgba(68, 64, 60, 0.12);
 }
 .pd-card-price .label {
     font-size: 0.875rem;
-    opacity: 0.95;
+    color: #78716c;
     text-transform: none;
     letter-spacing: 0;
     display: block;
@@ -444,25 +447,25 @@ include $base . 'includes/header.php';
     display: inline-flex;
     justify-content: center;
     align-items: baseline;
-    color: #fffdf7;
+    color: #1c1917;
     margin: 0.35rem auto 0.2rem;
     font-size: clamp(2rem, 3vw, 2.55rem);
-    text-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    text-shadow: none;
 }
 .pd-card-price .price-display.large-price .currency {
-    color: var(--color-amber-400);
+    color: #1c1917;
     font-weight: 900;
 }
 .pd-card-price .price-display.large-price .amount {
-    color: #fffdf7;
+    color: #1c1917;
 }
 .pd-card-price .price-display.large-price::after {
-    color: rgba(255, 253, 247, 0.86);
+    color: #57534e;
 }
 .pd-card-price .per {
     display: block;
     font-size: 0.875rem;
-    opacity: 0.95;
+    color: #78716c;
 }
 .pd-card-body { padding: 1.6rem; }
 .pd-card-row {
