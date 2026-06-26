@@ -21,6 +21,7 @@ if (!$tour) {
 $img = get_tour_image($tour);
 
 $category = isset($tour['category']) && $tour['category'] ? $tour['category'] : null;
+$category_label = $category ? ucwords(str_replace(['_', '-'], ' ', $category)) : 'Journey';
 $difficulty = isset($tour['difficulty']) && $tour['difficulty'] ? $tour['difficulty'] : null;
 $max_group = isset($tour['max_group']) && $tour['max_group'] ? $tour['max_group'] : null;
 $traveler_max = $max_group ? max(1, (int) $max_group) : 20;
@@ -42,6 +43,10 @@ $inclusions_text = isset($tour['inclusions']) && $tour['inclusions'] ? $tour['in
 $inclusions_list = array_filter(array_map('trim', explode("\n", $inclusions_text)));
 $exclusions_text = isset($tour['exclusions']) && $tour['exclusions'] ? $tour['exclusions'] : '';
 $exclusions_list = array_filter(array_map('trim', explode("\n", $exclusions_text)));
+$hero_lede = trim(preg_replace('/\s+/', ' ', (string) ($tour['description'] ?? '')));
+if (strlen($hero_lede) > 180) {
+    $hero_lede = substr($hero_lede, 0, 177) . '...';
+}
 
 $pageTitle = e($tour['title']) . ' | Nepal Tours';
 include $base . 'includes/header.php';
@@ -49,33 +54,65 @@ include $base . 'includes/header.php';
 <style>
 /* ——— Hero (matches second image) ——— */
 .pd-hero {
-    min-height: 70vh;
+    min-height: 82vh;
     background-size: cover;
     background-position: center;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-bottom: 3rem;
+    padding: 8rem 0 5rem;
+    overflow: hidden;
 }
 .pd-hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    background:
+        radial-gradient(circle at 18% 28%, rgba(251, 191, 36, 0.18), transparent 30%),
+        linear-gradient(90deg, rgba(4, 47, 46, 0.9) 0%, rgba(4, 47, 46, 0.55) 44%, rgba(12, 10, 9, 0.2) 100%),
+        linear-gradient(to top, rgba(12, 10, 9, 0.88) 0%, rgba(12, 10, 9, 0.18) 62%, rgba(12, 10, 9, 0.28) 100%);
 }
-.pd-hero-inner { position: relative; z-index: 1; }
+.pd-hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 8rem;
+    background: linear-gradient(to top, #fafaf9, rgba(250, 250, 249, 0));
+    pointer-events: none;
+}
+.pd-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+    margin-left: 5vw;
+}
 .pd-back {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    width: fit-content;
     color: rgba(255,255,255,0.9);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.75rem;
     text-decoration: none;
-    transition: opacity 0.3s;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid rgba(255, 253, 247, 0.26);
+    border-radius: 999px;
+    background: rgba(255, 253, 247, 0.08);
+    backdrop-filter: blur(10px);
+    transition: opacity 0.3s, transform 0.3s, border-color 0.3s;
 }
-.pd-back:hover { opacity: 0.8; }
+.pd-back:hover {
+    opacity: 1;
+    transform: translateX(-3px);
+    border-color: rgba(251, 191, 36, 0.54);
+}
 .pd-category-badge {
     display: inline-flex;
     align-items: center;
@@ -103,16 +140,48 @@ include $base . 'includes/header.php';
     background: var(--color-amber-400);
     box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.16);
 }
-.pd-title { font-size: 2.5rem; color: white; margin-bottom: 1rem; line-height: 1.2; font-weight: 700; }
-.pd-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: rgba(255,255,255,0.95); font-size: 0.95rem; }
-.pd-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.pd-title {
+    max-width: 880px;
+    font-size: clamp(3.4rem, 8vw, 7.2rem);
+    color: white;
+    margin-bottom: 1.35rem;
+    line-height: 0.92;
+    font-weight: 500;
+    text-shadow: 0 18px 45px rgba(0, 0, 0, 0.38);
+}
+.pd-hero-lede {
+    max-width: 680px;
+    color: rgba(255, 253, 247, 0.9);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin: 0 0 1.8rem;
+}
+.pd-meta { display: flex; flex-wrap: wrap; gap: 0.65rem; color: rgba(255,255,255,0.95); font-size: 0.86rem; }
+.pd-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.58rem 0.82rem;
+    border: 1px solid rgba(255, 253, 247, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 253, 247, 0.1);
+    backdrop-filter: blur(10px);
+}
 
 /* ——— Left column: About / Experience Highlights ——— */
-.pd-content { padding: 5rem 0 6rem; background: #fafaf9; }
+.pd-content {
+    padding: 5rem 0 6rem;
+    background:
+        linear-gradient(rgba(68, 64, 60, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(68, 64, 60, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 82% 10%, rgba(251, 191, 36, 0.12), transparent 28%),
+        #fafaf9;
+    background-size: 92px 92px, 92px 92px, auto, auto;
+}
 .pd-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 4rem;
+    grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.75fr);
+    gap: clamp(2rem, 4vw, 4rem);
     align-items: start;
     width: min(var(--site-width), calc(100% - 2rem));
     max-width: none;
@@ -121,63 +190,224 @@ include $base . 'includes/header.php';
 }
 .pd-main {
     text-align: left;
-    padding-right: 1rem;
+    display: grid;
+    gap: 1.35rem;
 }
 .pd-main h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3.35rem);
+    font-weight: 500;
     color: #1c1917;
     margin-bottom: 1rem;
-    font-family: var(--font-sans), sans-serif;
+    font-family: var(--font-serif), serif;
+    line-height: 1.02;
 }
 .pd-main p {
     color: #57534e;
     line-height: 1.85;
     font-size: 1rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 0;
 }
 .pd-main ul { list-style: none; padding: 0; margin: 0; }
 .pd-main li {
     color: #57534e;
-    line-height: 1.8;
+    line-height: 1.65;
     font-size: 1rem;
-    padding: 0.4rem 0;
-    padding-left: 1.5rem;
+    padding: 0.5rem 0;
+    padding-left: 0;
     position: relative;
 }
-.pd-main li::before {
+.pd-main li::before { content: none; }
+.pd-editorial-panel,
+.pd-section-card {
+    background: rgba(255, 253, 249, 0.86);
+    border: 1px solid rgba(68, 64, 60, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 24px 60px rgba(28, 25, 23, 0.08);
+    backdrop-filter: blur(12px);
+}
+.pd-editorial-panel {
+    padding: clamp(2rem, 4vw, 3.25rem);
+    position: relative;
+    overflow: hidden;
+}
+.pd-editorial-panel::after {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0.95rem;
-    width: 0.45rem;
-    height: 0.45rem;
-    border-radius: 999px;
+    top: 1.1rem;
+    right: 1.1rem;
+    width: 5rem;
+    height: 5rem;
+    border-top: 1px solid rgba(251, 191, 36, 0.42);
+    border-right: 1px solid rgba(251, 191, 36, 0.42);
+    pointer-events: none;
+}
+.pd-section-card {
+    padding: clamp(1.6rem, 3vw, 2.35rem);
+}
+.pd-kicker {
+    margin: 0 0 0.8rem !important;
+    color: var(--color-teal-900) !important;
+    font-size: 0.72rem !important;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+.pd-overview-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 2rem;
+    overflow: hidden;
+    border: 1px solid rgba(68, 64, 60, 0.1);
+    border-radius: 8px;
+    background: rgba(68, 64, 60, 0.1);
+}
+.pd-overview-item {
+    background: rgba(250, 250, 249, 0.92);
+    padding: 1rem;
+}
+.pd-overview-item span {
+    display: block;
+    color: var(--color-stone-500);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+.pd-overview-item strong {
+    color: var(--color-stone-900);
+    font-size: 1rem;
+}
+.pd-feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+.pd-feature-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.75rem;
+    padding: 0.95rem !important;
+    border: 1px solid rgba(68, 64, 60, 0.1);
+    border-radius: 8px;
+    background: rgba(250, 250, 249, 0.82);
+}
+.pd-feature-list em {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
     background: var(--color-teal-900);
+    color: var(--color-amber-400);
+    font-style: normal;
+    font-size: 0.72rem;
+    font-weight: 900;
 }
-.pd-highlights {
-    margin-top: 2.5rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid #e7e5e4;
+.pd-timeline-list {
+    display: grid;
+    gap: 0.85rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
-.pd-highlights h2 {
+.pd-timeline-list li {
+    display: grid;
+    grid-template-columns: 5.4rem 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 1rem 0 !important;
+    border-bottom: 1px solid rgba(68, 64, 60, 0.1);
+}
+.pd-timeline-list li:last-child { border-bottom: 0; }
+.pd-day-pill {
+    display: inline-flex;
+    justify-content: center;
+    padding: 0.42rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(4, 47, 46, 0.08);
+    color: var(--color-teal-900);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.pd-inclusion-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.2rem;
+}
+.pd-inclusion-box {
+    padding: 1.25rem;
+    border-radius: 8px;
+    background: rgba(250, 250, 249, 0.88);
+    border: 1px solid rgba(68, 64, 60, 0.1);
+}
+.pd-inclusion-box h3 {
+    font-size: 1rem;
+    color: var(--color-teal-900);
+    margin-bottom: 0.7rem;
+    font-family: var(--font-sans), sans-serif;
+}
+.pd-inclusion-box.excluded h3 { color: #991b1b; }
+.pd-check-list li {
+    display: flex;
+    gap: 0.55rem;
+    align-items: flex-start;
+    padding: 0.34rem 0 !important;
+}
+.pd-check-list li i {
+    margin-top: 0.3rem;
+    color: var(--color-amber-500);
+    font-size: 0.74rem;
+}
+.pd-requirement-note {
+    padding: 1.15rem;
+    border-radius: 8px;
+    background: rgba(251, 191, 36, 0.14);
+    border: 1px solid rgba(251, 191, 36, 0.36);
     margin-bottom: 1rem;
+}
+.pd-requirement-note strong {
+    display: block;
+    color: #78350f;
+    margin-bottom: 0.35rem;
+}
+.pd-permit-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 0.9rem !important;
+}
+.pd-permit-list li {
+    padding: 0.45rem 0.7rem !important;
+    border-radius: 999px;
+    background: rgba(4, 47, 46, 0.08);
+    color: var(--color-teal-900);
+    font-size: 0.82rem;
+    font-weight: 700;
 }
 
 /* ——— Right column: booking card (third image) ——— */
 .pd-card {
     background: var(--gallery-paper, #fffdf9);
     border-radius: 8px;
-    box-shadow: var(--gallery-shadow, 0 18px 50px rgba(28, 25, 23, 0.1));
+    box-shadow: 0 28px 80px rgba(28, 25, 23, 0.15);
     overflow: hidden;
     position: sticky;
     top: 100px;
-    border: 1px solid var(--gallery-line, #e7e5e4);
+    border: 1px solid rgba(251, 191, 36, 0.24);
 }
 .pd-card-price {
-    background: var(--color-teal-900);
+    background:
+        radial-gradient(circle at top left, rgba(251, 191, 36, 0.2), transparent 42%),
+        var(--color-teal-900);
     color: white;
-    padding: 1.75rem 1.5rem;
+    padding: 2rem 1.5rem 1.85rem;
     text-align: center;
 }
 .pd-card-price .label {
@@ -211,18 +441,19 @@ include $base . 'includes/header.php';
     font-size: 0.875rem;
     opacity: 0.95;
 }
-.pd-card-body { padding: 1.5rem; }
+.pd-card-body { padding: 1.6rem; }
 .pd-card-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #eee;
-    font-size: 1rem;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(68, 64, 60, 0.1);
+    font-size: 0.95rem;
 }
 .pd-card-row:last-of-type { border-bottom: none; }
 .pd-card-row .k { color: #57534e; font-weight: 400; }
-.pd-card-row .v { font-weight: 600; color: #292524; }
+.pd-card-row .v { font-weight: 800; color: #292524; text-align: right; }
 .pd-card-actions {
     margin-top: 1.5rem;
     display: flex;
@@ -235,8 +466,8 @@ include $base . 'includes/header.php';
     justify-content: center;
     gap: 0.5rem;
     padding: 0.9rem 1.25rem;
-    border-radius: 6px;
-    font-weight: 600;
+    border-radius: 8px;
+    font-weight: 800;
     font-size: 0.95rem;
     cursor: pointer;
     border: none;
@@ -248,6 +479,7 @@ include $base . 'includes/header.php';
 .pd-btn-primary {
     background: var(--color-teal-900);
     color: white;
+    box-shadow: 0 16px 34px rgba(4, 47, 46, 0.22);
 }
 .pd-btn-primary:hover {
     background: var(--color-teal-900);
@@ -324,6 +556,17 @@ include $base . 'includes/header.php';
     .pd-grid { grid-template-columns: 1fr; gap: 2rem; }
     .pd-card { position: static; }
     .pd-sticky-book-inner { flex-direction: column; align-items: stretch; }
+    .pd-hero { min-height: 74vh; }
+    .pd-hero-inner { margin-left: auto; }
+    .pd-overview-strip,
+    .pd-feature-list,
+    .pd-inclusion-grid {
+        grid-template-columns: 1fr;
+    }
+    .pd-timeline-list li {
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+    }
 }
 
 /* ——— Booking modal popup ——— */
@@ -445,12 +688,16 @@ include $base . 'includes/header.php';
             <i class="fa-solid fa-arrow-left"></i> Back to Collection
         </a>
         <?php if ($category): ?>
-            <div class="pd-category-badge"><?php echo e(ucwords(str_replace(['_', '-'], ' ', $category))); ?></div>
+            <div class="pd-category-badge"><?php echo e($category_label); ?></div>
         <?php endif; ?>
         <h1 class="pd-title"><?php echo e($tour['title']); ?></h1>
+        <p class="pd-hero-lede"><?php echo e($hero_lede); ?></p>
         <div class="pd-meta">
             <span><i class="fa-solid fa-location-dot"></i> <?php echo e($tour['location']); ?></span>
             <span><i class="fa-regular fa-clock"></i> <?php echo e($tour['duration']); ?></span>
+            <?php if ($difficulty): ?>
+                <span><i class="fa-solid fa-mountain-sun"></i> <?php echo e($difficulty); ?></span>
+            <?php endif; ?>
             <?php if ($max_group): ?>
                 <span><i class="fa-solid fa-users"></i> Max <?php echo e($max_group); ?></span>
             <?php endif; ?>
@@ -462,80 +709,103 @@ include $base . 'includes/header.php';
 <section class="pd-content">
     <div class="pd-grid">
         <div class="pd-main">
-            <h2>About This Journey</h2>
-            <p><?php echo nl2br(e($tour['description'])); ?></p>
+            <section class="pd-editorial-panel">
+                <p class="pd-kicker">Curated journey</p>
+                <h2><?php echo e($tour['title']); ?></h2>
+                <p><?php echo nl2br(e($tour['description'])); ?></p>
+
+                <div class="pd-overview-strip">
+                    <div class="pd-overview-item">
+                        <span>Region</span>
+                        <strong><?php echo e($tour['location']); ?></strong>
+                    </div>
+                    <div class="pd-overview-item">
+                        <span>Style</span>
+                        <strong><?php echo e($category_label); ?></strong>
+                    </div>
+                    <div class="pd-overview-item">
+                        <span>Season</span>
+                        <strong><?php echo $best_season ? e($best_season) : 'Year-round'; ?></strong>
+                    </div>
+                </div>
+            </section>
 
             <?php if (!empty($highlights_list)): ?>
-            <div class="pd-highlights">
+            <section class="pd-section-card">
+                <p class="pd-kicker">Signature moments</p>
                 <h2>Experience Highlights</h2>
-                <ul>
-                    <?php foreach ($highlights_list as $h): ?>
-                        <li><?php echo e($h); ?></li>
+                <ul class="pd-feature-list">
+                    <?php foreach ($highlights_list as $index => $h): ?>
+                        <li><em><?php echo str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT); ?></em><span><?php echo e($h); ?></span></li>
                     <?php endforeach; ?>
                 </ul>
-            </div>
+            </section>
             <?php endif; ?>
 
             <?php if (!empty($itinerary_days)): ?>
-            <div class="pd-highlights">
+            <section class="pd-section-card">
+                <p class="pd-kicker">Route composition</p>
                 <h2>Itinerary</h2>
-                <ul>
+                <ol class="pd-timeline-list">
                     <?php foreach ($itinerary_days as $index => $day): ?>
-                        <li><strong>Day <?php echo $index + 1; ?>:</strong> <?php echo e($day); ?></li>
+                        <?php $dayText = preg_replace('/^Day\s*\d+\s*:\s*/i', '', $day); ?>
+                        <li>
+                            <span class="pd-day-pill">Day <?php echo $index + 1; ?></span>
+                            <p><?php echo e($dayText); ?></p>
+                        </li>
                     <?php endforeach; ?>
-                </ul>
-            </div>
+                </ol>
+            </section>
             <?php endif; ?>
 
             <?php if (!empty($inclusions_list) || !empty($exclusions_list)): ?>
-            <div class="pd-highlights">
-                <h2>What's Included & Excluded</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
+            <section class="pd-section-card">
+                <p class="pd-kicker">Package details</p>
+                <h2>Included & Excluded</h2>
+                <div class="pd-inclusion-grid">
                     <?php if (!empty($inclusions_list)): ?>
-                    <div>
-                        <h3 style="font-size: 1.1rem; color: var(--color-teal-900); margin-bottom: 0.75rem;">Included</h3>
-                        <ul style="padding-left: 0;">
+                    <div class="pd-inclusion-box">
+                        <h3>Included</h3>
+                        <ul class="pd-check-list">
                             <?php foreach ($inclusions_list as $inc): ?>
-                                <li style="color: var(--color-teal-900);"><?php echo e($inc); ?></li>
+                                <li><i class="fa-solid fa-check"></i><span><?php echo e($inc); ?></span></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
                     <?php endif; ?>
                     <?php if (!empty($exclusions_list)): ?>
-                    <div>
-                        <h3 style="font-size: 1.1rem; color: #dc2626; margin-bottom: 0.75rem;">Not Included</h3>
-                        <ul style="padding-left: 0;">
+                    <div class="pd-inclusion-box excluded">
+                        <h3>Not Included</h3>
+                        <ul class="pd-check-list">
                             <?php foreach ($exclusions_list as $exc): ?>
-                                <li style="color: #dc2626; "><?php echo e($exc); ?></li>
+                                <li><i class="fa-solid fa-minus"></i><span><?php echo e($exc); ?></span></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
                     <?php endif; ?>
                 </div>
-            </div>
+            </section>
             <?php endif; ?>
 
             <?php if ($altitude_max || !empty($permits_list)): ?>
-            <div class="pd-highlights">
-                <h2>Safety & Requirements</h2>
+            <section class="pd-section-card">
+                <p class="pd-kicker">Safety & access</p>
+                <h2>Requirements</h2>
                 <?php if ($altitude_max && $altitude_max > 3500): ?>
-                <div style="background: #fef3c7; border: 1px solid #fbbf24; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                    <strong style="color: #92400e;">High Altitude Warning:</strong>
-                    <p style="margin: 0.5rem 0 0 0; color: #78350f;">This trek reaches <?php echo number_format($altitude_max); ?>m. Proper acclimatization is essential. Consult with your doctor before booking.</p>
+                <div class="pd-requirement-note">
+                    <strong>High Altitude Advisory</strong>
+                    <p>This journey reaches <?php echo number_format($altitude_max); ?>m. Proper acclimatization is essential, and guests should consult a doctor before booking.</p>
                 </div>
                 <?php endif; ?>
                 <?php if (!empty($permits_list)): ?>
-                <div>
-                    <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem;">Required Permits</h3>
-                    <ul>
+                    <p>All required permits are arranged by the Paila team and included in the package coordination.</p>
+                    <ul class="pd-permit-list">
                         <?php foreach ($permits_list as $permit): ?>
                             <li><?php echo e($permit); ?></li>
                         <?php endforeach; ?>
                     </ul>
-                    <p style="font-size: 0.9rem; color: #78716c; margin-top: 0.5rem;">All permits are arranged by our team and included in the package price.</p>
-                </div>
                 <?php endif; ?>
-            </div>
+            </section>
             <?php endif; ?>
         </div>
 
