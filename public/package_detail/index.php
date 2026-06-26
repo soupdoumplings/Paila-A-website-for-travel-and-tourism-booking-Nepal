@@ -187,15 +187,27 @@ include $base . 'includes/header.php';
     letter-spacing: 0;
     display: block;
 }
-.pd-card-price > .amount {
-    font-size: 2.2rem;
-    font-weight: 500;
-    font-family: var(--font-serif), serif;
-    display: block;
-    margin: 0.35rem 0;
-    line-height: 1.1;
+.pd-card-price .price-display.large-price {
+    display: inline-flex;
+    justify-content: center;
+    align-items: baseline;
+    color: #fffdf7;
+    margin: 0.35rem auto 0.2rem;
+    font-size: clamp(2rem, 3vw, 2.55rem);
+    text-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+}
+.pd-card-price .price-display.large-price .currency {
+    color: var(--color-amber-400);
+    font-weight: 900;
+}
+.pd-card-price .price-display.large-price .amount {
+    color: #fffdf7;
+}
+.pd-card-price .price-display.large-price::after {
+    color: rgba(255, 253, 247, 0.86);
 }
 .pd-card-price .per {
+    display: block;
     font-size: 0.875rem;
     opacity: 0.95;
 }
