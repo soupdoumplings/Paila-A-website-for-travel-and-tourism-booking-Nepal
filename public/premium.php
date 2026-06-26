@@ -92,25 +92,26 @@ include '../includes/header.php';
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
-        background: linear-gradient(135deg, #f8d477, #d99a18) !important;
-        color: #11100d !important;
+        background: linear-gradient(135deg, #042f2e, #073f3d) !important;
+        color: #fffdf9 !important;
         padding: 1rem 3rem !important;
         font-weight: 800 !important;
         letter-spacing: 0.04em;
         text-decoration: none !important;
         border: 1px solid rgba(251, 191, 36, 0.55) !important;
         border-radius: 999px !important;
-        box-shadow: 0 18px 42px rgba(251, 191, 36, 0.2) !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+        box-shadow: 0 18px 42px rgba(4, 47, 46, 0.24), 0 0 0 1px rgba(251, 191, 36, 0.12) inset !important;
     }
 
     .premium-access-cta:hover {
         transform: translateY(-2px);
-        filter: brightness(1.04);
-        box-shadow: 0 22px 48px rgba(251, 191, 36, 0.28) !important;
+        filter: brightness(1.08);
+        box-shadow: 0 22px 48px rgba(4, 47, 46, 0.3), 0 0 0 1px rgba(251, 191, 36, 0.22) inset !important;
     }
 
     .premium-access-cta i {
-        color: #11100d !important;
+        color: #fffdf9 !important;
     }
 
     .premium-request-form label {
