@@ -87,7 +87,9 @@ include '../includes/header.php';
         box-shadow: 0 16px 40px rgba(251, 191, 36, 0.18);
     }
 
-    .premium-access-cta {
+    .premium-dark-band .premium-access-cta,
+    .premium-dark-band .premium-access-cta:visited,
+    .premium-dark-band .premium-access-cta:focus {
         display: inline-flex !important;
         align-items: center;
         justify-content: center;
@@ -104,13 +106,14 @@ include '../includes/header.php';
         box-shadow: 0 18px 42px rgba(4, 47, 46, 0.24), 0 0 0 1px rgba(251, 191, 36, 0.12) inset !important;
     }
 
-    .premium-access-cta:hover {
+    .premium-dark-band .premium-access-cta:hover {
+        color: #fffdf9 !important;
         transform: translateY(-2px);
         filter: brightness(1.08);
         box-shadow: 0 22px 48px rgba(4, 47, 46, 0.3), 0 0 0 1px rgba(251, 191, 36, 0.22) inset !important;
     }
 
-    .premium-access-cta i {
+    .premium-dark-band .premium-access-cta i {
         color: #fffdf9 !important;
     }
 
