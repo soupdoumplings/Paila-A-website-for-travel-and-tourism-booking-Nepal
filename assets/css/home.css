@@ -927,6 +927,7 @@
         radial-gradient(circle at 78% 8%, rgba(251, 191, 36, 0.18), transparent 30%),
         linear-gradient(135deg, #042f2e 0%, #064e4b 48%, #03201f 100%);
     padding: 8rem 0;
+    scroll-margin-top: 6.5rem;
     border-top: 1px solid rgba(4, 47, 46, 0.24);
     color: white;
 }
@@ -975,12 +976,30 @@
 
 .contact-form-card {
     background: var(--gallery-paper);
+    color: var(--color-stone-900);
     padding: 2.5rem;
     border-radius: 8px;
     box-shadow: 0 30px 90px rgba(0, 0, 0, 0.24);
     border: 1px solid rgba(251, 191, 36, 0.22);
     animation: contactCardLift 900ms 120ms ease both;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.contact-form-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin: 0 0 1.5rem;
+    color: var(--color-stone-900);
+}
+
+.contact-form-card label {
+    color: var(--color-stone-700) !important;
+}
+
+.contact-form-card input,
+.contact-form-card textarea {
+    color: var(--color-stone-900);
 }
 
 .contact-form-card:hover {

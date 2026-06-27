@@ -636,7 +636,7 @@ $heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jp
 </section>
 
 <!-- Contact -->
-<section class="contact-section" style="border-top: none;">
+<section class="contact-section" id="contact" style="border-top: none;">
     <div class="container">
         <!-- Contact details and form -->
         <div class="grid-responsive-split">
@@ -674,8 +674,8 @@ $heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jp
             </div>
 
             <!-- Form -->
-            <div class="contact-form-card" id="contact" style="border: none;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; font-family: var(--font-serif);">Send us a message</h3>
+            <div class="contact-form-card" style="border: none;">
+                <h3>Send us a message</h3>
                 
                 <?php if(isset($_SESSION['success'])): ?>
                     <div style="background: rgba(4, 47, 46, 0.08); color: var(--color-teal-900); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border: 1px solid rgba(4, 47, 46, 0.24);">
