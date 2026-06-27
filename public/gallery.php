@@ -146,7 +146,7 @@ include '../includes/header.php';
 <!-- Hero Section -->
 <section style="position: relative; height: 75vh; min-height: 600px; overflow: hidden; background: #000;">
     <!-- Background Image -->
-    <img src="<?php echo $gallery['hero_image']; ?>" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;">
+    <img src="<?php echo $gallery['hero_image']; ?>" fetchpriority="high" decoding="async" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;">
     
     <!-- Overlay -->
     <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);"></div>
@@ -200,7 +200,7 @@ include '../includes/header.php';
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid var(--color-stone-200);">
             <?php foreach ($gallery['images'] as $index => $image): ?>
                 <div style="position: relative; aspect-ratio: 1; overflow: hidden; border-right: <?php echo ($index < 3) ? '1px solid var(--color-stone-200)' : 'none'; ?>;">
-                    <img src="<?php echo $image; ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="<?php echo $image; ?>" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                 </div>
             <?php endforeach; ?>
         </div>

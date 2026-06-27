@@ -132,7 +132,7 @@ $heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jp
 
                 <!-- Right -->
                 <div style="position: relative;">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" 
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" loading="lazy" decoding="async"
                          alt="Himalayan Mountain Range" 
                          style="width: 100%; border-radius: 1rem; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
                 </div>
@@ -195,7 +195,7 @@ $heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jp
                     ?>
                     <a href="<?php echo e($cardHref); ?>" class="collection-card hover-zoom-card">
                         <div class="collection-card-image-container">
-                            <img src="<?php echo e($img); ?>" alt="<?php echo e($tour['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="<?php echo e($img); ?>" alt="<?php echo e($tour['title']); ?>" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
                             <span class="journey-card-badge"><?php echo e($categoryLabel); ?></span>
                         </div>
                         <div class="collection-card-content">
@@ -266,7 +266,7 @@ $heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jp
                     $countLabel = $actualCount . ($actualCount == 1 ? ' Tour' : ' Tours');
                     ?>
                     <a href="<?php echo url('public/collection.php?category=' . $cat['filter']); ?>" class="category-card">
-                        <img src="<?php echo $cat['image']; ?>" alt="<?php echo $cat['name']; ?>" class="category-card-bg">
+                        <img src="<?php echo $cat['image']; ?>" alt="<?php echo $cat['name']; ?>" class="category-card-bg" loading="lazy" decoding="async">
                         <div class="category-card-overlay">
                             <div class="category-icon"><i class="<?php echo $cat['icon']; ?>"></i></div>
                             <div class="category-name"><?php echo $cat['name']; ?></div>
@@ -408,7 +408,7 @@ $heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jp
                 ?>
                 <a href="<?php echo url('public/archive.php?destination=' . urlencode($dest['name'])); ?>" class="destination-card hover-zoom-card">
                     <!-- Image -->
-                    <img src="<?php echo (strpos($dest['image'], 'http') === 0) ? $dest['image'] : url($dest['image']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="<?php echo (strpos($dest['image'], 'http') === 0) ? $dest['image'] : url($dest['image']); ?>" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
                     
                     <!-- Overlay -->
                     <div class="destination-gradient"></div>
@@ -450,8 +450,8 @@ $heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jp
         <div class="trust-standard">
             <!-- Left -->
             <div class="trust-collage">
-                <img src="<?php echo url('assets/images/guest_experience.jpg'); ?>" alt="Guest experience in Nepal" class="trust-main-photo">
-                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80" alt="Himalayan trail" class="trust-offset-photo">
+                <img src="<?php echo url('assets/images/guest_experience.jpg'); ?>" alt="Guest experience in Nepal" class="trust-main-photo" loading="lazy" decoding="async">
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=700&q=80" alt="Himalayan trail" class="trust-offset-photo" loading="lazy" decoding="async">
                 <!-- Rating -->
                 <div class="trust-rating">
                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
@@ -565,7 +565,7 @@ $heroFallbackImage = url('assets/images/Everest/photo-1544735716-87fa59a45b4e.jp
                         <span class="ig-post-menu" aria-hidden="true"></span>
                     </div>
                     <div class="ig-post-photo">
-                        <img src="<?php echo $test['photo']; ?>" alt="<?php echo $test['tour']; ?>">
+                        <img src="<?php echo $test['photo']; ?>" alt="<?php echo $test['tour']; ?>" loading="lazy" decoding="async">
                         <div class="ig-post-tag"><?php echo $test['tour']; ?></div>
                     </div>
                     <div class="ig-post-body">

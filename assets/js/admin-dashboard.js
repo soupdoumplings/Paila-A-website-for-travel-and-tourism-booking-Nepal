@@ -61,7 +61,7 @@ function viewTour(tour) {
 
     content.innerHTML = `
         <div style="position: relative; height: 400px; border-radius: 1rem; overflow: hidden; margin-bottom: 2rem;">
-            <img src="${img}" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="${img}" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
             <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7)); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; color: white;">
                 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
                     <span style="background: var(--color-emerald-600); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">

@@ -256,7 +256,7 @@ $imageMap = [
                             ?>
                             <a href="<?php echo e($cardHref); ?>" class="collection-card hover-zoom-card">
                                 <div class="collection-card-image-container">
-                                    <img src="<?php echo e($img); ?>" alt="<?php echo e($tour['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="<?php echo e($img); ?>" alt="<?php echo e($tour['title']); ?>" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
                                     <span class="journey-card-badge"><?php echo e($categoryLabel); ?></span>
                                 </div>
                                 <div class="collection-card-content">

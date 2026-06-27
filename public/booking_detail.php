@@ -104,7 +104,7 @@ include '../includes/header.php';
                     ?>
                     <div style="background: #fffdfa; border: 1px solid var(--border-color); border-radius: 1rem; padding: 2rem; box-shadow: 0 14px 44px rgba(28,25,23,0.06);">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.35rem;">
-                            <img src="<?php echo e(url($guideAvatar)); ?>" alt="<?php echo e($guideName); ?>" style="width: 82px; height: 82px; object-fit: cover; border-radius: 50%; border: 3px solid white; box-shadow: 0 8px 22px rgba(0,0,0,0.14);">
+                            <img src="<?php echo e(url($guideAvatar)); ?>" alt="<?php echo e($guideName); ?>" loading="lazy" decoding="async" style="width: 82px; height: 82px; object-fit: cover; border-radius: 50%; border: 3px solid white; box-shadow: 0 8px 22px rgba(0,0,0,0.14);">
                             <div>
                                 <div style="font-size: 0.78rem; color: var(--color-amber-600); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 800;"><?php echo !empty($booking['is_premium']) ? 'Your premium guide' : 'Your guide'; ?></div>
                                 <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin: 0.2rem 0;"><?php echo e($guideName); ?></h3>

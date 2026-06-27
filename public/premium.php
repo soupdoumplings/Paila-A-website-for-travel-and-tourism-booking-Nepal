@@ -282,7 +282,7 @@ include '../includes/header.php';
                 <!-- Tour 1 -->
                 <a class="premium-tour-card" href="<?php echo url('public/premium_tour_detail.php?id=helicopter'); ?>" style="border-radius: 1rem; overflow: hidden; background: white; text-decoration: none; color: inherit; transition: all 0.3s ease; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-7px)'; this.style.boxShadow='0 32px 90px rgba(0,0,0,0.36)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 24px 80px rgba(0,0,0,0.28)';">
                     <div style="position: relative; height: 300px;">
-                        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80" 
+                        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80" loading="lazy" decoding="async"
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: 2rem; color: var(--color-stone-900);">
@@ -307,7 +307,7 @@ include '../includes/header.php';
                 <!-- Tour 2 -->
                 <a class="premium-tour-card" href="<?php echo url('public/premium_tour_detail.php?id=mustang'); ?>" style="border-radius: 1rem; overflow: hidden; background: white; text-decoration: none; color: inherit; transition: all 0.3s ease; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-7px)'; this.style.boxShadow='0 32px 90px rgba(0,0,0,0.36)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 24px 80px rgba(0,0,0,0.28)';">
                     <div style="position: relative; height: 300px;">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" 
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" loading="lazy" decoding="async"
                              style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: 2rem; color: var(--color-stone-900);">

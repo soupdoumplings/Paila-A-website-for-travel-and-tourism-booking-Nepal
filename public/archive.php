@@ -109,7 +109,7 @@ include __DIR__ . '/../includes/header.php';
                 ?>
                 <a href="<?php echo url('public/gallery.php?location=' . urlencode($dest['name'])); ?>" class="hover-zoom-card" style="position: relative; border-radius: 2rem; overflow: hidden; height: 500px; display: block; text-decoration: none; transition: transform 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
                     <!-- Image -->
-                    <img src="<?php echo (strpos($dest['image'], 'http') === 0) ? $dest['image'] : url($dest['image']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="<?php echo (strpos($dest['image'], 'http') === 0) ? $dest['image'] : url($dest['image']); ?>" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
                     
                     <!-- Overlay -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>

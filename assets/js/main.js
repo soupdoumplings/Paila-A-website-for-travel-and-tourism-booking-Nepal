@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const image = tour.image_url || fallbackImage;
                 return `
                     <a class="site-search-result-card" href="${baseUrl}public/package_detail/?id=${encodeURIComponent(tour.id)}">
-                        <img src="${escapeHTML(image)}" alt="${escapeHTML(tour.title)}" onerror="this.src='${fallbackImage}'">
+                        <img src="${escapeHTML(image)}" alt="${escapeHTML(tour.title)}" loading="lazy" decoding="async" onerror="this.src='${fallbackImage}'">
                         <div>
                             <div class="site-search-result-title">${escapeHTML(tour.title)}</div>
                             <div class="site-search-result-meta">
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             return `
                                 <a href="${baseUrl}public/package_detail/?id=${tour.id}" style="display: flex; padding: 1.25rem 1rem; border-bottom: 1px solid #e7e5e4; align-items: center; gap: 1.25rem; text-decoration: none; color: inherit; transition: background 0.2s;">
                                     <div style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 0.75rem; overflow: hidden; background: #f5f5f4; border: 1px solid #e7e5e4;">
-                                        <img src="${tourImg}" onerror="this.src='${fallback}'" style="width: 100%; height: 100%; object-fit: cover;">
+                                        <img src="${tourImg}" loading="lazy" decoding="async" onerror="this.src='${fallback}'" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                     <div style="flex: 1;">
                                         <div style="font-weight: 700; font-size: 1rem; color: #1c1917; margin-bottom: 0.25rem;">${tour.title}</div>

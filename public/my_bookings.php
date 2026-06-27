@@ -73,7 +73,7 @@ include '../includes/header.php';
                     ?>
                     <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.5rem; display: flex; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
                         <div style="width: 250px; height: 180px; flex-shrink: 0; position: relative;">
-                            <img src="<?php echo e($bookingImage); ?>" alt="<?php echo e($booking['tour_title'] ?: 'Booked journey'); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="<?php echo e($bookingImage); ?>" alt="<?php echo e($booking['tour_title'] ?: 'Booked journey'); ?>" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div style="padding: 2rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
                             <div>
@@ -103,7 +103,7 @@ include '../includes/header.php';
                                 $guideAvatar = $booking['guide_avatar'] ?: 'assets/images/Pokhara/pexels-photo-30131353.jpeg';
                                 ?>
                                 <div style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem; display: flex; align-items: center; gap: 0.9rem;">
-                                    <img src="<?php echo e(url($guideAvatar)); ?>" alt="<?php echo e($guideName); ?>" style="width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: 0 6px 18px rgba(0,0,0,0.12);">
+                                    <img src="<?php echo e(url($guideAvatar)); ?>" alt="<?php echo e($guideName); ?>" loading="lazy" decoding="async" style="width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: 0 6px 18px rgba(0,0,0,0.12);">
                                     <div style="flex: 1;">
                                         <div style="font-size: 0.74rem; color: var(--color-amber-600); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;"><?php echo !empty($booking['is_premium']) ? 'Premium guide privilege' : 'Assigned guide'; ?></div>
                                         <div style="font-weight: 800; color: var(--color-stone-900);"><?php echo e($guideName); ?> <span style="font-size: 0.85rem; color: var(--color-stone-500); font-weight: 600;">/ <?php echo number_format((float)($booking['guide_rating'] ?: 4.8), 1); ?></span></div>
